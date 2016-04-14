@@ -1,31 +1,47 @@
-/**
+﻿/**
  * Sample React Native App
  * https://github.com/facebook/react-native
  */
-"use strict";
-const React = require("react");
-const react_native_1 = require('react-native');
+
+import React = require("react")
+import { AppRegistry, Component, StyleSheet, View, Text, ListView, Alert}  from 'react-native';
+
 var Button = require("react-native-button");
 var data = ['row 1', 'row 2', 'row 3', 'row 4', 'row 5', 'row 6', 'row 7', 'row 8', 'row 9', 'row 10', 'row 11'];
-var ds = new react_native_1.ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
-class ReactNativeGlood extends react_native_1.Component {
+var ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
+
+class ReactNativeGlood extends Component<{}, { dataSource?: any }> {
+
     constructor() {
         super();
         this.state = {
             dataSource: ds.cloneWithRows(data)
-        };
+        }
     }
+
     render() {
-        return (React.createElement(react_native_1.ListView, {dataSource: this.state.dataSource, renderRow: this._row.bind(this)}));
+
+        return (
+            <ListView
+                dataSource={this.state.dataSource}
+                renderRow={this._row.bind(this) }/>
+        );
     }
+
     _row(value) {
-        return (React.createElement(react_native_1.View, {style: styles.container}, React.createElement(Button, {style: styles.welcomeText, onPress: this._handerClick.bind(this, value)}, value)));
+        return (
+            <View style={styles.container}>
+                <Button style={styles.welcomeText} onPress={this._handerClick.bind(this, value) }>
+                    {value}
+                </Button>
+            </View>
+        );
     }
     _handerClick(value) {
-        react_native_1.Alert.alert(value, "teset");
+        Alert.alert(value,"teset");
     }
 }
-const styles = react_native_1.StyleSheet.create({
+const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
@@ -41,7 +57,7 @@ const styles = react_native_1.StyleSheet.create({
         borderWidth: 5,
         borderRadius: 5,
         borderColor: 'red',
-        color: 'white',
+        color:'white',
         backgroundColor: '#999999',
     },
     instructions: {
@@ -50,4 +66,4 @@ const styles = react_native_1.StyleSheet.create({
         marginBottom: 5,
     },
 });
-react_native_1.AppRegistry.registerComponent('ReactNativeGlood', () => ReactNativeGlood);
+ AppRegistry.registerComponent('ReactNativeGlood', () => ReactNativeGlood);
