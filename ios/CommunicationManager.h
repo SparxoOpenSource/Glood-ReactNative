@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-@interface CommunicationManager : NSObject
+#import "RCTBridgeModule.h"
+
+
+@interface CommunicationManager : NSObject <RCTBridgeModule>
 
 @end

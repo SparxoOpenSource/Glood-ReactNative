@@ -12,7 +12,7 @@
 
 -(BOOL)bonjourPublish{
     
-    self.bonjourService = [[NSNetService alloc]initWithDomain:@"" type:@"_chatty._tcp." name:@"test_YJ"port:8888];
+    self.bonjourService = [[NSNetService alloc]initWithDomain:@"local." type:@"_chatty._tcp." name:@""port:2222];
     if (self.bonjourService == nil)
 		return NO;
     // Add service to current run loop

@@ -8,6 +8,7 @@
  */
 
 #import "AppDelegate.h"
+#import "BonjourBrowser.h"
 
 #import "RCTRootView.h"
 
@@ -15,6 +16,14 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  //测试  browser
+  retestBro  = [[BonjourBrowser alloc]init];
+  [retestBro start];
+  //测试  pubilsh
+  self.testPub =  [[BonjourPublish alloc]init];
+  [self.testPub bonjourPublish];
+  
+  
   NSURL *jsCodeLocation;
 
   /**
@@ -42,10 +51,17 @@
    */
 
 //   jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
+  NSArray *userNameList = @[@"row one",
+                            @"row two",
+                            @"row three",
+                            @"row four",
+                            @"row five"];
+  
 
+  NSDictionary *props = @{@"userNameList" : userNameList};
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
                                                       moduleName:@"ReactNativeGlood"
-                                               initialProperties:nil
+                                               initialProperties:props
                                                    launchOptions:launchOptions];
 
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];

@@ -46,7 +46,8 @@
     
     // Don't need the service anymore
      self.netMyService = nil;
-    
-  
 }
+
+
+
 @end

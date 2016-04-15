@@ -6,8 +6,19 @@
 //  Copyright © 2016年 Facebook. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+#import <Foundation/Foundation.h>
+#import "RCTBridge.h"
+#import "RCTEventDispatcher.h"
+#import <MediaPlayer/MediaPlayer.h>
 
-@interface RCTSQLManager : RCTSQLManager
+@import AVFoundation;
+
+@interface RCTSQLManager : NSObject
+<RCTBridgeModule,MPMediaPickerControllerDelegate, AVAudioPlayerDelegate>
+
+@property (nonatomic, retain) AVAudioPlayer *player;
+@property (nonatomic, retain) MPMediaPickerController *mediaPicker;
+
+- (void) showMediaPicker;
 
 @end

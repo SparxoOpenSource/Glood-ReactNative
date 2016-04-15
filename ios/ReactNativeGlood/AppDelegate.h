@@ -9,8 +9,16 @@
 
 #import <UIKit/UIKit.h>
 
+#import "BonjourPublish.h"
+
+@class BonjourBrowser;
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
+{
+  BonjourBrowser * retestBro;
+}
 
 @property (nonatomic, strong) UIWindow *window;
+@property (strong) BonjourPublish * testPub;
 
 @end
