@@ -1,12 +1,12 @@
-"use strict";
-const react_native_1 = require('react-native');
-exports.styles = react_native_1.StyleSheet.create({
+import React = require("react")
+import {StyleSheet} from 'react-native';
+export var styles = StyleSheet.create({
     container: {
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#F5FCFF',
-    },
-    welcomeText: {
+    }
+    , welcomeText: {
         width: 200,
         height: 40,
         fontSize: 20,
