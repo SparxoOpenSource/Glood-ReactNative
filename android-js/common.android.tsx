@@ -4,8 +4,10 @@
  */
 
 import React = require("react")
-import { AppRegistry, Component, StyleSheet, View, Text, ListView, Alert, ScrollView, TouchableOpacity, Image}  from 'react-native';
+import { AppRegistry, Component, StyleSheet, View, Text, ListView, Alert, ScrollView, TouchableOpacity, Image, NativeModules}  from 'react-native';
 var _navigator;
+var _title = "我是导航";
+
 
 export class CommonView extends Component<{}, { dataSource?: any }> {
 
@@ -14,10 +16,12 @@ export class CommonView extends Component<{}, { dataSource?: any }> {
             <View>
                 <View style = {styles.view}>
                     <TouchableOpacity onPress={this._onBack.bind(this) }>
-                        <Image  source={require('../img/list4.png') } style={{ width: 20, height: 20 }}  />
+                        <Image source={require('../img/back.png') } style={{ width: 26, height: 26 }}  />
                     </TouchableOpacity>
-                    <Text style={{ fontSize: 18, color: '#484848' }}>SHOP</Text>
-                    <Image  source={require('../img/search.png') } style={{ width: 20, height: 20 }} />
+                    <Text style={{ fontSize: 18, color: '#FFFFFF' }}>{_title}</Text>
+                    <TouchableOpacity onPress={this._gotoIM.bind(this) }>
+                        <Image source={require('../img/search.png') } style={{ width: 26, height: 26 }}  />
+                    </TouchableOpacity>
                 </View>
             </View>
         );
@@ -27,6 +31,24 @@ export class CommonView extends Component<{}, { dataSource?: any }> {
     }
     _setPop(pop) {
         _navigator = pop;
+    }
+    _setTitle(value) {
+        if (value == null) {
+            _title = "我是导航";
+        } else {
+            _title = value;
+        }
+    }
+    _refush() {
+        var yy = NativeModules.ToastAndroid.show("单向通信", NativeModules.ToastAndroid.SHORT);
+        Alert.alert(yy);
+    }
+
+    _gotoIM() {
+        // 调用callback，获取回调result
+        NativeModules.ToastAndroid.gotoIM(function (result) {
+            Alert.alert(result);
+        });
     }
 }
 const styles = StyleSheet.create({

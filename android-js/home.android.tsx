@@ -49,7 +49,9 @@ export class Glood extends Component<{}, { dataSource?: any }> {
         );
     }
     _handerClick(value, navigator) {
-        this.props.navigator.push({ name: 'chat' });
+        this.props.navigator.push({
+            name: 'chat', value: value
+        });
     }
 }
 const styles = StyleSheet.create({

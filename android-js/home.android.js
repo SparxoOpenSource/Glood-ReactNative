@@ -28,7 +28,9 @@ class Glood extends react_native_1.Component {
         }}, value))));
     }
     _handerClick(value, navigator) {
-        this.props.navigator.push({ name: 'chat' });
+        this.props.navigator.push({
+            name: 'chat', value: value
+        });
     }
 }
 exports.Glood = Glood;

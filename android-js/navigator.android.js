@@ -13,6 +13,7 @@ class NavigatorClass extends react_native_1.Component {
                 component = home_android_1.Glood;
                 return React.createElement(home_android_1.Glood, {navigator: navigator});
             case "chat":
+                chat_android_1.ChatProject.prototype._setTitle(router.value);
                 return React.createElement(chat_android_1.ChatProject, {navigator: navigator});
         }
     }

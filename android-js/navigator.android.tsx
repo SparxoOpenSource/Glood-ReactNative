@@ -12,6 +12,7 @@ import { AppRegistry,
 import {ChatProject} from './chat.android';
 import {Glood} from './home.android';
 var _navigator;
+
 export class NavigatorClass extends Component<{}, {}> {
     renderScene(router, navigator) {
         var component = null;
@@ -21,6 +22,7 @@ export class NavigatorClass extends Component<{}, {}> {
                 component = Glood;
                 return <Glood navigator={navigator} />
             case "chat":
+                ChatProject.prototype._setTitle(router.value);
                 return <ChatProject navigator={navigator} />
         }
 
