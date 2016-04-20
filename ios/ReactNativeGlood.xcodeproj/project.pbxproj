@@ -22,8 +22,8 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
+		CC110A211CC5DF8300FDF9BE /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = CC110A201CC5DF8300FDF9BE /* GCDAsyncSocket.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CC20DEB71CC0FC9600D1FDA9 /* CommunicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CC20DEB61CC0FC9600D1FDA9 /* CommunicationManager.m */; };
-		CCC6036D1CC0F21C00B36670 /* RCTSQLManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC6036C1CC0F21C00B36670 /* RCTSQLManager.m */; };
 		CCD8A6AF1CBB936A00F4E2AE /* BonjourPublish.m in Sources */ = {isa = PBXBuildFile; fileRef = CCD8A6AC1CBB936A00F4E2AE /* BonjourPublish.m */; };
 		CCD8A6B01CBB936A00F4E2AE /* BonjourBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = CCD8A6AE1CBB936A00F4E2AE /* BonjourBrowser.m */; };
 		CCD8A6B31CBB937600F4E2AE /* AnalyzeNetService.m in Sources */ = {isa = PBXBuildFile; fileRef = CCD8A6B21CBB937600F4E2AE /* AnalyzeNetService.m */; };
@@ -132,10 +132,10 @@
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
+		CC110A1F1CC5DF8300FDF9BE /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
+		CC110A201CC5DF8300FDF9BE /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
 		CC20DEB51CC0FC9600D1FDA9 /* CommunicationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommunicationManager.h; sourceTree = "<group>"; };
 		CC20DEB61CC0FC9600D1FDA9 /* CommunicationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommunicationManager.m; sourceTree = "<group>"; };
-		CCC6036B1CC0F21C00B36670 /* RCTSQLManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCTSQLManager.h; sourceTree = "<group>"; };
-		CCC6036C1CC0F21C00B36670 /* RCTSQLManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCTSQLManager.m; sourceTree = "<group>"; };
 		CCD8A6AB1CBB936A00F4E2AE /* BonjourPublish.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BonjourPublish.h; sourceTree = "<group>"; };
 		CCD8A6AC1CBB936A00F4E2AE /* BonjourPublish.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BonjourPublish.m; sourceTree = "<group>"; };
 		CCD8A6AD1CBB936A00F4E2AE /* BonjourBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BonjourBrowser.h; sourceTree = "<group>"; };
@@ -250,12 +250,11 @@
 		13B07FAE1A68108700A75B9A /* ReactNativeGlood */ = {
 			isa = PBXGroup;
 			children = (
+				CC110A141CC5DF7500FDF9BE /* GCDAsyncSocket */,
 				CCD8A6A01CBB934300F4E2AE /* Bonjour */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
-				CCC6036B1CC0F21C00B36670 /* RCTSQLManager.h */,
-				CCC6036C1CC0F21C00B36670 /* RCTSQLManager.m */,
 				CC20DEB51CC0FC9600D1FDA9 /* CommunicationManager.h */,
 				CC20DEB61CC0FC9600D1FDA9 /* CommunicationManager.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -329,6 +328,16 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		CC110A141CC5DF7500FDF9BE /* GCDAsyncSocket */ = {
+			isa = PBXGroup;
+			children = (
+				CC110A1F1CC5DF8300FDF9BE /* GCDAsyncSocket.h */,
+				CC110A201CC5DF8300FDF9BE /* GCDAsyncSocket.m */,
+			);
+			name = GCDAsyncSocket;
+			path = ReactNativeGlood/GCDAsyncSocket;
+			sourceTree = "<group>";
+		};
 		CCD8A6A01CBB934300F4E2AE /* Bonjour */ = {
 			isa = PBXGroup;
 			children = (
@@ -394,6 +403,9 @@
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
+					};
+					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = LT4WYE8BSE;
 					};
 				};
 			};
@@ -584,8 +596,8 @@
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 				CCD8A6B01CBB936A00F4E2AE /* BonjourBrowser.m in Sources */,
-				CCC6036D1CC0F21C00B36670 /* RCTSQLManager.m in Sources */,
 				CCD8A6AF1CBB936A00F4E2AE /* BonjourPublish.m in Sources */,
+				CC110A211CC5DF8300FDF9BE /* GCDAsyncSocket.m in Sources */,
 				CC20DEB71CC0FC9600D1FDA9 /* CommunicationManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -654,6 +666,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEAD_CODE_STRIPPING = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -671,6 +684,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEAD_CODE_STRIPPING = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -700,6 +715,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -746,6 +762,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;

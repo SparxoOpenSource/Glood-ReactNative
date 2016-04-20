@@ -1,1 +1,0 @@
-exports.CommunicationManager = require('./Manager.ios.js');

@@ -17,15 +17,14 @@ import React, {
   Easing,
 } from 'react-native';
 
-
 var Button = require('react-native-button');
 var viewWidth;
 
-var headImageData = [{headImageIcon : 'http://localhost:8081/App/Common/head01.jpg',name:'Simon',audiolength:20},
-                     {headImageIcon : 'http://localhost:8081/App/Common/head02.jpg',name:'Lily',audiolength:60},
-                     {headImageIcon : 'http://localhost:8081/App/Common/head03.jpg',name:'Lucy',audiolength:34},
-                     {headImageIcon : 'http://localhost:8081/App/Common/head04.jpg',name:'Body',audiolength:25},
-                     {headImageIcon : 'http://localhost:8081/App/Common/head05.jpg',name:'Andrson',audiolength:80}];
+var headImageData = [{headImageIcon : 'http://192.168.31.221:8081/App/Common/head01.jpg',name:'Simon',audiolength:20},
+                     {headImageIcon : 'http://192.168.31.221:8081/App/Common/head02.jpg',name:'Lily',audiolength:60},
+                     {headImageIcon : 'http://192.168.31.221:8081/App/Common/head03.jpg',name:'Lucy',audiolength:34},
+                     {headImageIcon : 'http://192.168.31.221:8081/App/Common/head04.jpg',name:'Body',audiolength:25},
+                     {headImageIcon : 'http://192.168.31.221:8081/App/Common/head05.jpg',name:'Andrson',audiolength:80}];
 
 var MessageListView = React.createClass({
     
@@ -97,6 +96,7 @@ var MessageListView = React.createClass({
   },
   _writeMessage(){
       console.log('**********_writeMessage');
+      var CommunicationManager=require('react-native').NativeModules.call;
   },
   _readMessage(name){
       console.log('**********'+name);
@@ -115,13 +115,15 @@ const styles = StyleSheet.create({
       flex:1.5,
       flexDirection:'row',
       height:120,
-      width:375,
+      width:320,
+      marginBottom:20,
+      marginLeft:5,
   },
   submitIcon:{
       height:80,
       width:80,
       borderRadius:40,
-      marginLeft:50,
+      marginLeft:5,
       marginTop:15,
   },
   playIcon:{

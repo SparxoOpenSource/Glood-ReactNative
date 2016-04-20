@@ -9,6 +9,7 @@
 #import "AnalyzeNetService.h"
 #import <CFNetwork/CFSocketStream.h>
 #import <Foundation/Foundation.h>
+#import "AppDelegate.h"
 
 
 @implementation AnalyzeNetService
@@ -38,7 +39,11 @@
     if ( sender != self.netMyService ) {
         return;
     }
-    
+  
+  AppDelegate *app = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+  app.hostNameMutableArr = [[NSMutableArray alloc] initWithCapacity:10];
+  [app.hostNameMutableArr addObject:[NSString stringWithFormat:@"name:%@",self.netMyService.hostName]];
+  
     NSLog(@" 成功 得到了   netService.hostName  %@", self.netMyService.hostName);
     NSLog(@" 成功 得到了   netService.port  %ld", self.netMyService.port);
     // Save connection info

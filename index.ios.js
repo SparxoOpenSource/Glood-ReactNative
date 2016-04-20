@@ -16,19 +16,39 @@ import React, {
 
 import MessageListView  from './App/Common/messageList.ios';
 
+var {
+    CommunicationManager
+} = require('NativeModules');
 var Button = require('react-native-button');
 var responseData = [{name : 'row one'},{name : 'row two'},{name : 'row three'}];
 
 var UserListView = React.createClass({
     
   getInitialState: function(){
+      var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+      CommunicationManager.get(this.getFontCallback);
     return {
-      dataSource: new ListView.DataSource({
-        rowHasChanged:(row1,row2)=>row1 !== row2,
-      }).cloneWithRows(responseData),
-      loaded: false,
+         dataSource: ds.cloneWithRows([responseData]),
     };
-  },
+  },  
+  getFontCallback: function(results){
+      if(results !== null || results !== undefined ||results != ''){
+      responseData=[];
+      var namestr = results.split(",");
+      
+      for(var i = 0;i < namestr.length;i++)
+      {
+          responseData.push({name:namestr[i]});
+      }
+      console.log(responseData);
+        var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+        this.setState({dataSource:   ds.cloneWithRows(responseData)  });
+      }
+      else{
+          AlertIOS.alert('没有找到用户！！');
+      }
+      
+    },
   
   render: function() {
     return (
@@ -68,8 +88,9 @@ var ReactNativeGlood = React.createClass({
         //     title: '消息列表页面',
         //     component:MessageListView
         // })
-        AlertIOS.alert('setting!!!!!!!');
+        AlertIOS.alert('setting!!!!!!!');        
     },
+    
   render: function() {
     return (
         <NavigatorIOS  ref="nav"
@@ -77,7 +98,7 @@ var ReactNativeGlood = React.createClass({
             initialRoute={{
                 component: UserListView,
                 title: '用户列表页面',
-                rightButtonTitle: 'SETTING!',
+                rightButtonTitle: 'setting!',
                 onRightButtonPress: this.onRightButtonPress
             }}
         />
@@ -109,11 +130,11 @@ var styles = StyleSheet.create({
     paddingTop: 20,
   },
   submit:{
-      height:40,
+      height:80,
       width:300,
       borderColor:'red',
       borderWidth:2,
-      textAlign:'center',
+      textAlign:'left',
       borderRadius:8,
       marginTop:20,
       padding:10,

@@ -7,6 +7,7 @@
 //
 
 #import "BonjourBrowser.h"
+#import "AppDelegate.h"
 
 
 @implementation BonjourBrowser
@@ -55,7 +56,11 @@
     if ( ! [self.servers containsObject:netService] ) {
         // Add it to our list
         [self.servers addObject:netService];
-        
+      
+//      AppDelegate *app = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+//      app.hostNameMutableArr = [[NSMutableArray alloc] initWithCapacity:10];
+//      [app.hostNameMutableArr addObject:[NSString stringWithFormat:@"name:%@",netService.hostName]];
+      
         NSLog(@" hostname :  %@",netService.hostName);
         NSLog(@" port :  %ld",(long)netService.port);
         

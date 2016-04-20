@@ -11,14 +11,21 @@
 
 #import "BonjourPublish.h"
 
+#import "GCDAsyncSocket/GCDAsyncSocket.h"
+
 @class BonjourBrowser;
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate,GCDAsyncSocketDelegate>
 {
   BonjourBrowser * retestBro;
+  GCDAsyncSocket *socket;
 }
-
+@property(strong)  GCDAsyncSocket *socket;
 @property (nonatomic, strong) UIWindow *window;
 @property (strong) BonjourPublish * testPub;
+
+@property (strong, nonatomic)NSMutableArray *hostNameMutableArr;
+
+- (void)connection;
 
 @end

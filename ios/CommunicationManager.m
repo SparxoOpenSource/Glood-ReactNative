@@ -7,22 +7,38 @@
 //
 
 #import "CommunicationManager.h"
-
-@interface CommunicationManager ()
-
-@property (strong, nonatomic) RCTResponseSenderBlock completion;
-
-@end
+#import "AppDelegate.h"
+@import UIKit;
 
 @implementation CommunicationManager
 
-RCT_EXPORT_MODULE()
+RCT_EXPORT_MODULE();
 
-/**
- composeEmailToRecipients(recipients: Array<String>, ccRecipients: Array<String>, bccRecipients: Array<String>)
- */
-RCT_EXPORT_METHOD(composeEmailToRecipients:(NSArray *)recipients ccRecipients:(NSArray *)ccRecipients bccRecipients:(NSArray *)bccRecipients completion:(RCTResponseSenderBlock)completion) {
-  [self composeEmailTo:recipients ccRecipients:ccRecipients bccRecipients:bccRecipients subject:nil body:nil completion:completion];
+RCT_EXPORT_METHOD(get:(RCTResponseSenderBlock)callback)
+{
+  NSArray *userNameList = @[@"row one",
+                            @"row two",
+                            @"row three",
+                            @"row four",
+                            @"row five"];
+  
+//  AppDelegate *app = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+//  NSDictionary *userNameListDic = @{@"userNameList" : userNameList};
+  NSString *str = [userNameList componentsJoinedByString:@","];
+  
+  NSLog(@"-------  %@",str);
+  
+  callback(@[str]);
+}
+
+RCT_EXPORT_METHOD(call:(NSString *)messageContent)
+{
+  NSLog(@"**********");
+//  NSString *message = @"发送的测试数据！！！！！";
+//  AppDelegate *app = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+//  [app.socket writeData:[message dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1 tag:0];
+//  NSLog(@"------%@",[NSString stringWithFormat:@"发送的数据:%@",message]);
+//  [app.socket readDataWithTimeout:-1 tag:0];
 }
 
 @end
