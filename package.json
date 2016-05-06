@@ -10,5 +10,7 @@
     "react-native": "^0.23.1",
     "react-native-button":"^1.4.2",
     "NativeModules":"^0.14.8"
+  },
+  "devDependencies": {
   }
 }

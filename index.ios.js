@@ -76,8 +76,8 @@ var UserListView = React.createClass({
   
 
 _submitMessage : function (name){
-  CommunicationManager.connect(hostIp, (text) => {
-       this.setState({text});
+  // CommunicationManager.connect(hostIp, (text) => {
+      //  this.setState({text});
        console.log('4444444444444%s',this.state.text);
        
             // if(this.state.text === 'connect')
@@ -98,7 +98,7 @@ _submitMessage : function (name){
               }
               
             // }
-          });
+          // });
             
             
     }

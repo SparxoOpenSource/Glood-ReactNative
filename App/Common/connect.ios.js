@@ -26,7 +26,7 @@ var ConnectView = React.createClass({
             },
             update: {
                 type: 'spring',
-                springDamping: 0.1
+                springDamping: 1
             }
         });
         this.setState({w: this.state.w + 250, h: this.state.h,justifyContent: 'center'})
