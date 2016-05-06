@@ -15,8 +15,12 @@ import React, {
   TouchableHighlight,
   TouchableOpacity,
   Easing,
+  LayoutAnimation,
 } from 'react-native';
 
+var {
+    CommunicationManager
+} = require('NativeModules');
 var Button = require('react-native-button');
 var viewWidth;
 
@@ -30,8 +34,6 @@ var MessageListView = React.createClass({
     
     getInitialState: function(){
     return {
-        fadeInOpacity: new Animated.Value(0), //设置动画的初始值
-        
       dataSource: new ListView.DataSource({
         rowHasChanged:(row1,row2)=>row1 !== row2,
       }).cloneWithRows(headImageData),
@@ -39,13 +41,13 @@ var MessageListView = React.createClass({
     };
   },
   
-  componentDidMount() {
-        Animated.timing(this.state.fadeInOpacity, {
-            toValue: 1, // 目标值
-            duration: 1500, // 动画时间
-            easing: Easing.linear // 缓动函数
-        }).start();
-    },
+//   componentDidMount() {
+//         Animated.timing(this.state.fadeInOpacity, {
+//             toValue: 1, // 目标值
+//             duration: 1500, // 动画时间
+//             easing: Easing.linear // 缓动函数
+//         }).start();
+//     },
   
   render() {
     return (
@@ -60,7 +62,7 @@ var MessageListView = React.createClass({
                 <Image style = {styles.playIcon} source = {require('./player.png')}/>
             </TouchableOpacity>
             <Text style = {{height:30,width:50,marginLeft:10,marginTop:62}}>
-            auto
+            {this.state.text}
             </Text>
            
             <TouchableOpacity onPress={this._writeMessage}>
@@ -96,7 +98,19 @@ var MessageListView = React.createClass({
   },
   _writeMessage(){
       console.log('**********_writeMessage');
-      var CommunicationManager=require('react-native').NativeModules.call;
+      this.state.text=='sdfsdfsdf';
+    //   LayoutAnimation.configureNext({
+    //         duration: 700,   //持续时间
+    //         create: {
+    //             type: 'linear',
+    //             property: 'opacity'
+    //         },
+    //         update: {
+    //             type: 'spring',
+    //             springDamping: 0.4
+    //         }
+    //     });
+    //     this.setState({w: this.state.w + 30, h: this.state.h + 30})
   },
   _readMessage(name){
       console.log('**********'+name);

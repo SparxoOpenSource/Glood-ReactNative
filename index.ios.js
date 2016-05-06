@@ -15,12 +15,15 @@ import React, {
 } from 'react-native';
 
 import MessageListView  from './App/Common/messageList.ios';
+import ConnectView from './App/Common/connect.ios';
 
 var {
     CommunicationManager
 } = require('NativeModules');
 var Button = require('react-native-button');
 var responseData = [{name : 'row one'},{name : 'row two'},{name : 'row three'}];
+var hostIp;
+var port;
 
 var UserListView = React.createClass({
     
@@ -73,10 +76,30 @@ var UserListView = React.createClass({
   
 
 _submitMessage : function (name){
-            this.props.navigator.push({
-                component:MessageListView,
-                title: name
-            })
+  CommunicationManager.connect(hostIp, (text) => {
+       this.setState({text});
+       console.log('4444444444444%s',this.state.text);
+       
+            // if(this.state.text === 'connect')
+            // {
+              if(name == '192.168.31.221')
+              {
+                this.props.navigator.push({
+                      component:MessageListView,
+                      title: name
+                  })
+              }
+              else
+              {
+                this.props.navigator.push({
+                      component:ConnectView,
+                      title: name
+                  })
+              }
+              
+            // }
+          });
+            
             
     }
 });
@@ -88,7 +111,8 @@ var ReactNativeGlood = React.createClass({
         //     title: '消息列表页面',
         //     component:MessageListView
         // })
-        AlertIOS.alert('setting!!!!!!!');        
+        AlertIOS.alert('setting!!!!!!!');     
+          
     },
     
   render: function() {
@@ -130,7 +154,7 @@ var styles = StyleSheet.create({
     paddingTop: 20,
   },
   submit:{
-      height:80,
+      height:40,
       width:300,
       borderColor:'red',
       borderWidth:2,

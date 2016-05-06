@@ -8,7 +8,6 @@
  */
 
 #import "AppDelegate.h"
-#import "BonjourBrowser.h"
 
 #import "RCTRootView.h"
 
@@ -16,14 +15,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-//  //测试  browser
-//  retestBro  = [[BonjourBrowser alloc]init];
-//  [retestBro start];
-//  //测试  pubilsh
-//  self.testPub =  [[BonjourPublish alloc]init];
-//  [self.testPub bonjourPublish];
-  
-  [self connection];
   NSURL *jsCodeLocation;
 
   /**
@@ -41,6 +32,8 @@
    */
 
   jsCodeLocation = [NSURL URLWithString:@"http://192.168.31.221:8081/index.ios.bundle?platform=ios&dev=true"];
+
+//  jsCodeLocation = [NSURL URLWithString:@"http://192.168.2.101:8081/index.ios.bundle?platform=ios&dev=true"];
 
   /**
    * OPTION 2
@@ -72,35 +65,5 @@
   return YES;
 }
 
-#define HOST @"192.168.31.221"
-#define PORT 8081
-
-- (void)connection
-{
-  socket = [[GCDAsyncSocket alloc]initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
-  socket.delegate = self;
-  NSError *err = nil;
-  BOOL connState=[socket connectToHost:HOST onPort:PORT error:&err];
-  if(!connState)
-  {
-    NSLog(@"%@",err.description);
-  }else
-  {
-    NSLog(@"连接服务器：%@ 成功",HOST);
-    NSLog(@"打开端口");
-  }
-}
-
-- (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err
-{
-  NSLog(@"socket did is connect:%@",err);
-}
-
--(void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag
-{
-  NSString *newMessage = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-  NSLog(@"%@",[NSString stringWithFormat:@"服务器：%@:%@",sock.connectedHost,newMessage]);
-  [socket readDataWithTimeout:-1 tag:0];
-}
 
 @end

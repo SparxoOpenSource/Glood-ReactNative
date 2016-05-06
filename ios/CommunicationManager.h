@@ -7,8 +7,19 @@
 //
 
 #import "RCTBridgeModule.h"
+#import <GCDAsyncSocket.h>
+#import "RecorderManager.h"
+#import "PlayerManager.h"
 
+@interface CommunicationManager : NSObject <RCTBridgeModule,GCDAsyncSocketDelegate,RecordingDelegate, PlayingDelegate>
 
-@interface CommunicationManager : NSObject <RCTBridgeModule>
+@property (strong,nonatomic) GCDAsyncSocket *serverSocket;
+@property (strong,nonatomic) GCDAsyncSocket *partnerSocket;
+@property (strong,nonatomic) NSString *myIP;
+@property NSInteger port;
+
+@property (strong, nonatomic) NSString *isConnectxxx;
+
+@property (strong, nonatomic) NSString *fileName;
 
 @end

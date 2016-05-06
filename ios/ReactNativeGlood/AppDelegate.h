@@ -9,23 +9,12 @@
 
 #import <UIKit/UIKit.h>
 
-#import "BonjourPublish.h"
 
-#import "GCDAsyncSocket/GCDAsyncSocket.h"
+@interface AppDelegate : UIResponder <UIApplicationDelegate>
 
-@class BonjourBrowser;
-
-@interface AppDelegate : UIResponder <UIApplicationDelegate,GCDAsyncSocketDelegate>
-{
-  BonjourBrowser * retestBro;
-  GCDAsyncSocket *socket;
-}
-@property(strong)  GCDAsyncSocket *socket;
 @property (nonatomic, strong) UIWindow *window;
-@property (strong) BonjourPublish * testPub;
 
 @property (strong, nonatomic)NSMutableArray *hostNameMutableArr;
 
-- (void)connection;
 
 @end

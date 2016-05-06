@@ -7,6 +7,7 @@
 //
 
 #import "PlayerManager.h"
+#import <UIKit/UIKit.h>
 
 @interface PlayerManager ()
 
