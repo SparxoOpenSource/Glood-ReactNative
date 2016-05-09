@@ -4,6 +4,7 @@
  * @flow
  */
 
+import {Root} from './app/root';
 import React, { Component } from 'react';
 import {
   AppRegistry,
@@ -50,4 +51,4 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('ReduxTest', () => ReduxTest);
+AppRegistry.registerComponent('ReduxTest', () => Root);

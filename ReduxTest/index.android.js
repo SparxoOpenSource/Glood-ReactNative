@@ -4,6 +4,9 @@
  */
 
 import React, { Component } from 'react';
+import {Root} from './app/root';
+import {Common} from './app/pages/common';
+
 import {
   AppRegistry,
   StyleSheet,
@@ -48,4 +51,4 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('ReduxTest', () => ReduxTest);
+AppRegistry.registerComponent('ReduxTest', () => Root);
