@@ -22,12 +22,7 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
-		CC6F138B1CE1C5EB00D1893D /* CameraFocusSquare.m in Sources */ = {isa = PBXBuildFile; fileRef = CC6F13801CE1C5EB00D1893D /* CameraFocusSquare.m */; };
-		CC6F138C1CE1C5EB00D1893D /* NSMutableDictionary+ImageMetadata.m in Sources */ = {isa = PBXBuildFile; fileRef = CC6F13811CE1C5EB00D1893D /* NSMutableDictionary+ImageMetadata.m */; };
-		CC6F138D1CE1C5EB00D1893D /* RCTCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = CC6F13831CE1C5EB00D1893D /* RCTCamera.m */; };
-		CC6F138E1CE1C5EB00D1893D /* RCTCameraManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CC6F13881CE1C5EB00D1893D /* RCTCameraManager.m */; };
-		CC6F138F1CE1C5EB00D1893D /* RCTSensorOrientationChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = CC6F138A1CE1C5EB00D1893D /* RCTSensorOrientationChecker.m */; };
-		CC6F13931CE1C5F600D1893D /* libRCTCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC6F13921CE1C5EB00D1893D /* libRCTCamera.a */; };
+		CC6F13DE1CE1C8FE00D1893D /* libRCTCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC6F13DD1CE1C8FA00D1893D /* libRCTCamera.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,9 +103,9 @@
 			remoteGlobalIDString = 58B5119B1A9E6C1200147676;
 			remoteInfo = RCTText;
 		};
-		CC6F13911CE1C5EB00D1893D /* PBXContainerItemProxy */ = {
+		CC6F13DC1CE1C8FA00D1893D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = CC6F13841CE1C5EB00D1893D /* RCTCamera.xcodeproj */;
+			containerPortal = CC6F13D81CE1C8FA00D1893D /* RCTCamera.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 4107012F1ACB723B00C6AA39;
 			remoteInfo = RCTCamera;
@@ -139,16 +134,7 @@
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
-		CC6F137F1CE1C5EB00D1893D /* CameraFocusSquare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraFocusSquare.h; sourceTree = "<group>"; };
-		CC6F13801CE1C5EB00D1893D /* CameraFocusSquare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraFocusSquare.m; sourceTree = "<group>"; };
-		CC6F13811CE1C5EB00D1893D /* NSMutableDictionary+ImageMetadata.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableDictionary+ImageMetadata.m"; sourceTree = "<group>"; };
-		CC6F13821CE1C5EB00D1893D /* RCTCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCTCamera.h; sourceTree = "<group>"; };
-		CC6F13831CE1C5EB00D1893D /* RCTCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCTCamera.m; sourceTree = "<group>"; };
-		CC6F13841CE1C5EB00D1893D /* RCTCamera.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = RCTCamera.xcodeproj; sourceTree = "<group>"; };
-		CC6F13871CE1C5EB00D1893D /* RCTCameraManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCTCameraManager.h; sourceTree = "<group>"; };
-		CC6F13881CE1C5EB00D1893D /* RCTCameraManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCTCameraManager.m; sourceTree = "<group>"; };
-		CC6F13891CE1C5EB00D1893D /* RCTSensorOrientationChecker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCTSensorOrientationChecker.h; sourceTree = "<group>"; };
-		CC6F138A1CE1C5EB00D1893D /* RCTSensorOrientationChecker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCTSensorOrientationChecker.m; sourceTree = "<group>"; };
+		CC6F13D81CE1C8FA00D1893D /* RCTCamera.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTCamera.xcodeproj; path = "../node_modules/react-native-camera/ios/RCTCamera.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,7 +149,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CC6F13931CE1C5F600D1893D /* libRCTCamera.a in Frameworks */,
+				CC6F13DE1CE1C8FE00D1893D /* libRCTCamera.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
 				00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */,
@@ -286,6 +272,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				CC6F13D81CE1C8FA00D1893D /* RCTCamera.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
 				00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */,
 				00C302B51ABCB90400DB3ED1 /* RCTGeolocation.xcodeproj */,
@@ -311,7 +298,6 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				CC6F137E1CE1C5EB00D1893D /* ios */,
 				13B07FAE1A68108700A75B9A /* ReduxTest */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* ReduxTestTests */,
@@ -330,27 +316,10 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		CC6F137E1CE1C5EB00D1893D /* ios */ = {
+		CC6F13D91CE1C8FA00D1893D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				CC6F137F1CE1C5EB00D1893D /* CameraFocusSquare.h */,
-				CC6F13801CE1C5EB00D1893D /* CameraFocusSquare.m */,
-				CC6F13811CE1C5EB00D1893D /* NSMutableDictionary+ImageMetadata.m */,
-				CC6F13821CE1C5EB00D1893D /* RCTCamera.h */,
-				CC6F13831CE1C5EB00D1893D /* RCTCamera.m */,
-				CC6F13841CE1C5EB00D1893D /* RCTCamera.xcodeproj */,
-				CC6F13871CE1C5EB00D1893D /* RCTCameraManager.h */,
-				CC6F13881CE1C5EB00D1893D /* RCTCameraManager.m */,
-				CC6F13891CE1C5EB00D1893D /* RCTSensorOrientationChecker.h */,
-				CC6F138A1CE1C5EB00D1893D /* RCTSensorOrientationChecker.m */,
-			);
-			path = ios;
-			sourceTree = "<group>";
-		};
-		CC6F13851CE1C5EB00D1893D /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				CC6F13921CE1C5EB00D1893D /* libRCTCamera.a */,
+				CC6F13DD1CE1C8FA00D1893D /* libRCTCamera.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -407,6 +376,9 @@
 						CreatedOnToolsVersion = 6.2;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
+					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = LT4WYE8BSE;
+					};
 				};
 			};
 			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "ReduxTest" */;
@@ -426,8 +398,8 @@
 					ProjectRef = 00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */;
 				},
 				{
-					ProductGroup = CC6F13851CE1C5EB00D1893D /* Products */;
-					ProjectRef = CC6F13841CE1C5EB00D1893D /* RCTCamera.xcodeproj */;
+					ProductGroup = CC6F13D91CE1C8FA00D1893D /* Products */;
+					ProjectRef = CC6F13D81CE1C8FA00D1893D /* RCTCamera.xcodeproj */;
 				},
 				{
 					ProductGroup = 00C302B61ABCB90400DB3ED1 /* Products */;
@@ -545,11 +517,11 @@
 			remoteRef = 832341B41AAA6A8300B99B32 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		CC6F13921CE1C5EB00D1893D /* libRCTCamera.a */ = {
+		CC6F13DD1CE1C8FA00D1893D /* libRCTCamera.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRCTCamera.a;
-			remoteRef = CC6F13911CE1C5EB00D1893D /* PBXContainerItemProxy */;
+			remoteRef = CC6F13DC1CE1C8FA00D1893D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -603,12 +575,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CC6F138E1CE1C5EB00D1893D /* RCTCameraManager.m in Sources */,
-				CC6F138B1CE1C5EB00D1893D /* CameraFocusSquare.m in Sources */,
-				CC6F138F1CE1C5EB00D1893D /* RCTSensorOrientationChecker.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
-				CC6F138D1CE1C5EB00D1893D /* RCTCamera.m in Sources */,
-				CC6F138C1CE1C5EB00D1893D /* NSMutableDictionary+ImageMetadata.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -677,11 +644,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEAD_CODE_STRIPPING = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../node_modules/react-native/React/**",
+					"$(SRCROOT)/../../../React/**",
+					"$(SRCROOT)/../../react-native/React/**",
 				);
 				INFOPLIST_FILE = ReduxTest/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -695,10 +665,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../node_modules/react-native/React/**",
+					"$(SRCROOT)/../../../React/**",
+					"$(SRCROOT)/../../react-native/React/**",
 				);
 				INFOPLIST_FILE = ReduxTest/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -725,6 +698,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -771,6 +745,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
