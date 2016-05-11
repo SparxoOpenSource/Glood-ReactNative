@@ -36,7 +36,7 @@ export class Cameraq extends Component {
     
     takePicture() {
     this.camera.capture()
-      .then((data) => pathurl == data)
+      .then((data) => console.error("data:----------   %s",data))
       .catch(err => console.error("error:----------   %s",err));
      console.log("888888---- %S",pathurl);
       this.props.navigator.push({
