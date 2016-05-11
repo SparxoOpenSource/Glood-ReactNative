@@ -1,5 +1,5 @@
-import React,{Component} from "react";
-import { AppRegistry , StyleSheet, View, Text, ListView, Alert, Navigator, Image, TouchableOpacity }  from 'react-native';
+import React, {Component} from "react";
+import { AppRegistry, StyleSheet, View, Text, ListView, Alert, Navigator, Image, TouchableOpacity, TouchableWithoutFeedback }  from 'react-native';
 import {Common} from "./common";
 import {RecordAudio} from "../utils/RecordAudio";
 
@@ -13,6 +13,7 @@ export class Mic extends Component {
         this.state = {
             dataSource: ds.cloneWithRows(data)
         }
+        this._accessFileName()
     }
     render() {
         Common.prototype._setPop(this.props.navigator);
@@ -29,9 +30,9 @@ export class Mic extends Component {
                     <TouchableOpacity onPress={this._stop.bind(this) }>
                         <Image source={require('../img/stop.png') } style={style.ImagStyle}/>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={this._startVoice.bind(this) }>
+                    <TouchableWithoutFeedback onPressOut={this._stop.bind(this) } onPressIn={this._startVoice.bind(this) }>
                         <Image style={{ width: 54, height: 54 }}  source={require('../img/voice.png') }/>
-                    </TouchableOpacity>
+                    </TouchableWithoutFeedback>
                     <TouchableOpacity>
                         <Image source={require('../img/play.png') } style={style.ImagStyle}  />
                     </TouchableOpacity>
@@ -64,38 +65,61 @@ export class Mic extends Component {
         }
         Common.prototype._setTitle(_title);
     }
+
+    //开始录音
     _startVoice() {
         var _this = this;
         RecordAudio.prototype.startRecord(null, (back) => {
             _this._voiceCallBack(back);
         });
     }
+
+    //停止录音
     _stop() {
         var _this = this;
         RecordAudio.prototype.stopRecord((back) => {
             _this._voiceCallBack(back);
             var len = data.length;
             data[len + 1] = back["name"];
-            _this._refush();
-            _this._play(back["name"]);
+            _this._refush(data);
         });
     }
+
+    //播放声音
     _play(name) {
         var _this = this;
         RecordAudio.prototype.playRecord(name, (back) => {
             _this._voiceCallBack(back);
         });
     }
+
     _voiceCallBack(call) {
         Alert.alert(call["name"]);
     }
 
-    _refush() {
-        this.state = {
-            dataSource: ds.cloneWithRows(data)
-        }
+    //刷新数据
+    _refush(value) {
+        this.setState({
+            dataSource: ds.cloneWithRows(value)
+        })
     }
 
+    _accessFileName() {
+        var _this = this;
+        RecordAudio.prototype.accessFileName((back) => {
+            if (back["name"] === "有数据") {
+                var ss = back["param"];
+                var tt = ss.split("|");
+                for (var i = 0; i < tt.length; i++) {
+                    var len = data.length;
+                    data[len + 1] = tt[i];
+                }
+                this.setState({
+                    dataSource: ds.cloneWithRows(data)
+                })
+            }
+        });
+    }
 }
 const style = StyleSheet.create({
     container: {

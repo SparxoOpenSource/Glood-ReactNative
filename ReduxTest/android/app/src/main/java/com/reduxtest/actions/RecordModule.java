@@ -5,8 +5,11 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.text.TextUtils;
 import android.widget.Toast;
 import android.util.Log;
@@ -33,6 +36,7 @@ public class RecordModule extends ReactContextBaseJavaModule {
     private String fileBasePath = "";
     private MediaPlayer mediaPlayer;
     private WritableMap callbackMap;
+    Map<String, MediaPlayer> playerPool = new HashMap<>();
 
     public RecordModule(ReactApplicationContext reactContext) {
         super(reactContext);
@@ -131,39 +135,89 @@ public class RecordModule extends ReactContextBaseJavaModule {
     public void playRecord(String playName, final Callback callBack) {
         this.callback = callBack;
         callbackMap = Arguments.createMap();
-        if (mediaPlayer == null)
-            mediaPlayer = new MediaPlayer();
-        if (TextUtils.isEmpty(fileBasePath))
-            fileBasePath = "/mnt/sdcard/" + this.getReactApplicationContext().getPackageName() + "/audioCache/";
-        //获取文件路径
-        File audioFile = new File(fileBasePath, playName);
-        mediaPlayer.reset();
-        try {
-            FileInputStream fis = new FileInputStream(audioFile);
-            mediaPlayer.setDataSource(fis.getFD());
-            mediaPlayer.prepare();
-            mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                @Override
-                public void onCompletion(MediaPlayer mp) {
+        MediaPlayer player = this.playerPool.get(playName);
+        if (player == null) {
+            player = prepare(playName, playName);
+        }
+        if (player == null) {
+            callbackMap.putString("name", "播放创建失败");
+            callback.invoke(callbackMap);
+            return;
+        }
+        if (player.isPlaying()) {
+            player.stop();
+            callbackMap.putString("name", "播放停止");
+            callback.invoke(callbackMap);
+            return;
+        }
+        player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                if (!mp.isLooping()) {
                     callbackMap.putString("name", "播放完毕");
                     callback.invoke(callbackMap);
-                    mp.release();
                 }
-            });
-            mediaPlayer.setOnErrorListener(new MediaPlayer.OnErrorListener() {
-                @Override
-                public boolean onError(MediaPlayer mp, int what, int extra) {
-                    mp.release();
-                    callbackMap.putString("name", "播放出错");
-                    callback.invoke(callbackMap);
-                    return false;
-                }
-            });
-            mediaPlayer.start();
-        } catch (IOException e) {
-            callbackMap.putString("name", e.getMessage());
-            callback.invoke(callbackMap);
+            }
+        });
+        player.setOnErrorListener(new MediaPlayer.OnErrorListener() {
+            @Override
+            public boolean onError(MediaPlayer mp, int what, int extra) {
+                callbackMap.putString("name", "播放出错");
+                callback.invoke(callbackMap);
+                return true;
+            }
+        });
+        player.start();
+    }
+
+    @ReactMethod
+    public void accessFileName(Callback callback) {
+        if (TextUtils.isEmpty(fileBasePath))
+            fileBasePath = "/mnt/sdcard/" + this.getReactApplicationContext().getPackageName() + "/audioCache/";
+        callbackMap = Arguments.createMap();
+        File f = new File(fileBasePath);
+        File[] files = f.listFiles();// 列出所有文件
+        if (files == null) {
+            callbackMap.putString("name", "没有数据");
+            callback.invoke(callback);
+            return;
         }
+        String str = "";
+        for (int i = 0; i < files.length; i++) {
+            str += files[i].getName() + "|";
+        }
+        str = str.substring(str.length() - 1, str.length()).equals("|") ? str.substring(0, str.length() - 1) : str;
+        callbackMap.putString("name", "有数据");
+        callbackMap.putString("param", str);
+        callback.invoke(callbackMap);
+    }
+
+    public MediaPlayer prepare(final String fileName, final String key) {
+        MediaPlayer player = createMediaPlayer(fileName);
+        if (player == null) {
+            return null;
+        }
+        this.playerPool.put(key, player);
+        return player;
+    }
+
+    protected MediaPlayer createMediaPlayer(final String fileName) {
+        if (TextUtils.isEmpty(fileBasePath))
+            fileBasePath = "/mnt/sdcard/" + this.getReactApplicationContext().getPackageName() + "/audioCache/";
+        MediaPlayer player = new MediaPlayer();
+        File file = new File(fileBasePath, fileName);
+        if (file.exists()) {
+            try {
+                player.reset();
+                FileInputStream fis = new FileInputStream(file);
+                player.setDataSource(fis.getFD());
+                player.prepare();
+                return player;
+            } catch (IOException e) {
+                return null;
+            }
+        }
+        return null;
     }
 
     private boolean DeleteRecursive(File fileOrDirectory) {
