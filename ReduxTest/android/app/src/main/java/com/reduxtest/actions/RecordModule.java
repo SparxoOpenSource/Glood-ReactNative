@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import android.media.MediaPlayer;
+import android.text.TextUtils;
 import android.widget.Toast;
 import android.util.Log;
 
@@ -112,7 +113,7 @@ public class RecordModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void clearCache(Callback callback) {
         try {
-            String fileBasePath = "/mnt/sdcard/" + this.getReactApplicationContext().getPackageName() + "/audioCache/";
+            fileBasePath = "/mnt/sdcard/" + this.getReactApplicationContext().getPackageName() + "/audioCache/";
             File file = new File(fileBasePath + "/audioCache");
             if (!file.exists()) {
                 callback.invoke(true);
@@ -132,6 +133,8 @@ public class RecordModule extends ReactContextBaseJavaModule {
         callbackMap = Arguments.createMap();
         if (mediaPlayer == null)
             mediaPlayer = new MediaPlayer();
+        if (TextUtils.isEmpty(fileBasePath))
+            fileBasePath = "/mnt/sdcard/" + this.getReactApplicationContext().getPackageName() + "/audioCache/";
         //获取文件路径
         File audioFile = new File(fileBasePath, playName);
         mediaPlayer.reset();

@@ -3,7 +3,7 @@ import { AppRegistry , StyleSheet, View, Text, ListView, Alert, Navigator, Image
 import {Common} from "./common";
 import {RecordAudio} from "../utils/RecordAudio";
 
-var data = [];
+var data = ["recordKeyeeApp_2016-05-10 17:30:29.wav"];
 var ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
 const LISTVIEW_REF = 'listview'
 

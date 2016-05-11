@@ -3,10 +3,7 @@ package com.reduxtest;
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
-<<<<<<< HEAD:ReduxTest/android/app/src/main/java/com/reduxtest/MainActivity.java
-=======
 import com.reduxtest.actions.RecordAudioPackage;
->>>>>>> origin/Glood-Redux:ReduxTest/android/app/src/main/java/com/reduxtest/MainActivity.java
 
 import java.util.Arrays;
 import java.util.List;
@@ -38,12 +35,8 @@ public class MainActivity extends ReactActivity {
     @Override
     protected List<ReactPackage> getPackages() {
         return Arrays.<ReactPackage>asList(
-<<<<<<< HEAD:ReduxTest/android/app/src/main/java/com/reduxtest/MainActivity.java
-            new MainReactPackage()
-=======
                 new MainReactPackage(),
                 new RecordAudioPackage()
->>>>>>> origin/Glood-Redux:ReduxTest/android/app/src/main/java/com/reduxtest/MainActivity.java
         );
     }
 }
