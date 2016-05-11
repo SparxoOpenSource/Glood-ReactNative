@@ -1,5 +1,5 @@
-import React from "react";
-import { AppRegistry, Component, StyleSheet, View, Text, ListView, Alert, ScrollView, TouchableOpacity, Image, NativeModules}  from 'react-native';
+import React, {Component} from "react";
+import { AppRegistry, StyleSheet, View, Text, ListView, Alert, ScrollView, TouchableOpacity, Image, NativeModules}  from 'react-native';
 var _navigator;
 var _title = "我是导航";
 

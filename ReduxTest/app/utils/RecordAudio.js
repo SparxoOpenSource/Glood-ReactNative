@@ -1,6 +1,6 @@
 'use strict';
-
-import React, {NativeModules, Component, Alert} from 'react-native';
+import React, {Component} from 'react';
+import {NativeModules, Alert} from 'react-native';
 
 const Recorder = NativeModules.RecordAudio;
 

@@ -1,9 +1,8 @@
-import React from "react";
+import React,{Component} from "react";
 import { 
     AppRegistry, 
-    Component, 
     StyleSheet, 
-    View, 
+    View,
     Text, 
     Navigator, 
     Image, 
@@ -12,7 +11,7 @@ import {
     CameraRoll,
     ListView,
     Platform,
-}  from 'react-native';
+} from 'react-native';
 import {Common} from "./common";
 import ImageCarousell from 'react-native-image-carousell';
 

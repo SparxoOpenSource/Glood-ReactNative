@@ -1,7 +1,6 @@
-import React from "react";
+import React, {Component} from "react";
 import { 
     AppRegistry, 
-    Component, 
     StyleSheet, 
     View, 
     Text, 
@@ -12,8 +11,6 @@ import {
 }  from 'react-native';
 import {Common} from "./common";
 import Camera from 'react-native-camera';
-
-var pathurl;
 
 export class Cameraq extends Component {
     render() {
@@ -36,11 +33,10 @@ export class Cameraq extends Component {
     
     takePicture() {
     this.camera.capture()
-      .then((data) => console.error("data:----------   %s",data))
+      .then((data) => console.log("data:----------   %s",data))
       .catch(err => console.error("error:----------   %s",err));
-     console.log("888888---- %S",pathurl);
       this.props.navigator.push({
-                    name: "PHOTOWALL", value: pathurl
+                    name: "PHOTOWALL", value: "Photo Wall"
                 });
   }
 

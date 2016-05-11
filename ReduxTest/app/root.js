@@ -1,5 +1,5 @@
-import React from "react";
-import { AppRegistry, Component, StyleSheet, View, Text, ListView, Alert, Navigator, Image, TouchableOpacity }  from 'react-native';
+import React,{Component} from "react";
+import { AppRegistry, StyleSheet, View, Text, ListView, Alert, Navigator, Image, TouchableOpacity }  from 'react-native';
 var _navigator;
 import {Home} from "../app/pages/home";
 import {Mic} from "../app/pages/mic";
