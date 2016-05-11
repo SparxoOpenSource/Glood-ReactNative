@@ -70,7 +70,7 @@ export class Mic extends Component {
     _startVoice() {
         var _this = this;
         RecordAudio.prototype.startRecord(null, (back) => {
-            _this._voiceCallBack(back);
+            // _this._voiceCallBack(back);
         });
     }
 
@@ -78,7 +78,7 @@ export class Mic extends Component {
     _stop() {
         var _this = this;
         RecordAudio.prototype.stopRecord((back) => {
-            _this._voiceCallBack(back);
+            // _this._voiceCallBack(back);
             var len = data.length;
             data[len + 1] = back["name"];
             _this._refush(data);
