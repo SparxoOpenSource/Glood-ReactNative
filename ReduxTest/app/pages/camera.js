@@ -16,12 +16,6 @@ import Camera from 'react-native-camera';
 var pathurl;
 
 export class Cameraq extends Component {
-
-import { AppRegistry, Component, StyleSheet, View, Text, ListView, Alert, Navigator, Image, TouchableOpacity }  from 'react-native';
-import {Common} from "./common";
-
-export class Camera extends Component {
-
     render() {
         Common.prototype._setPop(this.props.navigator);
         return (

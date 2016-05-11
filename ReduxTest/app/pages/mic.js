@@ -2,7 +2,6 @@ import React from "react";
 import { AppRegistry, Component, StyleSheet, View, Text, ListView, Alert, Navigator, Image, TouchableOpacity }  from 'react-native';
 import {Common} from "./common";
 import {RecordAudio} from "../utils/RecordAudio";
-import {RefreshableListView} from "react-native-refreshable-listview";
 
 var data = [];
 var ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
