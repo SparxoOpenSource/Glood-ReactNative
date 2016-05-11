@@ -28,10 +28,14 @@ export class RecordAudio extends Component {
             callback && callback(args);
         });
     }
-    
+
     accessFileName(callback) {
         Recorder.accessFileName((args) => {
             callback && callback(args);
         });
+    }
+
+    recordMsg(msg) {
+        Recorder.recordMsg(msg);
     }
 }

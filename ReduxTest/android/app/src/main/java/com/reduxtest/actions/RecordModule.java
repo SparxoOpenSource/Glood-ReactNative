@@ -192,6 +192,11 @@ public class RecordModule extends ReactContextBaseJavaModule {
         callback.invoke(callbackMap);
     }
 
+    @ReactMethod
+    public void recordMsg(String temp) {
+        Toast.makeText(getReactApplicationContext(), temp, Toast.LENGTH_SHORT).show();
+    }
+
     public MediaPlayer prepare(final String fileName, final String key) {
         MediaPlayer player = createMediaPlayer(fileName);
         if (player == null) {

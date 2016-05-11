@@ -27,14 +27,14 @@ export class Mic extends Component {
                         renderRow={this._row.bind(this) }/>
                 </View>
                 <View style={style.footer}>
-                    <TouchableOpacity onPress={this._stop.bind(this) }>
-                        <Image source={require('../img/stop.png') } style={style.ImagStyle}/>
+                    <TouchableOpacity>
+                        <Image source={require('../img/none.png') } style={style.ImagStyle}/>
                     </TouchableOpacity>
                     <TouchableWithoutFeedback onPressOut={this._stop.bind(this) } onPressIn={this._startVoice.bind(this) }>
                         <Image style={{ width: 54, height: 54 }}  source={require('../img/voice.png') }/>
                     </TouchableWithoutFeedback>
                     <TouchableOpacity>
-                        <Image source={require('../img/play.png') } style={style.ImagStyle}  />
+                        <Image source={require('../img/none.png') } style={style.ImagStyle}  />
                     </TouchableOpacity>
                 </View>
             </View>
@@ -70,6 +70,7 @@ export class Mic extends Component {
     _startVoice() {
         var _this = this;
         RecordAudio.prototype.startRecord(null, (back) => {
+            RecordAudio.prototype.recordMsg("开始录音");
             // _this._voiceCallBack(back);
         });
     }
@@ -78,6 +79,7 @@ export class Mic extends Component {
     _stop() {
         var _this = this;
         RecordAudio.prototype.stopRecord((back) => {
+            RecordAudio.prototype.recordMsg("停止录音");
             // _this._voiceCallBack(back);
             var len = data.length;
             data[len + 1] = back["name"];
