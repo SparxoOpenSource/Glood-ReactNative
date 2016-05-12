@@ -15,6 +15,7 @@ import {
 } from 'react-native';
 import {Common} from "./common";
 import ImageCarousell from 'react-native-image-carousell';
+import {getPhotos} from "./camera"
 
 const propTypes = {
     title: PropTypes.string,
@@ -27,19 +28,9 @@ export class PhototWall extends Component {
         const dataSource = new ListView.DataSource({
             rowHasChanged: (r1, r2) => r1 !== r2,
         });
+        console.log("-------- %s", getPhotos());
         this.state = {
-            dataSource: dataSource.cloneWithRows([
-                require('../img/voice.png'),
-                require('../img/voice.png'),
-                require('../img/voice.png'),
-                require('../img/voice.png'),
-                require('../img/voice.png'),
-                require('../img/voice.png'),
-                require('../img/voice.png'),
-                require('../img/voice.png'),
-                require('../img/voice.png'),
-                require('../img/voice.png'),
-            ]),
+            dataSource: dataSource.cloneWithRows(getPhotos()),
         };
     }
 

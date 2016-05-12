@@ -81,7 +81,6 @@ export class ImageCarousell extends Component {
     if (this.state.showPreview) {
       imageHeight -= this.props.previewImageSize;
     }
-
     return (
       <Image
         style={[
@@ -103,6 +102,7 @@ export class ImageCarousell extends Component {
           { width: this.props.previewImageSize, height: this.props.previewImageSize },
         ]}
         source={image}
+        
         resizeMode="contain"
       />
     );

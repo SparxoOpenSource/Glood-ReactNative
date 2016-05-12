@@ -12,12 +12,15 @@ import {
 }  from 'react-native';
 import {Common} from "./common";
 import Camera from 'react-native-camera';
-
 const propTypes = {
     title: PropTypes.string,
     navigator: PropTypes.object
 };
+var photo_pathData = [];
 
+export function getPhotos() {
+    return photo_pathData;
+}
 export class Cameraq extends Component {
     render() {
         return (
@@ -30,10 +33,23 @@ export class Cameraq extends Component {
                     } }
                     style={style.preview}
                     aspect={Camera.constants.Aspect.fill}>
-                    <Text style={style.capture} onPress={this.takePicture.bind(this) }>CAPTURE</Text>
+                    <Text style={style.capture} onPress={this.takePicture.bind(this) }>[CAPTURE]</Text>
                 </Camera>
             </View>
         );
+    }
+
+    takePicture() {
+        this.camera.capture()
+            .then((data) => {
+                console.log("data:----------   %s", data)
+                  photo_pathData.push(require('../img/voice.png'));
+                // photo_pathData.push(require(data.path));
+                this.props.navigator.push({
+                    name: "PHOTOWALL", value: "Photo Wall"
+                });
+            })
+            .catch(err => console.error("error:----------   %s", err));
     }
 
     takePicture() {
