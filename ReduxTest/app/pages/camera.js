@@ -10,7 +10,9 @@ import {
     TouchableOpacity
 }  from 'react-native';
 import {Common} from "./common";
-import Camera from 'react-native-camera';
+// import Camera from 'react-native-camera';
+import Camera from '@remobile/react-native-camera';
+import Button from '@remobile/react-native-simple-button';
 
 var photo_pathData = [];
 
@@ -19,36 +21,83 @@ export function getPhotos() {
 }
 
 export class Cameraq extends Component {
+    
+    jumpPhoto(...imgs){
+        Array.prototype.push.apply(photo_pathData,imgs.map((data)=>{ return { uri:"data:image/jpeg;base64,"+data };}));
+                this.props.navigator.push({
+                    name: "PHOTOWALL", value: "Photo Wall"
+                });
+    }
+    
+    capturePhoto() {
+        
+        var options = {
+            quality: 50,
+            allowEdit: false,
+            destinationType: Camera.DestinationType.DATA_URL,
+        };
+        Camera.getPicture(options, (imageData) => {
+            this.jumpPhoto(imageData);
+        });
+    }
+    capturePhotoEdit() {
+        var options = {
+            quality: 50,
+            allowEdit: true,
+            destinationType: Camera.DestinationType.DATA_URL,
+        };
+        Camera.getPicture(options, (imageData) => {
+            this.jumpPhoto(imageData);
+        });
+    }
+    getPhoto(source) {
+        var options = {
+            quality: 50,
+            allowEdit: true,
+            destinationType: Camera.DestinationType.DATA_URL,
+            sourceType: source,
+            encodingType: Camera.EncodingType.PNG,
+        };
+        Camera.getPicture(options, (imageData) => {
+            this.jumpPhoto(imageData);
+        }, (error) => {
+                console.log(error);
+        });
+    }
     render() {
         Common.prototype._setPop(this.props.navigator);
         return (
             <View style={style.container}>
                 <Common/>
 
-                <Camera
-                    ref={(cam) => {
-                        this.camera = cam;
-                    } }
-                    style={style.preview}
-                    aspect={Camera.constants.Aspect.fill}>
-                    <Text style={style.capture} onPress={this.takePicture.bind(this) }>[CAPTURE]</Text>
-                </Camera>
+                <Button onPress={this.capturePhoto.bind(this)}>
+                    Capture Photo
+                </Button>
+                // <Button onPress={this.capturePhotoEdit.bind(this)}>
+                //     Capture Editable Photo
+                // </Button>
+                <Button onPress={this.getPhoto.bind(this,Camera.PictureSourceType.PHOTOLIBRARY)}>
+                    From Photo Library
+                </Button>
+                // <Button onPress={this.getPhoto.bind(this, Camera.PictureSourceType.SAVEDPHOTOALBUM)}>
+                //     From Photo Album Editable
+                // </Button>
             </View>
         );
     }
 
-    takePicture() {
-        this.camera.capture()
-            .then((data) => {
-                console.log("data:----------   %s", data)
-                  photo_pathData.push(require('../img/voice.png'));
-                // photo_pathData.push(require(data.path));
-                this.props.navigator.push({
-                    name: "PHOTOWALL", value: "Photo Wall"
-                });
-            })
-            .catch(err => console.error("error:----------   %s", err));
-    }
+    // takePicture() {
+    //     this.camera.capture()
+    //         .then((data) => {
+    //             console.log("data:----------   %s", data)
+    //               photo_pathData.push(require('../img/voice.png'));
+    //             // photo_pathData.push(require(data.path));
+    //             this.props.navigator.push({
+    //                 name: "PHOTOWALL", value: "Photo Wall"
+    //             });
+    //         })
+    //         .catch(err => console.error("error:----------   %s", err));
+    // }
 
     _setTitle(value) {
         if (value == null) {

@@ -22,7 +22,6 @@ export class PhototWall extends Component {
     const dataSource = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2,
     });
-    console.log("-------- %s",getPhotos());
     this.state = {
       dataSource: dataSource.cloneWithRows(getPhotos()),
       
