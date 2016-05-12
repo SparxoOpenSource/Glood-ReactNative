@@ -7,19 +7,24 @@ import {
     Navigator,
     Image,
     Dimensions,
-    TouchableOpacity
+    TouchableOpacity,
+    PropTypes
 }  from 'react-native';
 import {Common} from "./common";
+
 // import Camera from 'react-native-camera';
 import Camera from '@remobile/react-native-camera';
 import Button from '@remobile/react-native-simple-button';
 
+const propTypes = {
+    title: PropTypes.string,
+    navigator: PropTypes.object
+};
 var photo_pathData = [];
 
 export function getPhotos() {
     return photo_pathData;
 }
-
 export class Cameraq extends Component {
     
     jumpPhoto(...imgs){
@@ -65,10 +70,9 @@ export class Cameraq extends Component {
         });
     }
     render() {
-        Common.prototype._setPop(this.props.navigator);
         return (
             <View style={style.container}>
-                <Common/>
+                <Common navigator={this.props.navigator} title={this.props.title}/>
 
                 <Button onPress={this.capturePhoto.bind(this)}>
                     Capture Photo
@@ -99,16 +103,18 @@ export class Cameraq extends Component {
     //         .catch(err => console.error("error:----------   %s", err));
     // }
 
-    _setTitle(value) {
-        if (value == null) {
-            _title = "我是导航";
-            Common.prototype._setTitle(value);
-        } else {
-            _title = value;
-        }
-        Common.prototype._setTitle(_title);
+    takePicture() {
+        this.camera.capture()
+            .then((data) => console.log("data:----------   %s", data))
+            .catch(err => console.error("error:----------   %s", err));
+        this.props.navigator.push({
+            name: "PHOTOWALL", value: "Photo Wall"
+        });
     }
 }
+
+Cameraq.propTypes = propTypes;
+
 const style = StyleSheet.create({
     container: {
         flex: 1,

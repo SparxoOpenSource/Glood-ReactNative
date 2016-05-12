@@ -1,11 +1,19 @@
 import React, {Component} from "react";
-import { AppRegistry, StyleSheet, View, Text, ListView, Alert, Navigator, Image, TouchableOpacity, TouchableWithoutFeedback }  from 'react-native';
+import { AppRegistry, StyleSheet, View, Text, ListView, Alert, Navigator, Image, TouchableOpacity, TouchableWithoutFeedback, LayoutAnimation, PropTypes }  from 'react-native';
 import {Common} from "./common";
 import {RecordAudio} from "../utils/RecordAudio";
+import {MicItem} from "./mic_item";
 
 var data = ["recordKeyeeApp_2016-05-10 17:30:29.wav"];
 var ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
 const LISTVIEW_REF = 'listview'
+var ss = 70;
+var tt = 70;
+
+const propTypes = {
+    title: PropTypes.string,
+    navigator: PropTypes.object
+};
 
 export class Mic extends Component {
     constructor() {
@@ -16,10 +24,9 @@ export class Mic extends Component {
         this._accessFileName()
     }
     render() {
-        Common.prototype._setPop(this.props.navigator);
         return (
             <View style={style.container}>
-                <Common/>
+                <Common navigator={this.props.navigator} title={this.props.title}/>
                 <View style={style.content}>
                     <ListView
                         ref={LISTVIEW_REF}
@@ -41,7 +48,7 @@ export class Mic extends Component {
         );
     }
 
-    _row(value) {
+    _row2(value) {
         return (
             <View style={style.container}>
                 <TouchableOpacity style={style.welcomeText} onPress={this._play.bind(this, value) }>
@@ -56,14 +63,10 @@ export class Mic extends Component {
         );
     }
 
-    _setTitle(value) {
-        if (value == null) {
-            _title = "我是导航";
-            Common.prototype._setTitle(value);
-        } else {
-            _title = value;
-        }
-        Common.prototype._setTitle(_title);
+    _row(value) {
+        return (
+            <MicItem title={value} />
+        );
     }
 
     //开始录音
@@ -119,10 +122,37 @@ export class Mic extends Component {
                 this.setState({
                     dataSource: ds.cloneWithRows(data)
                 })
+            } else {
+                _this._voiceCallBack(back["name"]);
             }
         });
     }
+    _onPress(value) {
+        // var ss=this.refs.view.style.width;
+        // if(ss===300){
+        //     return;
+        // }
+        LayoutAnimation.configureNext({
+            duration: 10000,   //持续时间
+            create: {
+                type: 'linear',
+                property: 'opacity'
+            },
+            update: {
+                type: 'spring',
+                springDamping: 10000
+            }
+        });
+        ss = ss + 250;
+        this.refs.view.setNativeProps({
+            style: { width: ss, height: tt, justifyContent: "center" }
+        })
+        this._play(value);
+    }
 }
+
+Mic.propTypes = propTypes;
+
 const style = StyleSheet.create({
     container: {
         flex: 7,
@@ -159,5 +189,23 @@ const style = StyleSheet.create({
         borderColor: 'red',
         alignItems: 'center',
         backgroundColor: '#999999',
+    }, touch: {
+        marginLeft: 10,
+        marginRight: 10,
+        width: 70,
+        height: 70,
+        marginTop: 10,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 40,
+        backgroundColor: "#999999"
+
     },
+    img: {
+        width: 70,
+        height: 70,
+        borderWidth: 0,
+        borderRadius: 35,
+    }
 });

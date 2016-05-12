@@ -1,20 +1,26 @@
-import React,{Component} from "react";
-import { 
-    AppRegistry, 
-    StyleSheet, 
+import React, {Component} from "react";
+import {
+    AppRegistry,
+    StyleSheet,
     View,
-    Text, 
-    Navigator, 
-    Image, 
+    Text,
+    Navigator,
+    Image,
     TouchableOpacity,
     ActionSheetIOS,
     CameraRoll,
     ListView,
     Platform,
+    PropTypes
 } from 'react-native';
 import {Common} from "./common";
 import ImageCarousell from 'react-native-image-carousell';
-import {getPhotos} from "./camera" 
+import {getPhotos} from "./camera"
+
+const propTypes = {
+    title: PropTypes.string,
+    navigator: PropTypes.object
+};
 
 export class PhototWall extends Component {
     constructor(props) {
@@ -27,28 +33,21 @@ export class PhototWall extends Component {
       
     };
   }
-    
-    render() {
+     render() {
         Common.prototype._setPop(this.props.navigator);
         return (
             <View style={style.container}>
-                <Common/>
+                <Common navigator={this.props.navigator} title={this.props.title}/>
                 <ImageCarousell
                     dataSource={this.state.dataSource}
                     />
             </View>
         );
     }
-     _setTitle(value) {
-        if (value == null) {
-            _title = "我是导航";
-            Common.prototype._setTitle(value);
-        } else {
-            _title = value;
-        }
-        Common.prototype._setTitle(_title);
-    }
 }
+
+PhototWall.propTypes = propTypes;
+
 const style = StyleSheet.create({
     container: {
         flex: 1,
