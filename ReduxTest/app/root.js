@@ -1,4 +1,4 @@
-import React,{Component} from "react";
+import React, {Component} from "react";
 import { AppRegistry, StyleSheet, View, Text, ListView, Alert, Navigator, Image, TouchableOpacity }  from 'react-native';
 var _navigator;
 import {Home} from "../app/pages/home";
@@ -14,16 +14,13 @@ export class Root extends Component {
         switch (router.name) {
             case "welcome":
                 component = Home;
-                return (<Home navigator={navigator} />);
+                return (<Home navigator={navigator} title={"我的主页"}/>);
             case "MIC":
-                Mic.prototype._setTitle(router.value);
-                return (<Mic navigator={navigator} />);
+                return (<Mic navigator={router.nav} title={router.value}/>);
             case "CAMERA":
-                Cameraq.prototype._setTitle(router.value);
-                return (<Cameraq navigator={navigator} />);
+                return (<Cameraq navigator={router.nav}  title={router.value}/>);
             case "PHOTOWALL":
-                PhototWall.prototype._setTitle(router.value);
-                return (<PhototWall navigator={navigator} />);
+                return (<PhototWall navigator={router.nav}  title={router.value}/>);
 
         }
 

@@ -1,7 +1,12 @@
 import React, {Component} from "react";
-import { AppRegistry, StyleSheet, View, Text, ListView, Alert, ScrollView, TouchableOpacity, Image, NativeModules}  from 'react-native';
+import { AppRegistry, StyleSheet, View, Text, ListView, Alert, ScrollView, TouchableOpacity, Image, NativeModules, PropTypes}  from 'react-native';
 var _navigator;
 var _title = "我是导航";
+
+const propTypes = {
+    title: PropTypes.string,
+    navigator: PropTypes.object
+};
 
 export class Common extends Component {
     render() {
@@ -11,7 +16,7 @@ export class Common extends Component {
                     <TouchableOpacity onPress={this._onBack.bind(this) }>
                         <Image source={require('../img/back.png') } style={styles.ImagStyle}  />
                     </TouchableOpacity>
-                    <Text style={styles.TextStyle}>{_title}</Text>
+                    <Text style={styles.TextStyle}>{this.props.title}</Text>
                     <TouchableOpacity>
                         <Image source={require('../img/none.png') } style={styles.ImagStyle}  />
                     </TouchableOpacity>
@@ -20,19 +25,10 @@ export class Common extends Component {
         );
     }
     _onBack() {
-        _navigator.pop();
-    }
-    _setPop(pop) {
-        _navigator = pop;
-    }
-    _setTitle(value) {
-        if (value == null) {
-            _title = "我是导航";
-        } else {
-            _title = value;
-        }
+        this.props.navigator.pop();
     }
 }
+Common.PropTypes = propTypes;
 const styles = StyleSheet.create({
     view: {
         backgroundColor: '#999999',
@@ -48,7 +44,7 @@ const styles = StyleSheet.create({
         height: 26,
     },
     TextStyle: {
-        fontSize: 18, 
+        fontSize: 18,
         color: '#FFFFFF',
     }
 });
