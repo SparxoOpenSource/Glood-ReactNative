@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import { AppRegistry, StyleSheet, View, Text, ListView, Alert, Navigator, Image, TouchableOpacity, PropTypes }  from 'react-native';
 import {Common} from "./common";
-var data = ["MIC", "CAMERA"];
+var data = ["MIC", "CAMERA", "NEWCAMERA"];
 var ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
 
 const propTypes = {
@@ -41,12 +41,17 @@ export class Home extends Component {
         switch (value) {
             case "MIC":
                 this.props.navigator.push({
-                    name: value, value: "MIC", nav: navigator
+                    name: value, value: value, nav: navigator
                 });
                 break;
             case "CAMERA":
                 this.props.navigator.push({
-                    name: value, value: "Camera", nav: navigator
+                    name: value, value: value, nav: navigator
+                });
+                break;
+            case "NEWCAMERA":
+                this.props.navigator.push({
+                    name: value, value: value, nav: navigator
                 });
                 break;
         }

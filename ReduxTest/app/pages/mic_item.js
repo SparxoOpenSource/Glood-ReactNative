@@ -12,7 +12,7 @@ export class MicItem extends Component {
         super();
         this.state = {
             w: 70,
-            h: 74
+            h: 70
         }
     }
 
@@ -49,7 +49,7 @@ export class MicItem extends Component {
         });
         this.setState({
             w: this.state.w + 250,
-            h: this.state.h,
+            h: this.state.h + 4,
             justifyContent: 'center'
         })
         this._play(value);
@@ -84,8 +84,8 @@ const style = StyleSheet.create({
     },
     touch2: {
         width: 70,
-        height: 74,
-        borderRadius: 37,
+        height: 70,
+        borderRadius: 35,
         backgroundColor: "#99999950",
         justifyContent: 'center',
         alignItems: 'center'
