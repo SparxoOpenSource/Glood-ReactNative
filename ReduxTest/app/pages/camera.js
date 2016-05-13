@@ -50,7 +50,7 @@ export class Cameraq extends Component {
             allowEdit: true,
             destinationType: Camera.DestinationType.DATA_URL,
             sourceType: source,
-            encodingType: Camera.EncodingType.PNG,
+            encodingType: Camera.EncodingType.JPEG,
         };
         Camera.getPicture(options, (imageData) => {
             this.jumpPhoto(imageData);

@@ -1,5 +1,5 @@
-import React from 'react-native';
-import {ProgressBarAndroid, ActivityIndicatorIOS, Platform, Text, StyleSheet, View, Component} from React;
+import React,{Component} from 'react';
+import {ProgressBarAndroid, ActivityIndicatorIOS, Platform, Text, StyleSheet, View} from "react-native";
 
 export class LoadingView extends Component {
     render() {
