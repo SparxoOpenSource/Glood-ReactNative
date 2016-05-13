@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, {Component,PropTypes} from "react";
 import {
     AppRegistry,
     StyleSheet,
@@ -8,7 +8,6 @@ import {
     Image,
     Dimensions,
     TouchableOpacity,
-    PropTypes
 }  from 'react-native';
 import {Common} from "./common";
 
@@ -74,67 +73,26 @@ export class Cameraq extends Component {
             <View style={style.container}>
                 <Common navigator={this.props.navigator} title={this.props.title}/>
 
-                <Button onPress={this.capturePhoto.bind(this)}>
+                <Button style={style.captureButton} onPress={this.capturePhoto.bind(this)}>
                     Capture Photo
                 </Button>
-                // <Button onPress={this.capturePhotoEdit.bind(this)}>
-                //     Capture Editable Photo
-                // </Button>
-                <Button onPress={this.getPhoto.bind(this,Camera.PictureSourceType.PHOTOLIBRARY)}>
+                <Button style={style.captureButton} onPress={this.getPhoto.bind(this,Camera.PictureSourceType.PHOTOLIBRARY)}>
                     From Photo Library
                 </Button>
-                // <Button onPress={this.getPhoto.bind(this, Camera.PictureSourceType.SAVEDPHOTOALBUM)}>
-                //     From Photo Album Editable
-                // </Button>
             </View>
         );
     }
 
-    // takePicture() {
-    //     this.camera.capture()
-    //         .then((data) => {
-    //             console.log("data:----------   %s", data)
-    //               photo_pathData.push(require('../img/voice.png'));
-    //             // photo_pathData.push(require(data.path));
-    //             this.props.navigator.push({
-    //                 name: "PHOTOWALL", value: "Photo Wall"
-    //             });
-    //         })
-    //         .catch(err => console.error("error:----------   %s", err));
-    // }
-
-    takePicture() {
-        this.camera.capture()
-            .then((data) => console.log("data:----------   %s", data))
-            .catch(err => console.error("error:----------   %s", err));
-        this.props.navigator.push({
-            name: "PHOTOWALL", value: "Photo Wall"
-        });
-    }
 }
 
 Cameraq.propTypes = propTypes;
 
 const style = StyleSheet.create({
     container: {
-        flex: 1,
         flexDirection: 'column',
         justifyContent: 'space-between',
-        backgroundColor: '#F5FCFF',
     },
-    preview: {
-        flex: 1,
-        justifyContent: 'flex-end',
-        alignItems: 'center',
-        height: Dimensions.get('window').height,
-        width: Dimensions.get('window').width
-    },
-    capture: {
-        flex: 0,
-        backgroundColor: '#fff',
-        borderRadius: 5,
-        color: '#000',
-        padding: 10,
-        margin: 40
-    },
+    captureButton:{
+        paddingTop:50
+    }
 });
