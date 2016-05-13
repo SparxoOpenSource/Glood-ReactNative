@@ -29,7 +29,7 @@ export class Cameraq extends Component {
     jumpPhoto(...imgs){
         Array.prototype.push.apply(photo_pathData,imgs.map((data)=>{ return { uri:"data:image/jpeg;base64,"+data };}));
                 this.props.navigator.push({
-                    name: "PHOTOWALL", value: "Photo Wall"
+                    name: "PHOTOWALL", value: "Photo Wall",nav:this.props.navigator
                 });
     }
     
@@ -38,16 +38,6 @@ export class Cameraq extends Component {
         var options = {
             quality: 50,
             allowEdit: false,
-            destinationType: Camera.DestinationType.DATA_URL,
-        };
-        Camera.getPicture(options, (imageData) => {
-            this.jumpPhoto(imageData);
-        });
-    }
-    capturePhotoEdit() {
-        var options = {
-            quality: 50,
-            allowEdit: true,
             destinationType: Camera.DestinationType.DATA_URL,
         };
         Camera.getPicture(options, (imageData) => {
@@ -87,7 +77,7 @@ export class Cameraq extends Component {
 
 Cameraq.propTypes = propTypes;
 
-const style = StyleSheet.create({
+var style = StyleSheet.create({
     container: {
         flexDirection: 'column',
         justifyContent: 'space-between',

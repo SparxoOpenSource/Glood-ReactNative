@@ -34,7 +34,6 @@ export class PhototWall extends Component {
     };
   }
      render() {
-        Common.prototype._setPop(this.props.navigator);
         return (
             <View style={style.container}>
                 <Common navigator={this.props.navigator} title={this.props.title}/>
