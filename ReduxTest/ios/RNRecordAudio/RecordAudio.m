@@ -20,6 +20,7 @@ RCT_EXPORT_MODULE()
 }
 
 // Persist data
+#pragma mark ======== 开始录音 ============
 RCT_EXPORT_METHOD(startRecord:(NSString *)fileName
                   callback:(RCTResponseSenderBlock)successCallback) {
     
@@ -123,6 +124,7 @@ RCT_EXPORT_METHOD(startRecord:(NSString *)fileName
 }
 
 // Persist data
+#pragma mark ======== 停止录音 ============
 RCT_EXPORT_METHOD(stopRecord:(RCTResponseSenderBlock)successCallback) {
     
     // Validate that the file exists
@@ -190,6 +192,7 @@ RCT_EXPORT_METHOD(stopRecord:(RCTResponseSenderBlock)successCallback) {
     }
 }
 
+#pragma mark ======== 清除缓存 ============
 RCT_EXPORT_METHOD(clearCache:(RCTResponseSenderBlock)callback)
 {
     NSString * filepath = [self getCachePath];
