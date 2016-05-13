@@ -25,6 +25,7 @@
 		CC1041421CE5B4CC00B5D2E7 /* RecordAudio.m in Sources */ = {isa = PBXBuildFile; fileRef = CC1041411CE5B4CC00B5D2E7 /* RecordAudio.m */; };
 		CC11EFF31CE4810B00AAEA09 /* libRCTCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC11EFF21CE4810400AAEA09 /* libRCTCamera.a */; };
 		CCBAA0F91CE483A30035088B /* libRCTCordova.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CCBAA0EF1CE4838A0035088B /* libRCTCordova.a */; };
+		CCD8757A1CE5D8F200388995 /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CCD875791CE5D8EB00388995 /* libRNImagePicker.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -119,6 +120,13 @@
 			remoteGlobalIDString = 32285F831BFC05EC00AD8363;
 			remoteInfo = RCTCordova;
 		};
+		CCD875781CE5D8EB00388995 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CCD875681CE5D8EB00388995 /* RNImagePicker.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 014A3B5C1C6CF33500B6D375;
+			remoteInfo = RNImagePicker;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -147,6 +155,7 @@
 		CC1041411CE5B4CC00B5D2E7 /* RecordAudio.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordAudio.m; sourceTree = "<group>"; };
 		CC11EFED1CE4810400AAEA09 /* RCTCamera.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTCamera.xcodeproj; path = "../node_modules/@remobile/react-native-camera/ios/RCTCamera.xcodeproj"; sourceTree = "<group>"; };
 		CCBAA0E81CE4838A0035088B /* RCTCordova.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTCordova.xcodeproj; path = "../node_modules/@remobile/react-native-cordova/ios/RCTCordova.xcodeproj"; sourceTree = "<group>"; };
+		CCD875681CE5D8EB00388995 /* RNImagePicker.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNImagePicker.xcodeproj; path = "../node_modules/react-native-image-picker/ios/RNImagePicker.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +170,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCD8757A1CE5D8F200388995 /* libRNImagePicker.a in Frameworks */,
 				CCBAA0F91CE483A30035088B /* libRCTCordova.a in Frameworks */,
 				CC11EFF31CE4810B00AAEA09 /* libRCTCamera.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
@@ -286,6 +296,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				CCD875681CE5D8EB00388995 /* RNImagePicker.xcodeproj */,
 				CCBAA0E81CE4838A0035088B /* RCTCordova.xcodeproj */,
 				CC11EFED1CE4810400AAEA09 /* RCTCamera.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
@@ -352,6 +363,14 @@
 			isa = PBXGroup;
 			children = (
 				CCBAA0EF1CE4838A0035088B /* libRCTCordova.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CCD875691CE5D8EB00388995 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CCD875791CE5D8EB00388995 /* libRNImagePicker.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -473,6 +492,10 @@
 					ProductGroup = 146834001AC3E56700842450 /* Products */;
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
 				},
+				{
+					ProductGroup = CCD875691CE5D8EB00388995 /* Products */;
+					ProjectRef = CCD875681CE5D8EB00388995 /* RNImagePicker.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -565,6 +588,13 @@
 			fileType = archive.ar;
 			path = libRCTCordova.a;
 			remoteRef = CCBAA0EE1CE4838A0035088B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CCD875791CE5D8EB00388995 /* libRNImagePicker.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNImagePicker.a;
+			remoteRef = CCD875781CE5D8EB00388995 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */

@@ -1,3 +1,8 @@
+//////////
+//https://github.com/zss0512/react-native-camera
+//////////
+
+
 import React, {Component,PropTypes} from "react";
 import {
     AppRegistry,

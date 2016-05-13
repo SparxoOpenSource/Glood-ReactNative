@@ -15,7 +15,8 @@ import {
 } from 'react-native';
 import {Common} from "./common";
 import ImageCarousell from 'react-native-image-carousell';
-import {getPhotos} from "./camera"
+// import {getPhotos} from "./camera"
+import {getNewPhotos} from "./newcamera"
 
 const propTypes = {
     title: PropTypes.string,
@@ -24,16 +25,16 @@ const propTypes = {
 
 export class PhototWall extends Component {
     constructor(props) {
-    super(props);
-    const dataSource = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => r1 !== r2,
-    });
-    this.state = {
-      dataSource: dataSource.cloneWithRows(getPhotos()),
-      
-    };
-  }
-     render() {
+        super(props);
+        const dataSource = new ListView.DataSource({
+            rowHasChanged: (r1, r2) => r1 !== r2,
+        });
+        this.state = {
+            dataSource: dataSource.cloneWithRows(getNewPhotos()),
+
+        };
+    }
+    render() {
         return (
             <View style={style.container}>
                 <Common navigator={this.props.navigator} title={this.props.title}/>

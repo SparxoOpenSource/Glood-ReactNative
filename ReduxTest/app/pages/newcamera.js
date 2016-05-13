@@ -1,3 +1,8 @@
+////////
+//https://github.com/marcshilling/react-native-image-picker
+///////
+
+
 import React, {Component, PropTypes} from "react";
 import {
     AppRegistry,
@@ -10,10 +15,16 @@ import {
     TouchableOpacity,
     Alert,
     NativeModules,
-    Platform, 
+    Platform,
     ScrollView,
 }  from 'react-native';
 import {Common} from "./common";
+
+var photo_pathData = [];
+
+export function getNewPhotos() {
+    return photo_pathData;
+}
 
 // import Camera from 'react-native-camera';
 import Camera from '@remobile/react-native-camera';
@@ -38,11 +49,11 @@ var options = {
     mediaType: 'photo', // 'photo' or 'video'
     videoQuality: 'high', // 'low', 'medium', or 'high'
     durationLimit: 10, // video recording max time in seconds
-    maxWidth: 100, // photos only
-    maxHeight: 100, // photos only
+    maxWidth: width, // photos only
+    maxHeight: height, // photos only
     aspectX: 2, // android only - aspectX:aspectY, the cropping image's ratio of width to height
     aspectY: 1, // android only - aspectX:aspectY, the cropping image's ratio of width to height
-    quality: 0.2, // 0 to 1, photos only
+    quality: 1, // 0 to 1, photos only
     angle: 0, // android only, photos only
     allowsEditing: false, // Built in functionality to resize/reposition the image after selection
     noData: false, // photos only - disables the base64 `data` field from being generated (greatly improves performance on large photos)
@@ -59,6 +70,7 @@ export class NewCamera extends Component {
             avatarSource: "source"
         }
     }
+
     newCamera() {
         // Launch Camera:
         ImagePickerManager.launchCamera(options, (response) => {
@@ -73,16 +85,13 @@ export class NewCamera extends Component {
     }
     render() {
         return (
-            <ScrollView contentContainerStyle={style.contentContainer}>
-                <View style={style.container}>
-                    <Common navigator={this.props.navigator} title={this.props.title}/>
+            <View style={style.container}>
+                <Common navigator={this.props.navigator} title={this.props.title}/>
 
-                    <Button style={style.captureButton} onPress={this.newShown.bind(this) }>
-                        Camera
-                    </Button>
-                    <Image source={this.state.avatarSource} style={{ width: width, height: height }}/>
-                </View>
-            </ScrollView>
+                <Button style={style.captureButton} onPress={this.newShown.bind(this) }>
+                    Camera
+                </Button>
+            </View>
         );
     }
     newShown() {
@@ -99,7 +108,6 @@ export class NewCamera extends Component {
                 console.log('User tapped custom button: ', response.customButton);
             }
             else {
-                Alert.alert(response.uri);
                 // You can display the image using either data:
                 const source = { uri: 'data:image/jpeg;base64,' + response.data, isStatic: true };
                 if (Platform.OS === 'ios') {
@@ -110,9 +118,11 @@ export class NewCamera extends Component {
                     source = { uri: response.uri, isStatic: true };
                 }
 
-                this.setState({
-                    avatarSource: source
+                photo_pathData.push(source);
+                this.props.navigator.push({
+                    name: "PHOTOWALL", value: "Photo Wall", nav: this.props.navigator
                 });
+
             }
         });
     }
@@ -128,7 +138,4 @@ var style = StyleSheet.create({
     captureButton: {
         paddingTop: 50
     },
-    contentContainer: {
-        paddingVertical: 20
-    }
 });
