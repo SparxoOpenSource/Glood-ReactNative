@@ -1,6 +1,6 @@
 'use strict';
 import React, {Component} from 'react';
-import {NativeModules, Alert} from 'react-native';
+import {NativeModules} from 'react-native';
 
 const Recorder = NativeModules.RecordAudio;
 
@@ -36,6 +36,6 @@ export class RecordAudio extends Component {
     }
 
     recordMsg(msg) {
-        Recorder.recordMsg(msg);
+        //Recorder.recordMsg(msg);
     }
 }
