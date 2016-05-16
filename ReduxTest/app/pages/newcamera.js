@@ -120,7 +120,7 @@ export class NewCamera extends Component {
 
                 photo_pathData.push(source);
                 this.props.navigator.push({
-                    name: "PHOTOWALL", value: "Photo Wall", nav: this.props.navigator
+                    name: "PHOTOWALL", value: "New Photo Wall", nav: this.props.navigator
                 });
 
             }

@@ -11,11 +11,12 @@ import {
     CameraRoll,
     ListView,
     Platform,
-    PropTypes
+    PropTypes,
+    Alert
 } from 'react-native';
 import {Common} from "./common";
 import ImageCarousell from 'react-native-image-carousell';
-// import {getPhotos} from "./camera"
+import {getPhotos} from "./camera"
 import {getNewPhotos} from "./newcamera"
 
 const propTypes = {
@@ -29,9 +30,15 @@ export class PhototWall extends Component {
         const dataSource = new ListView.DataSource({
             rowHasChanged: (r1, r2) => r1 !== r2,
         });
+        var photos;
+        if (this.props.title == 'New Photo Wall') {
+            photos = getNewPhotos;
+        }
+        else {
+            photos = getPhotos;
+        }
         this.state = {
-            dataSource: dataSource.cloneWithRows(getNewPhotos()),
-
+            dataSource: dataSource.cloneWithRows(photos()),
         };
     }
     render() {
