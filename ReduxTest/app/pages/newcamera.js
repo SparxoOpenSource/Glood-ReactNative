@@ -30,7 +30,7 @@ export function getNewPhotos() {
 import Camera from '@remobile/react-native-camera';
 import Button from '@remobile/react-native-simple-button';
 var ImagePickerManager = NativeModules.ImagePickerManager;
-var {height, width} = Dimensions.get('window');
+var {width, height} = Dimensions.get('window');
 
 const propTypes = {
     title: PropTypes.string,

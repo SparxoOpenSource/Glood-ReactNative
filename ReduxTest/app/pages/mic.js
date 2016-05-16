@@ -84,8 +84,7 @@ export class Mic extends Component {
         RecordAudio.prototype.stopRecord((back) => {
             RecordAudio.prototype.recordMsg("停止录音");
             // _this._voiceCallBack(back);
-            var len = data.length;
-            data[len + 1] = back["name"];
+            data.push(back["name"]);
             _this._refush(data);
         });
     }
@@ -116,13 +115,13 @@ export class Mic extends Component {
                 var ss = back["param"];
                 var tt = ss.split("|");
                 for (var i = 0; i < tt.length; i++) {
-                    var len = data.length;
-                    data[len + 1] = tt[i];
+                    data.push(tt[i]);
                 }
                 this.setState({
                     dataSource: ds.cloneWithRows(data)
                 })
             } else {
+
                 _this._voiceCallBack(back["name"]);
             }
         });

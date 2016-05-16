@@ -76,6 +76,7 @@ public class RecordModule extends ReactContextBaseJavaModule {
             return;
         }
         WavAudioName = fileBasePath + fileName;
+        Log.i("startRecord",WavAudioName);
         AudioName = fileName;
         if (exRecorder != null) {
             exRecorder.release();
@@ -211,6 +212,7 @@ public class RecordModule extends ReactContextBaseJavaModule {
             fileBasePath = "/mnt/sdcard/" + this.getReactApplicationContext().getPackageName() + "/audioCache/";
         MediaPlayer player = new MediaPlayer();
         File file = new File(fileBasePath, fileName);
+        Log.i("createMediaPlayer",file.getPath());
         if (file.exists()) {
             try {
                 player.reset();
