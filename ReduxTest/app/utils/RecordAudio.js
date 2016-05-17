@@ -36,6 +36,6 @@ export class RecordAudio extends Component {
     }
 
     recordMsg(msg) {
-        //Recorder.recordMsg(msg);
+        Recorder.recordMsg(msg);
     }
 }

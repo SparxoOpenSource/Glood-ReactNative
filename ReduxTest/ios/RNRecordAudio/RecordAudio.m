@@ -1,5 +1,7 @@
 #import "RecordAudio.h"
 #import "RCTLog.h"
+#import "AppDelegate.h"
+#import "ShowMessage.h"
 
 @implementation RecordAudio {
     
@@ -363,14 +365,17 @@ RCT_EXPORT_METHOD(playRecord:(NSString *)playName
 {
   UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"end!" message:[NSString stringWithFormat:@"End"] delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
   [alertView show];
-
 }
 
-//RCT_EXPORT_METHOD(playFinish:(RCTResponseSenderBlock)callback)
-//{
-//  NSString *str = @"end!";
-//  callback(@[str]);
-//}
+RCT_EXPORT_METHOD(recordMsg:(NSString *)msg)
+{
+  dispatch_async(dispatch_get_main_queue(), ^
+                 {
+                   [ShowMessage showMessage:msg];
+                   
+                 });
+}
+
 
 #pragma mark ======== 清除缓存 ============
 RCT_EXPORT_METHOD(clearCache:(RCTResponseSenderBlock)callback)
