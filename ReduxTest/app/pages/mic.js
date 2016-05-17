@@ -3,6 +3,7 @@ import { AppRegistry, StyleSheet, View, Text, ListView, Alert, Navigator, Image,
 import {Common} from "./common";
 import {RecordAudio} from "../utils/RecordAudio";
 import {MicItem} from "./mic_item";
+import isAndroid from '../utils/isAndroid.js';
 
 var data = ["recordKeyeeApp_2016-05-10 17:30:29.wav"];
 var ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
@@ -108,7 +109,8 @@ export class Mic extends Component {
     }
 
     _accessFileName() {
-        var _this = this;
+        if (isAndroid()) {
+            var _this = this;
         RecordAudio.prototype.accessFileName((back) => {
             if (back.name === "有数据") {
                 var ss = back["param"];
@@ -124,6 +126,7 @@ export class Mic extends Component {
                 _this._voiceCallBack(back.name);
             }
         });
+        }        
     }
     _onPress(value) {
         // var ss=this.refs.view.style.width;

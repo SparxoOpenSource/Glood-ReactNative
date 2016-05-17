@@ -10,6 +10,9 @@
     NSString *pathForFile;
     NSString *newFileName;
     AVAudioPlayer *audioPlayer;
+    NSTimer *nstimer;
+  NSString *startStr;
+  NSString *endStr;
 }
 
 // Expose this module to the React Native bridge
@@ -29,6 +32,8 @@ RCT_EXPORT_MODULE()
 RCT_EXPORT_METHOD(startRecord:(NSString *)fileName
                   callback:(RCTResponseSenderBlock)successCallback) {
   
+    startStr = @"";
+    startStr = [self getTimeNow];
     fileName = @"";
     fileName = [NSString stringWithFormat:@"IOS-%@",[self getTimeNow]];
   
@@ -137,7 +142,9 @@ RCT_EXPORT_METHOD(startRecord:(NSString *)fileName
 // Persist data
 #pragma mark ======== 停止录音 ============
 RCT_EXPORT_METHOD(stopRecord:(RCTResponseSenderBlock)successCallback) {
-    
+  
+    endStr = @"";
+    endStr = [self getTimeNow];
     // Validate that the file exists
     NSFileManager *fileManager = [NSFileManager defaultManager];
     
@@ -166,11 +173,23 @@ RCT_EXPORT_METHOD(stopRecord:(RCTResponseSenderBlock)successCallback) {
             [recordSession setActive:NO error:nil];
             
             // Craft a success return message
-            NSDictionary *resultsDict = @{
-                                          @"success" : @YES,
-                                          @"param"  : pathForFile,
-                                          @"name" : newFileName
-                                          };
+          NSString *timerStr;
+          NSArray *array = [[self intervalFromLastDate:startStr toTheDate:endStr] componentsSeparatedByString:@":"];
+          if ([array objectAtIndex:1] == 0)
+          {
+            timerStr = [array objectAtIndex:2];
+          }
+          else
+          {
+            timerStr = [NSString stringWithFormat:@"%ld",[[array objectAtIndex:1] integerValue]*60+[[array objectAtIndex:2] integerValue]];
+          }
+          NSDictionary *resultsDict = @{
+                                        @"success" : @YES,
+                                        @"param"  : pathForFile,
+                                        @"name" : newFileName,
+                                        @"time" : timerStr
+                                        };
+          NSLog(@"fsdfsdfsdfsdfsdfsd---- %@",resultsDict);
             
             // Call the JavaScript sucess handler
             successCallback(@[resultsDict]);
@@ -363,12 +382,16 @@ RCT_EXPORT_METHOD(playRecord:(NSString *)playName
 
 - (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
 {
-  UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"end!" message:[NSString stringWithFormat:@"End"] delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
-  [alertView show];
+  dispatch_async(dispatch_get_main_queue(), ^
+                 {
+                   [ShowMessage showMessage:@"播放完毕"];
+                   
+                 });
 }
 
 RCT_EXPORT_METHOD(recordMsg:(NSString *)msg)
 {
+
   dispatch_async(dispatch_get_main_queue(), ^
                  {
                    [ShowMessage showMessage:msg];
@@ -404,11 +427,75 @@ RCT_EXPORT_METHOD(clearCache:(RCTResponseSenderBlock)callback)
   NSString* date;
   
   NSDateFormatter * formatter = [[NSDateFormatter alloc ] init];
-  [formatter setDateFormat:@"YYYYMMddhhmmss"];
+  [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
   date = [formatter stringFromDate:[NSDate date]];
   NSString * timeNow = [[NSString alloc] initWithFormat:@"%@", date];
   return timeNow;
 }
+
+- (NSString *)intervalFromLastDate: (NSString *) dateString1  toTheDate:(NSString *) dateString2
+{
+  NSArray *timeArray1=[dateString1 componentsSeparatedByString:@"."];
+  dateString1=[timeArray1 objectAtIndex:0];
+  
+  NSArray *timeArray2=[dateString2 componentsSeparatedByString:@"."];
+  dateString2=[timeArray2 objectAtIndex:0];
+  
+  NSLog(@"%@.....%@",dateString1,dateString2);
+  NSDateFormatter *date=[[NSDateFormatter alloc] init];
+  [date setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+  
+  NSDate *d1=[date dateFromString:dateString1];
+  
+  NSTimeInterval late1=[d1 timeIntervalSince1970]*1;
+  
+  NSDate *d2=[date dateFromString:dateString2];
+  
+  NSTimeInterval late2=[d2 timeIntervalSince1970]*1;
+  
+  NSTimeInterval cha=late2-late1;
+  NSString *timeString=@"";
+  NSString *house=@"";
+  NSString *min=@"";
+  NSString *sen=@"";
+  
+  sen = [NSString stringWithFormat:@"%d", (int)cha%60];
+  //        min = [min substringToIndex:min.length-7];
+  //    秒
+  sen=[NSString stringWithFormat:@"%@", sen];
+  
+  min = [NSString stringWithFormat:@"%d", (int)cha/60%60];
+  //        min = [min substringToIndex:min.length-7];
+  //    分
+  min=[NSString stringWithFormat:@"%@", min];
+  
+  //    小时
+  house = [NSString stringWithFormat:@"%d", (int)cha/3600];
+  //        house = [house substringToIndex:house.length-7];
+  house=[NSString stringWithFormat:@"%@", house];
+  
+  timeString=[NSString stringWithFormat:@"%@:%@:%@",house,min,sen];
+  
+  return timeString;
+}
+
+//UTC时间转换成对应系统时间
+//-(NSString *)getLocalDateFormateUTCDate:(NSString *)utcDate
+//{
+//  NSLog(@"UTC=========%@",utcDate);
+//  NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+//  //输入格式
+//  [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSSZ"];
+//  NSTimeZone *localTimeZone = [NSTimeZone localTimeZone];
+//  [dateFormatter setTimeZone:localTimeZone];
+//  
+//  NSDate *dateFormatted = [dateFormatter dateFromString:utcDate];
+//  //输出格式
+//  [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+//  NSString *dateString = [dateFormatter stringFromDate:dateFormatted];
+//  NSLog(@"UTC=========%@---%@",utcDate,dateString);
+//  return dateString;
+//}
 
 @end
 
