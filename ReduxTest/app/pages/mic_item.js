@@ -59,7 +59,7 @@ export class MicItem extends Component {
     _play(name) {
         var _this = this;
         RecordAudio.prototype.playRecord(name, (back) => {
-            _this._voiceCallBack(back);
+            // _this._voiceCallBack(back);
         });
     }
 

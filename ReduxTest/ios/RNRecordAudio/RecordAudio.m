@@ -80,12 +80,13 @@ RCT_EXPORT_METHOD(startRecord:(NSString *)fileName
     NSError *error = nil;
     recordSession = [AVAudioSession sharedInstance];
     [recordSession setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
+    [recordSession setActive:YES error:&error];
     
     audioRecorder = [[AVAudioRecorder alloc]
                          initWithURL:audioFileURL
                          settings:recordSettings
                          error:&error];
-        
+    audioRecorder.meteringEnabled = YES;
     audioRecorder.delegate = self;
     
     // Validate no errors in the session initialization
@@ -204,7 +205,7 @@ RCT_EXPORT_METHOD(stopRecord:(RCTResponseSenderBlock)successCallback) {
 #pragma mark ======== 播放录音 ============
 RCT_EXPORT_METHOD(playRecord:(NSString *)playName
                   Callback:(RCTResponseSenderBlock)callBack) {
-  playName = newFileName;
+//  playName = newFileName;
   NSLog(@"*-*-*-*-***--*******  %@",playName);
   // Validate the file name has positive length
   if ([playName length] < 1) {
@@ -310,16 +311,19 @@ RCT_EXPORT_METHOD(playRecord:(NSString *)playName
   if (!audioPlayer) {
   
     NSLog(@"heihiehiehi  %@",audioFileURL);
-//    NSData *data = [[NSFileManager defaultManager] contentsAtPath:audioFileURL];
     audioPlayer = [[AVAudioPlayer alloc]
                    initWithContentsOfURL: audioFileURL
                    error:&error];
     [audioPlayer setDelegate:self];
-//    NSLog(@"hahahaa ------  %@",data);
-//    audioPlayer =  [[AVAudioPlayer alloc] initWithData:data
-//                                                error:&error];
     
   }
+  
+  NSError *audioError = nil;
+  BOOL success = [recordSession overrideOutputAudioPort:AVAudioSessionPortOverrideSpeaker error:&audioError];
+  if(!success)
+    {
+       NSLog(@"error doing outputaudioportoverride - %@", [audioError localizedDescription]);
+    }
   
   // Validate no errors in the session initialization
   if (error) {
@@ -357,9 +361,16 @@ RCT_EXPORT_METHOD(playRecord:(NSString *)playName
 
 - (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
 {
-  
+  UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"end!" message:[NSString stringWithFormat:@"End"] delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+  [alertView show];
+
 }
 
+//RCT_EXPORT_METHOD(playFinish:(RCTResponseSenderBlock)callback)
+//{
+//  NSString *str = @"end!";
+//  callback(@[str]);
+//}
 
 #pragma mark ======== 清除缓存 ============
 RCT_EXPORT_METHOD(clearCache:(RCTResponseSenderBlock)callback)
