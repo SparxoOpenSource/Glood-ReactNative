@@ -25,6 +25,7 @@ import com.facebook.react.common.MapBuilder;
 import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.WritableMap;
+import com.reduxtest.utils.DataTimeUtils;
 
 public class RecordModule extends ReactContextBaseJavaModule {
     private Callback callback;
@@ -36,7 +37,9 @@ public class RecordModule extends ReactContextBaseJavaModule {
     private String fileBasePath = "";
     private MediaPlayer mediaPlayer;
     private WritableMap callbackMap;
-    Map<String, MediaPlayer> playerPool = new HashMap<>();
+    private Map<String, MediaPlayer> playerPool = new HashMap<>();
+    private Date startDate;
+    private Date stopDate;
 
     public RecordModule(ReactApplicationContext reactContext) {
         super(reactContext);
@@ -59,7 +62,7 @@ public class RecordModule extends ReactContextBaseJavaModule {
         this.callback = callback;
         WritableMap callbackMap = Arguments.createMap();
         if (fileName == null || fileName == "" || fileName.equals("null") || fileName == "null")
-            fileName = "recordKeyeeApp_" + data();
+            fileName = "recordKeyeeApp_" + DataTimeUtils.dataString();
         if (!fileName.endsWith(".wav"))
             fileName += ".wav";
         try {
@@ -76,7 +79,7 @@ public class RecordModule extends ReactContextBaseJavaModule {
             return;
         }
         WavAudioName = fileBasePath + fileName;
-        Log.i("startRecord",WavAudioName);
+        Log.i("startRecord", WavAudioName);
         AudioName = fileName;
         if (exRecorder != null) {
             exRecorder.release();
@@ -90,7 +93,7 @@ public class RecordModule extends ReactContextBaseJavaModule {
         exRecorder.setOutputFile(WavAudioName);
         exRecorder.prepare();
         exRecorder.start();
-
+        startDate = DataTimeUtils.date();
         callbackMap.putBoolean("success", true);
         callbackMap.putString("param", "Successfully started.");
         callbackMap.putString("name", AudioName);
@@ -107,11 +110,14 @@ public class RecordModule extends ReactContextBaseJavaModule {
             return;
         }
         exRecorder.stop();
+        stopDate = DataTimeUtils.date();
+        long date = stopDate.getTime() - startDate.getTime();
         exRecorder.release();
         exRecorder = null;
         callbackMap.putBoolean("success", true);
         callbackMap.putString("param", WavAudioName);
         callbackMap.putString("name", AudioName);
+        callbackMap.putInt("time", (int) date / 1000);
         callback.invoke(callbackMap);
     }
 
@@ -185,7 +191,8 @@ public class RecordModule extends ReactContextBaseJavaModule {
         }
         String str = "";
         for (int i = 0; i < files.length; i++) {
-            str += files[i].getName() + "|";
+            MediaPlayer prepare = prepare(files[i].getName(), files[i].getName());
+            str += files[i].getName() + "&" + prepare.getDuration() / 1000 + "|";
         }
         str = str.substring(str.length() - 1, str.length()).equals("|") ? str.substring(0, str.length() - 1) : str;
         callbackMap.putString("name", "有数据");
@@ -212,13 +219,14 @@ public class RecordModule extends ReactContextBaseJavaModule {
             fileBasePath = "/mnt/sdcard/" + this.getReactApplicationContext().getPackageName() + "/audioCache/";
         MediaPlayer player = new MediaPlayer();
         File file = new File(fileBasePath, fileName);
-        Log.i("createMediaPlayer",file.getPath());
+        Log.i("createMediaPlayer", file.getPath());
         if (file.exists()) {
             try {
                 player.reset();
                 FileInputStream fis = new FileInputStream(file);
                 player.setDataSource(fis.getFD());
                 player.prepare();
+
                 return player;
             } catch (IOException e) {
                 return null;
@@ -234,12 +242,5 @@ public class RecordModule extends ReactContextBaseJavaModule {
             }
         }
         return fileOrDirectory.delete();
-    }
-
-    private String data() {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date curDate = new Date(System.currentTimeMillis());//获取当前时间
-        String data = formatter.format(curDate);
-        return data;
     }
 }

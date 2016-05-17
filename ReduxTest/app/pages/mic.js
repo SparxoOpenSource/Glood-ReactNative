@@ -83,8 +83,7 @@ export class Mic extends Component {
         var _this = this;
         RecordAudio.prototype.stopRecord((back) => {
             RecordAudio.prototype.recordMsg("停止录音");
-            // _this._voiceCallBack(back);
-            data.push(back["name"]);
+            data.push(back.name + "&" + back.time);
             _this._refush(data);
         });
     }
@@ -98,7 +97,7 @@ export class Mic extends Component {
     }
 
     _voiceCallBack(call) {
-        Alert.alert(call["name"]);
+        Alert.alert(call.name);
     }
 
     //刷新数据
@@ -111,7 +110,7 @@ export class Mic extends Component {
     _accessFileName() {
         var _this = this;
         RecordAudio.prototype.accessFileName((back) => {
-            if (back["name"] === "有数据") {
+            if (back.name === "有数据") {
                 var ss = back["param"];
                 var tt = ss.split("|");
                 for (var i = 0; i < tt.length; i++) {
@@ -122,7 +121,7 @@ export class Mic extends Component {
                 })
             } else {
 
-                _this._voiceCallBack(back["name"]);
+                _this._voiceCallBack(back.name);
             }
         });
     }
