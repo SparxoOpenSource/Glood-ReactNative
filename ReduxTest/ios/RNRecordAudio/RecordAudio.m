@@ -173,17 +173,22 @@ RCT_EXPORT_METHOD(stopRecord:(RCTResponseSenderBlock)successCallback) {
             [recordSession setActive:NO error:nil];
             
             // Craft a success return message
-            NSArray *array = [[self intervalFromLastDate:startStr toTheDate:endStr] componentsSeparatedByString:@":"];
-//          if ([array objectAtIndex:1] == 0)
-//          {
-//            
-//          }
-            NSDictionary *resultsDict = @{
-                                          @"success" : @YES,
-                                          @"param"  : pathForFile,
-                                          @"name" : newFileName,
-                                          @"time" : [self intervalFromLastDate:startStr toTheDate:endStr]
-                                          };
+          NSString *timerStr;
+          NSArray *array = [[self intervalFromLastDate:startStr toTheDate:endStr] componentsSeparatedByString:@":"];
+          if ([array objectAtIndex:1] == 0)
+          {
+            timerStr = [array objectAtIndex:2];
+          }
+          else
+          {
+            timerStr = [NSString stringWithFormat:@"%ld",[[array objectAtIndex:1] integerValue]*60+[[array objectAtIndex:2] integerValue]];
+          }
+          NSDictionary *resultsDict = @{
+                                        @"success" : @YES,
+                                        @"param"  : pathForFile,
+                                        @"name" : newFileName,
+                                        @"time" : timerStr
+                                        };
           NSLog(@"fsdfsdfsdfsdfsdfsd---- %@",resultsDict);
             
             // Call the JavaScript sucess handler
@@ -377,8 +382,11 @@ RCT_EXPORT_METHOD(playRecord:(NSString *)playName
 
 - (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
 {
-  UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"message" message:[NSString stringWithFormat:@"End"] delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
-  [alertView show];
+  dispatch_async(dispatch_get_main_queue(), ^
+                 {
+                   [ShowMessage showMessage:@"播放完毕"];
+                   
+                 });
 }
 
 RCT_EXPORT_METHOD(recordMsg:(NSString *)msg)

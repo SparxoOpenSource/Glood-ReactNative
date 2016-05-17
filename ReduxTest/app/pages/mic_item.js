@@ -34,8 +34,8 @@ export class MicItem extends Component {
         return (
             <View style={ { justifyContent: 'center', alignItems: 'center' }}>
                 <TouchableOpacity style={style.touch} onPress={this._onPress.bind(this, this.props.title) } ref="view">
-                    <Image source={{ uri: "http://192.168.31.162:8081/app/img/background.png" } } style={[style.img2, { width: this.state.w, height: this.state.h }]} />
-                    <Image source={{ uri: "http://192.168.31.162:8081/app/img/171604419.jpg" } } style={[style.img, { marginLeft: this.state.margin_left }]}  />
+                    <Image source={require('../img/background.png')} style={[style.img2, { width: this.state.w, height: this.state.h }]} />
+                    <Image source={require('../img/171604419.jpg')} style={[style.img, { marginLeft: this.state.margin_left }]}  />
                 </TouchableOpacity>
             </View>
         );
