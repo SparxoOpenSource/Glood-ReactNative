@@ -21,7 +21,7 @@ export class Mic extends Component {
         this.state = {
             dataSource: ds.cloneWithRows(data)
         }
-        // this._accessFileName()
+        this._accessFileName()
     }
     render() {
         return (
@@ -108,24 +108,24 @@ export class Mic extends Component {
         })
     }
 
-    // _accessFileName() {
-    //     var _this = this;
-    //     RecordAudio.prototype.accessFileName((back) => {
-    //         if (back["name"] === "有数据") {
-    //             var ss = back["param"];
-    //             var tt = ss.split("|");
-    //             for (var i = 0; i < tt.length; i++) {
-    //                 data.push(tt[i]);
-    //             }
-    //             this.setState({
-    //                 dataSource: ds.cloneWithRows(data)
-    //             })
-    //         } else {
+    _accessFileName() {
+        var _this = this;
+        RecordAudio.prototype.accessFileName((back) => {
+            if (back["name"] === "有数据") {
+                var ss = back["param"];
+                var tt = ss.split("|");
+                for (var i = 0; i < tt.length; i++) {
+                    data.push(tt[i]);
+                }
+                this.setState({
+                    dataSource: ds.cloneWithRows(data)
+                })
+            } else {
 
-    //             _this._voiceCallBack(back["name"]);
-    //         }
-    //     });
-    // }
+                _this._voiceCallBack(back["name"]);
+            }
+        });
+    }
     _onPress(value) {
         // var ss=this.refs.view.style.width;
         // if(ss===300){
