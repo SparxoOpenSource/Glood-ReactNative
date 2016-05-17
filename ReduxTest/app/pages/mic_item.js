@@ -25,7 +25,8 @@ export class MicItem extends Component {
         super();
         this.state = {
             w: 70,
-            h: 70
+            h: 70,
+            margin_left: -70
         }
     }
 
@@ -33,9 +34,8 @@ export class MicItem extends Component {
         return (
             <View style={ { justifyContent: 'center', alignItems: 'center' }}>
                 <TouchableOpacity style={style.touch} onPress={this._onPress.bind(this, this.props.title) } ref="view">
-                    <Image source={{ uri: "http://192.168.31.162:8081/app/img/background.png" } } style={[style.img2, { width: this.state.w, height: this.state.h }]} >
-                    </Image>
-                    <Image source={{ uri: "http://192.168.31.162:8081/app/img/171604419.jpg" } } style={style.img}  />
+                    <Image source={{ uri: "http://192.168.31.162:8081/app/img/background.png" } } style={[style.img2, { width: this.state.w, height: this.state.h }]} />
+                    <Image source={{ uri: "http://192.168.31.162:8081/app/img/171604419.jpg" } } style={[style.img, { marginLeft: this.state.margin_left }]}  />
                 </TouchableOpacity>
             </View>
         );
@@ -60,7 +60,8 @@ export class MicItem extends Component {
         });
         this.setState({
             w: this.state.w + 250,
-            h: this.state.h
+            h: this.state.h,
+            margin_left: this.state.margin_left - 125
         })
         this._play(value);
     }
@@ -81,9 +82,9 @@ const style = StyleSheet.create({
         marginRight: 10,
         marginTop: 10,
         width: 320,
-        height: 74,
+        height: 70,
         flexDirection: "row",
-        borderRadius: 37,
+        borderRadius: 35,
         backgroundColor: "#99999900",
         justifyContent: 'center',
         alignItems: 'center'
@@ -101,7 +102,7 @@ const style = StyleSheet.create({
         height: 70,
         borderWidth: 0,
         borderRadius: 35,
-        justifyContent: 'center',
+        position: "absolute",
         alignItems: 'center'
     },
     img2: {

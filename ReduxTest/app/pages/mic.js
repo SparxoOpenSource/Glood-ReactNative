@@ -160,7 +160,7 @@ const style = StyleSheet.create({
         flex: 7,
         flexDirection: 'column',
         justifyContent: 'space-between',
-        backgroundColor: '#F5FCFF',
+        backgroundColor: '#F3F3F3',
     },
     content: {
         flex: 6
