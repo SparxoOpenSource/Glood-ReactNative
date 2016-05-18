@@ -382,11 +382,11 @@ RCT_EXPORT_METHOD(playRecord:(NSString *)playName
 
 - (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
 {
-  dispatch_async(dispatch_get_main_queue(), ^
-                 {
-                   [ShowMessage showMessage:@"播放完毕"];
-                   
-                 });
+//  dispatch_async(dispatch_get_main_queue(), ^
+//                 {
+//                   [ShowMessage showMessage:@"播放完毕"];
+//                   
+//                 });
 }
 
 RCT_EXPORT_METHOD(recordMsg:(NSString *)msg)

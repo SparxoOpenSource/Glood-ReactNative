@@ -11,6 +11,14 @@ const LISTVIEW_REF = 'listview'
 var ss = 70;
 var tt = 70;
 
+import P2P from "socket.io-p2p";
+import io from "socket.io-client";
+var socket = io();
+var p2p = new P2P(socket);
+// p2p.on('peer-msg', function (data) {
+//   console.log('From a peer %s', data);
+// });
+
 const propTypes = {
     title: PropTypes.string,
     navigator: PropTypes.object
