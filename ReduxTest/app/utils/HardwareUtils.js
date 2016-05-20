@@ -1,9 +1,9 @@
 import {NativeModules} from 'react-native';
 import React, {Component} from "react";
 
-const Recorder = NativeModules.AndroidInfo;
+const Recorder = NativeModules.RecordAudio;
 
-export class AndroidUtil extends Component{
+export class HardwareUtils extends Component{
     getAddressIp(callback) {
         Recorder.getAndroidIpAddress((args) => {
             callback && callback(args);

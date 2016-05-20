@@ -9,7 +9,7 @@ import hooks from 'feathers-hooks';
 import socketio from 'feathers-socketio/client'
 import authentication from 'feathers-authentication/client';
 var Actions = require('react-native-router-flux').Actions;
-import {AndroidUtil} from "../utils/AndroidUtils";
+import {HardwareUtils} from "../utils/HardwareUtils";
 
 // This is required for socket.io-client due to a bug in React Native debugger
 if (window.navigator && Object.keys(window.navigator).length == 0) {
@@ -65,7 +65,7 @@ export class Home extends Component {
         });
     }
     login(value) {
-        AndroidUtil.prototype.getAddressIp((call) => {
+        HardwareUtils.prototype.getAddressIp((call) => {
             this.setState({
                 loading: true,
                 email: call.IP,

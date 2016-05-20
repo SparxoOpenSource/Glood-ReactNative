@@ -10,6 +10,8 @@ import java.util.Map;
 
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.text.TextUtils;
 import android.widget.Toast;
 import android.util.Log;
@@ -234,6 +236,29 @@ public class RecordModule extends ReactContextBaseJavaModule {
             callbackMap.putInt("time", 0);
         }
         callback.invoke(callbackMap);
+    }
+
+    @ReactMethod
+    public void getAndroidIpAddress(Callback callback) {
+        String result = null;
+        try {
+            WifiManager wifi = (WifiManager) context
+                    .getSystemService(Context.WIFI_SERVICE);
+            WifiInfo info = wifi.getConnectionInfo();
+            result = intToIp(info.getIpAddress());
+        } catch (Exception e) {
+            result = null;
+        }
+        callbackMap = Arguments.createMap();
+        callbackMap.putString("IP", result);
+        callback.invoke(callbackMap);
+    }
+
+    private String intToIp(int i) {
+        return (i & 0xFF) + "." +
+                ((i >> 8) & 0xFF) + "." +
+                ((i >> 16) & 0xFF) + "." +
+                (i >> 24 & 0xFF);
     }
 
     protected MediaPlayer createMediaPlayer(final String fileName) {
