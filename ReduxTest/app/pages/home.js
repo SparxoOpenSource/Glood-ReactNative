@@ -64,7 +64,7 @@ export class Home extends Component {
             // Actions.offline();
         });
     }
-    login(value) {
+    login(value, navigator) {
         HardwareUtils.prototype.getAddressIp((call) => {
             this.setState({
                 loading: true,
@@ -87,13 +87,13 @@ export class Home extends Component {
                 console.log('ERROR-1', error);
                 // Alert.alert('Error-1', 'Please enter a valid email or password.');
                 // this.setState({ loading: false });
-                this.register(value);
+                this.register(value, navigator);
                 return;
             });
         });
     }
 
-    register(value) {
+    register(value, navigator) {
         var self = this;
 
         this.setState({ loading: true });
@@ -152,7 +152,7 @@ export class Home extends Component {
     _handerClick(value, navigator) {
         switch (value) {
             case "MIC":
-                this.login(value);
+                this.login(value, navigator);
                 break;
             case "CAMERA":
                 this.props.navigator.push({
