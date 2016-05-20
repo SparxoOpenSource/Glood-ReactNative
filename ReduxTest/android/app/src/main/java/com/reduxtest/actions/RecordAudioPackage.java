@@ -17,6 +17,7 @@ public class RecordAudioPackage implements ReactPackage {
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
         List<NativeModule> modules = new ArrayList<>();
         modules.add(new RecordModule(reactContext));
+        modules.add(new AndroidInfoModule(reactContext));
         return modules;
     }
 

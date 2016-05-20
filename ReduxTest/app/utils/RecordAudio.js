@@ -35,6 +35,12 @@ export class RecordAudio extends Component {
         });
     }
 
+    saveRecord(base64, callback) {
+        Recorder.saveRecord(base64, (args) => {
+            callback && callback(args);
+        });
+    }
+
     recordMsg(msg) {
         Recorder.recordMsg(msg);
     }

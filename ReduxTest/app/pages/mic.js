@@ -10,25 +10,20 @@ var ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
 const LISTVIEW_REF = 'listview'
 var ss = 70;
 var tt = 70;
-
-import P2P from "socket.io-p2p";
-import io from "socket.io-client";
-var socket = io();
-var p2p = new P2P(socket);
-// p2p.on('peer-msg', function (data) {
-//   console.log('From a peer %s', data);
-// });
+var app;
 
 const propTypes = {
     title: PropTypes.string,
-    navigator: PropTypes.object
+    navigator: PropTypes.object,
+    app: PropTypes.object
 };
 
 export class Mic extends Component {
     constructor() {
         super();
         this.state = {
-            dataSource: ds.cloneWithRows(data)
+            dataSource: ds.cloneWithRows(data),
+            messages: []
         }
         this._accessFileName()
     }
@@ -78,7 +73,9 @@ export class Mic extends Component {
         );
     }
 
-    //开始录音
+    /**
+     * 开始录音
+     */
     _startVoice() {
         var _this = this;
         RecordAudio.prototype.startRecord(null, (back) => {
@@ -87,17 +84,23 @@ export class Mic extends Component {
         });
     }
 
-    //停止录音
+    /**
+     * 停止录音并发送
+     */
     _stop() {
         var _this = this;
         RecordAudio.prototype.stopRecord((back) => {
             RecordAudio.prototype.recordMsg("停止录音");
             data.push(back.name + "&" + back.time);
+            //发送消息
+            _this.sendMessage(back.Base64);
             _this._refush(data);
         });
     }
 
-    //播放声音
+    /**
+     * 播放声音
+     */
     _play(name) {
         var _this = this;
         RecordAudio.prototype.playRecord(name, (back) => {
@@ -109,54 +112,85 @@ export class Mic extends Component {
         Alert.alert(call.name);
     }
 
-    //刷新数据
+    /**
+     * 更新数据到UI
+     */
     _refush(value) {
         this.setState({
             dataSource: ds.cloneWithRows(value)
         })
     }
-
+    /**
+     * 读取保存在磁盘中的录音文件
+     */
     _accessFileName() {
+        data = [];
         if (isAndroid()) {
             var _this = this;
-        RecordAudio.prototype.accessFileName((back) => {
-            if (back.name === "有数据") {
-                var ss = back["param"];
-                var tt = ss.split("|");
-                for (var i = 0; i < tt.length; i++) {
-                    data.push(tt[i]);
-                }
-                this.setState({
-                    dataSource: ds.cloneWithRows(data)
-                })
-            } else {
+            RecordAudio.prototype.accessFileName((back) => {
+                if (back.name === "有数据") {
+                    var ss = back["param"];
+                    var tt = ss.split("|");
+                    for (var i = 0; i < tt.length; i++) {
+                        data.push(tt[i]);
+                    }
+                    this.setState({
+                        dataSource: ds.cloneWithRows(data)
+                    })
+                } else {
 
-                _this._voiceCallBack(back.name);
-            }
-        });
-        }        
+                    _this._voiceCallBack(back.name);
+                }
+            });
+        }
     }
-    _onPress(value) {
-        // var ss=this.refs.view.style.width;
-        // if(ss===300){
-        //     return;
-        // }
-        LayoutAnimation.configureNext({
-            duration: 10000,   //持续时间
-            create: {
-                type: 'linear',
-                property: 'opacity'
-            },
-            update: {
-                type: 'spring',
-                springDamping: 10000
-            }
+
+    /**
+     * 接收消息，并监听
+     */
+    componentDidMount(props) {
+        var self = this;
+
+        this.props.app.service('messages').on('created', message => {
+            const messages = this.state.messages;
+            messages.push(this.formatMessage(message));
+            this.setState({ messages });
+            Alert.alert("收到消息", message.text);
+            RecordAudio.prototype.saveRecord(message.text, (back) => {
+                if (back.success == true) {
+                    data.push(back.name + "&" + back.time);
+                    self._refush(data);
+                }
+            });
         });
-        ss = ss + 250;
-        this.refs.view.setNativeProps({
-            style: { width: ss, height: tt, justifyContent: "center" }
-        })
-        this._play(value);
+
+        this.props.app.service('messages').on('removed', result => {
+            // this.deleteMessage(result);
+        });
+    }
+    /**
+     * 消息类型转换
+     */
+    formatMessage(message) {
+        return {
+            id: message._id,
+            name: message.sentBy.username,
+            text: message.text,
+            // position: message.sentBy._id === this.app.get('user')._id ? 'left' : 'right',
+            // image: { uri: message.sentBy.avatar ? message.sentBy.avatar : PLACEHOLDER },
+            date: new Date(message.createdAt)
+        };
+    }
+    /**
+     * 发送消息
+     */
+    sendMessage(message = null, rowID = null) {
+        this.props.app.service('messages').create({ text: message }).then(result => {
+            console.log('message created!');
+        }).catch((error) => {
+            console.log('ERROR creating message');
+            console.log(error);
+        });
     }
 }
 

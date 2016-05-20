@@ -25,6 +25,7 @@ import com.facebook.react.common.MapBuilder;
 import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.WritableMap;
+import com.reduxtest.utils.Base64Code;
 import com.reduxtest.utils.DataTimeUtils;
 
 public class RecordModule extends ReactContextBaseJavaModule {
@@ -118,6 +119,7 @@ public class RecordModule extends ReactContextBaseJavaModule {
         callbackMap.putString("param", WavAudioName);
         callbackMap.putString("name", AudioName);
         callbackMap.putInt("time", (int) date / 1000);
+        callbackMap.putString("Base64", Base64Code.encodeBase64File(WavAudioName));
         callback.invoke(callbackMap);
     }
 
@@ -192,7 +194,9 @@ public class RecordModule extends ReactContextBaseJavaModule {
         String str = "";
         for (int i = 0; i < files.length; i++) {
             MediaPlayer prepare = prepare(files[i].getName(), files[i].getName());
-            str += files[i].getName() + "&" + prepare.getDuration() / 1000 + "|";
+            if (prepare != null) {
+                str += files[i].getName() + "&" + prepare.getDuration() / 1000 + "|";
+            }
         }
         str = str.substring(str.length() - 1, str.length()).equals("|") ? str.substring(0, str.length() - 1) : str;
         callbackMap.putString("name", "有数据");
@@ -212,6 +216,24 @@ public class RecordModule extends ReactContextBaseJavaModule {
         }
         this.playerPool.put(key, player);
         return player;
+    }
+
+    @ReactMethod
+    public void saveRecord(String base64, Callback callback) {
+        callbackMap = Arguments.createMap();
+        String fileName = "recordKeyeeApp_" + DataTimeUtils.dataString() + ".wav";
+        fileBasePath = "/mnt/sdcard/" + this.getReactApplicationContext().getPackageName() + "/audioCache/";
+        if (Base64Code.decoderBase64File(base64, fileBasePath + fileName)) {
+            MediaPlayer prepare = prepare(fileName, fileName);
+            callbackMap.putBoolean("success", true);
+            callbackMap.putString("name", fileName);
+            callbackMap.putInt("time", prepare.getDuration() / 1000);
+        } else {
+            callbackMap.putBoolean("success", false);
+            callbackMap.putString("name", fileName);
+            callbackMap.putInt("time", 0);
+        }
+        callback.invoke(callbackMap);
     }
 
     protected MediaPlayer createMediaPlayer(final String fileName) {

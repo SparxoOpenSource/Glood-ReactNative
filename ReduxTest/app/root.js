@@ -1,6 +1,6 @@
 import React, {Component} from "react";
-import { AppRegistry, StyleSheet, View, Text, ListView, Alert, Navigator, Image, TouchableOpacity,StatusBarIOS,
-  Platform }  from 'react-native';
+import { AppRegistry, StyleSheet, View, Text, ListView, Alert, Navigator, Image, TouchableOpacity, StatusBarIOS,
+    Platform }  from 'react-native';
 var _navigator;
 import {Home} from "../app/pages/home";
 import {Mic} from "../app/pages/mic";
@@ -18,7 +18,7 @@ export class Root extends Component {
                 component = Home;
                 return (<Home navigator={navigator} title={"我的主页"}/>);
             case "MIC":
-                return (<Mic navigator={router.nav} title={router.value}/>);
+                return (<Mic navigator={router.nav} title={router.value} app={router.app}/>);
             case "CAMERA":
                 return (<Cameraq navigator={router.nav}  title={router.value}/>);
             case "PHOTOWALL":
@@ -29,11 +29,11 @@ export class Root extends Component {
         }
 
     }
-    componentDidMount () {
-    if (Platform.OS === 'ios') {
-      StatusBarIOS.setHidden(true)
+    componentDidMount() {
+        if (Platform.OS === 'ios') {
+            StatusBarIOS.setHidden(true)
+        }
     }
-  }
     render() {
         return (
 

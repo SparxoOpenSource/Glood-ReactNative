@@ -7,7 +7,6 @@ import isAndroid from '../utils/isAndroid.js';
 
 var _navigator;
 var _title = "我是导航";
-let tag;
 
 const propTypes = {
     title: PropTypes.string,
@@ -20,16 +19,7 @@ export class Common extends Component {
         super();
         this.goBack = this.goBack.bind(this);
     }
-    componentWillMount() {
-        if (isAndroid()) {
-            tag = Portal.allocateTag();
-        }
-    }
     goBack() {
-        if (Portal.getOpenModals().length != 0) {
-            Portal.closeModal(tag);
-            return true;
-        }
         return NaviGoBack(this.props.navigator);
     }
     componentDidMount() {
@@ -37,11 +27,15 @@ export class Common extends Component {
             BackAndroid.addEventListener('hardwareBackPress', this.goBack);
         }
     }
-
-    componentWillUnmount() {
-        if (isAndroid()) {
-            BackAndroid.removeEventListener('hardwareBackPress', this.goBack);
+    renderBackImage() {
+        if (this.props.title === "我的主页") {
+            return (
+                <Image source={require('../img/none.png') } style={styles.ImagStyle}  />
+            );
         }
+        return (
+            <Image source={require('../img/back.png') } style={styles.ImagStyle}  />
+        );
     }
     //监听手机自带返回按钮
     render() {
@@ -49,7 +43,7 @@ export class Common extends Component {
             <View>
                 <View style = {styles.view}>
                     <TouchableOpacity onPress={this._onBack.bind(this) }>
-                        <Image source={require('../img/back.png') } style={styles.ImagStyle}  />
+                        {this.renderBackImage() }
                     </TouchableOpacity>
                     <Text style={styles.TextStyle}>{this.props.title}</Text>
                     <TouchableOpacity>
