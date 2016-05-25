@@ -24,6 +24,7 @@
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		CC1041421CE5B4CC00B5D2E7 /* RecordAudio.m in Sources */ = {isa = PBXBuildFile; fileRef = CC1041411CE5B4CC00B5D2E7 /* RecordAudio.m */; };
 		CC11EFF31CE4810B00AAEA09 /* libRCTCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC11EFF21CE4810400AAEA09 /* libRCTCamera.a */; };
+		CC2672AE1CEF07570018F4AB /* NSString+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = CC2672AD1CEF07570018F4AB /* NSString+Base64.m */; };
 		CCA7E1961CEAFD6000EFEF04 /* ShowMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA7E1951CEAFD6000EFEF04 /* ShowMessage.m */; };
 		CCA7E1B81CEAFDFD00EFEF04 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA7E1A61CEAFDFD00EFEF04 /* MBProgressHUD.m */; };
 		CCA7E1B91CEAFDFD00EFEF04 /* MMVectorImage.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA7E1A81CEAFDFD00EFEF04 /* MMVectorImage.m */; };
@@ -165,6 +166,8 @@
 		CC1041401CE5B4CC00B5D2E7 /* RecordAudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordAudio.h; sourceTree = "<group>"; };
 		CC1041411CE5B4CC00B5D2E7 /* RecordAudio.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordAudio.m; sourceTree = "<group>"; };
 		CC11EFED1CE4810400AAEA09 /* RCTCamera.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTCamera.xcodeproj; path = "../node_modules/@remobile/react-native-camera/ios/RCTCamera.xcodeproj"; sourceTree = "<group>"; };
+		CC2672AC1CEF07570018F4AB /* NSString+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Base64.h"; sourceTree = "<group>"; };
+		CC2672AD1CEF07570018F4AB /* NSString+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Base64.m"; sourceTree = "<group>"; };
 		CCA7E1941CEAFD6000EFEF04 /* ShowMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowMessage.h; sourceTree = "<group>"; };
 		CCA7E1951CEAFD6000EFEF04 /* ShowMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowMessage.m; sourceTree = "<group>"; };
 		CCA7E1A51CEAFDFD00EFEF04 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
@@ -377,6 +380,7 @@
 		CC10413F1CE5B4CC00B5D2E7 /* RNRecordAudio */ = {
 			isa = PBXGroup;
 			children = (
+				CC26729E1CEF07220018F4AB /* NSString+Base64 */,
 				CCA7E1A41CEAFDF100EFEF04 /* MBProgressHUD */,
 				CC1041401CE5B4CC00B5D2E7 /* RecordAudio.h */,
 				CC1041411CE5B4CC00B5D2E7 /* RecordAudio.m */,
@@ -392,6 +396,15 @@
 				CC11EFF21CE4810400AAEA09 /* libRCTCamera.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		CC26729E1CEF07220018F4AB /* NSString+Base64 */ = {
+			isa = PBXGroup;
+			children = (
+				CC2672AC1CEF07570018F4AB /* NSString+Base64.h */,
+				CC2672AD1CEF07570018F4AB /* NSString+Base64.m */,
+			);
+			name = "NSString+Base64";
 			sourceTree = "<group>";
 		};
 		CCA7E1A41CEAFDF100EFEF04 /* MBProgressHUD */ = {
@@ -464,7 +477,6 @@
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
-				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 			);
 			buildRules = (
 			);
@@ -679,23 +691,6 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Bundle React Native code and images";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/packager/react-native-xcode.sh";
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		00E356EA1AD99517003FC87E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -718,6 +713,7 @@
 				CCA7E1B81CEAFDFD00EFEF04 /* MBProgressHUD.m in Sources */,
 				CCA7E1BE1CEAFDFD00EFEF04 /* MMRadialProgressView.m in Sources */,
 				CCA7E1961CEAFD6000EFEF04 /* ShowMessage.m in Sources */,
+				CC2672AE1CEF07570018F4AB /* NSString+Base64.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 				CCA7E1BF1CEAFDFD00EFEF04 /* MMHud.m in Sources */,
 				CCA7E1C11CEAFDFD00EFEF04 /* MMProgressHUDViewController.m in Sources */,

@@ -2,6 +2,10 @@
 #import "RCTLog.h"
 #import "AppDelegate.h"
 #import "ShowMessage.h"
+#import "NSString+Base64.h"
+
+#import <ifaddrs.h>
+#import <arpa/inet.h>
 
 @implementation RecordAudio {
     
@@ -11,8 +15,9 @@
     NSString *newFileName;
     AVAudioPlayer *audioPlayer;
     NSTimer *nstimer;
-  NSString *startStr;
-  NSString *endStr;
+    NSString *startStr;
+    NSString *endStr;
+    NSData *wavdata;
 }
 
 // Expose this module to the React Native bridge
@@ -168,7 +173,7 @@ RCT_EXPORT_METHOD(stopRecord:(RCTResponseSenderBlock)successCallback) {
         
         // if recording is in progress, stop
         if (audioRecorder.recording) {
-            
+          
             [audioRecorder stop];
             [recordSession setActive:NO error:nil];
             
@@ -183,13 +188,19 @@ RCT_EXPORT_METHOD(stopRecord:(RCTResponseSenderBlock)successCallback) {
           {
             timerStr = [NSString stringWithFormat:@"%ld",[[array objectAtIndex:1] integerValue]*60+[[array objectAtIndex:2] integerValue]];
           }
+          
+          wavdata = [fileManager contentsAtPath:pathForFile];
+          NSString *aString = [[NSString alloc] initWithData:wavdata encoding:NSUTF8StringEncoding];
+          NSString *pictureDataString=[wavdata base64Encoding];
+          NSLog(@"***********data:%@--%@",wavdata,pictureDataString);
           NSDictionary *resultsDict = @{
                                         @"success" : @YES,
                                         @"param"  : pathForFile,
                                         @"name" : newFileName,
-                                        @"time" : timerStr
+                                        @"time" : timerStr,
+                                        @"Base64": pictureDataString
                                         };
-          NSLog(@"fsdfsdfsdfsdfsdfsd---- %@",resultsDict);
+         
             
             // Call the JavaScript sucess handler
             successCallback(@[resultsDict]);
@@ -204,6 +215,7 @@ RCT_EXPORT_METHOD(stopRecord:(RCTResponseSenderBlock)successCallback) {
                                           };
             
             // Javascript error handling
+          
             successCallback(@[resultsDict]);
             return;
         }
@@ -217,6 +229,7 @@ RCT_EXPORT_METHOD(stopRecord:(RCTResponseSenderBlock)successCallback) {
                                       };
         
         // Javascript error handling
+      
         successCallback(@[resultsDict]);
         return;
         
@@ -332,9 +345,10 @@ RCT_EXPORT_METHOD(playRecord:(NSString *)playName
   if (!audioPlayer) {
   
     NSLog(@"heihiehiehi  %@",audioFileURL);
-    audioPlayer = [[AVAudioPlayer alloc]
-                   initWithContentsOfURL: audioFileURL
-                   error:&error];
+//    audioPlayer = [[AVAudioPlayer alloc]
+//                   initWithContentsOfURL: audioFileURL
+//                   error:&error];
+    audioPlayer = [[AVAudioPlayer alloc] initWithData:wavdata error:&error];
     [audioPlayer setDelegate:self];
     
   }
@@ -399,6 +413,88 @@ RCT_EXPORT_METHOD(recordMsg:(NSString *)msg)
                  });
 }
 
+#pragma mark ======= 获取当前设备ip地址 ======
+RCT_EXPORT_METHOD(getAndroidIpAddress:(RCTResponseSenderBlock)callback)
+{
+  NSString *address = @"error";
+  struct ifaddrs *interfaces = NULL;
+  struct ifaddrs *temp_addr = NULL;
+  int success = 0;
+  // retrieve the current interfaces - returns 0 on success
+  success = getifaddrs(&interfaces);
+  if (success == 0) {
+    temp_addr = interfaces;
+    while(temp_addr != NULL) {
+      if(temp_addr->ifa_addr->sa_family == AF_INET) {
+        if([[NSString stringWithUTF8String:temp_addr->ifa_name] isEqualToString:@"en0"]) {
+          address = [NSString stringWithUTF8String:inet_ntoa(((struct sockaddr_in *)temp_addr->ifa_addr)->sin_addr)];
+        }
+      }
+      temp_addr = temp_addr->ifa_next;
+    }
+  }
+  freeifaddrs(interfaces);
+  
+  NSLog(@"-*-*-*-------ADDRE:%@",address);
+  NSDictionary *resultsDict = @{@"IP" : address};
+  callback(@[resultsDict]);
+}
+
+/*
+NSString *codeString = @"Hello world";
+NSLog(@"原文--%@",codeString);
+
+NSString *base64Str = [codeString base64EncodedString];
+NSLog(@"Base64编码--%@",base64Str);
+
+NSString *decodeStr = [base64Str base64DecodedString];
+NSLog(@"Base64解码--%@",decodeStr);
+ */
+
+#pragma mark ======= base64转码 ======
+RCT_EXPORT_METHOD(saveRecord:(NSString *)base64
+                  Callback:(RCTResponseSenderBlock)callBack)
+{
+   NSString *fileName = [NSString stringWithFormat:@"IOS-%@.wav",[self getTimeNow]];
+//    NSRange isRangeWav = [fileName rangeOfString:@".wav" options:NSCaseInsensitiveSearch];
+    NSString *cachePath = [self getCachePath];
+    BOOL isDir = NO;
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    BOOL existed = [fileManager fileExistsAtPath:cachePath isDirectory:&isDir];
+    if ( !(isDir == YES && existed == YES) )
+    {
+      [fileManager createDirectoryAtPath:cachePath withIntermediateDirectories:YES attributes:nil error:nil];
+    }
+    // Create the path that the file will be stored at
+  
+  
+//  NSString *base64Str = [base64 base64EncodedString];
+//  NSLog(@"Base64编码--%@",base64Str);
+//  
+//  NSString *decodeStr = [base64 base64DecodedString];
+//  NSLog(@"Base64解码--%@",decodeStr);
+  pathForFile = [NSString stringWithFormat:@"%@/%@", cachePath, fileName];
+    NSData *sData   = [[NSData alloc] initWithBase64Encoding:base64];
+   [sData writeToFile:pathForFile atomically:YES];
+  NSURL *audioFileURL = [NSURL fileURLWithPath:pathForFile];
+  AVURLAsset* audioAsset =[AVURLAsset URLAssetWithURL:audioFileURL options:nil];
+  
+  CMTime audioDuration = audioAsset.duration;
+  
+  float audioDurationSeconds =CMTimeGetSeconds(audioDuration);
+  NSString *timeStr = [NSString stringWithFormat:@"%ld",(long)audioDurationSeconds];
+
+  
+    NSLog(@"-----**-*pathForFile:---%@  sData:%@ -- %@",pathForFile,sData,base64);
+    NSDictionary *resultsDict = @{
+                                @"success" : @YES,
+                                @"name" : fileName,
+                                @"time":timeStr
+                                };
+  NSLog(@"^^^^^^^^^^^^^^^^^^^^^%f",audioDurationSeconds);
+    callBack(@[resultsDict]);
+  
+}
 
 #pragma mark ======== 清除缓存 ============
 RCT_EXPORT_METHOD(clearCache:(RCTResponseSenderBlock)callback)
