@@ -192,7 +192,7 @@ RCT_EXPORT_METHOD(stopRecord:(RCTResponseSenderBlock)successCallback) {
           wavdata = [fileManager contentsAtPath:pathForFile];
           NSString *aString = [[NSString alloc] initWithData:wavdata encoding:NSUTF8StringEncoding];
           NSString *pictureDataString=[wavdata base64Encoding];
-          NSLog(@"***********data:%@--%@",wavdata,pictureDataString);
+          // NSLog(@"***********data:%@--%@",wavdata,pictureDataString);
           NSDictionary *resultsDict = @{
                                         @"success" : @YES,
                                         @"param"  : pathForFile,
@@ -537,7 +537,7 @@ RCT_EXPORT_METHOD(clearCache:(RCTResponseSenderBlock)callback)
   NSArray *timeArray2=[dateString2 componentsSeparatedByString:@"."];
   dateString2=[timeArray2 objectAtIndex:0];
   
-  NSLog(@"%@.....%@",dateString1,dateString2);
+  // NSLog(@"%@.....%@",dateString1,dateString2);
   NSDateFormatter *date=[[NSDateFormatter alloc] init];
   [date setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
   

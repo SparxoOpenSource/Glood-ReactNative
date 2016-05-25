@@ -93,7 +93,7 @@ export class Mic extends Component {
         RecordAudio.prototype.stopRecord((back) => {
             RecordAudio.prototype.recordMsg("停止录音");
             if (back.success == true) {
-                data.push(back.name + "&" + back.time);
+                data.push(back.name + "&" + back.time + "&" + _this.prototype.ip);
                 //发送消息
                 _this.sendMessage(back.Base64);
                 _this._refush(data);
@@ -139,13 +139,13 @@ export class Mic extends Component {
                     for (var i = 0; i < tt.length; i++) {
                         data.push(tt[i] + "&" + "file");
                     }
-                    this.setState({
-                        dataSource: ds.cloneWithRows(data)
-                    })
                 } else {
 
-                    _this._voiceCallBack(back.name);
+                    // _this._voiceCallBack(back.name);
                 }
+                this.setState({
+                    dataSource: ds.cloneWithRows(data)
+                })
             });
         }
     }
@@ -182,7 +182,7 @@ export class Mic extends Component {
     formatMessage(message) {
         return {
             id: message._id,
-            name: message.sentBy.username,
+            name: message.sentBy.email,
             text: message.text,
             userid: message.sentBy._id,
             // position: message.sentBy._id === this.app.get('user')._id ? 'left' : 'right',
