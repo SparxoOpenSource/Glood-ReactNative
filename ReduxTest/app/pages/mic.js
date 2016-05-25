@@ -5,7 +5,7 @@ import {RecordAudio} from "../utils/RecordAudio";
 import {MicItem} from "./mic_item";
 import isAndroid from '../utils/isAndroid.js';
 
-var data = [];
+var data = ["recordKeyeeApp_2016-05-10 17:30:29.wav"];
 var ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
 const LISTVIEW_REF = 'listview'
 var ss = 70;
