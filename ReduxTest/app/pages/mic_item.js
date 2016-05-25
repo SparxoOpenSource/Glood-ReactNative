@@ -18,6 +18,7 @@ import {RecordAudio} from "../utils/RecordAudio";
 import isAndroid from '../utils/isAndroid.js';
 var deviceWidth = Dimensions.get('window').width;
 var {height, width} = Dimensions.get('window');
+var isCisClick = false;
 
 const propTypes = {
     title: PropTypes.string
@@ -37,8 +38,8 @@ export class MicItem extends Component {
         return (
             <View style={ { justifyContent: 'center', alignItems: 'center', marginTop: 10 }}>
                 <TouchableOpacity style={style.touch} onPress={this._onPress.bind(this, this.props.title) } ref="view">
-                    <Image source={require('../img/background.png')} style={[style.img2, { width: this.state.w, height: this.state.h }]} />
-                    <Image source={require('../img/171604419.jpg')} style={[style.img, { marginLeft: this.state.margin_left }]}  />
+                    <Image source={require('../img/background.png') } style={[style.img2, { width: this.state.w, height: this.state.h }]} />
+                    <Image source={require('../img/171604419.jpg') } style={[style.img, { marginLeft: this.state.margin_left }]}  />
                 </TouchableOpacity>
                 <Text style={style.text}>YoYo+{this.props.title.split("&")[1]}</Text>
             </View>
@@ -52,34 +53,37 @@ export class MicItem extends Component {
             RecordAudio.prototype.recordMsg("播放失败");
             return;
         }
-        var wid = deviceWidth - 20 - 70;
-        var show_width;
-        if (time >= 20) {
-            show_width = wid - 35;
-        } else {
-            show_width = (wid - 70) / 20 * time + 70;
-        }
-        if (isAndroid()) {
-            //安卓平台使用 LayoutAnimation 动画必须加上这么一句代码（否则动画会失效）
-            UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
-        }
-        LayoutAnimation.configureNext({
-
-            duration: time * 1000,   //持续时间
-            create: {
-                type: 'linear',
-                property: 'opacity'
-            },
-            update: {
-                type: 'linear'
+        if (isCisClick == false) {
+            var wid = deviceWidth - 20 - 70;
+            var show_width;
+            if (time >= 20) {
+                show_width = wid - 35;
+            } else {
+                show_width = (wid - 70) / 20 * time + 70;
             }
-        });
-        //Alert.alert(width + "-------" + deviceWidth + "------" + show_width + "------------" + time);
-        this.setState({
-            w: this.state.w + show_width,
-            h: this.state.h,
-            margin_left: this.state.margin_left - show_width / 2
-        })
+            if (isAndroid()) {
+                //安卓平台使用 LayoutAnimation 动画必须加上这么一句代码（否则动画会失效）
+                UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
+            }
+            LayoutAnimation.configureNext({
+
+                duration: time * 1000,   //持续时间
+                create: {
+                    type: 'linear',
+                    property: 'opacity'
+                },
+                update: {
+                    type: 'linear'
+                }
+            });
+            //Alert.alert(width + "-------" + deviceWidth + "------" + show_width + "------------" + time);
+            this.setState({
+                w: this.state.w + show_width,
+                h: this.state.h,
+                margin_left: this.state.margin_left - show_width / 2
+            })
+            isCisClick = true;
+        }
         this._play(title);
     }
 

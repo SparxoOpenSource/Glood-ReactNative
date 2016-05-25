@@ -240,7 +240,7 @@ RCT_EXPORT_METHOD(stopRecord:(RCTResponseSenderBlock)successCallback) {
 RCT_EXPORT_METHOD(playRecord:(NSString *)playName
                   Callback:(RCTResponseSenderBlock)callBack) {
 //  playName = newFileName;
-  NSLog(@"*-*-*-*-***--*******  %@",playName);
+  // NSLog(@"*-*-*-*-***--*******  %@",playName);
   // Validate the file name has positive length
   if ([playName length] < 1) {
     
@@ -318,7 +318,7 @@ RCT_EXPORT_METHOD(playRecord:(NSString *)playName
   NSString *pathForFile = [NSString stringWithFormat:@"%@/%@", documentsDirectory, playName];
   
   NSURL *audioFileURL = [NSURL fileURLWithPath:pathForFile];
-  NSLog(@"播放－－－－－%@",audioFileURL);
+  // NSLog(@"播放－－－－－%@",audioFileURL);
   // Validate that the file exists
   NSFileManager *fileManager = [NSFileManager defaultManager];
   
@@ -344,7 +344,7 @@ RCT_EXPORT_METHOD(playRecord:(NSString *)playName
   // Check if audioPlayer exists for initialization
 //  if (!audioPlayer) {
   
-    NSLog(@"heihiehiehi  %@",audioFileURL);
+    // NSLog(@"heihiehiehi  %@",audioFileURL);
     audioPlayer = [[AVAudioPlayer alloc]
                    initWithContentsOfURL: audioFileURL
                    error:&error];
@@ -435,7 +435,7 @@ RCT_EXPORT_METHOD(getAndroidIpAddress:(RCTResponseSenderBlock)callback)
   }
   freeifaddrs(interfaces);
   
-  NSLog(@"-*-*-*-------ADDRE:%@",address);
+  // NSLog(@"-*-*-*-------ADDRE:%@",address);
   NSDictionary *resultsDict = @{@"IP" : address};
   callback(@[resultsDict]);
 }
@@ -485,13 +485,13 @@ RCT_EXPORT_METHOD(saveRecord:(NSString *)base64
   NSString *timeStr = [NSString stringWithFormat:@"%ld",(long)audioDurationSeconds];
 
   
-    NSLog(@"-----**-*pathForFile:---%@  sData:%@ -- %@",pathForFile,sData,base64);
+    // NSLog(@"-----**-*pathForFile:---%@  sData:%@ -- %@",pathForFile,sData,base64);
     NSDictionary *resultsDict = @{
                                 @"success" : @YES,
                                 @"name" : fileName,
                                 @"time":timeStr
                                 };
-  NSLog(@"^^^^^^^^^^^^^^^^^^^^^%f",audioDurationSeconds);
+  // NSLog(@"^^^^^^^^^^^^^^^^^^^^^%f",audioDurationSeconds);
     callBack(@[resultsDict]);
   
 }
