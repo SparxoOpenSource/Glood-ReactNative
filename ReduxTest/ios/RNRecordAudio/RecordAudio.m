@@ -342,16 +342,16 @@ RCT_EXPORT_METHOD(playRecord:(NSString *)playName
   NSError *error = nil;
   
   // Check if audioPlayer exists for initialization
-  if (!audioPlayer) {
+//  if (!audioPlayer) {
   
     NSLog(@"heihiehiehi  %@",audioFileURL);
-//    audioPlayer = [[AVAudioPlayer alloc]
-//                   initWithContentsOfURL: audioFileURL
-//                   error:&error];
-    audioPlayer = [[AVAudioPlayer alloc] initWithData:wavdata error:&error];
+    audioPlayer = [[AVAudioPlayer alloc]
+                   initWithContentsOfURL: audioFileURL
+                   error:&error];
+//    audioPlayer = [[AVAudioPlayer alloc] initWithData:wavdata error:&error];
     [audioPlayer setDelegate:self];
     
-  }
+//  }
   
   NSError *audioError = nil;
   BOOL success = [recordSession overrideOutputAudioPort:AVAudioSessionPortOverrideSpeaker error:&audioError];
