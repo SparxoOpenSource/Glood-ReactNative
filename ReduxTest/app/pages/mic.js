@@ -5,7 +5,7 @@ import {RecordAudio} from "../utils/RecordAudio";
 import {MicItem} from "./mic_item";
 import isAndroid from '../utils/isAndroid.js';
 
-var data = ["recordKeyeeApp_2016-05-10 17:30:29.wav"];
+var data = [];
 var ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
 const LISTVIEW_REF = 'listview'
 var ss = 70;
@@ -93,7 +93,7 @@ export class Mic extends Component {
         RecordAudio.prototype.stopRecord((back) => {
             RecordAudio.prototype.recordMsg("停止录音");
             if (back.success == true) {
-                data.push(back.name + "&" + back.time + "&" + _this.prototype.ip);
+                data.push(back.name + "&" + back.time + "&" + _this.props.ip);
                 //发送消息
                 _this.sendMessage(back.Base64);
                 _this._refush(data);
