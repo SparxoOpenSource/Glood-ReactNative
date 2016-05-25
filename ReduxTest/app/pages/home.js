@@ -81,7 +81,7 @@ export class Home extends Component {
                 // re-route to chat app
                 // Actions.main();
                 this.props.navigator.push({
-                    name: value, value: value, nav: navigator, app: this.app
+                    name: value, value: value, nav: navigator, app: this.app, ip: this.state.email
                 });
             }).catch(error => {
                 console.log('ERROR-1', error);
@@ -111,7 +111,7 @@ export class Home extends Component {
             }).then(response => {
                 this.setState({ loading: false });
                 this.props.navigator.push({
-                    name: value, value: value, nav: navigator, app: this.app
+                    name: value, value: value, nav: navigator, app: this.app, ip: this.state.email
                 });
                 // re-route to main authorized chat   component
                 // Actions.main();

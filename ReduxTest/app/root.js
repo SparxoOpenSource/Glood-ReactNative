@@ -18,7 +18,7 @@ export class Root extends Component {
                 component = Home;
                 return (<Home navigator={navigator} title={"我的主页"}/>);
             case "MIC":
-                return (<Mic navigator={router.nav} title={router.value} app={router.app}/>);
+                return (<Mic navigator={router.nav} title={router.value} app={router.app} ip={router.ip}/>);
             case "CAMERA":
                 return (<Cameraq navigator={router.nav}  title={router.value}/>);
             case "PHOTOWALL":

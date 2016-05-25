@@ -1,34 +1,28 @@
 package com.reduxtest.actions;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-
+import android.content.Context;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.text.TextUtils;
-import android.widget.Toast;
 import android.util.Log;
+import android.widget.Toast;
 
-import android.content.Context;
-
-import com.facebook.react.bridge.NativeModule;
+import com.facebook.react.bridge.Arguments;
+import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.ReactApplicationContext;
-import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
-import com.facebook.react.common.MapBuilder;
-import com.facebook.react.bridge.Callback;
-import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.WritableMap;
 import com.reduxtest.utils.Base64Code;
 import com.reduxtest.utils.DataTimeUtils;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class RecordModule extends ReactContextBaseJavaModule {
     private Callback callback;
@@ -68,14 +62,8 @@ public class RecordModule extends ReactContextBaseJavaModule {
             fileName = "recordKeyeeApp_" + DataTimeUtils.dataString();
         if (!fileName.endsWith(".wav"))
             fileName += ".wav";
-        try {
-            fileBasePath = "/mnt/sdcard/" + this.getReactApplicationContext().getPackageName() + "/audioCache/";
-            // fileBasePath = this.getReactApplicationContext().getFilesDir().getCanonicalPath() + "/audioCache/";
-            File fileCreate = new File(fileBasePath);
-            if (!fileCreate.exists()) {
-                fileCreate.mkdirs();
-            }
-        } catch (Exception ex) {
+        fileBasePath = isFileExists();
+        if (TextUtils.isEmpty(fileBasePath)) {
             callbackMap.putBoolean("success", false);
             callbackMap.putString("param", "create audioCache failed!");
             callback.invoke(callbackMap);
@@ -117,23 +105,32 @@ public class RecordModule extends ReactContextBaseJavaModule {
         long date = stopDate.getTime() - startDate.getTime();
         exRecorder.release();
         exRecorder = null;
+        String temp = Base64Code.encodeBase64File(WavAudioName);
+        if (TextUtils.isEmpty(temp)) {
+            callbackMap.putBoolean("success", false);
+            callbackMap.putString("param", WavAudioName);
+            callbackMap.putString("name", AudioName);
+            callbackMap.putInt("time", 0);
+            callbackMap.putString("Base64", temp);
+            callback.invoke(callbackMap);
+        }
         callbackMap.putBoolean("success", true);
         callbackMap.putString("param", WavAudioName);
         callbackMap.putString("name", AudioName);
         callbackMap.putInt("time", (int) date / 1000);
-        callbackMap.putString("Base64", Base64Code.encodeBase64File(WavAudioName));
+        callbackMap.putString("Base64", temp);
         callback.invoke(callbackMap);
     }
 
     @ReactMethod
     public void clearCache(Callback callback) {
         try {
-            fileBasePath = "/mnt/sdcard/" + this.getReactApplicationContext().getPackageName() + "/audioCache/";
-            File file = new File(fileBasePath + "/audioCache");
-            if (!file.exists()) {
+            fileBasePath = isFileExists();
+            if (TextUtils.isEmpty(fileBasePath)) {
                 callback.invoke(true);
                 return;
             }
+            File file = new File(fileBasePath);
             boolean success = DeleteRecursive(file);
             callback.invoke(success);
         } catch (Exception ex) {
@@ -183,14 +180,21 @@ public class RecordModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void accessFileName(Callback callback) {
-        if (TextUtils.isEmpty(fileBasePath))
-            fileBasePath = "/mnt/sdcard/" + this.getReactApplicationContext().getPackageName() + "/audioCache/";
         callbackMap = Arguments.createMap();
+        fileBasePath = isFileExists();
+        if (TextUtils.isEmpty(fileBasePath)) {
+            callbackMap.putString("name", "没有数据");
+            callback.invoke(callbackMap);
+            return;
+        }
         File f = new File(fileBasePath);
+        if (!f.exists()) {
+            f.mkdirs();
+        }
         File[] files = f.listFiles();// 列出所有文件
         if (files == null) {
             callbackMap.putString("name", "没有数据");
-            callback.invoke(callback);
+            callback.invoke(callbackMap);
             return;
         }
         String str = "";
@@ -200,9 +204,14 @@ public class RecordModule extends ReactContextBaseJavaModule {
                 str += files[i].getName() + "&" + prepare.getDuration() / 1000 + "|";
             }
         }
-        str = str.substring(str.length() - 1, str.length()).equals("|") ? str.substring(0, str.length() - 1) : str;
-        callbackMap.putString("name", "有数据");
-        callbackMap.putString("param", str);
+        if (!TextUtils.isEmpty(str)) {
+            str = str.substring(str.length() - 1, str.length()).equals("|") ? str.substring(0, str.length() - 1) : str;
+            callbackMap.putString("name", "有数据");
+            callbackMap.putString("param", str);
+        } else {
+            callbackMap.putString("name", "没有数据");
+            callbackMap.putString("param", str);
+        }
         callback.invoke(callbackMap);
     }
 
@@ -224,9 +233,22 @@ public class RecordModule extends ReactContextBaseJavaModule {
     public void saveRecord(String base64, Callback callback) {
         callbackMap = Arguments.createMap();
         String fileName = "recordKeyeeApp_" + DataTimeUtils.dataString() + ".wav";
-        fileBasePath = "/mnt/sdcard/" + this.getReactApplicationContext().getPackageName() + "/audioCache/";
-        if (Base64Code.decoderBase64File(base64, fileBasePath + fileName)) {
+        fileBasePath = isFileExists();
+        if (TextUtils.isEmpty(fileBasePath)) {
+            callbackMap.putBoolean("success", false);
+            callbackMap.putString("name", fileName);
+            callbackMap.putInt("time", 0);
+            return;
+        }
+        if (Base64Code.decoderBase64File(base64, fileBasePath, fileName)) {
             MediaPlayer prepare = prepare(fileName, fileName);
+            if (prepare == null) {
+                callbackMap.putBoolean("success", false);
+                callbackMap.putString("name", fileName);
+                callbackMap.putInt("time", 0);
+                callback.invoke(callbackMap);
+                return;
+            }
             callbackMap.putBoolean("success", true);
             callbackMap.putString("name", fileName);
             callbackMap.putInt("time", prepare.getDuration() / 1000);
@@ -262,9 +284,11 @@ public class RecordModule extends ReactContextBaseJavaModule {
     }
 
     protected MediaPlayer createMediaPlayer(final String fileName) {
-        if (TextUtils.isEmpty(fileBasePath))
-            fileBasePath = "/mnt/sdcard/" + this.getReactApplicationContext().getPackageName() + "/audioCache/";
         MediaPlayer player = new MediaPlayer();
+        fileBasePath = isFileExists();
+        if (TextUtils.isEmpty(fileBasePath)) {
+            return null;
+        }
         File file = new File(fileBasePath, fileName);
         Log.i("createMediaPlayer", file.getPath());
         if (file.exists()) {
@@ -289,5 +313,25 @@ public class RecordModule extends ReactContextBaseJavaModule {
             }
         }
         return fileOrDirectory.delete();
+    }
+
+    private String isFileExists() {
+        try {
+            fileBasePath = "/mnt/sdcard/" + this.getReactApplicationContext().getPackageName() + "/audioCache/";
+            File fileCreate = new File(fileBasePath);
+            if (!fileCreate.exists()) {
+                fileCreate.mkdirs();
+            }
+            if (!fileCreate.exists()) {
+                fileBasePath = this.getReactApplicationContext().getFilesDir().getCanonicalPath() + "/audioCache/";
+                fileCreate = new File(fileBasePath);
+                if (!fileCreate.exists()) {
+                    fileCreate.mkdirs();
+                }
+            }
+            return fileBasePath;
+        } catch (IOException e) {
+            return "";
+        }
     }
 }
