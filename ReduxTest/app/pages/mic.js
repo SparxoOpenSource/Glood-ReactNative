@@ -15,7 +15,8 @@ var app;
 const propTypes = {
     title: PropTypes.string,
     navigator: PropTypes.object,
-    app: PropTypes.object
+    app: PropTypes.object,
+    ip: PropTypes.string
 };
 
 export class Mic extends Component {
@@ -91,10 +92,14 @@ export class Mic extends Component {
         var _this = this;
         RecordAudio.prototype.stopRecord((back) => {
             RecordAudio.prototype.recordMsg("停止录音");
-            data.push(back.name + "&" + back.time);
-            //发送消息
-            _this.sendMessage(back.Base64);
-            _this._refush(data);
+            if (back.success == true) {
+                data.push(back.name + "&" + back.time);
+                //发送消息
+                _this.sendMessage(back.Base64);
+                _this._refush(data);
+            } else {
+                RecordAudio.prototype.recordMsg("录音读取失败");
+            }
         });
     }
 
@@ -153,15 +158,18 @@ export class Mic extends Component {
 
         this.props.app.service('messages').on('created', message => {
             const messages = this.state.messages;
-            messages.push(this.formatMessage(message));
+            var newMessage = this.formatMessage(message);
+            messages.push(newMessage);
             this.setState({ messages });
-            Alert.alert("收到消息", message.text);
-            RecordAudio.prototype.saveRecord(message.text, (back) => {
-                if (back.success == true) {
-                    data.push(back.name + "&" + back.time);
-                    self._refush(data);
-                }
-            });
+            // Alert.alert("收到消息", this.props.app.get('user')._id + "___" + newMessage.userid);
+            if (this.props.app.get('user')._id !== newMessage.userid) {
+                RecordAudio.prototype.saveRecord(newMessage.text, (back) => {
+                    if (back.success == true) {
+                        data.push(back.name + "&" + back.time);
+                        self._refush(data);
+                    }
+                });
+            }
         });
 
         this.props.app.service('messages').on('removed', result => {
@@ -176,6 +184,7 @@ export class Mic extends Component {
             id: message._id,
             name: message.sentBy.username,
             text: message.text,
+            userid: message.sentBy._id,
             // position: message.sentBy._id === this.app.get('user')._id ? 'left' : 'right',
             // image: { uri: message.sentBy.avatar ? message.sentBy.avatar : PLACEHOLDER },
             date: new Date(message.createdAt)
