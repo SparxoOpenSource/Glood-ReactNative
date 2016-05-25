@@ -137,7 +137,7 @@ export class Mic extends Component {
                     var ss = back["param"];
                     var tt = ss.split("|");
                     for (var i = 0; i < tt.length; i++) {
-                        data.push(tt[i]);
+                        data.push(tt[i] + "&" + "file");
                     }
                     this.setState({
                         dataSource: ds.cloneWithRows(data)
@@ -165,7 +165,7 @@ export class Mic extends Component {
             if (this.props.app.get('user')._id !== newMessage.userid) {
                 RecordAudio.prototype.saveRecord(newMessage.text, (back) => {
                     if (back.success == true) {
-                        data.push(back.name + "&" + back.time);
+                        data.push(back.name + "&" + back.time + "&" + newMessage.name);
                         self._refush(data);
                     }
                 });

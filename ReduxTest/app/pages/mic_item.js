@@ -18,7 +18,6 @@ import {RecordAudio} from "../utils/RecordAudio";
 import isAndroid from '../utils/isAndroid.js';
 var deviceWidth = Dimensions.get('window').width;
 var {height, width} = Dimensions.get('window');
-var isCisClick = false;
 
 const propTypes = {
     title: PropTypes.string
@@ -30,7 +29,8 @@ export class MicItem extends Component {
         this.state = {
             w: 70,
             h: 70,
-            margin_left: -70
+            margin_left: -70,
+            isCisClick: false
         }
     }
 
@@ -41,7 +41,7 @@ export class MicItem extends Component {
                     <Image source={require('../img/background.png') } style={[style.img2, { width: this.state.w, height: this.state.h }]} />
                     <Image source={require('../img/171604419.jpg') } style={[style.img, { marginLeft: this.state.margin_left }]}  />
                 </TouchableOpacity>
-                <Text style={style.text}>YoYo+{this.props.title.split("&")[1]}</Text>
+                <Text style={style.text}>{this.props.title.split("&")[2]}+{this.props.title.split("&")[1]}</Text>
             </View>
         );
     }
@@ -53,7 +53,7 @@ export class MicItem extends Component {
             RecordAudio.prototype.recordMsg("播放失败");
             return;
         }
-        if (isCisClick == false) {
+        if (this.state.isCisClick == false) {
             var wid = deviceWidth - 20 - 70;
             var show_width;
             if (time >= 20) {
@@ -80,9 +80,9 @@ export class MicItem extends Component {
             this.setState({
                 w: this.state.w + show_width,
                 h: this.state.h,
-                margin_left: this.state.margin_left - show_width / 2
+                margin_left: this.state.margin_left - show_width / 2,
+                isCisClick: true
             })
-            isCisClick = true;
         }
         this._play(title);
     }
