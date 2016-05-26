@@ -178,26 +178,33 @@ RCT_EXPORT_METHOD(stopRecord:(RCTResponseSenderBlock)successCallback) {
             [recordSession setActive:NO error:nil];
             
             // Craft a success return message
-          NSString *timerStr;
-          NSArray *array = [[self intervalFromLastDate:startStr toTheDate:endStr] componentsSeparatedByString:@":"];
-          if ([array objectAtIndex:1] == 0)
-          {
-            timerStr = [array objectAtIndex:2];
-          }
-          else
-          {
-            timerStr = [NSString stringWithFormat:@"%ld",[[array objectAtIndex:1] integerValue]*60+[[array objectAtIndex:2] integerValue]];
-          }
+//          NSString *timerStr;
+//          NSArray *array = [[self intervalFromLastDate:startStr toTheDate:endStr] componentsSeparatedByString:@":"];
+//          if ([array objectAtIndex:1] == 0)
+//          {
+//            timerStr = [array objectAtIndex:2];
+//          }
+//          else
+//          {
+//            timerStr = [NSString stringWithFormat:@"%ld",[[array objectAtIndex:1] integerValue]*60+[[array objectAtIndex:2] integerValue]];
+//          }
           
           wavdata = [fileManager contentsAtPath:pathForFile];
           NSString *aString = [[NSString alloc] initWithData:wavdata encoding:NSUTF8StringEncoding];
           NSString *pictureDataString=[wavdata base64Encoding];
           // NSLog(@"***********data:%@--%@",wavdata,pictureDataString);
+          NSURL *audioFileURL = [NSURL fileURLWithPath:pathForFile];
+          AVURLAsset* audioAsset =[AVURLAsset URLAssetWithURL:audioFileURL options:nil];
+          
+          CMTime audioDuration = audioAsset.duration;
+          
+          float audioDurationSeconds =CMTimeGetSeconds(audioDuration);
+          NSString *timeStr = [NSString stringWithFormat:@"%.1f",audioDurationSeconds];
           NSDictionary *resultsDict = @{
                                         @"success" : @YES,
                                         @"param"  : pathForFile,
                                         @"name" : newFileName,
-                                        @"time" : timerStr,
+                                        @"time" : timeStr,
                                         @"Base64": pictureDataString
                                         };
          
@@ -452,7 +459,7 @@ NSLog(@"Base64解码--%@",decodeStr);
  */
 
 #pragma mark ======= base64转码 ======
-RCT_EXPORT_METHOD(saveRecord:(NSString *)base64
+RCT_EXPORT_METHOD(saveRecord:(NSString *)base64 addressIp:(NSString *)IP
                   Callback:(RCTResponseSenderBlock)callBack)
 {
    NSString *fileName = [NSString stringWithFormat:@"IOS-%@.wav",[self getTimeNow]];
@@ -482,7 +489,7 @@ RCT_EXPORT_METHOD(saveRecord:(NSString *)base64
   CMTime audioDuration = audioAsset.duration;
   
   float audioDurationSeconds =CMTimeGetSeconds(audioDuration);
-  NSString *timeStr = [NSString stringWithFormat:@"%ld",(long)audioDurationSeconds];
+  NSString *timeStr = [NSString stringWithFormat:@"%.1f",audioDurationSeconds];
 
   
     // NSLog(@"-----**-*pathForFile:---%@  sData:%@ -- %@",pathForFile,sData,base64);
