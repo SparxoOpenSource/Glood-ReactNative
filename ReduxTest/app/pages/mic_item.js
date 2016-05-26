@@ -35,20 +35,33 @@ export class MicItem extends Component {
     }
 
     render() {
-        return (
-            <View style={ { justifyContent: 'center', alignItems: 'center', marginTop: 10 }}>
-                <TouchableOpacity style={style.touch} onPress={this._onPress.bind(this, this.props.title) } ref="view">
-                    <Image source={require('../img/background.png') } style={[style.img2, { width: this.state.w, height: this.state.h }]} />
-                    <Image source={require('../img/171604419.jpg') } style={[style.img, { marginLeft: this.state.margin_left }]}  />
-                </TouchableOpacity>
-                <Text style={style.text}>{this.props.title.split("&")[2]}+{this.props.title.split("&")[1]}</Text>
-            </View>
-        );
+        if (this.props.title.split("&").length > 1) {
+            return (
+                <View style={ { justifyContent: 'center', alignItems: 'center', marginTop: 10 }}>
+                    <TouchableOpacity style={style.touch} onPress={this._onPress.bind(this, this.props.title) } ref="view">
+                        <Image source={require('../img/background.png') } style={[style.img2, { width: this.state.w, height: this.state.h }]} />
+                        <Image source={require('../img/171604419.jpg') } style={[style.img, { marginLeft: this.state.margin_left }]}  />
+                    </TouchableOpacity>
+                    <Text style={style.text}>{
+                        this.props.title.split("&")[1]}+{this.props.title.split("&")[2]}</Text>
+                </View>
+            );
+        } else {
+            return (
+                <View style={ { justifyContent: 'center', alignItems: 'center', marginTop: 10 }}>
+                    <TouchableOpacity style={style.touch} onPress={this._onPress.bind(this, this.props.title) } ref="view">
+                        <Image source={require('../img/background.png') } style={[style.img2, { width: this.state.w, height: this.state.h }]} />
+                        <Image source={require('../img/171604419.jpg') } style={[style.img, { marginLeft: this.state.margin_left }]}  />
+                    </TouchableOpacity>
+                    <Text style={style.text}>{this.props.title}</Text>
+                </View>
+            );
+        }
     }
 
     _onPress(value) {
         var title = value.split("&")[0];
-        var time = value.split("&")[1];
+        var time = value.split("&")[2];
         if (time == "" || time == null || time <= 0) {
             RecordAudio.prototype.recordMsg("播放失败");
             return;

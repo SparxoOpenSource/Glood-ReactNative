@@ -58,8 +58,11 @@ public class RecordModule extends ReactContextBaseJavaModule {
     public void startRecord(String fileName, Callback callback) {
         this.callback = callback;
         WritableMap callbackMap = Arguments.createMap();
-        if (fileName == null || fileName == "" || fileName.equals("null") || fileName == "null")
+        if (!TextUtils.isEmpty(fileName)) {
+            fileName = "recordKeyeeApp_" + fileName + "_" + DataTimeUtils.dataString();
+        } else {
             fileName = "recordKeyeeApp_" + DataTimeUtils.dataString();
+        }
         if (!fileName.endsWith(".wav"))
             fileName += ".wav";
         fileBasePath = isFileExists();
@@ -142,18 +145,19 @@ public class RecordModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void playRecord(String playName, final Callback callBack) {
         this.callback = callBack;
-        callbackMap = Arguments.createMap();
         MediaPlayer player = this.playerPool.get(playName);
         if (player == null) {
             player = prepare(playName, playName);
         }
         if (player == null) {
+            callbackMap = Arguments.createMap();
             callbackMap.putString("name", "播放创建失败");
             callback.invoke(callbackMap);
             return;
         }
         if (player.isPlaying()) {
             player.stop();
+            callbackMap = Arguments.createMap();
             callbackMap.putString("name", "播放停止");
             callback.invoke(callbackMap);
             return;
@@ -162,6 +166,7 @@ public class RecordModule extends ReactContextBaseJavaModule {
             @Override
             public void onCompletion(MediaPlayer mp) {
                 if (!mp.isLooping()) {
+                    callbackMap = Arguments.createMap();
                     callbackMap.putString("name", "播放完毕");
                     callback.invoke(callbackMap);
                 }
@@ -170,6 +175,7 @@ public class RecordModule extends ReactContextBaseJavaModule {
         player.setOnErrorListener(new MediaPlayer.OnErrorListener() {
             @Override
             public boolean onError(MediaPlayer mp, int what, int extra) {
+                callbackMap = Arguments.createMap();
                 callbackMap.putString("name", "播放出错");
                 callback.invoke(callbackMap);
                 return true;
@@ -180,9 +186,9 @@ public class RecordModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void accessFileName(Callback callback) {
-        callbackMap = Arguments.createMap();
         fileBasePath = isFileExists();
         if (TextUtils.isEmpty(fileBasePath)) {
+            callbackMap = Arguments.createMap();
             callbackMap.putString("name", "没有数据");
             callback.invoke(callbackMap);
             return;
@@ -193,6 +199,7 @@ public class RecordModule extends ReactContextBaseJavaModule {
         }
         File[] files = f.listFiles();// 列出所有文件
         if (files == null) {
+            callbackMap = Arguments.createMap();
             callbackMap.putString("name", "没有数据");
             callback.invoke(callbackMap);
             return;
@@ -201,14 +208,21 @@ public class RecordModule extends ReactContextBaseJavaModule {
         for (int i = 0; i < files.length; i++) {
             MediaPlayer prepare = prepare(files[i].getName(), files[i].getName());
             if (prepare != null) {
-                str += files[i].getName() + "&" + prepare.getDuration() / 1000 + "|";
+                String[] temp = files[i].getName().split("_");
+                if (temp.length > 2) {
+                    str += files[i].getName() + "&" + temp[1] + "&" + prepare.getDuration() / 1000 + "|";
+                } else {
+                    str += files[i].getName() + "&" + temp[1] + "&" + prepare.getDuration() / 1000 + "|";
+                }
             }
         }
         if (!TextUtils.isEmpty(str)) {
             str = str.substring(str.length() - 1, str.length()).equals("|") ? str.substring(0, str.length() - 1) : str;
+            callbackMap = Arguments.createMap();
             callbackMap.putString("name", "有数据");
             callbackMap.putString("param", str);
         } else {
+            callbackMap = Arguments.createMap();
             callbackMap.putString("name", "没有数据");
             callbackMap.putString("param", str);
         }
@@ -230,11 +244,11 @@ public class RecordModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void saveRecord(String base64, Callback callback) {
-        callbackMap = Arguments.createMap();
-        String fileName = "recordKeyeeApp_" + DataTimeUtils.dataString() + ".wav";
+    public void saveRecord(String base64, String ip, Callback callback) {
+        String fileName = "recordKeyeeApp_" + ip + "_" + DataTimeUtils.dataString() + ".wav";
         fileBasePath = isFileExists();
         if (TextUtils.isEmpty(fileBasePath)) {
+            callbackMap = Arguments.createMap();
             callbackMap.putBoolean("success", false);
             callbackMap.putString("name", fileName);
             callbackMap.putInt("time", 0);
@@ -243,16 +257,19 @@ public class RecordModule extends ReactContextBaseJavaModule {
         if (Base64Code.decoderBase64File(base64, fileBasePath, fileName)) {
             MediaPlayer prepare = prepare(fileName, fileName);
             if (prepare == null) {
+                callbackMap = Arguments.createMap();
                 callbackMap.putBoolean("success", false);
                 callbackMap.putString("name", fileName);
                 callbackMap.putInt("time", 0);
                 callback.invoke(callbackMap);
                 return;
             }
+            callbackMap = Arguments.createMap();
             callbackMap.putBoolean("success", true);
             callbackMap.putString("name", fileName);
             callbackMap.putInt("time", prepare.getDuration() / 1000);
         } else {
+            callbackMap = Arguments.createMap();
             callbackMap.putBoolean("success", false);
             callbackMap.putString("name", fileName);
             callbackMap.putInt("time", 0);

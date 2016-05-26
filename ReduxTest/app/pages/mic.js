@@ -4,8 +4,9 @@ import {Common} from "./common";
 import {RecordAudio} from "../utils/RecordAudio";
 import {MicItem} from "./mic_item";
 import isAndroid from '../utils/isAndroid.js';
+import RefreshableListView from "react-native-refreshable-listview";
 
-var data = ["recordKeyeeApp_2016-05-10 17:30:29.wav"];
+var data = ["recordKeyeeApp_2016.05.10.17.30.29.wav"];
 var ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
 const LISTVIEW_REF = 'listview'
 var ss = 70;
@@ -26,17 +27,19 @@ export class Mic extends Component {
             dataSource: ds.cloneWithRows(data),
             messages: []
         }
-        this._accessFileName()
+        this._accessFileName();
     }
     render() {
         return (
             <View style={style.container}>
                 <Common navigator={this.props.navigator} title={this.props.title}/>
                 <View style={style.content}>
-                    <ListView
+                    <RefreshableListView
                         ref={LISTVIEW_REF}
                         dataSource={this.state.dataSource}
-                        renderRow={this._row.bind(this) }/>
+                        renderRow={this._row.bind(this) }
+                        loadData={this._accessFileName.bind(this) }
+                        refreshPrompt="Pull down to refresh"/>
                 </View>
                 <View style={style.footer}>
                     <TouchableOpacity>
@@ -79,7 +82,7 @@ export class Mic extends Component {
      */
     _startVoice() {
         var _this = this;
-        RecordAudio.prototype.startRecord(null, (back) => {
+        RecordAudio.prototype.startRecord(_this.props.ip, (back) => {
             RecordAudio.prototype.recordMsg("开始录音");
             // _this._voiceCallBack(back);
         });
@@ -93,7 +96,7 @@ export class Mic extends Component {
         RecordAudio.prototype.stopRecord((back) => {
             RecordAudio.prototype.recordMsg("停止录音");
             if (back.success == true) {
-                data.push(back.name + "&" + back.time + "&" + _this.props.ip);
+                data.push(back.name + "&" + _this.props.ip + "&" + back.time);
                 //发送消息
                 _this.sendMessage(back.Base64);
                 _this._refush(data);
@@ -134,10 +137,10 @@ export class Mic extends Component {
             var _this = this;
             RecordAudio.prototype.accessFileName((back) => {
                 if (back.name === "有数据") {
-                    var ss = back["param"];
+                    var ss = back.param;
                     var tt = ss.split("|");
                     for (var i = 0; i < tt.length; i++) {
-                        data.push(tt[i] + "&" + "file");
+                        data.push(tt[i]);
                     }
                 } else {
 
@@ -163,9 +166,9 @@ export class Mic extends Component {
             this.setState({ messages });
             // Alert.alert("收到消息", this.props.app.get('user')._id + "___" + newMessage.userid);
             if (this.props.app.get('user')._id !== newMessage.userid) {
-                RecordAudio.prototype.saveRecord(newMessage.text, (back) => {
+                RecordAudio.prototype.saveRecord(newMessage.text, newMessage.name, (back) => {
                     if (back.success == true) {
-                        data.push(back.name + "&" + back.time + "&" + newMessage.name);
+                        data.push(back.name + "&" + newMessage.name + "&" + back.time);
                         self._refush(data);
                     }
                 });

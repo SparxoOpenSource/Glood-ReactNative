@@ -8,14 +8,14 @@ import java.util.Date;
  */
 public class DataTimeUtils {
     public static String dataString() {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss");
         Date curDate = new Date(System.currentTimeMillis());//获取当前时间
         String data = formatter.format(curDate);
         return data;
     }
 
     public static Date date() {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss");
         Date curDate = new Date(System.currentTimeMillis());//获取当前时间
         return curDate;
     }

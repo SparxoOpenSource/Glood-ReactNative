@@ -1,11 +1,7 @@
 package com.reduxtest.utils;
 
-import android.content.Context;
 import android.util.Base64;
 import android.util.Log;
-
-import com.reduxtest.encoder.BASE64Decoder;
-import com.reduxtest.encoder.BASE64Encoder;
 
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
@@ -14,7 +10,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 
 /**
  * Created by Sparxo_Android on 2016/5/20.
