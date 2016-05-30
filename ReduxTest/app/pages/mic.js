@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import { AppRegistry, StyleSheet, View, Text, ListView, Alert, Navigator, Image, TouchableOpacity, TouchableWithoutFeedback, LayoutAnimation, PropTypes,Animated }  from 'react-native';
+import { AppRegistry, StyleSheet, View, Text, ListView, Alert, Navigator, Image, TouchableOpacity, TouchableWithoutFeedback, LayoutAnimation, PropTypes, Animated }  from 'react-native';
 import {Common} from "./common";
 import {RecordAudio} from "../utils/RecordAudio";
 import {MicItem} from "./mic_item";
@@ -8,10 +8,13 @@ import RefreshableListView from "react-native-refreshable-listview";
 
 var data = ["recordKeyeeApp_2016.05.10.17.30.29.wav"];
 var ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
-const LISTVIEW_REF = 'listview'
+const LISTVIEW_REF = 'listView'
 var ss = 70;
 var tt = 70;
 var app;
+var footerY = 0;
+var everyOne = 109;
+var index = 0;
 
 const propTypes = {
     title: PropTypes.string,
@@ -55,11 +58,43 @@ export class Mic extends Component {
             </View>
         );
     }
+    /**
+     * 新消息进来时进行滚动
+     */
+    _scrollToBottom() {
+        this.scrollResponder.scrollTo({
+            y: footerY,
+            x: 0,
+            animated: true,
+        });
+    }
+    /**
+     * 设置延迟时间
+     */
+    _setTime() {
+        setTimeout(() => {
+            this._scrollToBottom();
+        }, 0);
 
-_scrollToBottom () {
-    Alert.alert("444444");
-        let scrollResponder = this.refs.listview.getScrollResponder();
-        scrollResponder.scrollResponderScrollTo({x: 0, y: 10000, animated: false}); // 10k is just random number high enough to scroll right to the bottom.
+    }
+
+    _scrollToBottom2() {
+        this.scrollResponder.scrollTo({
+            y: footerY,
+            x: 0,
+            animated: true,
+        });
+        this._setTime2();
+    }
+    _setTime2() {
+        var len = data.length;
+        if (len > index) {
+            index = index + 1;
+            footerY = footerY + everyOne;
+            setTimeout(() => {
+                this._scrollToBottom2();
+            }, 0);
+        }
     }
 
     _row2(value) {
@@ -82,7 +117,7 @@ _scrollToBottom () {
             <MicItem title={value} />
         );
     }
-    
+
     /**
      * 开始录音
      */
@@ -139,6 +174,7 @@ _scrollToBottom () {
      */
     _accessFileName() {
         data = [];
+        index = 0;
         if (isAndroid()) {
             var _this = this;
             RecordAudio.prototype.accessFileName((back) => {
@@ -155,6 +191,7 @@ _scrollToBottom () {
                 this.setState({
                     dataSource: this.state.dataSource.cloneWithRows(data)
                 })
+                this._setTime2();
             });
         }
     }
@@ -164,11 +201,7 @@ _scrollToBottom () {
      */
     componentDidMount(props) {
         var self = this;
-        
-        setTimeout(()=>{
-        this._scrollToBottom();
-    },100); // 100 ms is enough to generate my list and is less enough for user not to notice anything.
-
+        this.scrollResponder = this.refs.listView.getScrollResponder();
         this.props.app.service('messages').on('created', message => {
             const messages = this.state.messages;
             var newMessage = this.formatMessage(message);
@@ -183,6 +216,8 @@ _scrollToBottom () {
                     }
                 });
             }
+            footerY = footerY + everyOne;
+            this._setTime();
         });
 
         this.props.app.service('messages').on('removed', result => {
