@@ -1,10 +1,11 @@
 import React, {Component} from "react";
-import { AppRegistry, StyleSheet, View, Text, ListView, Alert, Navigator, Image, TouchableOpacity, TouchableWithoutFeedback, LayoutAnimation, PropTypes, Animated }  from 'react-native';
+import { AppRegistry, StyleSheet, View, Text, ListView, Alert, Navigator, Image, TouchableOpacity, TouchableWithoutFeedback, LayoutAnimation, PropTypes, Animated, Dimensions }  from 'react-native';
 import {Common} from "./common";
 import {RecordAudio} from "../utils/RecordAudio";
 import {MicItem} from "./mic_item";
 import isAndroid from '../utils/isAndroid.js';
 import RefreshableListView from "react-native-refreshable-listview";
+import ExtraDimensions from 'react-native-extra-dimensions-android';
 
 var data = ["recordKeyeeApp_2016.05.10.17.30.29.wav"];
 var ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
@@ -15,6 +16,12 @@ var app;
 var footerY = 0;
 var everyOne = 109;
 var index = 0;
+var STATUS_BAR_HEIGHT = Navigator.NavigationBar.Styles.General.StatusBarHeight;
+// if (isAndroid()) {
+//     var STATUS_BAR_HEIGHT = ExtraDimensions.get('STATUS_BAR_HEIGHT');
+// }
+var maxHeight = Dimensions.get('window').height - Navigator.NavigationBar.Styles.General.NavBarHeight - STATUS_BAR_HEIGHT - 64;
+var scorll = false;
 
 const propTypes = {
     title: PropTypes.string,
@@ -92,7 +99,8 @@ export class Mic extends Component {
             index = index + 1;
             footerY = footerY + everyOne;
             setTimeout(() => {
-                this._scrollToBottom2();
+                if (scorll)
+                    this._scrollToBottom2();
             }, 0);
         }
     }
@@ -141,6 +149,8 @@ export class Mic extends Component {
                 //发送消息
                 _this.sendMessage(back.Base64);
                 _this._refush(data);
+                footerY = footerY + everyOne;
+                this._setTime();
             } else {
                 RecordAudio.prototype.recordMsg("录音读取失败");
             }
@@ -191,6 +201,8 @@ export class Mic extends Component {
                 this.setState({
                     dataSource: this.state.dataSource.cloneWithRows(data)
                 })
+                if (data.length * everyOne > maxHeight)
+                    scorll = true;
                 this._setTime2();
             });
         }
@@ -215,9 +227,9 @@ export class Mic extends Component {
                         self._refush(data);
                     }
                 });
+                footerY = footerY + everyOne;
+                this._setTime();
             }
-            footerY = footerY + everyOne;
-            this._setTime();
         });
 
         this.props.app.service('messages').on('removed', result => {
