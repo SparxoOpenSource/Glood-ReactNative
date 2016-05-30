@@ -102,7 +102,7 @@ _scrollToBottom () {
         RecordAudio.prototype.stopRecord((back) => {
             RecordAudio.prototype.recordMsg("停止录音");
             if (back.success == true) {
-                data.push(back.name + "&" + _this.props.ip + "&" + back.time);
+                data = [...data, back.name + "&" + _this.props.ip + "&" + back.time];
                 //发送消息
                 _this.sendMessage(back.Base64);
                 _this._refush(data);
@@ -131,7 +131,7 @@ _scrollToBottom () {
      */
     _refush(value) {
         this.setState({
-            dataSource: ds.cloneWithRows(value)
+            dataSource: this.state.dataSource.cloneWithRows(value)
         })
     }
     /**
@@ -146,14 +146,14 @@ _scrollToBottom () {
                     var ss = back.param;
                     var tt = ss.split("|");
                     for (var i = 0; i < tt.length; i++) {
-                        data.push(tt[i]);
+                        data = [...data, tt[i]];
                     }
                 } else {
 
                     // _this._voiceCallBack(back.name);
                 }
                 this.setState({
-                    dataSource: ds.cloneWithRows(data)
+                    dataSource: this.state.dataSource.cloneWithRows(data)
                 })
             });
         }
@@ -178,7 +178,7 @@ _scrollToBottom () {
             if (this.props.app.get('user')._id !== newMessage.userid) {
                 RecordAudio.prototype.saveRecord(newMessage.text, newMessage.name, (back) => {
                     if (back.success == true) {
-                        data.push(back.name + "&" + newMessage.name + "&" + back.time);
+                        data = [...data, back.name + "&" + newMessage.name + "&" + back.time];
                         self._refush(data);
                     }
                 });
