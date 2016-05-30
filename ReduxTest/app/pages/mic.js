@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import { AppRegistry, StyleSheet, View, Text, ListView, Alert, Navigator, Image, TouchableOpacity, TouchableWithoutFeedback, LayoutAnimation, PropTypes }  from 'react-native';
+import { AppRegistry, StyleSheet, View, Text, ListView, Alert, Navigator, Image, TouchableOpacity, TouchableWithoutFeedback, LayoutAnimation, PropTypes,Animated }  from 'react-native';
 import {Common} from "./common";
 import {RecordAudio} from "../utils/RecordAudio";
 import {MicItem} from "./mic_item";
@@ -56,6 +56,12 @@ export class Mic extends Component {
         );
     }
 
+_scrollToBottom () {
+    Alert.alert("444444");
+        let scrollResponder = this.refs.listview.getScrollResponder();
+        scrollResponder.scrollResponderScrollTo({x: 0, y: 10000, animated: false}); // 10k is just random number high enough to scroll right to the bottom.
+    }
+
     _row2(value) {
         return (
             <View style={style.container}>
@@ -76,7 +82,7 @@ export class Mic extends Component {
             <MicItem title={value} />
         );
     }
-
+    
     /**
      * 开始录音
      */
@@ -158,6 +164,10 @@ export class Mic extends Component {
      */
     componentDidMount(props) {
         var self = this;
+        
+        setTimeout(()=>{
+        this._scrollToBottom();
+    },100); // 100 ms is enough to generate my list and is less enough for user not to notice anything.
 
         this.props.app.service('messages').on('created', message => {
             const messages = this.state.messages;
