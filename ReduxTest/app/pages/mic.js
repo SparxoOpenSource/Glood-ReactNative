@@ -80,7 +80,8 @@ export class Mic extends Component {
      */
     _setTime() {
         setTimeout(() => {
-            this._scrollToBottom();
+            if (scorll)
+                this._scrollToBottom();
         }, 0);
 
     }
@@ -150,6 +151,8 @@ export class Mic extends Component {
                 _this.sendMessage(back.Base64);
                 _this._refush(data);
                 footerY = footerY + everyOne;
+                if (data.length * everyOne > maxHeight)
+                    scorll = true;
                 this._setTime();
             } else {
                 RecordAudio.prototype.recordMsg("录音读取失败");
@@ -228,6 +231,8 @@ export class Mic extends Component {
                     }
                 });
                 footerY = footerY + everyOne;
+                if (data.length * everyOne > maxHeight)
+                    scorll = true;
                 this._setTime();
             }
         });
