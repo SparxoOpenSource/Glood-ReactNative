@@ -5,7 +5,7 @@ import {RecordAudio} from "../utils/RecordAudio";
 import {MicItem} from "./mic_item";
 import isAndroid from '../utils/isAndroid.js';
 import RefreshableListView from "react-native-refreshable-listview";
-import ExtraDimensions from 'react-native-extra-dimensions-android';
+// import ExtraDimensions from 'react-native-extra-dimensions-android';
 
 var data = ["recordKeyeeApp_2016.05.10.17.30.29.wav"];
 var ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
