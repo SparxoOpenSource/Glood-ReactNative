@@ -22,6 +22,7 @@ var STATUS_BAR_HEIGHT = Navigator.NavigationBar.Styles.General.StatusBarHeight;
 // }
 var maxHeight = Dimensions.get('window').height - Navigator.NavigationBar.Styles.General.NavBarHeight - STATUS_BAR_HEIGHT - 64;
 var scorll = false;
+var auto = false;
 
 const propTypes = {
     title: PropTypes.string,
@@ -38,7 +39,8 @@ export class Mic extends Component {
         index = 0;
         scorll = false;
         this.state = {
-            dataSource: ds.cloneWithRows(data)
+            dataSource: ds.cloneWithRows(data),
+            autoImage: require('../img/play.png')
         }
         this._accessFileName();
     }
@@ -55,8 +57,8 @@ export class Mic extends Component {
                         refreshPrompt="Pull down to refresh"/>
                 </View>
                 <View style={style.footer}>
-                    <TouchableOpacity>
-                        <Image source={require('../img/none.png') } style={style.ImagStyle}/>
+                    <TouchableOpacity onPress={this.autoPlay.bind(this) }>
+                        <Image source={this.state.autoImage } style={style.ImagStyle}/>
                     </TouchableOpacity>
                     <TouchableWithoutFeedback onPressOut={this._stop.bind(this) } onPressIn={this._startVoice.bind(this) }>
                         <Image style={{ width: 54, height: 54 }}  source={require('../img/voice.png') }/>
@@ -267,6 +269,22 @@ export class Mic extends Component {
             console.log(error);
         });
     }
+    /**
+     * 自动播放
+     */
+    autoPlay() {
+        if (auto) {
+            this.setState({
+                autoImage: require('../img/play2.png')
+            })
+            auto = true;
+        } else {
+            this.setState({
+                autoImage: require('../img/play.png')
+            })
+            auto = false;
+        }
+    }
 }
 
 Mic.propTypes = propTypes;
@@ -292,6 +310,7 @@ const style = StyleSheet.create({
         marginBottom: 3
     },
     ImagStyle: {
+        marginTop: 30,
         width: 26,
         height: 26,
     },
