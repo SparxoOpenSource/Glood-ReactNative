@@ -33,9 +33,12 @@ const propTypes = {
 export class Mic extends Component {
     constructor() {
         super();
+        data = new Array();
+        footerY = 0;
+        index = 0;
+        scorll = false;
         this.state = {
-            dataSource: ds.cloneWithRows(data),
-            messages: []
+            dataSource: ds.cloneWithRows(data)
         }
         this._accessFileName();
     }
@@ -69,6 +72,7 @@ export class Mic extends Component {
      * 新消息进来时进行滚动
      */
     _scrollToBottom() {
+        console.log("huyuyuyu", footerY);
         this.scrollResponder.scrollTo({
             y: footerY,
             x: 0,
@@ -150,10 +154,11 @@ export class Mic extends Component {
                 //发送消息
                 _this.sendMessage(back.Base64);
                 _this._refush(data);
-                footerY = footerY + everyOne;
-                if (data.length * everyOne > maxHeight)
+                if (data.length * everyOne > maxHeight) {
+                    footerY = footerY + everyOne;
                     scorll = true;
-                this._setTime();
+                    this._setTime();
+                }
             } else {
                 RecordAudio.prototype.recordMsg("录音读取失败");
             }
@@ -186,8 +191,6 @@ export class Mic extends Component {
      * 读取保存在磁盘中的录音文件
      */
     _accessFileName() {
-        data = [];
-        index = 0;
         if (isAndroid()) {
             var _this = this;
             RecordAudio.prototype.accessFileName((back) => {
@@ -204,9 +207,10 @@ export class Mic extends Component {
                 this.setState({
                     dataSource: this.state.dataSource.cloneWithRows(data)
                 })
-                if (data.length * everyOne > maxHeight)
+                if (data.length * everyOne > maxHeight) {
                     scorll = true;
-                this._setTime2();
+                    this._setTime2();
+                }
             });
         }
     }
@@ -218,10 +222,7 @@ export class Mic extends Component {
         var self = this;
         this.scrollResponder = this.refs.listView.getScrollResponder();
         this.props.app.service('messages').on('created', message => {
-            const messages = this.state.messages;
             var newMessage = this.formatMessage(message);
-            messages.push(newMessage);
-            this.setState({ messages });
             // Alert.alert("收到消息", this.props.app.get('user')._id + "___" + newMessage.userid);
             if (this.props.app.get('user')._id !== newMessage.userid) {
                 RecordAudio.prototype.saveRecord(newMessage.text, newMessage.name, (back) => {
