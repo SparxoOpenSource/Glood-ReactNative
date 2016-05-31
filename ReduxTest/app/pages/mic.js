@@ -50,6 +50,7 @@ export class Mic extends Component {
                 <Common navigator={this.props.navigator} title={this.props.title}/>
                 <View style={style.content}>
                     <RefreshableListView
+                        enableEmptySections = {true} 
                         ref={LISTVIEW_REF}
                         dataSource={this.state.dataSource}
                         renderRow={this._row.bind(this) }
