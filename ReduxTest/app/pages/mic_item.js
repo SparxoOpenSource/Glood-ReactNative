@@ -20,7 +20,8 @@ var deviceWidth = Dimensions.get('window').width;
 var {height, width} = Dimensions.get('window');
 
 const propTypes = {
-    title: PropTypes.string
+    title: PropTypes.string,
+    auto: PropTypes.bool
 };
 
 export class MicItem extends Component {
@@ -33,6 +34,7 @@ export class MicItem extends Component {
             isCisClick: false,
             playCode: props.title
         }
+        this._setTime(props.title, props.auto);
     }
 
     render() {
@@ -107,6 +109,16 @@ export class MicItem extends Component {
             RecordAudio.prototype.recordMsg(back.name);
         });
     }
+    /**
+     * 设置延迟时间
+     */
+    _setTime(value, auto) {
+        setTimeout(() => {
+            if (auto)
+                this._onPress(value);
+        }, 1000);
+    }
+
 }
 
 MicItem.propTypes = propTypes;

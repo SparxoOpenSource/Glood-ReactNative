@@ -114,15 +114,9 @@ export class Mic extends Component {
             }, 0);
         }
     }
-    _setTime3(temp) {
-        setTimeout(() => {
-            list[list.length-1]._onPress(temp);
-        }, 1000);
-
-    }
 
     _row(value) {
-        var ss = (<MicItem title={value} />);
+        var ss = (<MicItem title={value} auto={auto}/>);
         list = [...list, ss];
         return ss;
     }
@@ -208,8 +202,6 @@ export class Mic extends Component {
                     if (back.success == true) {
                         data = [...data, back.name + "&" + newMessage.name + "&" + back.time];
                         self._refush(data);
-                        if (auto)
-                            this._setTime3(back.name + "&" + newMessage.name + "&" + back.time);
                     }
                 });
                 footerY = footerY + everyOne;
