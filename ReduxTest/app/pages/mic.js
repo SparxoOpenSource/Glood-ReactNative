@@ -116,15 +116,15 @@ export class Mic extends Component {
     }
     _setTime3(temp) {
         setTimeout(() => {
-            MicItem.prototype._onPress(temp);
+            list[list.length-1]._onPress(temp);
         }, 1000);
 
     }
 
     _row(value) {
-        var ss = <MicItem title={value} />;
-        // list = [...list, ss];
-        return (ss);
+        var ss = (<MicItem title={value} />);
+        list = [...list, ss];
+        return ss;
     }
 
     /**
@@ -134,7 +134,6 @@ export class Mic extends Component {
         var _this = this;
         RecordAudio.prototype.startRecord(_this.props.ip, (back) => {
             RecordAudio.prototype.recordMsg("开始录音");
-            // _this._voiceCallBack(back);
         });
     }
 
@@ -162,20 +161,6 @@ export class Mic extends Component {
     }
 
     /**
-     * 播放声音
-     */
-    _play(name) {
-        var _this = this;
-        RecordAudio.prototype.playRecord(name, (back) => {
-            _this._voiceCallBack(back);
-        });
-    }
-
-    _voiceCallBack(call) {
-        Alert.alert(call.name);
-    }
-
-    /**
      * 更新数据到UI
      */
     _refush(value) {
@@ -197,8 +182,7 @@ export class Mic extends Component {
                         data = [...data, tt[i]];
                     }
                 } else {
-
-                    // _this._voiceCallBack(back.name);
+                    RecordAudio.prototype.recordMsg(back.name);
                 }
                 this.setState({
                     dataSource: this.state.dataSource.cloneWithRows(data)
@@ -219,7 +203,6 @@ export class Mic extends Component {
         this.scrollResponder = this.refs.listView.getScrollResponder();
         this.props.app.service('messages').on('created', message => {
             var newMessage = this.formatMessage(message);
-            // Alert.alert("收到消息", this.props.app.get('user')._id + "___" + newMessage.userid);
             if (this.props.app.get('user')._id !== newMessage.userid) {
                 RecordAudio.prototype.saveRecord(newMessage.text, newMessage.name, (back) => {
                     if (back.success == true) {

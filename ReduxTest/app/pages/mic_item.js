@@ -63,8 +63,6 @@ export class MicItem extends Component {
     _onPress(value) {
         var title = value.split("&")[0];
         var time = value.split("&")[2];
-        if (this.state.playCode.split("&")[0] !== title)
-            return;
         if (time == "" || time == null || time <= 0) {
             RecordAudio.prototype.recordMsg("播放失败");
             return;
@@ -92,7 +90,6 @@ export class MicItem extends Component {
                     type: 'linear'
                 }
             });
-            //Alert.alert(width + "-------" + deviceWidth + "------" + show_width + "------------" + time);
             this.setState({
                 w: this.state.w + show_width,
                 h: this.state.h,

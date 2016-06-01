@@ -77,7 +77,6 @@ export class Home extends Component {
                 password: this.state.password
             }).then(response => {
                 this.setState({ loading: false });
-                // Alert.alert('Success', 'Success');
                 // re-route to chat app
                 // Actions.main();
                 this.props.navigator.push({
@@ -85,7 +84,6 @@ export class Home extends Component {
                 });
             }).catch(error => {
                 console.log('ERROR-1', error);
-                // Alert.alert('Error-1', 'Please enter a valid email or password.');
                 // this.setState({ loading: false });
                 this.register(value, navigator);
                 return;
@@ -117,13 +115,11 @@ export class Home extends Component {
                 // Actions.main();
             }).catch(error => {
                 console.log('ERROR-2', error);
-                // Alert.alert('Error-2', 'Please enter a valid email or password.');
                 this.setState({ loading: false });
             });
         }).catch((err) => {
             console.log('ERROR-3', err);
             self.setState({ loading: false });
-            // Alert.alert('Error-3', err.message);
         });
     }
 
