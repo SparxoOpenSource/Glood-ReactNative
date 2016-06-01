@@ -24,13 +24,14 @@ const propTypes = {
 };
 
 export class MicItem extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             w: 70,
             h: 70,
             margin_left: -70,
-            isCisClick: false
+            isCisClick: false,
+            playCode: props.title
         }
     }
 
@@ -62,6 +63,8 @@ export class MicItem extends Component {
     _onPress(value) {
         var title = value.split("&")[0];
         var time = value.split("&")[2];
+        if (this.state.playCode.split("&")[0] !== title)
+            return;
         if (time == "" || time == null || time <= 0) {
             RecordAudio.prototype.recordMsg("播放失败");
             return;

@@ -7,7 +7,7 @@ import isAndroid from '../utils/isAndroid.js';
 import RefreshableListView from "react-native-refreshable-listview";
 // import ExtraDimensions from 'react-native-extra-dimensions-android';
 
-var data = ["recordKeyeeApp_2016.05.10.17.30.29.wav"];
+var data = [];
 var ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
 const LISTVIEW_REF = 'listView'
 var ss = 70;
@@ -23,6 +23,8 @@ var STATUS_BAR_HEIGHT = Navigator.NavigationBar.Styles.General.StatusBarHeight;
 var maxHeight = Dimensions.get('window').height - Navigator.NavigationBar.Styles.General.NavBarHeight - STATUS_BAR_HEIGHT - 64;
 var scorll = false;
 var auto = false;
+var myImg = require('../img/play.png');
+var list = new Array();
 
 const propTypes = {
     title: PropTypes.string,
@@ -40,7 +42,7 @@ export class Mic extends Component {
         scorll = false;
         this.state = {
             dataSource: ds.cloneWithRows(data),
-            autoImage: require('../img/play.png')
+            autoImage: myImg
         }
         this._accessFileName();
     }
@@ -50,7 +52,7 @@ export class Mic extends Component {
                 <Common navigator={this.props.navigator} title={this.props.title}/>
                 <View style={style.content}>
                     <RefreshableListView
-                        enableEmptySections = {true} 
+                        enableEmptySections = {true}
                         ref={LISTVIEW_REF}
                         dataSource={this.state.dataSource}
                         renderRow={this._row.bind(this) }
@@ -112,26 +114,17 @@ export class Mic extends Component {
             }, 0);
         }
     }
+    _setTime3(temp) {
+        setTimeout(() => {
+            MicItem.prototype._onPress(temp);
+        }, 1000);
 
-    _row2(value) {
-        return (
-            <View style={style.container}>
-                <TouchableOpacity style={style.welcomeText} onPress={this._play.bind(this, value) }>
-                    <Text style={{
-                        fontSize: 20,
-                        color: 'white',
-                        textAlign: 'center',
-                        marginLeft: 20
-                    }}>{value}</Text>
-                </TouchableOpacity>
-            </View>
-        );
     }
 
     _row(value) {
-        return (
-            <MicItem title={value} />
-        );
+        var ss = <MicItem title={value} />;
+        // list = [...list, ss];
+        return (ss);
     }
 
     /**
@@ -232,6 +225,8 @@ export class Mic extends Component {
                     if (back.success == true) {
                         data = [...data, back.name + "&" + newMessage.name + "&" + back.time];
                         self._refush(data);
+                        if (auto)
+                            this._setTime3(back.name + "&" + newMessage.name + "&" + back.time);
                     }
                 });
                 footerY = footerY + everyOne;
@@ -274,14 +269,16 @@ export class Mic extends Component {
      * 自动播放
      */
     autoPlay() {
-        if (auto) {
+        if (!auto) {
+            myImg = require('../img/play2.png');
             this.setState({
-                autoImage: require('../img/play2.png')
+                autoImage: myImg
             })
             auto = true;
         } else {
+            myImg = require('../img/play.png');
             this.setState({
-                autoImage: require('../img/play.png')
+                autoImage: myImg
             })
             auto = false;
         }
