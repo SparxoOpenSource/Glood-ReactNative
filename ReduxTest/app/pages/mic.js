@@ -6,7 +6,7 @@ import {MicItem} from "./mic_item";
 import isAndroid from '../utils/isAndroid.js';
 import RefreshableListView from "react-native-refreshable-listview";
 // import ExtraDimensions from 'react-native-extra-dimensions-android';
-var Actions = require('../actions/Actions.js');
+import {EventListener} from "../listener/EventListener";
 
 var data = new Array();
 var ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
@@ -74,6 +74,11 @@ export class Mic extends Component {
             </View>
         );
     }
+
+    _row(rowData, sectionID, rowID) {
+        let item = <MicItem title={rowData} auto={auto} rowID={parseInt(rowID) }/>;
+        return item;
+    }
     /**
      * 新消息进来时进行滚动
      */
@@ -115,11 +120,6 @@ export class Mic extends Component {
         }
     }
 
-    _row(value) {
-        let item = <MicItem title={value} auto={auto}/>;
-        return item;
-    }
-
     /**
      * 开始录音
      */
@@ -156,14 +156,6 @@ export class Mic extends Component {
                 RecordAudio.prototype.recordMsg("录音读取失败");
             }
         });
-    }
-    /**
-         * 设置延迟时间
-         */
-    _setTime3(value) {
-        setTimeout(() => {
-            this.onRightButtonPress();
-        }, 1000);
     }
     /**
      * 更新数据到UI
@@ -203,9 +195,6 @@ export class Mic extends Component {
             });
         }
     }
-    onRightButtonPress() {
-        Actions.fire('ButtonPressEvent');
-    }
     /**
      * 接收消息，并监听
      */
@@ -224,8 +213,6 @@ export class Mic extends Component {
                         };
                         data = [...data, title];
                         self._refush(data);
-                        if (auto)
-                            this._setTime3(title);
                     }
                 });
                 footerY = footerY + everyOne;
@@ -274,12 +261,14 @@ export class Mic extends Component {
                 autoImage: myImg
             })
             auto = true;
+            EventListener.trigger("AutoPlayState", auto);
         } else {
             myImg = require('../img/play.png');
             this.setState({
                 autoImage: myImg
             })
             auto = false;
+            EventListener.trigger("AutoPlayState", auto);
         }
     }
 }

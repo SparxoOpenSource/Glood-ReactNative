@@ -20,7 +20,7 @@ var deviceWidth = Dimensions.get('window').width;
 var {height, width} = Dimensions.get('window');
 import EventEmitter from "EventEmitter";
 import Subscribable  from "Subscribable";
-import EventListener from "../listener/EventListener";
+import {EventListener} from "../listener/EventListener";
 
 const propTypes = {
     title: PropTypes.shape({
@@ -28,7 +28,8 @@ const propTypes = {
         ip: PropTypes.string,
         time: PropTypes.number
     }),
-    auto: PropTypes.bool
+    auto: PropTypes.bool,
+    rowID: PropTypes.number
 };
 
 export class MicItem extends Component {
@@ -40,21 +41,35 @@ export class MicItem extends Component {
             h: 70,
             margin_left: -70,
             isCisClick: false,
-            playCode: props.title
+            playCode: props.title,
+            auto: props.auto
         }
-        // this._setTime(props.title, props.auto);
+        this._setTime(props.title, props.auto);
     }
     componentDidMount() {
-        EventListener.addChangeListener('ButtonPressEvent', this.miscFunction.bind(this));
+        EventListener.on("AutoPlayAllRecord").then(this.playFunction.bind(this));
+        EventListener.on("AutoPlayState").then(this.changeState.bind(this));
     }
-
-    miscFunction() {
-        console.log("收到消息", this.props.title);
+    changeState(auto) {
+        this.setState({
+            auto: auto
+        });
+    }
+    playFunction(item, rowId) {
+        if (rowId > this.props.rowID) {
+            if (this.state.isCisClick === false) {
+                this._playAnim(this.props.title.time);
+            }
+        } else {
+            rowId = rowId + 1;
+            if (rowId === this.props.rowID)
+                this._onPress(this.props.title, this.props.rowID);
+        }
     }
     render() {
         return (
             <View style={ { justifyContent: 'center', alignItems: 'center', marginTop: 10 }}>
-                <TouchableOpacity style={style.touch} onPress={this._onPress.bind(this, this.props.title) } ref="view">
+                <TouchableOpacity style={style.touch} onPress={this._onPress.bind(this, this.props.title, this.props.rowID) } ref="view">
                     <Image source={require('../img/background.png') } style={[style.img2, { width: this.state.w, height: this.state.h }]} />
                     <Image source={require('../img/171604419.jpg') } style={[style.img, { marginLeft: this.state.margin_left }]}  />
                 </TouchableOpacity>
@@ -64,53 +79,30 @@ export class MicItem extends Component {
         );
     }
 
-    _onPress(value) {
+    _onPress(value, rowId) {
         var title = value.name;
         var time = value.time;
         if (time == "" || time == null || time <= 0) {
             RecordAudio.prototype.recordMsg("播放失败");
+            EventListener.trigger("AutoPlayAllRecord", value, rowId);
             return;
         }
         if (this.state.isCisClick == false) {
-            var wid = deviceWidth - 20 - 70;
-            var show_width;
-            if (time >= 20) {
-                show_width = wid - 35;
-            } else {
-                show_width = (wid - 70) / 20 * time + 70;
-            }
-            if (isAndroid()) {
-                //安卓平台使用 LayoutAnimation 动画必须加上这么一句代码（否则动画会失效）
-                UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
-            }
-            LayoutAnimation.configureNext({
-
-                duration: time * 1000,   //持续时间
-                create: {
-                    type: 'linear',
-                    property: 'opacity'
-                },
-                update: {
-                    type: 'linear'
-                }
-            });
-            this.setState({
-                w: this.state.w + show_width,
-                h: this.state.h,
-                margin_left: this.state.margin_left - show_width / 2,
-                isCisClick: true
-            })
+            this._playAnim(time);
         }
-        this._play(title);
+        this._play(value, rowId);
     }
 
     /**
      * 播放声音 
      * */
-    _play(name) {
+    _play(value, rowId) {
         var _this = this;
-        RecordAudio.prototype.playRecord(name, (back) => {
+        RecordAudio.prototype.playRecord(value.name, (back) => {
             RecordAudio.prototype.recordMsg(back.name);
+            if (_this.state.auto) {
+                EventListener.trigger("AutoPlayAllRecord", value, rowId);
+            }
         });
     }
     /**
@@ -122,15 +114,36 @@ export class MicItem extends Component {
                 this._onPress(value);
         }, 1000);
     }
-    _newPlay(value) {
-        // this.setState({
-        //     w: 70,
-        //     h: 70,
-        //     margin_left: -70,
-        //     isCisClick: false
-        // })
-        // this._onPress(value);
-        Alert.alert("erbi");
+
+    _playAnim(time) {
+        var wid = deviceWidth - 20 - 70;
+        var show_width;
+        if (time >= 20) {
+            show_width = wid - 35;
+        } else {
+            show_width = (wid - 70) / 20 * time + 70;
+        }
+        if (isAndroid()) {
+            //安卓平台使用 LayoutAnimation 动画必须加上这么一句代码（否则动画会失效）
+            UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
+        }
+        LayoutAnimation.configureNext({
+
+            duration: time * 1000,   //持续时间
+            create: {
+                type: 'linear',
+                property: 'opacity'
+            },
+            update: {
+                type: 'linear'
+            }
+        });
+        this.setState({
+            w: this.state.w + show_width,
+            h: this.state.h,
+            margin_left: this.state.margin_left - show_width / 2,
+            isCisClick: true
+        })
     }
 }
 
