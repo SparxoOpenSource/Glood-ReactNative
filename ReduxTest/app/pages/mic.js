@@ -6,6 +6,8 @@ import {MicItem} from "./mic_item";
 import isAndroid from '../utils/isAndroid.js';
 import RefreshableListView from "react-native-refreshable-listview";
 // import ExtraDimensions from 'react-native-extra-dimensions-android';
+import EventEmitter from "EventEmitter";
+import Subscribable  from "Subscribable";
 
 var data = [];
 var ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
@@ -24,7 +26,6 @@ var maxHeight = Dimensions.get('window').height - Navigator.NavigationBar.Styles
 var scorll = false;
 var auto = false;
 var myImg = require('../img/play.png');
-var list = new Array();
 
 const propTypes = {
     title: PropTypes.string,
@@ -77,7 +78,6 @@ export class Mic extends Component {
      * 新消息进来时进行滚动
      */
     _scrollToBottom() {
-        console.log("huyuyuyu", footerY);
         this.scrollResponder.scrollTo({
             y: footerY,
             x: 0,
@@ -116,9 +116,8 @@ export class Mic extends Component {
     }
 
     _row(value) {
-        var ss = (<MicItem title={value} auto={auto}/>);
-        list = [...list, ss];
-        return ss;
+        let item = <MicItem title={value} auto={auto} events={this.eventEmitter}/>;
+        return item;
     }
 
     /**
@@ -153,7 +152,14 @@ export class Mic extends Component {
             }
         });
     }
-
+    /**
+         * 设置延迟时间
+         */
+    _setTime3(value) {
+        setTimeout(() => {
+            this.onRightButtonPress();
+        }, 1000);
+    }
     /**
      * 更新数据到UI
      */
@@ -188,7 +194,13 @@ export class Mic extends Component {
             });
         }
     }
+    componentWillMount() {
+        this.eventEmitter = new EventEmitter();
+    }
 
+    onRightButtonPress() {
+        this.eventEmitter.emit('myRightBtnEvent', { someArg: 'argValue' });
+    }
     /**
      * 接收消息，并监听
      */
@@ -202,6 +214,8 @@ export class Mic extends Component {
                     if (back.success == true) {
                         data = [...data, back.name + "&" + newMessage.name + "&" + back.time];
                         self._refush(data);
+                        if (auto)
+                            this._setTime3(back.name + "&" + newMessage.name + "&" + back.time);
                     }
                 });
                 footerY = footerY + everyOne;

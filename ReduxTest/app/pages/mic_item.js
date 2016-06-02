@@ -18,10 +18,13 @@ import {RecordAudio} from "../utils/RecordAudio";
 import isAndroid from '../utils/isAndroid.js';
 var deviceWidth = Dimensions.get('window').width;
 var {height, width} = Dimensions.get('window');
+import EventEmitter from "EventEmitter";
+import Subscribable  from "Subscribable";
 
 const propTypes = {
     title: PropTypes.string,
-    auto: PropTypes.bool
+    auto: PropTypes.bool,
+    events: PropTypes.object
 };
 
 export class MicItem extends Component {
@@ -34,9 +37,16 @@ export class MicItem extends Component {
             isCisClick: false,
             playCode: props.title
         }
-        this._setTime(props.title, props.auto);
+        // this._setTime(props.title, props.auto);
+    }
+    componentDidMount() {
+        // console.log("999999",this.props.events);
+        this.addListenerOn(this.props.events, 'myRightBtnEvent', this.miscFunction.bind(this));
     }
 
+    miscFunction(args) {
+        console.log("收到消息", this.state.title);
+    }
     render() {
         if (this.props.title.split("&").length > 1) {
             return (
@@ -102,7 +112,9 @@ export class MicItem extends Component {
         this._play(title);
     }
 
-    //播放声音
+    /**
+     * 播放声音 
+     * */
     _play(name) {
         var _this = this;
         RecordAudio.prototype.playRecord(name, (back) => {
@@ -118,7 +130,16 @@ export class MicItem extends Component {
                 this._onPress(value);
         }, 1000);
     }
-
+    _newPlay(value) {
+        // this.setState({
+        //     w: 70,
+        //     h: 70,
+        //     margin_left: -70,
+        //     isCisClick: false
+        // })
+        // this._onPress(value);
+        Alert.alert("erbi");
+    }
 }
 
 MicItem.propTypes = propTypes;
