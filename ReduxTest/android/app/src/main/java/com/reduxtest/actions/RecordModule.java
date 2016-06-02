@@ -13,6 +13,7 @@ import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
+import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
 import com.reduxtest.utils.Base64Code;
 import com.reduxtest.utils.DataTimeUtils;
@@ -204,27 +205,26 @@ public class RecordModule extends ReactContextBaseJavaModule {
             callback.invoke(callbackMap);
             return;
         }
-        String str = "";
+        WritableArray array = Arguments.createArray();
         for (int i = 0; i < files.length; i++) {
             MediaPlayer prepare = prepare(files[i].getName(), files[i].getName());
             if (prepare != null) {
                 String[] temp = files[i].getName().split("_");
-                if (temp.length > 2) {
-                    str += files[i].getName() + "&" + temp[1] + "&" + prepare.getDuration() / 1000 + "|";
-                } else {
-                    str += files[i].getName() + "&" + temp[1] + "&" + prepare.getDuration() / 1000 + "|";
-                }
+                WritableMap str = Arguments.createMap();
+                str.putString("name", files[i].getName());
+                str.putString("ip", temp[1]);
+                str.putInt("time", prepare.getDuration() / 100);
+                array.pushMap(str);
             }
         }
-        if (!TextUtils.isEmpty(str)) {
-            str = str.substring(str.length() - 1, str.length()).equals("|") ? str.substring(0, str.length() - 1) : str;
+        if (array.size() > 0) {
             callbackMap = Arguments.createMap();
             callbackMap.putString("name", "有数据");
-            callbackMap.putString("param", str);
+            callbackMap.putArray("param", array);
         } else {
             callbackMap = Arguments.createMap();
             callbackMap.putString("name", "没有数据");
-            callbackMap.putString("param", str);
+            callbackMap.putArray("param", array);
         }
         callback.invoke(callbackMap);
     }

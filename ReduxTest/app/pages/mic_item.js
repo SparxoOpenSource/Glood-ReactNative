@@ -20,14 +20,19 @@ var deviceWidth = Dimensions.get('window').width;
 var {height, width} = Dimensions.get('window');
 import EventEmitter from "EventEmitter";
 import Subscribable  from "Subscribable";
+import EventListener from "../listener/EventListener";
 
 const propTypes = {
-    title: PropTypes.string,
-    auto: PropTypes.bool,
-    events: PropTypes.object
+    title: PropTypes.shape({
+        name: PropTypes.string,
+        ip: PropTypes.string,
+        time: PropTypes.number
+    }),
+    auto: PropTypes.bool
 };
 
 export class MicItem extends Component {
+
     constructor(props) {
         super(props);
         this.state = {
@@ -40,41 +45,28 @@ export class MicItem extends Component {
         // this._setTime(props.title, props.auto);
     }
     componentDidMount() {
-        // console.log("999999",this.props.events);
-        this.addListenerOn(this.props.events, 'myRightBtnEvent', this.miscFunction.bind(this));
+        EventListener.addChangeListener('ButtonPressEvent', this.miscFunction.bind(this));
     }
 
-    miscFunction(args) {
-        console.log("收到消息", this.state.title);
+    miscFunction() {
+        console.log("收到消息", this.props.title);
     }
     render() {
-        if (this.props.title.split("&").length > 1) {
-            return (
-                <View style={ { justifyContent: 'center', alignItems: 'center', marginTop: 10 }}>
-                    <TouchableOpacity style={style.touch} onPress={this._onPress.bind(this, this.props.title) } ref="view">
-                        <Image source={require('../img/background.png') } style={[style.img2, { width: this.state.w, height: this.state.h }]} />
-                        <Image source={require('../img/171604419.jpg') } style={[style.img, { marginLeft: this.state.margin_left }]}  />
-                    </TouchableOpacity>
-                    <Text style={style.text}>{
-                        this.props.title.split("&")[1]}+{this.props.title.split("&")[2]}</Text>
-                </View>
-            );
-        } else {
-            return (
-                <View style={ { justifyContent: 'center', alignItems: 'center', marginTop: 10 }}>
-                    <TouchableOpacity style={style.touch} onPress={this._onPress.bind(this, this.props.title) } ref="view">
-                        <Image source={require('../img/background.png') } style={[style.img2, { width: this.state.w, height: this.state.h }]} />
-                        <Image source={require('../img/171604419.jpg') } style={[style.img, { marginLeft: this.state.margin_left }]}  />
-                    </TouchableOpacity>
-                    <Text style={style.text}>{this.props.title}</Text>
-                </View>
-            );
-        }
+        return (
+            <View style={ { justifyContent: 'center', alignItems: 'center', marginTop: 10 }}>
+                <TouchableOpacity style={style.touch} onPress={this._onPress.bind(this, this.props.title) } ref="view">
+                    <Image source={require('../img/background.png') } style={[style.img2, { width: this.state.w, height: this.state.h }]} />
+                    <Image source={require('../img/171604419.jpg') } style={[style.img, { marginLeft: this.state.margin_left }]}  />
+                </TouchableOpacity>
+                <Text style={style.text}>{
+                    this.props.title.ip}+{this.props.title.time}</Text>
+            </View>
+        );
     }
 
     _onPress(value) {
-        var title = value.split("&")[0];
-        var time = value.split("&")[2];
+        var title = value.name;
+        var time = value.time;
         if (time == "" || time == null || time <= 0) {
             RecordAudio.prototype.recordMsg("播放失败");
             return;
