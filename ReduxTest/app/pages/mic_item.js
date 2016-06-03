@@ -76,7 +76,7 @@ export class MicItem extends Component {
                     <Image source={require('../img/171604419.jpg') } style={[style.img, { marginLeft: this.state.margin_left }]}  />
                 </TouchableOpacity>
                 <Text style={style.text}>{
-                    this.props.title.ip}+{this.props.title.time}</Text>
+                    this.props.title.ip}</Text>
             </View>
         );
     }

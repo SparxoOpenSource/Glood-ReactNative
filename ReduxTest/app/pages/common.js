@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
         height: 26,
     },
     TextStyle: {
-        fontSize: 18,
+        fontSize: 26,
         color: 'black',
         fontFamily:'Myriad Pro',
     }
