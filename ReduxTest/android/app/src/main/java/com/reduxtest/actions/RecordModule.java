@@ -121,7 +121,7 @@ public class RecordModule extends ReactContextBaseJavaModule {
         callbackMap.putBoolean("success", true);
         callbackMap.putString("param", WavAudioName);
         callbackMap.putString("name", AudioName);
-        callbackMap.putInt("time", (int) date / 1000);
+        callbackMap.putDouble("time", (int) date / 1000 + 0.5);
         callbackMap.putString("Base64", temp);
         callback.invoke(callbackMap);
     }
@@ -213,7 +213,7 @@ public class RecordModule extends ReactContextBaseJavaModule {
                 WritableMap str = Arguments.createMap();
                 str.putString("name", files[i].getName());
                 str.putString("ip", temp[1]);
-                str.putInt("time", prepare.getDuration() / 1000);
+                str.putDouble("time", prepare.getDuration() / 1000 + 0.5);
                 array.pushMap(str);
             }
         }
@@ -267,7 +267,7 @@ public class RecordModule extends ReactContextBaseJavaModule {
             callbackMap = Arguments.createMap();
             callbackMap.putBoolean("success", true);
             callbackMap.putString("name", fileName);
-            callbackMap.putInt("time", prepare.getDuration() / 1000);
+            callbackMap.putDouble("time", prepare.getDuration() / 1000 + 0.5);
         } else {
             callbackMap = Arguments.createMap();
             callbackMap.putBoolean("success", false);

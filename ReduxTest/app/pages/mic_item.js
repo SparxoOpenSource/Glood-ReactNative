@@ -92,16 +92,17 @@ export class MicItem extends Component {
         if (this.state.isCisClick == false) {
             this._playAnim(time);
         }
-        this._play(value, rowId);
+        this._play(value, rowId, bool);
     }
 
     /**
      * 播放声音 
      * */
-    _play(value, rowId) {
+    _play(value, rowId, bool) {
         var _this = this;
         RecordAudio.prototype.playRecord(value.name, (back) => {
-            RecordAudio.prototype.recordMsg(back.name);
+            if (bool)
+                RecordAudio.prototype.recordMsg(back.name);
             if (_this.state.auto) {
                 EventListener.trigger("AutoPlayAllRecord", value, rowId, false);
             }
