@@ -50,7 +50,7 @@ export class Mic extends Component {
     render() {
         return (
             <View style={style.container}>
-                <Common navigator={this.props.navigator} title={this.props.title}/>
+                <Common navigator={this.props.navigator} title="Crazy May Fest 2016"/>
                 <View style={style.content}>
                     <RefreshableListView
                         enableEmptySections = {true}
@@ -281,7 +281,7 @@ const style = StyleSheet.create({
         flex: 7,
         flexDirection: 'column',
         justifyContent: 'space-between',
-        backgroundColor: '#F3F3F3',
+        backgroundColor: 'white',
     },
     content: {
         flex: 6
@@ -313,7 +313,8 @@ const style = StyleSheet.create({
         borderColor: 'red',
         alignItems: 'center',
         backgroundColor: '#999999',
-    }, touch: {
+    }, 
+    touch: {
         marginLeft: 10,
         marginRight: 10,
         width: 70,

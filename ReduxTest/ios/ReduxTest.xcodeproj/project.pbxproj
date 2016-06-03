@@ -22,6 +22,12 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
+		CC0BD82E1D018C9D0071A5B8 /* OpenSans-Bold-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CC0BD82D1D018C9D0071A5B8 /* OpenSans-Bold-webfont.ttf */; };
+		CC0BD8341D018E100071A5B8 /* MyriadPro-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CC0BD82F1D018E100071A5B8 /* MyriadPro-Bold.otf */; };
+		CC0BD8351D018E100071A5B8 /* MyriadPro-BoldIt.otf in Resources */ = {isa = PBXBuildFile; fileRef = CC0BD8301D018E100071A5B8 /* MyriadPro-BoldIt.otf */; };
+		CC0BD8361D018E100071A5B8 /* MyriadPro-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = CC0BD8311D018E100071A5B8 /* MyriadPro-Regular.otf */; };
+		CC0BD8371D018E100071A5B8 /* MyriadPro-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CC0BD8321D018E100071A5B8 /* MyriadPro-Semibold.otf */; };
+		CC0BD8381D018E100071A5B8 /* MyriadPro-SemiboldIt.otf in Resources */ = {isa = PBXBuildFile; fileRef = CC0BD8331D018E100071A5B8 /* MyriadPro-SemiboldIt.otf */; };
 		CC1041421CE5B4CC00B5D2E7 /* RecordAudio.m in Sources */ = {isa = PBXBuildFile; fileRef = CC1041411CE5B4CC00B5D2E7 /* RecordAudio.m */; };
 		CC11EFF31CE4810B00AAEA09 /* libRCTCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC11EFF21CE4810400AAEA09 /* libRCTCamera.a */; };
 		CC2672AE1CEF07570018F4AB /* NSString+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = CC2672AD1CEF07570018F4AB /* NSString+Base64.m */; };
@@ -163,6 +169,12 @@
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
+		CC0BD82D1D018C9D0071A5B8 /* OpenSans-Bold-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold-webfont.ttf"; sourceTree = "<group>"; };
+		CC0BD82F1D018E100071A5B8 /* MyriadPro-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MyriadPro-Bold.otf"; sourceTree = "<group>"; };
+		CC0BD8301D018E100071A5B8 /* MyriadPro-BoldIt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MyriadPro-BoldIt.otf"; sourceTree = "<group>"; };
+		CC0BD8311D018E100071A5B8 /* MyriadPro-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MyriadPro-Regular.otf"; sourceTree = "<group>"; };
+		CC0BD8321D018E100071A5B8 /* MyriadPro-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MyriadPro-Semibold.otf"; sourceTree = "<group>"; };
+		CC0BD8331D018E100071A5B8 /* MyriadPro-SemiboldIt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MyriadPro-SemiboldIt.otf"; sourceTree = "<group>"; };
 		CC1041401CE5B4CC00B5D2E7 /* RecordAudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordAudio.h; sourceTree = "<group>"; };
 		CC1041411CE5B4CC00B5D2E7 /* RecordAudio.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordAudio.m; sourceTree = "<group>"; };
 		CC11EFED1CE4810400AAEA09 /* RCTCamera.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTCamera.xcodeproj; path = "../node_modules/@remobile/react-native-camera/ios/RCTCamera.xcodeproj"; sourceTree = "<group>"; };
@@ -359,6 +371,12 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				CC0BD82F1D018E100071A5B8 /* MyriadPro-Bold.otf */,
+				CC0BD8301D018E100071A5B8 /* MyriadPro-BoldIt.otf */,
+				CC0BD8311D018E100071A5B8 /* MyriadPro-Regular.otf */,
+				CC0BD8321D018E100071A5B8 /* MyriadPro-Semibold.otf */,
+				CC0BD8331D018E100071A5B8 /* MyriadPro-SemiboldIt.otf */,
+				CC0BD82D1D018C9D0071A5B8 /* OpenSans-Bold-webfont.ttf */,
 				13B07FAE1A68108700A75B9A /* ReduxTest */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* ReduxTestTests */,
@@ -689,8 +707,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC0BD8361D018E100071A5B8 /* MyriadPro-Regular.otf in Resources */,
+				CC0BD8351D018E100071A5B8 /* MyriadPro-BoldIt.otf in Resources */,
+				CC0BD8371D018E100071A5B8 /* MyriadPro-Semibold.otf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				CC0BD8341D018E100071A5B8 /* MyriadPro-Bold.otf in Resources */,
+				CC0BD82E1D018C9D0071A5B8 /* OpenSans-Bold-webfont.ttf in Resources */,
+				CC0BD8381D018E100071A5B8 /* MyriadPro-SemiboldIt.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

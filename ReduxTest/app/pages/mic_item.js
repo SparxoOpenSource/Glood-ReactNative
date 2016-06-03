@@ -192,6 +192,7 @@ const style = StyleSheet.create({
         color: '#000000',
         fontSize: 14,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        fontFamily:'MyriadPro-SemiboldIt',
     }
 });

@@ -32,6 +32,34 @@ RCT_EXPORT_MODULE()
     return [NSString stringWithFormat:@"%@", documentsDirectory];
 }
 
++ (void)countDownWithTime:(int)time
+           countDownBlock:(void (^)(int timeLeft))countDownBlock
+                 endBlock:(void (^)())endBlock
+{
+  __block int timeout = time; //倒计时时间
+  dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+  dispatch_source_t _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
+  dispatch_source_set_timer(_timer,dispatch_walltime(NULL, 0),1.0*NSEC_PER_SEC, 0); //每秒执行
+  dispatch_source_set_event_handler(_timer, ^{
+    if(timeout<=0){ //倒计时结束，关闭
+      dispatch_source_cancel(_timer);
+      dispatch_async(dispatch_get_main_queue(), ^{
+        if (endBlock) {
+          endBlock();
+        }
+      });
+    } else {
+      dispatch_async(dispatch_get_main_queue(), ^{
+        timeout--;
+        if (countDownBlock) {
+          countDownBlock(timeout);
+        }
+      });
+    }
+  });
+  dispatch_resume(_timer);
+}
+
 // Persist data
 #pragma mark ======== 开始录音 ============
 RCT_EXPORT_METHOD(startRecord:(NSString *)fileName
@@ -325,7 +353,7 @@ RCT_EXPORT_METHOD(playRecord:(NSString *)playName
   NSString *pathForFile = [NSString stringWithFormat:@"%@/%@", documentsDirectory, playName];
   
   NSURL *audioFileURL = [NSURL fileURLWithPath:pathForFile];
-  // NSLog(@"播放－－－－－%@",audioFileURL);
+   NSLog(@"播放－－－－－%@",audioFileURL);
   // Validate that the file exists
   NSFileManager *fileManager = [NSFileManager defaultManager];
   
@@ -389,26 +417,59 @@ RCT_EXPORT_METHOD(playRecord:(NSString *)playName
     [audioPlayer play];
     
     // Craft a success return message
-    NSDictionary *resultsDict = @{
-                                  @"success" : @YES,
-                                  @"successMsg" : @"Successfully started."
-                                  };
+//    NSDictionary *resultsDict = @{
+//                                  @"success" : @YES,
+//                                  @"successMsg" : @"Successfully started."
+//                                  };
+    
+    AVURLAsset* audioAsset =[AVURLAsset URLAssetWithURL:audioFileURL options:nil];
+    
+    CMTime audioDuration = audioAsset.duration;
+    
+    float audioDurationSeconds =CMTimeGetSeconds(audioDuration);
+//    NSString *timeStr = [NSString stringWithFormat:@"%.1f",audioDurationSeconds];
+    __block float timeout = audioDurationSeconds+0.5;
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_source_t _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
+    dispatch_source_set_timer(_timer,dispatch_walltime(NULL, 0),1*NSEC_PER_SEC, 0);
+    dispatch_source_set_event_handler(_timer, ^{
+      if(timeout<=0){
+//        resultsDict = @{@"name" : @"播放完毕"};
+        
+        NSDictionary *resultsDict = @{
+                                      @"name" : @"播放完毕"
+                                      };
+        dispatch_source_cancel(_timer);
+        callBack(@[resultsDict]);
+        dispatch_async(dispatch_get_main_queue(), ^{
+          [ShowMessage showMessage:@"播放完毕"];
+        });
+      } else {
+        dispatch_async(dispatch_get_main_queue(), ^{
+          timeout--;
+        });
+      }
+    });
+    dispatch_resume(_timer);
     
     // Call the JavaScript sucess handler
-    callBack(@[resultsDict]);
+    
     
   }
   
 }
 
-- (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
-{
+//- (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
+//{
+//  NSDictionary *resultsDict = @{
+//                                @"name" : @"播放完毕"
+//                                };
 //  dispatch_async(dispatch_get_main_queue(), ^
 //                 {
 //                   [ShowMessage showMessage:@"播放完毕"];
 //                   
 //                 });
-}
+//}
 
 RCT_EXPORT_METHOD(recordMsg:(NSString *)msg)
 {

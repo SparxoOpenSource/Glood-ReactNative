@@ -60,7 +60,7 @@ export class Common extends Component {
 Common.PropTypes = propTypes;
 const styles = StyleSheet.create({
     view: {
-        backgroundColor: '#999999',
+        backgroundColor: 'white',
         height: 54,
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -74,6 +74,7 @@ const styles = StyleSheet.create({
     },
     TextStyle: {
         fontSize: 18,
-        color: '#FFFFFF',
+        color: 'black',
+        fontFamily:'Myriad Pro',
     }
 });
