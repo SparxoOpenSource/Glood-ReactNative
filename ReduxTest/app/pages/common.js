@@ -4,6 +4,7 @@ import { AppRegistry, StyleSheet, View, Text, ListView, Alert, ScrollView, Touch
 import {NaviGoBack} from '../utils/CommonUtils';
 import Portal from 'react-native/Libraries/Portal/Portal.js';
 import isAndroid from '../utils/isAndroid.js';
+import {EventListener} from "../listener/EventListener";
 
 var _navigator;
 var _title = "我是导航";
@@ -20,6 +21,9 @@ export class Common extends Component {
         this.goBack = this.goBack.bind(this);
     }
     goBack() {
+        if (isAndroid()) {
+            EventListener.trigger("RecordStop");
+        }
         return NaviGoBack(this.props.navigator);
     }
     componentDidMount() {
@@ -75,6 +79,6 @@ const styles = StyleSheet.create({
     TextStyle: {
         fontSize: 26,
         color: 'black',
-        fontFamily:'Myriad Pro',
+        fontFamily: 'Myriad Pro',
     }
 });

@@ -300,6 +300,18 @@ public class RecordModule extends ReactContextBaseJavaModule {
                 (i >> 24 & 0xFF);
     }
 
+    @ReactMethod
+    public void stopAllRecord() {
+        if (playerPool == null)
+            return;
+        for (MediaPlayer value : playerPool.values()) {
+            if (value == null)
+                return;
+            if (value.isPlaying())
+                value.stop();
+        }
+    }
+
     protected MediaPlayer createMediaPlayer(final String fileName) {
         MediaPlayer player = new MediaPlayer();
         fileBasePath = isFileExists();

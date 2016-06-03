@@ -46,7 +46,9 @@ export class RecordAudio extends Component {
             callback && callback(args);
         });
     }
-
+    stopAllRecord() {
+        Recorder.stopAllRecord();
+    }
     recordMsg(msg) {
         Recorder.recordMsg(msg);
     }

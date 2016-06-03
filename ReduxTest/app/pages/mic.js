@@ -205,6 +205,9 @@ export class Mic extends Component {
      * 接收消息，并监听
      */
     componentDidMount(props) {
+        if (isAndroid()) {
+            EventListener.on("RecordStop").then(this.stopRecordAll.bind(this));
+        }
         var self = this;
         this.scrollResponder = this.refs.listView.getScrollResponder();
         this.props.app.service('messages').on('created', message => {
@@ -290,6 +293,9 @@ export class Mic extends Component {
         this.setState({
             voiceImage: voiceImg
         })
+    }
+    stopRecordAll() {
+        RecordAudio.prototype.stopAllRecord();
     }
 }
 
