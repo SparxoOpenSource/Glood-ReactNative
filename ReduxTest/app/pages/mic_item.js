@@ -31,7 +31,9 @@ const propTypes = {
     auto: PropTypes.bool,
     rowID: PropTypes.number
 };
-
+/**
+ * 2表示收到消息自动播放，1表示顺序自动播放，0表示点击播放
+ */
 export class MicItem extends Component {
 
     constructor(props) {
@@ -80,7 +82,7 @@ export class MicItem extends Component {
     }
 
     _onPress(value, rowId, bool) {
-        if (bool == 1 && this.state.isCisClick)
+        if (bool === 1 && this.state.isCisClick)
             return
         var title = value.name;
         var time = value.time;
