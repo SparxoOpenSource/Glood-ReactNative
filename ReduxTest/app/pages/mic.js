@@ -216,9 +216,10 @@ export class Mic extends Component {
                     }
                 });
                 footerY = footerY + everyOne;
-                if (data.length * everyOne > maxHeight)
+                if (data.length * everyOne > maxHeight) {
                     scorll = true;
-                this._setTime();
+                    this._setTime();
+                }
             }
         });
 

@@ -86,7 +86,7 @@ export class MicItem extends Component {
             return
         var title = value.name;
         var time = value.time;
-        if (time == "" || time == null || time <= 0) {
+        if (time <= 0) {
             RecordAudio.prototype.recordMsg("播放失败");
             EventListener.trigger("AutoPlayAllRecord", value, rowId, 1);
             return;
@@ -105,8 +105,8 @@ export class MicItem extends Component {
         RecordAudio.prototype.playRecord(value.name, (back) => {
             if (bool !== 1)
                 RecordAudio.prototype.recordMsg(back.name);
-            if (_this.state.auto && bool === 1) {
-                EventListener.trigger("AutoPlayAllRecord", value, rowId, 2);
+            if (_this.state.auto) {
+                EventListener.trigger("AutoPlayAllRecord", value, rowId, 1);
             }
         });
     }
