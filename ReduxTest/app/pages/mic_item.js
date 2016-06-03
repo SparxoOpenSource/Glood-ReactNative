@@ -44,7 +44,7 @@ export class MicItem extends Component {
             playCode: props.title,
             auto: props.auto
         }
-        this._setTime(props.title, props.auto);
+        this._setTime(props.title, props.auto, 2);
     }
     componentDidMount() {
         EventListener.on("AutoPlayAllRecord").then(this.playFunction.bind(this));
@@ -69,7 +69,7 @@ export class MicItem extends Component {
     render() {
         return (
             <View style={ { justifyContent: 'center', alignItems: 'center', marginTop: 10 }}>
-                <TouchableOpacity style={style.touch} onPress={this._onPress.bind(this, this.props.title, this.props.rowID, true) } ref="view">
+                <TouchableOpacity style={style.touch} onPress={this._onPress.bind(this, this.props.title, this.props.rowID, 0) } ref="view">
                     <Image source={require('../img/background.png') } style={[style.img2, { width: this.state.w, height: this.state.h }]} />
                     <Image source={require('../img/171604419.jpg') } style={[style.img, { marginLeft: this.state.margin_left }]}  />
                 </TouchableOpacity>
@@ -80,13 +80,13 @@ export class MicItem extends Component {
     }
 
     _onPress(value, rowId, bool) {
-        if (!bool && this.state.isCisClick)
+        if (bool == 1 && this.state.isCisClick)
             return
         var title = value.name;
         var time = value.time;
         if (time == "" || time == null || time <= 0) {
             RecordAudio.prototype.recordMsg("播放失败");
-            EventListener.trigger("AutoPlayAllRecord", value, rowId, false);
+            EventListener.trigger("AutoPlayAllRecord", value, rowId, 1);
             return;
         }
         if (this.state.isCisClick == false) {
@@ -101,10 +101,10 @@ export class MicItem extends Component {
     _play(value, rowId, bool) {
         var _this = this;
         RecordAudio.prototype.playRecord(value.name, (back) => {
-            if (bool)
+            if (bool !== 1)
                 RecordAudio.prototype.recordMsg(back.name);
-            if (_this.state.auto) {
-                EventListener.trigger("AutoPlayAllRecord", value, rowId, false);
+            if (_this.state.auto && bool === 1) {
+                EventListener.trigger("AutoPlayAllRecord", value, rowId, 2);
             }
         });
     }
