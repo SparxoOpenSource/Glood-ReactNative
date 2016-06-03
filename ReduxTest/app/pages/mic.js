@@ -25,6 +25,7 @@ var maxHeight = Dimensions.get('window').height - Navigator.NavigationBar.Styles
 var scorll = false;
 var auto = false;
 var myImg = require('../img/play.png');
+var voiceImg = require('../img/voice.png');
 var array = new Array();
 
 const propTypes = {
@@ -43,7 +44,8 @@ export class Mic extends Component {
         scorll = false;
         this.state = {
             dataSource: ds.cloneWithRows(data),
-            autoImage: myImg
+            autoImage: myImg,
+            voiceImage: voiceImg
         }
         this._accessFileName();
     }
@@ -61,14 +63,16 @@ export class Mic extends Component {
                         refreshPrompt="Pull down to refresh"/>
                 </View>
                 <View style={style.footer}>
-                    <TouchableOpacity onPress={this.autoPlay.bind(this) }>
+                    <TouchableOpacity onPress={this.autoPlay.bind(this) } style={{ flexDirection: 'row' }}>
                         <Image source={this.state.autoImage } style={style.ImagStyle}/>
+                        <Text style={{ marginTop: 36, marginLeft: 6, fontSize: 16, color: '#000000' }}>auto</Text>
                     </TouchableOpacity>
                     <TouchableWithoutFeedback onPressOut={this._stop.bind(this) } onPressIn={this._startVoice.bind(this) }>
-                        <Image style={{ width: 54, height: 54 }}  source={require('../img/voice.png') }/>
+                        <Image style={{ width: 54, height: 54 }}  source={this.state.voiceImage }/>
                     </TouchableWithoutFeedback>
-                    <TouchableOpacity>
+                    <TouchableOpacity style={{ flexDirection: 'row' }}>
                         <Image source={require('../img/none.png') } style={style.ImagStyle}  />
+                        <Text style={{ marginTop: 36, marginLeft: 6, fontSize: 16, color: '#00000000' }}>auto</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -125,8 +129,9 @@ export class Mic extends Component {
      */
     _startVoice() {
         var _this = this;
+        this.voiceStatus(true);
         RecordAudio.prototype.startRecord(_this.props.ip, (back) => {
-            RecordAudio.prototype.recordMsg("开始录音");
+            // RecordAudio.prototype.recordMsg("开始录音");
         });
     }
 
@@ -135,8 +140,9 @@ export class Mic extends Component {
      */
     _stop() {
         var _this = this;
+        this.voiceStatus(false);
         RecordAudio.prototype.stopRecord((back) => {
-            RecordAudio.prototype.recordMsg("停止录音");
+            // RecordAudio.prototype.recordMsg("停止录音");
             if (back.success == true) {
                 var title = {
                     name: back.name,
@@ -272,6 +278,19 @@ export class Mic extends Component {
             EventListener.trigger("AutoPlayState", auto);
         }
     }
+    /**
+     * 设置录音状态
+     */
+    voiceStatus(bool) {
+        if (bool === true) {
+            voiceImg = require('../img/voice2.png');
+        } else {
+            voiceImg = require('../img/voice.png');
+        }
+        this.setState({
+            voiceImage: voiceImg
+        })
+    }
 }
 
 Mic.propTypes = propTypes;
@@ -313,7 +332,11 @@ const style = StyleSheet.create({
         borderColor: 'red',
         alignItems: 'center',
         backgroundColor: '#999999',
+<<<<<<< HEAD
     }, 
+=======
+    },
+>>>>>>> 984c0146ced239e5409e06979fd4e05800bc58e9
     touch: {
         marginLeft: 10,
         marginRight: 10,

@@ -104,7 +104,7 @@ export class MicItem extends Component {
         var _this = this;
         RecordAudio.prototype.playRecord(value.name, (back) => {
             if (bool !== 1)
-                RecordAudio.prototype.recordMsg(back.name);
+                // RecordAudio.prototype.recordMsg(back.name);
             if (_this.state.auto) {
                 EventListener.trigger("AutoPlayAllRecord", value, rowId, 1);
             }
