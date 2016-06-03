@@ -213,7 +213,7 @@ public class RecordModule extends ReactContextBaseJavaModule {
                 WritableMap str = Arguments.createMap();
                 str.putString("name", files[i].getName());
                 str.putString("ip", temp[1]);
-                str.putInt("time", prepare.getDuration() / 100);
+                str.putInt("time", prepare.getDuration() / 1000);
                 array.pushMap(str);
             }
         }

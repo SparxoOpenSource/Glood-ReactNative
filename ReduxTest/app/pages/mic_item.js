@@ -69,7 +69,7 @@ export class MicItem extends Component {
     render() {
         return (
             <View style={ { justifyContent: 'center', alignItems: 'center', marginTop: 10 }}>
-                <TouchableOpacity style={style.touch} onPress={this._onPress.bind(this, this.props.title, this.props.rowID) } ref="view">
+                <TouchableOpacity style={style.touch} onPress={this._onPress.bind(this, this.props.title, this.props.rowID, true) } ref="view">
                     <Image source={require('../img/background.png') } style={[style.img2, { width: this.state.w, height: this.state.h }]} />
                     <Image source={require('../img/171604419.jpg') } style={[style.img, { marginLeft: this.state.margin_left }]}  />
                 </TouchableOpacity>
@@ -79,12 +79,14 @@ export class MicItem extends Component {
         );
     }
 
-    _onPress(value, rowId) {
+    _onPress(value, rowId, bool) {
+        if (!bool && this.state.isCisClick)
+            return
         var title = value.name;
         var time = value.time;
         if (time == "" || time == null || time <= 0) {
             RecordAudio.prototype.recordMsg("播放失败");
-            EventListener.trigger("AutoPlayAllRecord", value, rowId);
+            EventListener.trigger("AutoPlayAllRecord", value, rowId, false);
             return;
         }
         if (this.state.isCisClick == false) {
@@ -101,7 +103,7 @@ export class MicItem extends Component {
         RecordAudio.prototype.playRecord(value.name, (back) => {
             RecordAudio.prototype.recordMsg(back.name);
             if (_this.state.auto) {
-                EventListener.trigger("AutoPlayAllRecord", value, rowId);
+                EventListener.trigger("AutoPlayAllRecord", value, rowId, false);
             }
         });
     }
