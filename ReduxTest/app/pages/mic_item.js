@@ -190,7 +190,7 @@ const style = StyleSheet.create({
     },
     text: {
         color: '#000000',
-        fontSize: 14,
+        fontSize: 16,
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: 10,
