@@ -303,7 +303,8 @@ const style = StyleSheet.create({
         backgroundColor: 'white',
     },
     content: {
-        flex: 6
+        flex: 6,
+        marginBottom: 16
     },
     footer: {
         backgroundColor: '#99999900',
@@ -332,7 +333,7 @@ const style = StyleSheet.create({
         borderColor: 'red',
         alignItems: 'center',
         backgroundColor: '#999999',
-    }, 
+    },
     touch: {
         marginLeft: 10,
         marginRight: 10,
