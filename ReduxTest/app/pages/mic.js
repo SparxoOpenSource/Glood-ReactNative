@@ -332,11 +332,7 @@ const style = StyleSheet.create({
         borderColor: 'red',
         alignItems: 'center',
         backgroundColor: '#999999',
-<<<<<<< HEAD
     }, 
-=======
-    },
->>>>>>> 984c0146ced239e5409e06979fd4e05800bc58e9
     touch: {
         marginLeft: 10,
         marginRight: 10,
