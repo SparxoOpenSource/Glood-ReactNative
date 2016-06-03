@@ -105,9 +105,9 @@ export class MicItem extends Component {
         RecordAudio.prototype.playRecord(value.name, (back) => {
             if (bool !== 1)
                 // RecordAudio.prototype.recordMsg(back.name);
-            if (_this.state.auto) {
-                EventListener.trigger("AutoPlayAllRecord", value, rowId, 1);
-            }
+                if (_this.state.auto) {
+                    EventListener.trigger("AutoPlayAllRecord", value, rowId, 1);
+                }
         });
     }
     /**
@@ -157,7 +157,7 @@ const style = StyleSheet.create({
     touch: {
         marginLeft: 10,
         marginRight: 10,
-        marginTop: 10,
+        marginTop: 6,
         width: 320,
         height: 70,
         flexDirection: "row",
@@ -193,6 +193,7 @@ const style = StyleSheet.create({
         fontSize: 14,
         justifyContent: 'center',
         alignItems: 'center',
-        fontFamily:'MyriadPro-SemiboldIt',
+        marginTop: 10,
+        fontFamily: 'MyriadPro-SemiboldIt',
     }
 });
