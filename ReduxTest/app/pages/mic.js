@@ -15,7 +15,7 @@ var ss = 70;
 var tt = 70;
 var app;
 var footerY = 0;
-var everyOne = 109;
+var everyOne = 116;
 var index = 0;
 var STATUS_BAR_HEIGHT = Navigator.NavigationBar.Styles.General.StatusBarHeight;
 // if (isAndroid()) {
