@@ -442,7 +442,7 @@ RCT_EXPORT_METHOD(playRecord:(NSString *)playName
         dispatch_source_cancel(_timer);
         callBack(@[resultsDict]);
         dispatch_async(dispatch_get_main_queue(), ^{
-          [ShowMessage showMessage:@"播放完毕"];
+//          [ShowMessage showMessage:@"播放完毕"];
         });
       } else {
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -460,7 +460,7 @@ RCT_EXPORT_METHOD(playRecord:(NSString *)playName
 }
 
 #pragma mark ======停止播放=============
-RCT_EXPORT_METHOD(stopAllRecord:(NSString *)stopRecord)
+RCT_EXPORT_METHOD(stopAllRecord)
 {
   [audioPlayer stop];
   audioPlayer = nil;
