@@ -459,6 +459,13 @@ RCT_EXPORT_METHOD(playRecord:(NSString *)playName
   
 }
 
+#pragma mark ======停止播放=============
+RCT_EXPORT_METHOD(stopAllRecord:(NSString *)stopRecord)
+{
+  [audioPlayer stop];
+  audioPlayer = nil;
+}
+
 //- (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
 //{
 //  NSDictionary *resultsDict = @{

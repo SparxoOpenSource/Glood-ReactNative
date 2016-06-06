@@ -21,9 +21,7 @@ export class Common extends Component {
         this.goBack = this.goBack.bind(this);
     }
     goBack() {
-        if (isAndroid()) {
-            EventListener.trigger("RecordStop");
-        }
+        EventListener.trigger("RecordStop");
         return NaviGoBack(this.props.navigator);
     }
     componentDidMount() {
@@ -58,6 +56,7 @@ export class Common extends Component {
         );
     }
     _onBack() {
+        EventListener.trigger("RecordStop");
         this.props.navigator.pop();
     }
 }

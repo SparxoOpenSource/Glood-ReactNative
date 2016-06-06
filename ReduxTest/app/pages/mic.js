@@ -205,9 +205,7 @@ export class Mic extends Component {
      * 接收消息，并监听
      */
     componentDidMount(props) {
-        if (isAndroid()) {
-            EventListener.on("RecordStop").then(this.stopRecordAll.bind(this));
-        }
+        EventListener.on("RecordStop").then(this.stopRecordAll.bind(this));
         var self = this;
         this.scrollResponder = this.refs.listView.getScrollResponder();
         this.props.app.service('messages').on('created', message => {
