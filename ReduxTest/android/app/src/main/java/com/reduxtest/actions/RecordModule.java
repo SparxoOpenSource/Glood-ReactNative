@@ -2,6 +2,7 @@ package com.reduxtest.actions;
 
 import android.content.Context;
 import android.media.MediaPlayer;
+import android.media.MediaRecorder;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.text.TextUtils;
@@ -15,6 +16,8 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.modules.core.DeviceEventManagerModule;
+import com.reduxtest.utils.AudioFileFunc;
 import com.reduxtest.utils.Base64Code;
 import com.reduxtest.utils.DataTimeUtils;
 
@@ -29,7 +32,7 @@ public class RecordModule extends ReactContextBaseJavaModule {
     private Callback callback;
     private static final String TAG = RecordModule.class.getSimpleName();
     private ExtAudioRecorder exRecorder = null;
-    private Context context;
+    private ReactApplicationContext context;
     private String WavAudioName;
     private String AudioName;
     private String fileBasePath = "";
@@ -38,6 +41,8 @@ public class RecordModule extends ReactContextBaseJavaModule {
     private Map<String, MediaPlayer> playerPool = new HashMap<>();
     private Date startDate;
     private Date stopDate;
+    private static final String TestEventName = "TestEventName";
+    private MediaRecorder mMediaRecorder;
 
     public RecordModule(ReactApplicationContext reactContext) {
         super(reactContext);
@@ -64,8 +69,7 @@ public class RecordModule extends ReactContextBaseJavaModule {
         } else {
             fileName = "recordKeyeeApp_" + DataTimeUtils.dataString();
         }
-        if (!fileName.endsWith(".wav"))
-            fileName += ".wav";
+        fileName = AudioFileFunc.getAMRFilePath(fileName);
         fileBasePath = isFileExists();
         if (TextUtils.isEmpty(fileBasePath)) {
             callbackMap.putBoolean("success", false);
@@ -73,57 +77,83 @@ public class RecordModule extends ReactContextBaseJavaModule {
             callback.invoke(callbackMap);
             return;
         }
-        WavAudioName = fileBasePath + fileName;
-        Log.i("startRecord", WavAudioName);
+        WavAudioName = AudioFileFunc.getAMRFilePath(fileBasePath + fileName);
         AudioName = fileName;
-        if (exRecorder != null) {
-            exRecorder.release();
-            exRecorder = null;
+        if (mMediaRecorder == null)
+            createMediaRecord(WavAudioName);
+        try {
+            mMediaRecorder.prepare();
+            mMediaRecorder.start();
+            startDate = DataTimeUtils.date();
+            callbackMap.putBoolean("success", true);
+            callbackMap.putString("param", "Successfully started.");
+            callbackMap.putString("name", AudioName);
+            callback.invoke(callbackMap);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            callbackMap.putBoolean("success", false);
+            callbackMap.putString("param", "create audioCache failed!");
+            callback.invoke(callbackMap);
         }
-        File file = new File(WavAudioName);
+    }
+
+    private void createMediaRecord(String path) {
+         /* ①Initial：实例化MediaRecorder对象 */
+        mMediaRecorder = new MediaRecorder();
+        /* setAudioSource/setVedioSource*/
+        mMediaRecorder.setAudioSource(AudioFileFunc.AUDIO_INPUT);//设置麦克风
+        /* 设置输出文件的格式：THREE_GPP/MPEG-4/RAW_AMR/Default
+         * THREE_GPP(3gp格式，H263视频/ARM音频编码)、MPEG-4、RAW_AMR(只支持音频且音频编码要求为AMR_NB)
+         */
+        mMediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.DEFAULT);
+         /* 设置音频文件的编码：AAC/AMR_NB/AMR_MB/Default */
+        mMediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.DEFAULT);
+         /* 设置输出文件的路径 */
+        File file = new File(path);
         if (file.exists()) {
             file.delete();
         }
-        exRecorder = ExtAudioRecorder.getInstanse(false);
-        exRecorder.setOutputFile(WavAudioName);
-        exRecorder.prepare();
-        exRecorder.start();
-        startDate = DataTimeUtils.date();
-        callbackMap.putBoolean("success", true);
-        callbackMap.putString("param", "Successfully started.");
-        callbackMap.putString("name", AudioName);
-        callback.invoke(callbackMap);
+        mMediaRecorder.setOutputFile(path);
     }
 
     @ReactMethod
     public void stopRecord(Callback callback) {
         WritableMap callbackMap = Arguments.createMap();
-        if (exRecorder == null || exRecorder.getState() != ExtAudioRecorder.State.RECORDING) {
+        if (mMediaRecorder == null) {
             callbackMap.putBoolean("success", false);
             callbackMap.putString("param", "未正确开始录音,或发生错误.");
             callback.invoke(callbackMap);
             return;
         }
-        exRecorder.stop();
+        mMediaRecorder.stop();
+        mMediaRecorder.release();
+        mMediaRecorder = null;
         stopDate = DataTimeUtils.date();
         long date = stopDate.getTime() - startDate.getTime();
-        exRecorder.release();
-        exRecorder = null;
-        String temp = Base64Code.encodeBase64File(WavAudioName);
-        if (TextUtils.isEmpty(temp)) {
+        if (TextUtils.isEmpty(WavAudioName)) {
             callbackMap.putBoolean("success", false);
             callbackMap.putString("param", WavAudioName);
             callbackMap.putString("name", AudioName);
             callbackMap.putInt("time", 0);
+            callbackMap.putString("Base64", "");
+            callback.invoke(callbackMap);
+        } else {
+            String temp = Base64Code.encodeBase64File(WavAudioName);
+            if (TextUtils.isEmpty(temp)) {
+                callbackMap.putBoolean("success", false);
+                callbackMap.putString("param", WavAudioName);
+                callbackMap.putString("name", AudioName);
+                callbackMap.putInt("time", 0);
+                callbackMap.putString("Base64", temp);
+                callback.invoke(callbackMap);
+            }
+            callbackMap.putBoolean("success", true);
+            callbackMap.putString("param", WavAudioName);
+            callbackMap.putString("name", AudioName);
+            callbackMap.putDouble("time", (int) date / 1000 + 0.5);
             callbackMap.putString("Base64", temp);
             callback.invoke(callbackMap);
         }
-        callbackMap.putBoolean("success", true);
-        callbackMap.putString("param", WavAudioName);
-        callbackMap.putString("name", AudioName);
-        callbackMap.putDouble("time", (int) date / 1000 + 0.5);
-        callbackMap.putString("Base64", temp);
-        callback.invoke(callbackMap);
     }
 
     @ReactMethod
@@ -146,6 +176,8 @@ public class RecordModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void playRecord(String playName, final Callback callBack) {
         this.callback = callBack;
+        send();
+        stopAllRecord();
         MediaPlayer player = this.playerPool.get(playName);
         if (player == null) {
             player = prepare(playName, playName);
@@ -245,7 +277,7 @@ public class RecordModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void saveRecord(String base64, String ip, Callback callback) {
-        String fileName = "recordKeyeeApp_" + ip + "_" + DataTimeUtils.dataString() + ".wav";
+        String fileName = "recordKeyeeApp_" + ip + "_" + DataTimeUtils.dataString() + ".amr";
         fileBasePath = isFileExists();
         if (TextUtils.isEmpty(fileBasePath)) {
             callbackMap = Arguments.createMap();
@@ -362,5 +394,14 @@ public class RecordModule extends ReactContextBaseJavaModule {
         } catch (IOException e) {
             return "";
         }
+    }
+
+    private void send() {
+        //发送事件
+        WritableMap params = Arguments.createMap();
+        params.putString("name", "Jack");
+        context.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+                .emit(TestEventName, params);
+
     }
 }

@@ -10,6 +10,7 @@ import com.facebook.react.bridge.JavaScriptModule;
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.uimanager.ViewManager;
+import com.facebook.react.views.webview.ReactWebViewManager;
 
 public class RecordAudioPackage implements ReactPackage {
 
@@ -28,6 +29,7 @@ public class RecordAudioPackage implements ReactPackage {
 
     @Override
     public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
-        return Collections.emptyList();
+        return Arrays.<ViewManager>asList(
+                new ReactWaveManager());
     }
 }

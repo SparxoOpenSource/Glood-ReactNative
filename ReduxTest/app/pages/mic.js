@@ -1,5 +1,19 @@
 import React, {Component} from "react";
-import { AppRegistry, StyleSheet, View, Text, ListView, Alert, Navigator, Image, TouchableOpacity, TouchableWithoutFeedback, LayoutAnimation, PropTypes, Animated, Dimensions }  from 'react-native';
+import { AppRegistry,
+    StyleSheet,
+    View,
+    Text,
+    ListView,
+    Alert,
+    Navigator,
+    Image,
+    TouchableOpacity,
+    TouchableWithoutFeedback,
+    LayoutAnimation,
+    PropTypes,
+    Animated,
+    Dimensions,
+    DeviceEventEmitter }  from 'react-native';
 import {Common} from "./common";
 import {RecordAudio} from "../utils/RecordAudio";
 import {MicItem} from "./mic_item";
@@ -15,7 +29,7 @@ var ss = 70;
 var tt = 70;
 var app;
 var footerY = 0;
-var everyOne = 116;
+var everyOne = isAndroid() ? 120 : 116;
 var index = 0;
 var STATUS_BAR_HEIGHT = Navigator.NavigationBar.Styles.General.StatusBarHeight;
 // if (isAndroid()) {
@@ -24,6 +38,7 @@ var STATUS_BAR_HEIGHT = Navigator.NavigationBar.Styles.General.StatusBarHeight;
 var maxHeight = Dimensions.get('window').height - Navigator.NavigationBar.Styles.General.NavBarHeight - STATUS_BAR_HEIGHT - 64;
 var scorll = false;
 var auto = false;
+var inTher = false;
 var myImg = require('../img/play.png');
 var voiceImg = require('../img/voice.png');
 var array = new Array();
@@ -42,6 +57,7 @@ export class Mic extends Component {
         footerY = 0;
         index = 0;
         scorll = false;
+        inTher = true;
         this.state = {
             dataSource: ds.cloneWithRows(data),
             autoImage: myImg,
@@ -206,9 +222,15 @@ export class Mic extends Component {
      */
     componentDidMount(props) {
         EventListener.on("RecordStop").then(this.stopRecordAll.bind(this));
+        // DeviceEventEmitter.addListener("TestEventName", info => {
+        //     Alert.alert(info.name);
+        // });
+
         var self = this;
         this.scrollResponder = this.refs.listView.getScrollResponder();
         this.props.app.service('messages').on('created', message => {
+            if (!inTher)
+                return;
             var newMessage = this.formatMessage(message);
             if (this.props.app.get('user')._id !== newMessage.userid) {
                 RecordAudio.prototype.saveRecord(newMessage.text, newMessage.name, (back) => {
@@ -293,6 +315,7 @@ export class Mic extends Component {
         })
     }
     stopRecordAll() {
+        inTher = false;
         RecordAudio.prototype.stopAllRecord();
     }
 }
