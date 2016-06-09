@@ -3,6 +3,9 @@
 #import "AppDelegate.h"
 #import "ShowMessage.h"
 #import "NSString+Base64.h"
+#import "VoiceConverter.h"
+@import AVFoundation;
+@import AudioToolbox;
 
 #import <ifaddrs.h>
 #import <arpa/inet.h>
@@ -61,6 +64,7 @@ RCT_EXPORT_MODULE()
 }
 
 // Persist data
+/*
 #pragma mark ======== 开始录音 ============
 RCT_EXPORT_METHOD(startRecord:(NSString *)fileName
                   callback:(RCTResponseSenderBlock)successCallback) {
@@ -86,9 +90,9 @@ RCT_EXPORT_METHOD(startRecord:(NSString *)fileName
 //        
 //    }
   
-    NSRange isRangeWav = [fileName rangeOfString:@".wav" options:NSCaseInsensitiveSearch];
+    NSRange isRangeMp3 = [fileName rangeOfString:@".wav" options:NSCaseInsensitiveSearch];
     
-    if (isRangeWav.location == NSNotFound) {
+    if (isRangeMp3.location == NSNotFound) {
         fileName = [NSString stringWithFormat:@"%@.wav",fileName];
     }
     
@@ -103,6 +107,7 @@ RCT_EXPORT_METHOD(startRecord:(NSString *)fileName
     
     // Create the path that the file will be stored at
     pathForFile = [NSString stringWithFormat:@"%@/%@", cachePath, fileName];
+  NSLog(@"-*-***-*-*-露营格式：%@",pathForFile);
     
     NSURL *audioFileURL = [NSURL fileURLWithPath:pathForFile];
     
@@ -115,7 +120,14 @@ RCT_EXPORT_METHOD(startRecord:(NSString *)fileName
                           [NSNumber numberWithBool:0], AVLinearPCMIsBigEndianKey,
                           [NSNumber numberWithBool:NO], AVLinearPCMIsNonInterleaved,
                           [NSData data], AVChannelLayoutKey, nil];
-    
+//  NSDictionary *recordSettings  = [NSDictionary dictionaryWithObjectsAndKeys:
+//                                  [NSNumber numberWithInt:kAudioFormatMPEGLayer3] ,AVFormatIDKey,
+//                                  [NSNumber numberWithFloat:22050.0] ,AVSampleRateKey,
+//                                  [NSNumber numberWithInt: 2] ,AVNumberOfChannelsKey,
+//                                  [NSNumber numberWithInt:16] ,AVLinearPCMBitDepthKey,
+//                                  [NSNumber numberWithBool:NO] ,AVLinearPCMIsBigEndianKey,
+//                                  [NSNumber numberWithBool:NO],AVLinearPCMIsFloatKey,nil];
+  
     // Initialize the session for the recording
     NSError *error = nil;
     recordSession = [AVAudioSession sharedInstance];
@@ -171,16 +183,106 @@ RCT_EXPORT_METHOD(startRecord:(NSString *)fileName
     // Call the JavaScript sucess handler
     successCallback(@[resultsDict]);
 }
+ */
 
-// Persist data
+#pragma mark ======== 开始录音 ============
+RCT_EXPORT_METHOD(startRecord:(NSString *)fileName
+                  callback:(RCTResponseSenderBlock)successCallback) {
+  
+    //录音
+    
+    //根据当前时间生成文件名
+    self.recordFileName = [self GetCurrentTimeString];
+    //获取路径
+    self.recordFilePath = [self GetPathByFileName:self.recordFileName ofType:@"wav"];
+    
+    //初始化录音
+    self.recorder = [[AVAudioRecorder alloc]initWithURL:[NSURL fileURLWithPath:self.recordFilePath]
+                                               settings:[VoiceConverter GetAudioRecorderSettingDict]
+                                                  error:nil];
+    
+    //准备录音
+    if ([self.recorder prepareToRecord]){
+      
+      [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategoryPlayAndRecord error:nil];
+      [[AVAudioSession sharedInstance] setActive:YES error:nil];
+      
+      //开始录音
+      [self.recorder record];
+      
+      NSDictionary *resultsDict = @{
+                                    @"success" : @YES,
+                                    @"param" : @"Successfully started.",
+                                    @"name" : fileName
+                                    };
+      successCallback(@[resultsDict]);
+  }
+}
+
 #pragma mark ======== 停止录音 ============
 RCT_EXPORT_METHOD(stopRecord:(RCTResponseSenderBlock)successCallback) {
   
+    //停止录音
+    [self.recorder stop];
+    //设置label信息
+//  NSLog(@"%@",[NSString stringWithFormat:@"原wav:\n%@",[self getVoiceFileInfoByPath:self.recordFilePath convertTime:0]]);
+    //开始转换格式
+    
+    NSDate *date = [NSDate date];
+    NSString *amrPath = [self GetPathByFileName:self.recordFileName ofType:@"amr"];
+    
+#warning wav转amr
+    if ([VoiceConverter ConvertWavToAmr:self.recordFilePath amrSavePath:amrPath]){
+      
+      //设置label信息
+//      NSLog(@"%@",[NSString stringWithFormat:@"原wav转amr:\n%@",[self getVoiceFileInfoByPath:amrPath convertTime:[[NSDate date] timeIntervalSinceDate:date]]]);
+      
+      date = [NSDate date];
+      NSString *convertedPath = [self GetPathByFileName:[self.recordFileName stringByAppendingString:@""] ofType:@"wav"];
+//      NSLog(@"dafdfadfa-----%@---%@",convertedPath,amrPath);
+      //获取时间
+      NSURL *audioFileURL = [NSURL fileURLWithPath:convertedPath];
+      AVURLAsset* audioAsset =[AVURLAsset URLAssetWithURL:audioFileURL options:nil];
+      CMTime audioDuration = audioAsset.duration;
+      float audioDurationSeconds =CMTimeGetSeconds(audioDuration);
+      NSString *timeStr = [NSString stringWithFormat:@"%.1f",audioDurationSeconds];
+      //转码
+      NSFileManager *fileManager = [NSFileManager defaultManager];
+      wavdata = [fileManager contentsAtPath:amrPath];
+//      NSLog(@"wavdata:%@",wavdata);
+      NSString *pictureDataString=[wavdata base64Encoding];
+//      NSLog(@"amr:%@",pictureDataString,timeStr);
+      NSDictionary *resultsDict = @{
+                                    @"success" : @YES,
+                                    @"param"  : convertedPath,
+                                    @"name" : [NSString stringWithFormat:@"%@.wav",self.recordFileName],
+                                    @"time" : timeStr,
+                                    @"Base64": pictureDataString
+                                    };
+      
+      // Call the JavaScript sucess handler
+      successCallback(@[resultsDict]);
+//#warning amr转wav
+//      if ([VoiceConverter ConvertAmrToWav:amrPath wavSavePath:convertedPath]){
+//        //设置label信息
+//        NSLog(@"%@",[NSString stringWithFormat:@"amr转wav:\n%@",[self getVoiceFileInfoByPath:convertedPath convertTime:[[NSDate date] timeIntervalSinceDate:date]]]);
+//      }else
+//        NSLog(@"amr转wav失败");
+      
+    }else
+      NSLog(@"wav转amr失败");
+}
+
+// Persist data
+/*
+#pragma mark ======== 停止录音 ============
+RCT_EXPORT_METHOD(stopRecord:(RCTResponseSenderBlock)successCallback) {
+ 
     endStr = @"";
     endStr = [self getTimeNow];
     // Validate that the file exists
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    
+ 
     // Check if file exists
     if (![fileManager fileExistsAtPath:pathForFile]){
         
@@ -270,12 +372,55 @@ RCT_EXPORT_METHOD(stopRecord:(RCTResponseSenderBlock)successCallback) {
         
     }
 }
+ */
 
 #pragma mark ======== 播放录音 ============
 RCT_EXPORT_METHOD(playRecord:(NSString *)playName
                   Callback:(RCTResponseSenderBlock)callBack) {
+  self.player = [[AVAudioPlayer alloc]init];
+  [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategoryPlayback error:nil];
+  [[AVAudioSession sharedInstance] setActive:YES error:nil];
+  playName = [playName stringByReplacingOccurrencesOfString:@".wav" withString:@""];
+  NSString *convertedPath = [self GetPathByFileName:playName ofType:@"wav"];
+  self.player = [self.player initWithContentsOfURL:[NSURL URLWithString:convertedPath] error:nil];
+  [self.player play];
+  
+  AVURLAsset* audioAsset =[AVURLAsset URLAssetWithURL:[NSURL URLWithString:convertedPath] options:nil];
+  
+  CMTime audioDuration = audioAsset.duration;
+  
+  float audioDurationSeconds =CMTimeGetSeconds(audioDuration);
+  //    NSString *timeStr = [NSString stringWithFormat:@"%.1f",audioDurationSeconds];
+  __block float timeout = audioDurationSeconds+0.5;
+  dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+  dispatch_source_t _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
+  dispatch_source_set_timer(_timer,dispatch_walltime(NULL, 0),1*NSEC_PER_SEC, 0);
+  dispatch_source_set_event_handler(_timer, ^{
+    if(timeout<=0){
+      //        resultsDict = @{@"name" : @"播放完毕"};
+      
+      NSDictionary *resultsDict = @{
+                                    @"name" : @"播放完毕"
+                                    };
+      dispatch_source_cancel(_timer);
+      callBack(@[resultsDict]);
+      dispatch_async(dispatch_get_main_queue(), ^{
+        //          [ShowMessage showMessage:@"播放完毕"];
+      });
+    } else {
+      dispatch_async(dispatch_get_main_queue(), ^{
+        timeout--;
+      });
+    }
+  });
+  dispatch_resume(_timer);
+}
+/*
+#pragma mark ======== 播放录音 ============
+RCT_EXPORT_METHOD(playRecord:(NSString *)playName
+                  Callback:(RCTResponseSenderBlock)callBack) {
 //  playName = newFileName;
-  // NSLog(@"*-*-*-*-***--*******  %@",playName);
+   NSLog(@"*-*-*-*-***--*******  %@",playName);
   // Validate the file name has positive length
   if ([playName length] < 1) {
     
@@ -358,8 +503,9 @@ RCT_EXPORT_METHOD(playRecord:(NSString *)playName
   NSFileManager *fileManager = [NSFileManager defaultManager];
   
   // Check if file exists
-  NSString * filepath = [self getCachePath];
-  BOOL exists = [fileManager fileExistsAtPath:filepath isDirectory:false];
+//  NSString * filepath = [self getCachePath];
+  NSString *convertedPath = [self GetPathByFileName:[self.recordFileName stringByAppendingString:@"IOS-"] ofType:@"wav"];
+  BOOL exists = [fileManager fileExistsAtPath:convertedPath isDirectory:false];
   if (!exists){
     
     // Show failure message
@@ -458,10 +604,13 @@ RCT_EXPORT_METHOD(playRecord:(NSString *)playName
   }
   
 }
+ */
 
 #pragma mark ======停止播放=============
 RCT_EXPORT_METHOD(stopAllRecord)
 {
+  [self.player stop];
+  self.player = nil;
   [audioPlayer stop];
   audioPlayer = nil;
 }
@@ -526,19 +675,22 @@ NSString *decodeStr = [base64Str base64DecodedString];
 NSLog(@"Base64解码--%@",decodeStr);
  */
 
-#pragma mark ======= base64转码 ======
+#pragma mark ======= 处理并保存文件 ======
 RCT_EXPORT_METHOD(saveRecord:(NSString *)base64 addressIp:(NSString *)IP
                   Callback:(RCTResponseSenderBlock)callBack)
 {
-   NSString *fileName = [NSString stringWithFormat:@"IOS-%@.wav",[self getTimeNow]];
+//  NSLog(@"---*-*-*-  %@",base64);
+   NSString *fileName = [NSString stringWithFormat:@"%@",[self GetCurrentTimeString]];
 //    NSRange isRangeWav = [fileName rangeOfString:@".wav" options:NSCaseInsensitiveSearch];
     NSString *cachePath = [self getCachePath];
+  NSString *convertedPath = [self GetPathByFileName:fileName ofType:@"amr"];
+//  NSString *convertedPath = [self GetPathByFileName:[self.recordFileName stringByAppendingString:@""] ofType:@"amr"];
     BOOL isDir = NO;
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    BOOL existed = [fileManager fileExistsAtPath:cachePath isDirectory:&isDir];
+    BOOL existed = [fileManager fileExistsAtPath:convertedPath isDirectory:&isDir];
     if ( !(isDir == YES && existed == YES) )
     {
-      [fileManager createDirectoryAtPath:cachePath withIntermediateDirectories:YES attributes:nil error:nil];
+      [fileManager createDirectoryAtPath:convertedPath withIntermediateDirectories:YES attributes:nil error:nil];
     }
     // Create the path that the file will be stored at
   
@@ -548,10 +700,24 @@ RCT_EXPORT_METHOD(saveRecord:(NSString *)base64 addressIp:(NSString *)IP
 //  
 //  NSString *decodeStr = [base64 base64DecodedString];
 //  NSLog(@"Base64解码--%@",decodeStr);
-  pathForFile = [NSString stringWithFormat:@"%@/%@", cachePath, fileName];
-    NSData *sData   = [[NSData alloc] initWithBase64Encoding:base64];
-   [sData writeToFile:pathForFile atomically:YES];
-  NSURL *audioFileURL = [NSURL fileURLWithPath:pathForFile];
+  pathForFile = [NSString stringWithFormat:@"%@/%@", convertedPath, fileName];
+  NSData *sData   = [[NSData alloc] initWithBase64Encoding:base64];
+  BOOL ss = [sData writeToFile:pathForFile atomically:YES];
+//  NSLog(@"-*-*--777----%@---%@--%d",convertedPath,sData,ss);
+//  NSLog(@"wavdata**:%@",sData);
+  self.recordFilePath = [self GetPathByFileName:fileName ofType:@"wav"];
+//  NSLog(@"-*-*--888----%@",self.recordFilePath);
+#warning amr转wav
+  if ([VoiceConverter ConvertAmrToWav:pathForFile wavSavePath:self.recordFilePath]){
+    //设置label信息
+    NSLog(@"amr转wav成功");
+  }else
+  {
+    NSLog(@"amr转wav失败");
+  }
+  
+  
+  NSURL *audioFileURL = [NSURL fileURLWithPath:self.recordFilePath];
   AVURLAsset* audioAsset =[AVURLAsset URLAssetWithURL:audioFileURL options:nil];
   
   CMTime audioDuration = audioAsset.duration;
@@ -563,10 +729,9 @@ RCT_EXPORT_METHOD(saveRecord:(NSString *)base64 addressIp:(NSString *)IP
     // NSLog(@"-----**-*pathForFile:---%@  sData:%@ -- %@",pathForFile,sData,base64);
     NSDictionary *resultsDict = @{
                                 @"success" : @YES,
-                                @"name" : fileName,
+                                @"name" : [NSString stringWithFormat:@"%@.wav",fileName],
                                 @"time":timeStr
                                 };
-  // NSLog(@"^^^^^^^^^^^^^^^^^^^^^%f",audioDurationSeconds);
     callBack(@[resultsDict]);
   
 }
@@ -648,6 +813,57 @@ RCT_EXPORT_METHOD(clearCache:(RCTResponseSenderBlock)callback)
   timeString=[NSString stringWithFormat:@"%@:%@:%@",house,min,sen];
   
   return timeString;
+}
+
+#pragma mark - Others
+
+#pragma mark - 生成当前时间字符串
+- (NSString*)GetCurrentTimeString{
+  NSDateFormatter *dateformat = [[NSDateFormatter  alloc]init];
+  [dateformat setDateFormat:@"yyyyMMddHHmmss"];
+  return [dateformat stringFromDate:[NSDate date]];
+}
+
+#pragma mark - 生成文件路径
+- (NSString*)GetPathByFileName:(NSString *)_fileName ofType:(NSString *)_type{
+  NSString *directory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)objectAtIndex:0];;
+  NSString* fileDirectory = [[[directory stringByAppendingPathComponent:_fileName]
+                              stringByAppendingPathExtension:_type]
+                             stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+  return fileDirectory;
+}
+
+#pragma mark - 获取音频文件信息
+- (NSString *)getVoiceFileInfoByPath:(NSString *)aFilePath convertTime:(NSTimeInterval)aConTime{
+  
+  NSInteger size = [self getFileSize:aFilePath]/1024;
+  NSString *info = [NSString stringWithFormat:@"文件名:%@\n文件大小:%dkb\n",aFilePath.lastPathComponent,size];
+  
+  NSRange range = [aFilePath rangeOfString:@"wav"];
+  if (range.length > 0) {
+    AVAudioPlayer *play = [[AVAudioPlayer alloc]initWithContentsOfURL:[NSURL URLWithString:aFilePath] error:nil];
+    info = [info stringByAppendingFormat:@"文件时长:%f\n",play.duration];
+  }
+  
+  if (aConTime > 0)
+    info = [info stringByAppendingFormat:@"转换时间:%f",aConTime];
+  return info;
+}
+
+#pragma mark - 获取文件大小
+- (NSInteger) getFileSize:(NSString*) path{
+  NSFileManager * filemanager = [[NSFileManager alloc]init];
+  if([filemanager fileExistsAtPath:path]){
+    NSDictionary * attributes = [filemanager attributesOfItemAtPath:path error:nil];
+    NSNumber *theFileSize;
+    if ( (theFileSize = [attributes objectForKey:NSFileSize]) )
+      return  [theFileSize intValue];
+    else
+      return -1;
+  }
+  else{
+    return -1;
+  }
 }
 
 //UTC时间转换成对应系统时间

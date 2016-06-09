@@ -252,7 +252,7 @@ export class Mic extends Component {
      * 发送消息
      */
     sendMessage(message = null, rowID = null) {
-        this.props.app.service('messages').create({ text: message }).then(result => {
+        this.props.app.service('messages').create({ text: message}).then(result => {
             console.log('message created!');
         }).catch((error) => {
             console.log('ERROR creating message');

@@ -31,6 +31,11 @@
 		CC1041421CE5B4CC00B5D2E7 /* RecordAudio.m in Sources */ = {isa = PBXBuildFile; fileRef = CC1041411CE5B4CC00B5D2E7 /* RecordAudio.m */; };
 		CC11EFF31CE4810B00AAEA09 /* libRCTCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC11EFF21CE4810400AAEA09 /* libRCTCamera.a */; };
 		CC2672AE1CEF07570018F4AB /* NSString+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = CC2672AD1CEF07570018F4AB /* NSString+Base64.m */; };
+		CC5832191D07FC23009E28A2 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC5832181D07FC23009E28A2 /* AVFoundation.framework */; };
+		CC5832281D07FC76009E28A2 /* amrFileCodec.mm in Sources */ = {isa = PBXBuildFile; fileRef = CC58321C1D07FC76009E28A2 /* amrFileCodec.mm */; };
+		CC5832291D07FC76009E28A2 /* libopencore-amrnb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC58321E1D07FC76009E28A2 /* libopencore-amrnb.a */; };
+		CC58322A1D07FC76009E28A2 /* libopencore-amrwb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC58321F1D07FC76009E28A2 /* libopencore-amrwb.a */; };
+		CC58322B1D07FC76009E28A2 /* VoiceConverter.mm in Sources */ = {isa = PBXBuildFile; fileRef = CC5832271D07FC76009E28A2 /* VoiceConverter.mm */; };
 		CCA7E1961CEAFD6000EFEF04 /* ShowMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA7E1951CEAFD6000EFEF04 /* ShowMessage.m */; };
 		CCA7E1B81CEAFDFD00EFEF04 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA7E1A61CEAFDFD00EFEF04 /* MBProgressHUD.m */; };
 		CCA7E1B91CEAFDFD00EFEF04 /* MMVectorImage.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA7E1A81CEAFDFD00EFEF04 /* MMVectorImage.m */; };
@@ -180,6 +185,17 @@
 		CC11EFED1CE4810400AAEA09 /* RCTCamera.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTCamera.xcodeproj; path = "../node_modules/@remobile/react-native-camera/ios/RCTCamera.xcodeproj"; sourceTree = "<group>"; };
 		CC2672AC1CEF07570018F4AB /* NSString+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Base64.h"; sourceTree = "<group>"; };
 		CC2672AD1CEF07570018F4AB /* NSString+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Base64.m"; sourceTree = "<group>"; };
+		CC5832181D07FC23009E28A2 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		CC58321B1D07FC76009E28A2 /* amrFileCodec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = amrFileCodec.h; sourceTree = "<group>"; };
+		CC58321C1D07FC76009E28A2 /* amrFileCodec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = amrFileCodec.mm; sourceTree = "<group>"; };
+		CC58321E1D07FC76009E28A2 /* libopencore-amrnb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libopencore-amrnb.a"; sourceTree = "<group>"; };
+		CC58321F1D07FC76009E28A2 /* libopencore-amrwb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libopencore-amrwb.a"; sourceTree = "<group>"; };
+		CC5832211D07FC76009E28A2 /* interf_dec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = interf_dec.h; sourceTree = "<group>"; };
+		CC5832221D07FC76009E28A2 /* interf_enc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = interf_enc.h; sourceTree = "<group>"; };
+		CC5832241D07FC76009E28A2 /* dec_if.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dec_if.h; sourceTree = "<group>"; };
+		CC5832251D07FC76009E28A2 /* if_rom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = if_rom.h; sourceTree = "<group>"; };
+		CC5832261D07FC76009E28A2 /* VoiceConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoiceConverter.h; sourceTree = "<group>"; };
+		CC5832271D07FC76009E28A2 /* VoiceConverter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = VoiceConverter.mm; sourceTree = "<group>"; };
 		CCA7E1941CEAFD6000EFEF04 /* ShowMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowMessage.h; sourceTree = "<group>"; };
 		CCA7E1951CEAFD6000EFEF04 /* ShowMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowMessage.m; sourceTree = "<group>"; };
 		CCA7E1A51CEAFDFD00EFEF04 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
@@ -217,6 +233,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC5832191D07FC23009E28A2 /* AVFoundation.framework in Frameworks */,
 				CCD8757A1CE5D8F200388995 /* libRNImagePicker.a in Frameworks */,
 				CCBAA0F91CE483A30035088B /* libRCTCordova.a in Frameworks */,
 				CC11EFF31CE4810B00AAEA09 /* libRCTCamera.a in Frameworks */,
@@ -226,9 +243,11 @@
 				00C302E81ABCBA2D00DB3ED1 /* libRCTImage.a in Frameworks */,
 				133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */,
 				00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */,
+				CC58322A1D07FC76009E28A2 /* libopencore-amrwb.a in Frameworks */,
 				139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */,
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
+				CC5832291D07FC76009E28A2 /* libopencore-amrnb.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -371,6 +390,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				CC5832181D07FC23009E28A2 /* AVFoundation.framework */,
 				CC0BD82F1D018E100071A5B8 /* MyriadPro-Bold.otf */,
 				CC0BD8301D018E100071A5B8 /* MyriadPro-BoldIt.otf */,
 				CC0BD8311D018E100071A5B8 /* MyriadPro-Regular.otf */,
@@ -398,6 +418,7 @@
 		CC10413F1CE5B4CC00B5D2E7 /* RNRecordAudio */ = {
 			isa = PBXGroup;
 			children = (
+				CC5832171D07FBEB009E28A2 /* VoiceConvert */,
 				CC26729E1CEF07220018F4AB /* NSString+Base64 */,
 				CCA7E1A41CEAFDF100EFEF04 /* MBProgressHUD */,
 				CC1041401CE5B4CC00B5D2E7 /* RecordAudio.h */,
@@ -423,6 +444,55 @@
 				CC2672AD1CEF07570018F4AB /* NSString+Base64.m */,
 			);
 			name = "NSString+Base64";
+			sourceTree = "<group>";
+		};
+		CC5832171D07FBEB009E28A2 /* VoiceConvert */ = {
+			isa = PBXGroup;
+			children = (
+				CC58321A1D07FC76009E28A2 /* amrwapper */,
+				CC58321D1D07FC76009E28A2 /* lib */,
+				CC5832201D07FC76009E28A2 /* opencore-amrnb */,
+				CC5832231D07FC76009E28A2 /* opencore-amrwb */,
+				CC5832261D07FC76009E28A2 /* VoiceConverter.h */,
+				CC5832271D07FC76009E28A2 /* VoiceConverter.mm */,
+			);
+			name = VoiceConvert;
+			sourceTree = "<group>";
+		};
+		CC58321A1D07FC76009E28A2 /* amrwapper */ = {
+			isa = PBXGroup;
+			children = (
+				CC58321B1D07FC76009E28A2 /* amrFileCodec.h */,
+				CC58321C1D07FC76009E28A2 /* amrFileCodec.mm */,
+			);
+			path = amrwapper;
+			sourceTree = "<group>";
+		};
+		CC58321D1D07FC76009E28A2 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				CC58321E1D07FC76009E28A2 /* libopencore-amrnb.a */,
+				CC58321F1D07FC76009E28A2 /* libopencore-amrwb.a */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		CC5832201D07FC76009E28A2 /* opencore-amrnb */ = {
+			isa = PBXGroup;
+			children = (
+				CC5832211D07FC76009E28A2 /* interf_dec.h */,
+				CC5832221D07FC76009E28A2 /* interf_enc.h */,
+			);
+			path = "opencore-amrnb";
+			sourceTree = "<group>";
+		};
+		CC5832231D07FC76009E28A2 /* opencore-amrwb */ = {
+			isa = PBXGroup;
+			children = (
+				CC5832241D07FC76009E28A2 /* dec_if.h */,
+				CC5832251D07FC76009E28A2 /* if_rom.h */,
+			);
+			path = "opencore-amrwb";
 			sourceTree = "<group>";
 		};
 		CCA7E1A41CEAFDF100EFEF04 /* MBProgressHUD */ = {
@@ -738,6 +808,7 @@
 				CCA7E1C01CEAFDFD00EFEF04 /* MMProgressHUDWindow.m in Sources */,
 				CCA7E1BB1CEAFDFD00EFEF04 /* MMProgressHUDOverlayView.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				CC5832281D07FC76009E28A2 /* amrFileCodec.mm in Sources */,
 				CCA7E1BA1CEAFDFD00EFEF04 /* MMProgressHUD.m in Sources */,
 				CCA7E1B81CEAFDFD00EFEF04 /* MBProgressHUD.m in Sources */,
 				CCA7E1BE1CEAFDFD00EFEF04 /* MMRadialProgressView.m in Sources */,
@@ -746,6 +817,7 @@
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 				CCA7E1BF1CEAFDFD00EFEF04 /* MMHud.m in Sources */,
 				CCA7E1C11CEAFDFD00EFEF04 /* MMProgressHUDViewController.m in Sources */,
+				CC58322B1D07FC76009E28A2 /* VoiceConverter.mm in Sources */,
 				CCA7E1BC1CEAFDFD00EFEF04 /* MMProgressHUD+Class.m in Sources */,
 				CCA7E1BD1CEAFDFD00EFEF04 /* MMProgressHUD+Animations.m in Sources */,
 			);
@@ -817,6 +889,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEAD_CODE_STRIPPING = NO;
+				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -825,7 +898,12 @@
 				);
 				INFOPLIST_FILE = ReduxTest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/RNRecordAudio/lib",
+				);
 				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_BUNDLE_IDENTIFIER = com.sparxo.vambie;
 				PRODUCT_NAME = ReduxTest;
 			};
 			name = Debug;
@@ -835,6 +913,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -843,7 +923,12 @@
 				);
 				INFOPLIST_FILE = ReduxTest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/RNRecordAudio/lib",
+				);
 				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_BUNDLE_IDENTIFIER = com.sparxo.vambie;
 				PRODUCT_NAME = ReduxTest;
 			};
 			name = Release;
