@@ -48,6 +48,8 @@
 		CCA7E1C01CEAFDFD00EFEF04 /* MMProgressHUDWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA7E1B51CEAFDFD00EFEF04 /* MMProgressHUDWindow.m */; };
 		CCA7E1C11CEAFDFD00EFEF04 /* MMProgressHUDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA7E1B71CEAFDFD00EFEF04 /* MMProgressHUDViewController.m */; };
 		CCBAA0F91CE483A30035088B /* libRCTCordova.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CCBAA0EF1CE4838A0035088B /* libRCTCordova.a */; };
+		CCCFEF581D0967B600B79A10 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = CCCFEF561D0967B600B79A10 /* assets */; };
+		CCCFEF591D0967B600B79A10 /* index.ios.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = CCCFEF571D0967B600B79A10 /* index.ios.jsbundle */; };
 		CCD8757A1CE5D8F200388995 /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CCD875791CE5D8EB00388995 /* libRNImagePicker.a */; };
 /* End PBXBuildFile section */
 
@@ -153,7 +155,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTActionSheet.xcodeproj; path = "../node_modules/react-native/Libraries/ActionSheetIOS/RCTActionSheet.xcodeproj"; sourceTree = "<group>"; };
 		00C302B51ABCB90400DB3ED1 /* RCTGeolocation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTGeolocation.xcodeproj; path = "../node_modules/react-native/Libraries/Geolocation/RCTGeolocation.xcodeproj"; sourceTree = "<group>"; };
 		00C302BB1ABCB91800DB3ED1 /* RCTImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTImage.xcodeproj; path = "../node_modules/react-native/Libraries/Image/RCTImage.xcodeproj"; sourceTree = "<group>"; };
@@ -218,6 +219,8 @@
 		CCA7E1B61CEAFDFD00EFEF04 /* MMProgressHUDViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMProgressHUDViewController.h; sourceTree = "<group>"; };
 		CCA7E1B71CEAFDFD00EFEF04 /* MMProgressHUDViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMProgressHUDViewController.m; sourceTree = "<group>"; };
 		CCBAA0E81CE4838A0035088B /* RCTCordova.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTCordova.xcodeproj; path = "../node_modules/@remobile/react-native-cordova/ios/RCTCordova.xcodeproj"; sourceTree = "<group>"; };
+		CCCFEF561D0967B600B79A10 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = assets; sourceTree = "<group>"; };
+		CCCFEF571D0967B600B79A10 /* index.ios.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = index.ios.jsbundle; sourceTree = "<group>"; };
 		CCD875681CE5D8EB00388995 /* RNImagePicker.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNImagePicker.xcodeproj; path = "../node_modules/react-native-image-picker/ios/RNImagePicker.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -332,7 +335,8 @@
 			isa = PBXGroup;
 			children = (
 				CC10413F1CE5B4CC00B5D2E7 /* RNRecordAudio */,
-				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
+				CCCFEF561D0967B600B79A10 /* assets */,
+				CCCFEF571D0967B600B79A10 /* index.ios.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -781,7 +785,9 @@
 				CC0BD8351D018E100071A5B8 /* MyriadPro-BoldIt.otf in Resources */,
 				CC0BD8371D018E100071A5B8 /* MyriadPro-Semibold.otf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				CCCFEF581D0967B600B79A10 /* assets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				CCCFEF591D0967B600B79A10 /* index.ios.jsbundle in Resources */,
 				CC0BD8341D018E100071A5B8 /* MyriadPro-Bold.otf in Resources */,
 				CC0BD82E1D018C9D0071A5B8 /* OpenSans-Bold-webfont.ttf in Resources */,
 				CC0BD8381D018E100071A5B8 /* MyriadPro-SemiboldIt.otf in Resources */,

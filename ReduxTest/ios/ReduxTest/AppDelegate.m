@@ -31,7 +31,7 @@
    * on the same Wi-Fi network.
    */
 
-  jsCodeLocation = [NSURL URLWithString:@"http://192.168.31.221:8081/index.ios.bundle?platform=ios&dev=true"];
+//  jsCodeLocation = [NSURL URLWithString:@"https://raw.githubusercontent.com/SparxoOpenSource/Glood-ReactNative/master/index.js"];
 
   /**
    * OPTION 2
@@ -41,7 +41,7 @@
    * simulator in the "Release" build configuration.
    */
 
-//   jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
+   jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"index.ios" withExtension:@"jsbundle"];
   for (NSString* family in [UIFont familyNames])
   {
     NSLog(@"%@", family);
@@ -50,7 +50,7 @@
       NSLog(@" %@", name);
     }
   }
-
+  
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
                                                       moduleName:@"ReduxTest"
                                                initialProperties:nil
