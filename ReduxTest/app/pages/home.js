@@ -160,6 +160,11 @@ export class Home extends Component {
                     name: value, value: value, nav: navigator
                 });
                 break;
+            // case "WAVEVIEW":
+            //     this.props.navigator.push({
+            //         name: value, value: value, nav: navigator
+            //     });
+            //     break;
         }
     }
 
