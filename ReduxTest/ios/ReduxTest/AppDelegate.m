@@ -31,7 +31,7 @@
    * on the same Wi-Fi network.
    */
 
-//  jsCodeLocation = [NSURL URLWithString:@"https://raw.githubusercontent.com/SparxoOpenSource/Glood-ReactNative/master/index.js"];
+//  jsCodeLocation = [NSURL URLWithString:@"http://192.168.31.221:8081/index.ios.bundle?platform=ios&dev=true"];
 
   /**
    * OPTION 2

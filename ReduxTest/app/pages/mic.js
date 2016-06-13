@@ -169,6 +169,7 @@ export class Mic extends Component {
                 //发送消息
                 _this.sendMessage(back.Base64);
                 _this._refush(data);
+                console.log("*--------",everyOne+"----"+maxHeight);
                 if (data.length * everyOne > maxHeight) {
                     footerY = footerY + everyOne;
                     scorll = true;
