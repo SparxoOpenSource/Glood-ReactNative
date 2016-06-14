@@ -12,7 +12,8 @@ import { AppRegistry,
     LayoutAnimation,
     PropTypes,
     UIManager,
-    Dimensions}  from 'react-native';
+    Dimensions
+}  from 'react-native';
 
 import {RecordAudio} from "../utils/RecordAudio";
 import isAndroid from '../utils/isAndroid.js';
@@ -21,6 +22,8 @@ var {height, width} = Dimensions.get('window');
 import EventEmitter from "EventEmitter";
 import Subscribable  from "Subscribable";
 import {EventListener} from "../listener/EventListener";
+
+var currentTime = 0;
 
 const propTypes = {
     title: PropTypes.shape({
@@ -42,6 +45,18 @@ export class NewMicItem extends Component {
             w: 70,
             h: 70,
             margin_left: -70,
+            headImageW: 70,
+            headImageH: 70,
+            headImage_margin_left: -70,
+            headImage_margin_top: 0,
+            headImage_borderRadius: 35,
+            headImage_opacity: 1,
+            headImageW1: 70,
+            headImageH1: 70,
+            headImage_margin_left1: -70,
+            headImage_margin_top1: 0,
+            headImage_borderRadius1: 35,
+            headImage_opacity1: 1,
             isCisClick: false,
             playCode: props.title,
             auto: props.auto
@@ -70,13 +85,20 @@ export class NewMicItem extends Component {
     }
     render() {
         return (
-            <View style={ { justifyContent: 'center', alignItems: 'center', marginTop: 10 }}>
+            <View style={ { justifyContent: 'center', alignItems: 'center', marginTop: 20 }}>
                 <TouchableOpacity style={style.touch} onPress={this._onPress.bind(this, this.props.title, this.props.rowID, 0) } ref="view">
                     <Image source={require('../img/background.png') } style={[style.img2, { width: this.state.w, height: this.state.h }]} />
+                    <Image style={[style.img3, {
+                        width: this.state.headImageW, height: this.state.headImageH, marginLeft: this.state.headImage_margin_left,
+                        marginTop: this.state.headImage_margin_top, borderRadius: this.state.headImage_borderRadius, opacity: this.state.headImage_opacity
+                    }]} />
+                    <Image style={[style.img3, {
+                        width: this.state.headImageW1, height: this.state.headImageH1, marginLeft: this.state.headImage_margin_left1,
+                        marginTop: this.state.headImage_margin_top1, borderRadius: this.state.headImage_borderRadius1, opacity: this.state.headImage_opacity1
+                    }]} />
                     <Image source={require('../img/171604419.jpg') } style={[style.img, { marginLeft: this.state.margin_left }]}  />
                 </TouchableOpacity>
-                <Text style={style.text}>{
-                    this.props.title.ip}</Text>
+                <Text style={style.text}></Text>
             </View>
         );
     }
@@ -120,10 +142,121 @@ export class NewMicItem extends Component {
         }, 1000);
     }
 
+    _rippleAnima(time) {
+        this._headAnim(time)
+        // setTimeout(() => {
+        //     this._headAnim(1)
+        //     setTimeout(() => {
+        //         this._headAnim(1)
+        //     }, 1000);
+        // }, 1000);
+    }
+
+    _headAnim(timesss) {
+        var maxSize = 30;
+        var mixSize = 0;
+
+        LayoutAnimation.configureNext({
+
+            duration: 1 * 1000,   //持续时间
+            create: {
+                type: 'linear',
+                property: 'opacity'
+            },
+            update: {
+                type: 'linear'
+            }
+        });
+
+        this.setState({
+            headImageW: this.state.headImageW + maxSize,
+            headImageH: this.state.headImageH + maxSize,
+            headImage_borderRadius: this.state.headImageW / 2,
+            // headImage_margin_left: -(deviceWidth - this.state.headImageH - maxSize) / 2,
+            headImage_margin_top: - maxSize / 2,
+            headImage_opacity: 0.1,
+            justifyContent: 'center',
+            alignItems: 'center',
+        })
+        setTimeout(() => {
+            console.log("1111111111111111");
+            currentTime=currentTime+0.5;
+            console.log("xxxxxxxxxxxx",currentTime+"**"+timesss);
+            if(currentTime<timesss){
+                this._head1Anim(timesss);
+            }
+            else{
+                currentTime = 0;
+            }
+        }, 500);
+        setTimeout(() => {
+             console.log("222222222222222222");
+            this.setState({
+                headImageW: 70,
+                headImageH: 70,
+                headImage_margin_left: -70,
+                headImage_margin_top: 0,
+                headImage_borderRadius: 35,
+                headImage_opacity: 1
+            })
+        }, 1000);
+    }
+
+    _head1Anim(timess) {
+        var maxSize = 30;
+        var mixSize = 0;
+
+        LayoutAnimation.configureNext({
+
+            duration: 1 * 1000,   //持续时间
+            create: {
+                type: 'linear',
+                property: 'opacity'
+            },
+            update: {
+                type: 'linear'
+            }
+        });
+
+        this.setState({
+            headImageW1: this.state.headImageW1 + maxSize,
+            headImageH1: this.state.headImageH1 + maxSize,
+            headImage_borderRadius1: this.state.headImageH1/ 2,
+            // headImage_margin_left1: - (deviceWidth - this.state.headImageH1 - maxSize) / 2,
+            headImage_margin_top1: - maxSize / 2,
+            headImage_opacity1: 0.1,
+            justifyContent: 'center',
+            alignItems: 'center',
+        })
+        setTimeout(() => {
+            console.log("33333333333333333");
+            currentTime=currentTime+0.5;
+            console.log("YYYYYYYYYYYYY",currentTime+"**"+timess);
+            if(currentTime<timess){
+                this._headAnim(timess);
+            }
+            else{
+                currentTime = 0;
+            }
+        }, 500);
+        setTimeout(() => {
+            console.log("44444444444444444");
+            this.setState({
+                headImageW1: 70,
+                headImageH1: 70,
+                headImage_margin_left1: -70,
+                headImage_margin_top1: 0,
+                headImage_borderRadius1: 35,
+                headImage_opacity1: 1
+            })
+        }, 1000);
+    }
+
     _playAnim(time) {
+        this._rippleAnima(time);
         var wid = deviceWidth - 20 - 70;
         var show_width;
-        if (time >= 20) {
+        if (time >= 20) {  
             show_width = wid - 35;
         } else {
             show_width = (wid - 70) / 20 * time + 70;
@@ -181,6 +314,13 @@ const style = StyleSheet.create({
         borderRadius: 35,
         position: "absolute",
         alignItems: 'center'
+    },
+    img3: {
+        borderWidth: 0,
+        borderRadius: 35,
+        position: "absolute",
+        alignItems: 'center',
+        backgroundColor: "red"
     },
     img2: {
         borderWidth: 0,

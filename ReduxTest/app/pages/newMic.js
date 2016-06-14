@@ -50,7 +50,7 @@ const propTypes = {
     ip: PropTypes.string
 };
 
-export class newMic extends Component {
+export class NewMic extends Component {
     constructor() {
         super();
         data = new Array();
@@ -321,7 +321,7 @@ export class newMic extends Component {
     }
 }
 
-newMic.propTypes = propTypes;
+NewMic.propTypes = propTypes;
 
 const style = StyleSheet.create({
     container: {
