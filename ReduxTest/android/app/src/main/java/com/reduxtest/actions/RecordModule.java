@@ -1,10 +1,7 @@
 package com.reduxtest.actions;
 
-import android.content.Context;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
-import android.net.wifi.WifiInfo;
-import android.net.wifi.WifiManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
@@ -20,6 +17,7 @@ import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.reduxtest.utils.AudioFileFunc;
 import com.reduxtest.utils.Base64Code;
 import com.reduxtest.utils.DataTimeUtils;
+import com.reduxtest.utils.IPAddress;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -105,9 +103,21 @@ public class RecordModule extends ReactContextBaseJavaModule {
         /* 设置输出文件的格式：THREE_GPP/MPEG-4/RAW_AMR/Default
          * THREE_GPP(3gp格式，H263视频/ARM音频编码)、MPEG-4、RAW_AMR(只支持音频且音频编码要求为AMR_NB)
          */
-        mMediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.DEFAULT);
+        mMediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.RAW_AMR);
          /* 设置音频文件的编码：AAC/AMR_NB/AMR_MB/Default */
-        mMediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.DEFAULT);
+        mMediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+        /**
+         * 设置录制的音频采样率。
+         */
+        mMediaRecorder.setAudioSamplingRate(8000);
+        /**
+         * 设置录制的音频编码比特率
+         */
+//        mMediaRecorder.setAudioEncodingBitRate(4);
+        /**
+         * 设置录制的音频通道数。
+         */
+        mMediaRecorder.setAudioChannels(1);
          /* 设置输出文件的路径 */
         File file = new File(path);
         if (file.exists()) {
@@ -138,6 +148,7 @@ public class RecordModule extends ReactContextBaseJavaModule {
             callbackMap.putString("Base64", "");
             callback.invoke(callbackMap);
         } else {
+            Log.i("WavAudioName发", WavAudioName);
             String temp = Base64Code.encodeBase64File(WavAudioName);
             if (TextUtils.isEmpty(temp)) {
                 callbackMap.putBoolean("success", false);
@@ -311,25 +322,10 @@ public class RecordModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void getAndroidIpAddress(Callback callback) {
-        String result = null;
-        try {
-            WifiManager wifi = (WifiManager) context
-                    .getSystemService(Context.WIFI_SERVICE);
-            WifiInfo info = wifi.getConnectionInfo();
-            result = intToIp(info.getIpAddress());
-        } catch (Exception e) {
-            result = null;
-        }
+        String result = IPAddress.getAndroidIpAddress(context);
         callbackMap = Arguments.createMap();
         callbackMap.putString("IP", result);
         callback.invoke(callbackMap);
-    }
-
-    private String intToIp(int i) {
-        return (i & 0xFF) + "." +
-                ((i >> 8) & 0xFF) + "." +
-                ((i >> 16) & 0xFF) + "." +
-                (i >> 24 & 0xFF);
     }
 
     @ReactMethod
