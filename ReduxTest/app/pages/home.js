@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import { AppRegistry, StyleSheet, View, Text, ListView, Alert, Navigator, Image, TouchableOpacity, PropTypes, AsyncStorage }  from 'react-native';
 import {Common} from "./common";
-var data = ["MIC", "CAMERA", "NEWCAMERA"];
+var data = ["MIC", "CAMERA", "NEWCAMERA","NEWMIC"];
 var ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
 
 import feathers from 'feathers/client'
@@ -27,7 +27,8 @@ export class Home extends Component {
     constructor(props) {
         super(props);
         const options = { transports: ['websocket'], forceNew: true };
-        const socket = io('http://50.18.208.72:30030', options);
+        // const socket = io('http://50.18.208.72:30030', options);
+        const socket = io('http://192.168.31.221:3030', options);
 
         this.state = {
             connected: false,
@@ -160,11 +161,9 @@ export class Home extends Component {
                     name: value, value: value, nav: navigator
                 });
                 break;
-            // case "WAVEVIEW":
-            //     this.props.navigator.push({
-            //         name: value, value: value, nav: navigator
-            //     });
-            //     break;
+            case "NEWMIC":
+                this.login(value, navigator);
+                break;
         }
     }
 
