@@ -89,11 +89,11 @@ export class NewMicItem extends Component {
                 <TouchableOpacity style={style.touch} onPress={this._onPress.bind(this, this.props.title, this.props.rowID, 0) } ref="view">
                     <Image source={require('../img/background.png') } style={[style.img2, { width: this.state.w, height: this.state.h }]} />
                     <Image style={[style.img3, {
-                        width: this.state.headImageW, height: this.state.headImageH, marginLeft: this.state.headImage_margin_left,
+                        width: this.state.headImageW, height: this.state.headImageH, marginLeft: this.state.margin_left,
                         marginTop: this.state.headImage_margin_top, borderRadius: this.state.headImage_borderRadius, opacity: this.state.headImage_opacity
                     }]} />
                     <Image style={[style.img3, {
-                        width: this.state.headImageW1, height: this.state.headImageH1, marginLeft: this.state.headImage_margin_left1,
+                        width: this.state.headImageW1, height: this.state.headImageH1, marginLeft: this.state.margin_left,
                         marginTop: this.state.headImage_margin_top1, borderRadius: this.state.headImage_borderRadius1, opacity: this.state.headImage_opacity1
                     }]} />
                     <Image source={require('../img/171604419.jpg') } style={[style.img, { marginLeft: this.state.margin_left }]}  />
@@ -143,18 +143,17 @@ export class NewMicItem extends Component {
     }
 
     _rippleAnima(time) {
-        this._headAnim(time)
-        // setTimeout(() => {
-        //     this._headAnim(1)
-        //     setTimeout(() => {
-        //         this._headAnim(1)
-        //     }, 1000);
-        // }, 1000);
+        this._headAnim(time);
     }
 
     _headAnim(timesss) {
         var maxSize = 30;
         var mixSize = 0;
+
+        if (isAndroid()) {
+            //安卓平台使用 LayoutAnimation 动画必须加上这么一句代码（否则动画会失效）
+            UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
+        }
 
         LayoutAnimation.configureNext({
 
@@ -171,12 +170,10 @@ export class NewMicItem extends Component {
         this.setState({
             headImageW: this.state.headImageW + maxSize,
             headImageH: this.state.headImageH + maxSize,
-            headImage_borderRadius: this.state.headImageW / 2,
+            headImage_borderRadius: (this.state.headImageW + maxSize/2) / 2,
             // headImage_margin_left: -(deviceWidth - this.state.headImageH - maxSize) / 2,
             headImage_margin_top: - maxSize / 2,
             headImage_opacity: 0.1,
-            justifyContent: 'center',
-            alignItems: 'center',
         })
         setTimeout(() => {
             console.log("1111111111111111");
@@ -206,6 +203,11 @@ export class NewMicItem extends Component {
         var maxSize = 30;
         var mixSize = 0;
 
+        if (isAndroid()) {
+            //安卓平台使用 LayoutAnimation 动画必须加上这么一句代码（否则动画会失效）
+            UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
+        }
+
         LayoutAnimation.configureNext({
 
             duration: 1 * 1000,   //持续时间
@@ -221,12 +223,10 @@ export class NewMicItem extends Component {
         this.setState({
             headImageW1: this.state.headImageW1 + maxSize,
             headImageH1: this.state.headImageH1 + maxSize,
-            headImage_borderRadius1: this.state.headImageH1/ 2,
+            headImage_borderRadius1: (this.state.headImageH1 + maxSize/2)/ 2,
             // headImage_margin_left1: - (deviceWidth - this.state.headImageH1 - maxSize) / 2,
             headImage_margin_top1: - maxSize / 2,
             headImage_opacity1: 0.1,
-            justifyContent: 'center',
-            alignItems: 'center',
         })
         setTimeout(() => {
             console.log("33333333333333333");
