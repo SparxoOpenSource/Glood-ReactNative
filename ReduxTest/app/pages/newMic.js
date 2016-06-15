@@ -30,7 +30,9 @@ var tt = 70;
 var app;
 var footerY = 0;
 var everyOne = isAndroid() ? 120 : 116;
+var everyOnexxx = isAndroid() ? 120 : 116;
 var index = 0;
+var {deviceHeight, deviceWidth} = Dimensions.get('window');
 var STATUS_BAR_HEIGHT = Navigator.NavigationBar.Styles.General.StatusBarHeight;
 // if (isAndroid()) {
 //     var STATUS_BAR_HEIGHT = ExtraDimensions.get('STATUS_BAR_HEIGHT');
@@ -61,7 +63,8 @@ export class NewMic extends Component {
         this.state = {
             dataSource: ds.cloneWithRows(data),
             autoImage: myImg,
-            voiceImage: voiceImg
+            voiceImage: voiceImg,
+            margin_Top: maxHeight - 40,
         }
         this._accessFileName();
     }
@@ -69,7 +72,7 @@ export class NewMic extends Component {
         return (
             <View style={style.container}>
                 <Common navigator={this.props.navigator} title="Crazy May Fest 2016"/>
-                <View style={style.content}>
+                <View style={[style.content, { marginTop: this.state.margin_Top}]}>
                     <RefreshableListView
                         enableEmptySections = {true}
                         ref={LISTVIEW_REF}
@@ -169,7 +172,7 @@ export class NewMic extends Component {
                 //发送消息
                 _this.sendMessage(back.Base64);
                 _this._refush(data);
-                console.log("*--------",everyOne+"----"+maxHeight);
+                console.log("*--------", everyOne + "----" + maxHeight);
                 if (data.length * everyOne > maxHeight) {
                     footerY = footerY + everyOne;
                     scorll = true;
@@ -184,8 +187,16 @@ export class NewMic extends Component {
      * 更新数据到UI
      */
     _refush(value) {
+        console.log("-------------", value);
+        if (value.length * everyOne > maxHeight) {
+            everyOnexxx = 0;
+        }
+        else {
+            everyOnexxx;
+        }
         this.setState({
-            dataSource: this.state.dataSource.cloneWithRows(value)
+            dataSource: this.state.dataSource.cloneWithRows(value),
+            margin_Top: this.state.margin_Top - everyOnexxx,
         })
     }
     /**
@@ -275,7 +286,7 @@ export class NewMic extends Component {
      * 发送消息
      */
     sendMessage(message = null, rowID = null) {
-        this.props.app.service('messages').create({ text: message}).then(result => {
+        this.props.app.service('messages').create({ text: message }).then(result => {
             console.log('message created!');
         }).catch((error) => {
             console.log('ERROR creating message');
@@ -380,5 +391,10 @@ const style = StyleSheet.create({
         height: 70,
         borderWidth: 0,
         borderRadius: 35,
+    },
+    ShieldingLayer: {
+        width: deviceWidth,
+        height: everyOne,
+        backgroundColor: 'red',
     }
 });
