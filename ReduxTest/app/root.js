@@ -8,6 +8,7 @@ import {Cameraq} from "../app/pages/camera";
 import {PhototWall} from "../app/pages/photoWall"
 import {NewCamera} from "../app/pages/newcamera"
 import {NewMic} from "../app/pages/newMic"
+import {Try} from "../app/pages/try"
 
 
 export class Root extends Component {
@@ -28,6 +29,8 @@ export class Root extends Component {
                 return (<PhototWall navigator={router.nav}  title={router.value}/>);
             case "NEWCAMERA":
                 return (<NewCamera navigator={router.nav}  title={router.value}/>);
+            case "TRY":
+                return (<Try navigator={router.nav}  title={router.value}/>);
         }
 
     }
