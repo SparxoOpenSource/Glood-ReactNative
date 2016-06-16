@@ -29,9 +29,10 @@ var ss = 70;
 var tt = 70;
 var app;
 var footerY = 0;
-var everyOne = isAndroid() ? 120 : 116;
-var everyOnexxx = isAndroid() ? 120 : 116;
+var everyOne = isAndroid() ? 116 : 120;
+var everyOnexxx = isAndroid() ? 116 : 120;
 var index = 0;
+var topp = -120;
 var {deviceHeight, deviceWidth} = Dimensions.get('window');
 var STATUS_BAR_HEIGHT = Navigator.NavigationBar.Styles.General.StatusBarHeight;
 // if (isAndroid()) {
@@ -65,6 +66,7 @@ export class NewMic extends Component {
             autoImage: myImg,
             voiceImage: voiceImg,
             margin_Top: maxHeight - 40,
+            ShieldingLayer_Margin_Top:topp,
         }
         this._accessFileName();
     }
@@ -105,6 +107,9 @@ export class NewMic extends Component {
     /**
      * 新消息进来时进行滚动
      */
+                        //     <View style={[style.shieldingLayer,{backgroundColor:'red',width:deviceWidth,height:120,marginTop:-800}]}>
+                        // </View>
+
     _scrollToBottom() {
         this.scrollResponder.scrollTo({
             y: footerY,
@@ -194,9 +199,12 @@ export class NewMic extends Component {
         else {
             everyOnexxx;
         }
+        topp = topp-everyOnexxx;
+        console.log("=============",topp);
         this.setState({
             dataSource: this.state.dataSource.cloneWithRows(value),
             margin_Top: this.state.margin_Top - everyOnexxx,
+            ShieldingLayer_Margin_Top:topp,
         })
     }
     /**
@@ -392,9 +400,9 @@ const style = StyleSheet.create({
         borderWidth: 0,
         borderRadius: 35,
     },
-    ShieldingLayer: {
-        width: deviceWidth,
-        height: everyOne,
-        backgroundColor: 'red',
-    }
+    // ShieldingLayer: {
+    //     width: deviceWidth,
+    //     height: everyOne,
+    //     backgroundColor: 'red',
+    // }
 });

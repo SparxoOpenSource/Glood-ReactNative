@@ -42,18 +42,18 @@ export class NewMicItem extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            w: 70,
+            w: 170,
             h: 70,
-            margin_left: -70,
+            margin_left: -120,
             headImageW: 70,
             headImageH: 70,
-            headImage_margin_left: -70,
+            headImage_margin_left: -120,
             headImage_margin_top: 0,
             headImage_borderRadius: 35,
             headImage_opacity: 0,
             headImageW1: 70,
             headImageH1: 70,
-            headImage_margin_left1: -70,
+            headImage_margin_left1: -120,
             headImage_margin_top1: 0,
             headImage_borderRadius1: 35,
             headImage_opacity1: 0,
@@ -85,15 +85,15 @@ export class NewMicItem extends Component {
     }
     render() {
         return (
-            <View style={ { justifyContent: 'center', alignItems: 'center', marginTop: 20,backgroundColor:"#333333" }}>
+            <View style={ { justifyContent: 'center', alignItems: 'center', marginTop: 20 }}>
                 <TouchableOpacity style={style.touch} onPress={this._onPress.bind(this, this.props.title, this.props.rowID, 0) } ref="view">
                     <Image source={require('../img/background.png') } style={[style.img2, { width: this.state.w, height: this.state.h }]} />
                     <View style={[style.img3, {
-                        width: this.state.headImageW, height: this.state.headImageH, marginLeft: this.state.margin_left,
+                        width: this.state.headImageW, height: this.state.headImageH, marginLeft: this.state.headImage_margin_left,
                         marginTop: this.state.headImage_margin_top, borderRadius: this.state.headImage_borderRadius, opacity: this.state.headImage_opacity
                     }]} />
                     <View style={[style.img3, {
-                        width: this.state.headImageW1, height: this.state.headImageH1, marginLeft: this.state.margin_left,
+                        width: this.state.headImageW1, height: this.state.headImageH1, marginLeft: this.state.headImage_margin_left1,
                         marginTop: this.state.headImage_margin_top1, borderRadius: this.state.headImage_borderRadius1, opacity: this.state.headImage_opacity1
                     }]} />
                     <Image source={require('../img/171604419.jpg') } style={[style.img, { marginLeft: this.state.margin_left }]}  />
@@ -113,8 +113,9 @@ export class NewMicItem extends Component {
             EventListener.trigger("AutoPlayAllRecord", value, rowId, 1);
             return;
         }
+        this._rippleAnima(time);
         if (this.state.isCisClick == false) {
-            this._playAnim(time);
+            // this._playAnim(time);
         }
         this._play(value, rowId, bool);
     }
@@ -147,8 +148,15 @@ export class NewMicItem extends Component {
     }
 
     _headAnim(timesss) {
-        var maxSize = 30;
+        var maxSize = 40;
         var mixSize = 0;
+        var wid = deviceWidth - 20 - 70;
+        var show_width;
+        if (timesss >= 20) {
+            show_width = wid - 35;
+        } else {
+            show_width = (wid - 70) / 20 * timesss + 70;
+        }
 
         if (isAndroid()) {
             //安卓平台使用 LayoutAnimation 动画必须加上这么一句代码（否则动画会失效）
@@ -170,28 +178,28 @@ export class NewMicItem extends Component {
         this.setState({
             headImageW: this.state.headImageW + maxSize,
             headImageH: this.state.headImageH + maxSize,
-            headImage_borderRadius: (this.state.headImageW + maxSize/2) / 2,
-            // headImage_margin_left: -(deviceWidth - this.state.headImageH - maxSize) / 2,
+            headImage_borderRadius: (this.state.headImageW + maxSize / 2) / 2,
+            headImage_margin_left: -120-20,
             headImage_margin_top: - maxSize / 2,
             headImage_opacity: 0.2,
         })
         setTimeout(() => {
             console.log("1111111111111111");
-            currentTime=currentTime+0.5;
-            console.log("xxxxxxxxxxxx",currentTime+"**"+timesss);
-            if(currentTime<timesss){
+            currentTime = currentTime + 0.5;
+            console.log("xxxxxxxxxxxx", currentTime + "**" + timesss);
+            if (currentTime < timesss) {
                 this._head1Anim(timesss);
             }
-            else{
+            else {
                 currentTime = 0;
             }
         }, 500);
         setTimeout(() => {
-             console.log("222222222222222222");
+            console.log("222222222222222222");
             this.setState({
                 headImageW: 70,
                 headImageH: 70,
-                headImage_margin_left: -70,
+                headImage_margin_left: -120,
                 headImage_margin_top: 0,
                 headImage_borderRadius: 35,
                 headImage_opacity: 0
@@ -200,9 +208,15 @@ export class NewMicItem extends Component {
     }
 
     _head1Anim(timess) {
-        var maxSize = 30;
+        var maxSize = 40;
         var mixSize = 0;
-
+        var wid = deviceWidth - 20 - 70;
+        var show_width;
+        if (timess >= 20) {
+            show_width = wid - 35;
+        } else {
+            show_width = (wid - 70) / 20 * timess + 70;
+        }
         if (isAndroid()) {
             //安卓平台使用 LayoutAnimation 动画必须加上这么一句代码（否则动画会失效）
             UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
@@ -223,19 +237,19 @@ export class NewMicItem extends Component {
         this.setState({
             headImageW1: this.state.headImageW1 + maxSize,
             headImageH1: this.state.headImageH1 + maxSize,
-            headImage_borderRadius1: (this.state.headImageH1 + maxSize/2)/ 2,
-            // headImage_margin_left1: - (deviceWidth - this.state.headImageH1 - maxSize) / 2,
+            headImage_borderRadius1: (this.state.headImageH1 + maxSize / 2) / 2,
+            headImage_margin_left1: -120-20,
             headImage_margin_top1: - maxSize / 2,
             headImage_opacity1: 0.2,
         })
         setTimeout(() => {
             console.log("33333333333333333");
-            currentTime=currentTime+0.5;
-            console.log("YYYYYYYYYYYYY",currentTime+"**"+timess);
-            if(currentTime<timess){
+            currentTime = currentTime + 0.5;
+            console.log("YYYYYYYYYYYYY", currentTime + "**" + timess);
+            if (currentTime < timess) {
                 this._headAnim(timess);
             }
-            else{
+            else {
                 currentTime = 0;
             }
         }, 500);
@@ -244,7 +258,7 @@ export class NewMicItem extends Component {
             this.setState({
                 headImageW1: 70,
                 headImageH1: 70,
-                headImage_margin_left1: -70,
+                headImage_margin_left1: -120,
                 headImage_margin_top1: 0,
                 headImage_borderRadius1: 35,
                 headImage_opacity1: 0
@@ -253,10 +267,10 @@ export class NewMicItem extends Component {
     }
 
     _playAnim(time) {
-        this._rippleAnima(time);
+
         var wid = deviceWidth - 20 - 70;
         var show_width;
-        if (time >= 20) {  
+        if (time >= 20) {
             show_width = wid - 35;
         } else {
             show_width = (wid - 70) / 20 * time + 70;

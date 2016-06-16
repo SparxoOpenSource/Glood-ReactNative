@@ -29,7 +29,7 @@ var ss = 70;
 var tt = 70;
 var app;
 var footerY = 0;
-var everyOne = isAndroid() ? 120 : 116;
+var everyOne = isAndroid() ? 116 : 120;
 var index = 0;
 var STATUS_BAR_HEIGHT = Navigator.NavigationBar.Styles.General.StatusBarHeight;
 // if (isAndroid()) {
