@@ -138,9 +138,8 @@ export class NewMicItem extends Component {
      */
     _setTime(value, auto) {
         setTimeout(() => {
-            if (auto)
-                this._onPress(value);
-        }, 1000);
+            this._playAnim(value);
+        }, 200);
     }
 
     _rippleAnima(time) {
@@ -275,21 +274,6 @@ export class NewMicItem extends Component {
         } else {
             show_width = (wid - 70) / 20 * time + 70;
         }
-        if (isAndroid()) {
-            //安卓平台使用 LayoutAnimation 动画必须加上这么一句代码（否则动画会失效）
-            UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
-        }
-        LayoutAnimation.configureNext({
-
-            duration: time * 1000,   //持续时间
-            create: {
-                type: 'linear',
-                property: 'opacity'
-            },
-            update: {
-                type: 'linear'
-            }
-        });
         this.setState({
             w: this.state.w + show_width,
             h: this.state.h,
