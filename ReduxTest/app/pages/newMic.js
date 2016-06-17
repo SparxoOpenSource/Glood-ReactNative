@@ -65,7 +65,7 @@ export class NewMic extends Component {
             dataSource: ds.cloneWithRows(data),
             autoImage: myImg,
             voiceImage: voiceImg,
-            margin_Top: maxHeight - 40,
+            margin_Top: maxHeight - 20,
             ShieldingLayer_Margin_Top:topp,
         }
         this._accessFileName();

@@ -376,7 +376,7 @@ const style = StyleSheet.create({
         borderRadius: 35,
         position: "absolute",
         alignItems: 'center',
-        backgroundColor: "red"
+        backgroundColor: "green"
     },
     img2: {
         borderWidth: 0,
