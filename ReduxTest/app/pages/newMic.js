@@ -192,7 +192,6 @@ export class NewMic extends Component {
      * 更新数据到UI
      */
     _refush(value) {
-        console.log("-------------", value);
         if (value.length * everyOne > maxHeight) {
             everyOnexxx = 0;
         }
@@ -200,7 +199,6 @@ export class NewMic extends Component {
             everyOnexxx;
         }
         topp = topp-everyOnexxx;
-        console.log("=============",topp);
         this.setState({
             dataSource: this.state.dataSource.cloneWithRows(value),
             margin_Top: this.state.margin_Top - everyOnexxx,
