@@ -42,18 +42,18 @@ export class NewMicItem extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            w: 170,
+            w: 70,
             h: 70,
-            margin_left: -120,
+            margin_left: -70,
             headImageW: 70,
             headImageH: 70,
-            headImage_margin_left: -120,
+            
             headImage_margin_top: 0,
             headImage_borderRadius: 35,
             headImage_opacity: 0,
             headImageW1: 70,
             headImageH1: 70,
-            headImage_margin_left1: -120,
+            
             headImage_margin_top1: 0,
             headImage_borderRadius1: 35,
             headImage_opacity1: 0,
@@ -61,7 +61,7 @@ export class NewMicItem extends Component {
             playCode: props.title,
             auto: props.auto
         }
-        this._setTime(props.title, props.auto, 2);
+        this._setTime(props.title.time);
     }
     componentDidMount() {
         EventListener.on("AutoPlayAllRecord").then(this.playFunction.bind(this));
@@ -136,10 +136,14 @@ export class NewMicItem extends Component {
     /**
      * 设置延迟时间
      */
-    _setTime(value, auto) {
+    _setTime(value) {
         setTimeout(() => {
             this._playAnim(value);
-        }, 200);
+             this.setState({
+                 headImage_margin_left: (-70 - this.state.w) / 2,
+                 headImage_margin_left1: (-70 - this.state.w) / 2,
+             })
+        }, 100);
     }
 
     _rippleAnima(time) {
@@ -149,14 +153,6 @@ export class NewMicItem extends Component {
     _headAnim(timesss) {
         var maxSize = 40;
         var mixSize = 0;
-        var wid = deviceWidth - 20 - 70;
-        var show_width;
-        if (timesss >= 20) {
-            show_width = wid - 35;
-        } else {
-            show_width = (wid - 70) / 20 * timesss + 70;
-        }
-
         if (isAndroid()) {
             //安卓平台使用 LayoutAnimation 动画必须加上这么一句代码（否则动画会失效）
             UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
@@ -178,7 +174,7 @@ export class NewMicItem extends Component {
             headImageW: this.state.headImageW + maxSize,
             headImageH: this.state.headImageH + maxSize,
             headImage_borderRadius: (this.state.headImageW + maxSize / 2) / 2,
-            headImage_margin_left: -120-20,
+            headImage_margin_left: (-70-this.state.w)/2-20,
             headImage_margin_top: - maxSize / 2,
             headImage_opacity: 0.2,
         })
@@ -198,7 +194,7 @@ export class NewMicItem extends Component {
             this.setState({
                 headImageW: 70,
                 headImageH: 70,
-                headImage_margin_left: -120,
+                headImage_margin_left: (-70-this.state.w)/2,
                 headImage_margin_top: 0,
                 headImage_borderRadius: 35,
                 headImage_opacity: 0
@@ -209,13 +205,6 @@ export class NewMicItem extends Component {
     _head1Anim(timess) {
         var maxSize = 40;
         var mixSize = 0;
-        var wid = deviceWidth - 20 - 70;
-        var show_width;
-        if (timess >= 20) {
-            show_width = wid - 35;
-        } else {
-            show_width = (wid - 70) / 20 * timess + 70;
-        }
         if (isAndroid()) {
             //安卓平台使用 LayoutAnimation 动画必须加上这么一句代码（否则动画会失效）
             UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
@@ -237,7 +226,7 @@ export class NewMicItem extends Component {
             headImageW1: this.state.headImageW1 + maxSize,
             headImageH1: this.state.headImageH1 + maxSize,
             headImage_borderRadius1: (this.state.headImageH1 + maxSize / 2) / 2,
-            headImage_margin_left1: -120-20,
+            headImage_margin_left1: (-70-this.state.w)/2-20,
             headImage_margin_top1: - maxSize / 2,
             headImage_opacity1: 0.2,
         })
@@ -257,7 +246,7 @@ export class NewMicItem extends Component {
             this.setState({
                 headImageW1: 70,
                 headImageH1: 70,
-                headImage_margin_left1: -120,
+                headImage_margin_left1: (-70-this.state.w)/2,
                 headImage_margin_top1: 0,
                 headImage_borderRadius1: 35,
                 headImage_opacity1: 0
