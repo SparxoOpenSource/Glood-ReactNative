@@ -14,15 +14,22 @@ import { AppRegistry,
     Animated,
     Dimensions,
     UIManager,
+    Easing,
     DeviceEventEmitter }  from 'react-native';
 import {Common} from "./common";
 import isAndroid from '../utils/isAndroid.js';
 var {height, width} = Dimensions.get('window');
-var maxSize = 40;
+var maxSize = 60;
 var cha = width - 330;
 var leftEvery = 330 / 2 - 70 / 2 + cha / 2;
 var currentTime = 0;
 var currentTime1 = 0;
+var _animateHandler;
+var _animateHandler2;
+var viewOpacity_1 = new Animated.Value(0.3);
+var viewOpacity_2 = new Animated.Value(0.3);
+var runBool_1 = false;
+var runBool_2 = false;
 const propTypes = {
     title: PropTypes.string,
     navigator: PropTypes.object
@@ -31,42 +38,43 @@ export class Try extends Component {
     constructor() {
         super();
         this.state = {
-            imageTop: 20,
+            imageTop: maxSize / 2,
             imageLeft: leftEvery,
             viewWidth_1: 70,
             viewHeight_1: 70,
-            viewTop_1: 20,
+            viewTop_1: maxSize / 2,
             viewLeft_1: leftEvery,
             viewRadius_1: 35,
             viewWidth_2: 70,
             viewHeight_2: 70,
-            viewTop_2: 20,
+            viewTop_2: maxSize / 2,
             viewLeft_2: leftEvery,
             viewRadius_2: 35,
-            viewOpacity_1: 0,
-            viewOpacity_2: 0,
+            viewOpacity_1: viewOpacity_1,
+            viewOpacity_2: viewOpacity_2,
+            bounceValue_1: new Animated.Value(1),
+            bounceValue_2: new Animated.Value(1),
         }
     }
-    componentDidMount(props) {
+    componentDidMount() {
         if (isAndroid()) {
             //安卓平台使用 LayoutAnimation 动画必须加上这么一句代码（否则动画会失效）
             UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
         }
-        // Alert.alert(height + "__" + width);
     }
     render() {
         return (
             <View style={{ flexDirection: 'column', justifyContent: 'space-between', backgroundColor: 'white', }}>
                 <Common navigator={this.props.navigator} title={this.props.title}/>
                 <View style={{
-                    height: 110,
+                    height: 70 + maxSize,
                     width: width
                 }}>
                     <Image source={require('../img/background.png') } style={{
                         width: 330, height: 70, borderWidth: 0, borderRadius: 35,
-                        position: "absolute", marginLeft: cha / 2, marginTop: 20
+                        position: "absolute", marginLeft: cha / 2, marginTop: maxSize / 2
                     }} />
-                    <View style={{
+                    <Animated.View style={{
                         width: this.state.viewWidth_1,
                         height: this.state.viewHeight_1,
                         borderWidth: 0,
@@ -77,9 +85,10 @@ export class Try extends Component {
                         alignItems: 'center',
                         marginLeft: this.state.viewLeft_1,
                         marginTop: this.state.viewTop_1,
-                        position: "absolute"
+                        position: "absolute",
+                        transform: [{ scale: this.state.bounceValue_1 }]
                     }}/>
-                    <View style={{
+                    <Animated.View style={{
                         width: this.state.viewWidth_2,
                         height: this.state.viewHeight_2,
                         borderWidth: 0,
@@ -90,7 +99,8 @@ export class Try extends Component {
                         alignItems: 'center',
                         position: "absolute",
                         marginLeft: this.state.viewLeft_2,
-                        marginTop: this.state.viewTop_2
+                        marginTop: this.state.viewTop_2,
+                        transform: [{ scale: this.state.bounceValue_2 }]
                     }}/>
                     <TouchableOpacity style={{
                         width: 70, height: 70,
@@ -109,93 +119,92 @@ export class Try extends Component {
         );
     }
     _onPress() {
-        this._playAnimOne(5);
-        setTimeout(() => {
-
-            this._playAnimTwo(5);
-        }, 500);
+        this._playAnimOne(10);
     }
     _playAnimOne(times) {
-        LayoutAnimation.configureNext({
-            duration: 1 * 1000,   //持续时间
-            create: {
-                type: 'linear',
-                property: 'opacity'
-            },
-            update: {
-                type: 'linear'
-            }
-        });
-        this.setState({
-            viewWidth_1: 110,
-            viewHeight_1: 110,
-            viewTop_1: 0,
-            viewLeft_1: leftEvery - maxSize / 2,
-            viewRadius_1: this.state.viewHeight_1,
-            viewOpacity_2: this.state.viewOpacity_2 + 0.2,
-            viewOpacity_1: this.state.viewOpacity_1 + 0.2
-        });
-        setTimeout(() => {
-            currentTime = currentTime + 0.5;
-            if (currentTime < times) {
-                this._playAnimTwo(times);
-            }
-            else {
-                currentTime = 0;
-            }
-        }, 500);
-        setTimeout(() => {
-            this.setState({
-                viewWidth_1: 70,
-                viewHeight_1: 70,
-                viewTop_1: 20,
-                viewLeft_1: leftEvery,
-                viewRadius_1: this.state.viewHeight_1,
-                viewOpacity_2: this.state.viewOpacity_2 - 0.2,
-                viewOpacity_1: this.state.viewOpacity_1 - 0.2
+        currentTime = currentTime + 0.5;
+        if (currentTime >= times) {
+            currentTime = 0;
+            return;
+        }
+
+        _animateHandler = Animated.parallel([
+            Animated.timing(this.state.bounceValue_1, {
+                toValue: 1.8,  //透明度动画最终值
+                duration:800,   //动画时长3000毫秒
+                easing: Easing.linear  //缓动函数
+            }),
+            Animated.timing(this.state.viewOpacity_1, {
+                toValue: 0,  //透明度动画最终值
+                duration:800,   //动画时长3000毫秒
+                easing: Easing.linear  //缓动函数
             })
-        }, 1000);
+        ]);
+        this.state.viewOpacity_1.addListener((callback) => {
+            if (callback.value > 0.1) {
+                runBool_1 = false;
+            } else if (callback.value <= 0.1) {
+                if (runBool_1 === false) {
+                    this._playAnimTwo(10);
+                    runBool_1 = true;
+                }
+            }
+            if (callback.value === 0) {
+                this.setState({
+                    viewWidth_1: 70,
+                    viewHeight_1: 70,
+                    viewTop_1: maxSize / 2,
+                    viewLeft_1: leftEvery,
+                    viewRadius_1: this.state.viewHeight_1,
+                    viewOpacity_1: new Animated.Value(0.3),
+                    bounceValue_1: new Animated.Value(1),
+                })
+            }
+        });
+        _animateHandler.start && _animateHandler.start();
     }
     _playAnimTwo(times) {
-        LayoutAnimation.configureNext({
-            duration: 1 * 1000,   //持续时间
-            create: {
-                type: 'linear',
-                property: 'opacity'
-            },
-            update: {
-                type: 'linear'
+        currentTime = currentTime + 0.5;
+        if (currentTime >= times) {
+            currentTime = 0;
+            return;
+        }
+        _animateHandler2 = Animated.parallel([
+            Animated.timing(this.state.bounceValue_2, {
+                toValue: 1.8,  //透明度动画最终值
+                duration:800,   //动画时长3000毫秒
+                easing: Easing.linear  //缓动函数
+            }),
+            Animated.timing(this.state.viewOpacity_2, {
+                toValue: 0,  //透明度动画最终值
+                duration: 800,   //动画时长3000毫秒
+                easing: Easing.linear  //缓动函数
+            })
+        ]);
+
+        this.state.viewOpacity_2.addListener(callback => {
+            console.log("this.state.viewOpacity_2", callback.value);
+            if (callback.value > 0.1) {
+                runBool_2 = false;
+            } else if (callback.value <= 0.1) {
+                if (runBool_2 === false) {
+                    this._playAnimOne(10);
+                    runBool_2 = true;
+                }
+            }
+            if (callback.value === 0) {
+                this.setState({
+                    viewWidth_2: 70,
+                    viewHeight_2: 70,
+                    viewTop_2: maxSize / 2,
+                    viewLeft_2: leftEvery,
+                    viewRadius_2: this.state.viewHeight_1,
+                    viewOpacity_2: new Animated.Value(0.3),
+                    bounceValue_2: new Animated.Value(1),
+                })
             }
         });
-        this.setState({
-            viewWidth_2: 110,
-            viewHeight_2: 110,
-            viewTop_2: 0,
-            viewLeft_2: leftEvery - maxSize / 2,
-            viewRadius_2: this.state.viewHeight_2,
-            viewOpacity_2: this.state.viewOpacity_2 + 0.2,
-            viewOpacity_1: this.state.viewOpacity_1 + 0.2
-        })
-        setTimeout(() => {
-            currentTime1 = currentTime1 + 0.5;
-            if (currentTime1 < times) {
-                this._playAnimOne(times);
-            }
-            else {
-                currentTime1 = 0;
-            }
-        }, 500);
-        setTimeout(() => {
-            this.setState({
-                viewWidth_2: 70,
-                viewHeight_2: 70,
-                viewTop_2: 20,
-                viewLeft_2: leftEvery,
-                viewRadius_2: this.state.viewHeight_2,
-                viewOpacity_2: this.state.viewOpacity_2 - 0.2,
-                viewOpacity_1: this.state.viewOpacity_1 - 0.2
-            })
-        }, 1000);
+        _animateHandler2.start && _animateHandler2.start();
     }
 }
 Try.propTypes = propTypes;
