@@ -9,6 +9,7 @@ import {PhototWall} from "../app/pages/photoWall"
 import {NewCamera} from "../app/pages/newcamera"
 import {NewMic} from "../app/pages/newMic"
 import {Try} from "../app/pages/try"
+import {Tickets} from "../app/pages/tickets"
 
 
 export class Root extends Component {
@@ -19,6 +20,8 @@ export class Root extends Component {
             case "welcome":
                 component = Home;
                 return (<Home navigator={navigator} title={"我的主页"}/>);
+            case "TICKETS":
+                return (<Tickets navigator={router.nav}  title={'Tickets'}/>);
             case "MIC":
                 return (<Mic navigator={router.nav} title={router.value} app={router.app} ip={router.ip}/>);
             case "NEWMIC":
