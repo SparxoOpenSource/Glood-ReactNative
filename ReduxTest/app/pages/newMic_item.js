@@ -31,7 +31,7 @@ var STATUS_BAR_HEIGHT = Navigator.NavigationBar.Styles.General.StatusBarHeight;
 //     var STATUS_BAR_HEIGHT = ExtraDimensions.get('STATUS_BAR_HEIGHT');
 // }
 var maxHeight = height - Navigator.NavigationBar.Styles.General.NavBarHeight - STATUS_BAR_HEIGHT - 64 - 40;
-var maxSize = 20;
+var maxSize = isAndroid() ? 20 : 25;
 var cha = width - 70;
 var leftEvery = 70 / 2 - 70 / 2 + cha / 2;
 var currentTime = 0;
@@ -108,6 +108,7 @@ export class NewMicItem extends Component {
     firstTopMargin(number) {
         if (this.props.rowID === 0) {
             var temp = number * (80 + maxSize);
+            console.log('--*-----',temp+'--'+number);
             if (maxHeight > temp) {
                 this.setState({
                     firstTop: maxHeight - temp

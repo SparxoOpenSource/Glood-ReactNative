@@ -29,10 +29,9 @@ var ss = 70;
 var tt = 70;
 var app;
 var footerY = 0;
-var everyOne = isAndroid() ? 116 : 120;
-var everyOnexxx = isAndroid() ? 116 : 120;
+var everyOne = isAndroid() ? 100 : 105;
+var everyOnexxx = isAndroid() ? 100 : 105;
 var index = 0;
-var topp = -120;
 var {deviceHeight, deviceWidth} = Dimensions.get('window');
 var STATUS_BAR_HEIGHT = Navigator.NavigationBar.Styles.General.StatusBarHeight;
 // if (isAndroid()) {
@@ -195,7 +194,7 @@ export class NewMic extends Component {
         })
         setTimeout(() => {
             EventListener.trigger("firstTop", value.length);
-        }, 100);
+        }, 1);
     }
     /**
      * 读取保存在磁盘中的录音文件
