@@ -49,9 +49,13 @@ export class Tickets extends Component {
     }
     render() {
         return (
-            <CoverFlow style={style.converflow}>
-                {this.state.images.map((src, i) => <Image style={{width:100,height:100, marginLeft: -55,}} key={i} source={src} />) }
-            </CoverFlow>
+            <View style={style.container}>
+                <Common navigator={this.props.navigator} title={this.props.title}/>
+                <CoverFlow style={style.converflow}>
+                    {this.state.images.map((src, i) => <Image style={{width:200,height:300,marginTop:80,marginLeft:-23,borderRadius: 5}} key={i} source={src} />) }
+                </CoverFlow>
+            </View>
+
         );
     }
 }
@@ -81,6 +85,6 @@ const style = StyleSheet.create({
         height: 300,
     },
     converflow: {
-        
+
     }
 });
