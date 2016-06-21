@@ -15,13 +15,16 @@ import { AppRegistry,
     Dimensions,
     UIManager,
     ScrollView,
+    Platform,
     DeviceEventEmitter }  from 'react-native';
 import {Common} from "./common";
 import isAndroid from '../utils/isAndroid.js';
 import ScrollableTabView, { DefaultTabBar, } from 'react-native-scrollable-tab-view';
 import { CoverFlow } from 'react-native-pan-controller';
+var image_margin_left;
 var widthh = Dimensions.get('window').width
-var heightt = Dimensions.get('window').height
+var STATUS_BAR_HEIGHT = Navigator.NavigationBar.Styles.General.StatusBarHeight;
+var heightt = Dimensions.get('window').height - Navigator.NavigationBar.Styles.General.NavBarHeight - STATUS_BAR_HEIGHT
 var headImageData = [
     { headImageIcon: 'http://192.168.31.221:8081/app/img/171604419.jpg' },
     { headImageIcon: 'http://192.168.31.221:8081/app/img/171604419.jpg' },
@@ -50,12 +53,20 @@ export class Tickets extends Component {
         }
     }
     render() {
-        console.log('----///-----',widthh+'----'+heightt);
+
+        console.log('----///-----', widthh + '----' + heightt);
+        if (Platform.OS === 'android') {
+            image_margin_left = -widthh * (0 / 414);
+        }
+        else{
+            image_margin_left = -widthh * (3 / 414);
+        }
         return (
             <View style={style.container}>
                 <Common navigator={this.props.navigator} title={this.props.title}/>
                 <CoverFlow style={style.converflow}>
-                    {this.state.images.map((src, i) => <Image style={{width:widthh*(200/414),height:heightt*(300/736),marginTop:heightt*(80/736),marginLeft:-widthh*(23/414),borderRadius: 5}} key={i} source={src} />) }
+                    {this.state.images.map((src, i) => <Image style={{ width: widthh * (200 / 414), height: heightt * (300 / 736), marginTop: heightt * (80 / 736),
+                         marginLeft: image_margin_left, borderRadius: 5 }} key={i} source={src} />) }
                 </CoverFlow>
             </View>
 
@@ -88,6 +99,6 @@ const style = StyleSheet.create({
         height: 300,
     },
     converflow: {
-
-    }
+        backgroundColor: 'red',
+    },
 });
