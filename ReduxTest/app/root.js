@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import { AppRegistry, StyleSheet, View, Text, ListView, Alert, Navigator, Image, TouchableOpacity, StatusBarIOS,
-    Platform }  from 'react-native';
+    Platform, Dimensions }  from 'react-native';
 var _navigator;
 import {Home} from "../app/pages/home";
 import {Mic} from "../app/pages/mic";
@@ -10,6 +10,7 @@ import {NewCamera} from "../app/pages/newcamera"
 import {NewMic} from "../app/pages/newMic"
 import {Try} from "../app/pages/try"
 import {Tickets} from "../app/pages/tickets"
+var {height, width} = Dimensions.get('window');
 
 
 export class Root extends Component {
@@ -44,10 +45,30 @@ export class Root extends Component {
     }
     render() {
         return (
-
-            <Navigator
-                initialRoute={{ name: 'welcome' }}
-                renderScene={this.renderScene} />
+            <View style={styles.navigatorContainer}>
+                <Image source={require('../app/img/background3.png') } style={styles.background} />
+                <Navigator
+                    ref="navigator"
+                    sceneStyle={styles.container}
+                    initialRoute={{ name: 'welcome' }}
+                    renderScene={this.renderScene} />
+            </View>
         );
     }
 }
+var styles = StyleSheet.create({
+    container: {
+        flex: 1
+    },
+    background: {
+        position: 'absolute',
+        left: 0,
+        top: 0,
+        width: width,
+        height: height
+    },
+    navigatorContainer: {
+        flex: 1,
+        backgroundColor: '#FF000000'
+    }
+});

@@ -186,7 +186,7 @@ const style = StyleSheet.create({
         flex: 7,
         flexDirection: 'column',
         justifyContent: 'space-between',
-        backgroundColor: '#F5FCFF',
+        backgroundColor: '#F5FCFF00',
     },
     content: {
         flex: 6

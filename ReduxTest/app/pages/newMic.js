@@ -205,7 +205,8 @@ export class NewMic extends Component {
             RecordAudio.prototype.accessFileName((back) => {
                 if (back.name === "有数据") {
                     array = back.param;
-                    for (var i = 0; i < array.length; i++) {
+                    var rr = array.length > 5 ? 5 : array.length;
+                    for (var i = 0; i < rr; i++) {
                         var title = {
                             name: array[i].name,
                             ip: array[i].ip,
@@ -334,7 +335,7 @@ const style = StyleSheet.create({
         flex: 7,
         flexDirection: 'column',
         justifyContent: 'space-between',
-        backgroundColor: 'white',
+        backgroundColor: '#00000000',
     },
     content: {
         flex: 6,

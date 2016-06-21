@@ -64,7 +64,7 @@ export class Try extends Component {
     }
     render() {
         return (
-            <View style={{ flexDirection: 'column', justifyContent: 'space-between', backgroundColor: 'white', }}>
+            <View style={{ flexDirection: 'column', justifyContent: 'space-between', backgroundColor: '#00000000', }}>
                 <Common navigator={this.props.navigator} title={this.props.title}/>
                 <View style={{
                     height: 70 + maxSize,

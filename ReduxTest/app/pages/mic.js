@@ -328,7 +328,7 @@ const style = StyleSheet.create({
         flex: 7,
         flexDirection: 'column',
         justifyContent: 'space-between',
-        backgroundColor: 'white',
+        backgroundColor: '#00000000',
     },
     content: {
         flex: 6,

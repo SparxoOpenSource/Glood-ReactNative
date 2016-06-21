@@ -3,7 +3,7 @@
 //////////
 
 
-import React, {Component,PropTypes} from "react";
+import React, {Component, PropTypes} from "react";
 import {
     AppRegistry,
     StyleSheet,
@@ -30,16 +30,16 @@ export function getPhotos() {
     return photo_pathData;
 }
 export class Cameraq extends Component {
-    
-    jumpPhoto(...imgs){
-        Array.prototype.push.apply(photo_pathData,imgs.map((data)=>{ return { uri:"data:image/jpeg;base64,"+data };}));
-                this.props.navigator.push({
-                    name: "PHOTOWALL", value: "Photo Wall",nav:this.props.navigator
-                });
+
+    jumpPhoto(...imgs) {
+        Array.prototype.push.apply(photo_pathData, imgs.map((data) => { return { uri: "data:image/jpeg;base64," + data }; }));
+        this.props.navigator.push({
+            name: "PHOTOWALL", value: "Photo Wall", nav: this.props.navigator
+        });
     }
-    
+
     capturePhoto() {
-        
+
         var options = {
             quality: 50,
             allowEdit: false,
@@ -60,7 +60,7 @@ export class Cameraq extends Component {
         Camera.getPicture(options, (imageData) => {
             this.jumpPhoto(imageData);
         }, (error) => {
-                console.log(error);
+            console.log(error);
         });
     }
     render() {
@@ -68,10 +68,10 @@ export class Cameraq extends Component {
             <View style={style.container}>
                 <Common navigator={this.props.navigator} title={this.props.title}/>
 
-                <Button style={style.captureButton} onPress={this.capturePhoto.bind(this)}>
+                <Button style={style.captureButton} onPress={this.capturePhoto.bind(this) }>
                     Capture Photo
                 </Button>
-                <Button style={style.captureButton} onPress={this.getPhoto.bind(this,Camera.PictureSourceType.PHOTOLIBRARY)}>
+                <Button style={style.captureButton} onPress={this.getPhoto.bind(this, Camera.PictureSourceType.PHOTOLIBRARY) }>
                     From Photo Library
                 </Button>
             </View>
@@ -86,8 +86,9 @@ var style = StyleSheet.create({
     container: {
         flexDirection: 'column',
         justifyContent: 'space-between',
+        backgroundColor: '#00000000',
     },
-    captureButton:{
-        paddingTop:50
+    captureButton: {
+        paddingTop: 50
     }
 });

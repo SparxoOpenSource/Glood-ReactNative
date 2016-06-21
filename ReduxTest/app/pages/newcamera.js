@@ -134,6 +134,7 @@ var style = StyleSheet.create({
     container: {
         flexDirection: 'column',
         justifyContent: 'space-between',
+        backgroundColor: '#00000000',
     },
     captureButton: {
         paddingTop: 50

@@ -63,7 +63,7 @@ export class Common extends Component {
 Common.PropTypes = propTypes;
 const styles = StyleSheet.create({
     view: {
-        backgroundColor: 'white',
+        backgroundColor: '#00000000',
         height: 54,
         flexDirection: 'row',
         justifyContent: 'space-between',
