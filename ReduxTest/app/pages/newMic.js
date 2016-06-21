@@ -64,9 +64,7 @@ export class NewMic extends Component {
         this.state = {
             dataSource: ds.cloneWithRows(data),
             autoImage: myImg,
-            voiceImage: voiceImg,
-            margin_Top: maxHeight - 20,
-            ShieldingLayer_Margin_Top:topp,
+            voiceImage: voiceImg
         }
         this._accessFileName();
     }
@@ -74,7 +72,7 @@ export class NewMic extends Component {
         return (
             <View style={style.container}>
                 <Common navigator={this.props.navigator} title="Crazy May Fest 2016"/>
-                <View style={[style.content, { marginTop: this.state.margin_Top}]}>
+                <View style={style.content}>
                     <RefreshableListView
                         enableEmptySections = {true}
                         ref={LISTVIEW_REF}
@@ -101,14 +99,14 @@ export class NewMic extends Component {
     }
 
     _row(rowData, sectionID, rowID) {
-        let item = <NewMicItem title={rowData} auto={auto} rowID={parseInt(rowID) }/>;
+        let item = <NewMicItem title={rowData} auto={auto} rowID={parseInt(rowID) } dateLength={data.length}/>;
         return item;
     }
     /**
      * 新消息进来时进行滚动
      */
-                        //     <View style={[style.shieldingLayer,{backgroundColor:'red',width:deviceWidth,height:120,marginTop:-800}]}>
-                        // </View>
+    //     <View style={[style.shieldingLayer,{backgroundColor:'red',width:deviceWidth,height:120,marginTop:-800}]}>
+    // </View>
 
     _scrollToBottom() {
         this.scrollResponder.scrollTo({
@@ -192,18 +190,12 @@ export class NewMic extends Component {
      * 更新数据到UI
      */
     _refush(value) {
-        if (value.length * everyOne > maxHeight) {
-            everyOnexxx = 0;
-        }
-        else {
-            everyOnexxx;
-        }
-        topp = topp-everyOnexxx;
         this.setState({
-            dataSource: this.state.dataSource.cloneWithRows(value),
-            margin_Top: this.state.margin_Top - everyOnexxx,
-            ShieldingLayer_Margin_Top:topp,
+            dataSource: this.state.dataSource.cloneWithRows(value)
         })
+        setTimeout(() => {
+            EventListener.trigger("firstTop", value.length);
+        }, 100);
     }
     /**
      * 读取保存在磁盘中的录音文件
@@ -225,9 +217,7 @@ export class NewMic extends Component {
                 } else {
                     RecordAudio.prototype.recordMsg(back.name);
                 }
-                this.setState({
-                    dataSource: this.state.dataSource.cloneWithRows(data)
-                })
+                this._refush(data);
                 if (data.length * everyOne > maxHeight) {
                     scorll = true;
                     this._setTime2();

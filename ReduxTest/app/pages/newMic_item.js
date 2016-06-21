@@ -12,7 +12,9 @@ import { AppRegistry,
     LayoutAnimation,
     PropTypes,
     UIManager,
-    Dimensions
+    Dimensions,
+    Animated,
+    Easing,
 }  from 'react-native';
 
 import {RecordAudio} from "../utils/RecordAudio";
@@ -23,8 +25,23 @@ import EventEmitter from "EventEmitter";
 import Subscribable  from "Subscribable";
 import {EventListener} from "../listener/EventListener";
 
+var {height, width} = Dimensions.get('window');
+var STATUS_BAR_HEIGHT = Navigator.NavigationBar.Styles.General.StatusBarHeight;
+// if (isAndroid()) {
+//     var STATUS_BAR_HEIGHT = ExtraDimensions.get('STATUS_BAR_HEIGHT');
+// }
+var maxHeight = height - Navigator.NavigationBar.Styles.General.NavBarHeight - STATUS_BAR_HEIGHT - 64 - 40;
+var maxSize = 20;
+var cha = width - 70;
+var leftEvery = 70 / 2 - 70 / 2 + cha / 2;
 var currentTime = 0;
-var background_imagex = require('../img/background.png');
+var currentTime1 = 0;
+var _animateHandler;
+var _animateHandler2;
+var viewOpacity_1 = new Animated.Value(0.3);
+var viewOpacity_2 = new Animated.Value(0.3);
+var runBool_1 = false;
+var runBool_2 = false;
 
 const propTypes = {
     title: PropTypes.shape({
@@ -33,7 +50,8 @@ const propTypes = {
         time: PropTypes.number
     }),
     auto: PropTypes.bool,
-    rowID: PropTypes.number
+    rowID: PropTypes.number,
+    dateLength: PropTypes.number
 };
 /**
  * 2表示收到消息自动播放，1表示顺序自动播放，0表示点击播放
@@ -42,34 +60,60 @@ export class NewMicItem extends Component {
 
     constructor(props) {
         super(props);
+        currentTime = 0;
+        currentTime1 = 0;
+        viewOpacity_1 = new Animated.Value(0.3);
+        viewOpacity_2 = new Animated.Value(0.3);
+        runBool_1 = false;
+        runBool_2 = false;
         this.state = {
-            background_imagexx: background_imagex,
             w: 70,
             h: 70,
-            margin_left: -70,
-            head_w: 70,
-            head_h: 70,
-            head_margin_top: 0,
-            head_borderRadius: 35,
-            headImageW: 70,
-            headImageH: 70,
-            headImage_margin_top: 0,
-            headImage_borderRadius: 35,
-            headImage_opacity: 0,
-            headImageW1: 70,
-            headImageH1: 70,
-            headImage_margin_top1: 0,
-            headImage_borderRadius1: 35,
-            headImage_opacity1: 0,
+            left: cha / 2,
+            imageTop: maxSize / 2,
+            imageLeft: leftEvery,
+            viewWidth_1: 70,
+            viewHeight_1: 70,
+            viewTop_1: maxSize / 2,
+            viewLeft_1: leftEvery,
+            viewRadius_1: 35,
+            viewWidth_2: 70,
+            viewHeight_2: 70,
+            viewTop_2: maxSize / 2,
+            viewLeft_2: leftEvery,
+            viewRadius_2: 35,
+            viewOpacity_1: viewOpacity_1,
+            viewOpacity_2: viewOpacity_2,
+            bounceValue_1: new Animated.Value(1),
+            bounceValue_2: new Animated.Value(1),
+            bounceValue_3: new Animated.Value(1),
             isCisClick: false,
             playCode: props.title,
-            auto: props.auto
+            auto: props.auto,
+            imgIsBig: false,
+            background_imagex: require('../img/background.png'),
+            firstTop: props.rowID === 0 ? ((props.dateLength * (80 + maxSize)) > maxHeight ? 0 : (maxHeight - 80 - maxSize)) : 0
         }
         this._setTime(props.title.time);
     }
     componentDidMount() {
         EventListener.on("AutoPlayAllRecord").then(this.playFunction.bind(this));
         EventListener.on("AutoPlayState").then(this.changeState.bind(this));
+        EventListener.on("firstTop").then(this.firstTopMargin.bind(this));
+        if (isAndroid()) {
+            //安卓平台使用 LayoutAnimation 动画必须加上这么一句代码（否则动画会失效）
+            UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
+        }
+    }
+    firstTopMargin(number) {
+        if (this.props.rowID === 0) {
+            var temp = number * (80 + maxSize);
+            if (maxHeight > temp) {
+                this.setState({
+                    firstTop: maxHeight - temp
+                });
+            }
+        }
     }
     changeState(auto) {
         this.setState({
@@ -89,23 +133,63 @@ export class NewMicItem extends Component {
     }
     render() {
         return (
-            <View style={ { justifyContent: 'center', alignItems: 'center', marginTop: 20 }}>
-                <TouchableOpacity style={style.touch} onPress={this._onPress.bind(this, this.props.title, this.props.rowID, 0) } ref="view">
-                    <Image source={this.state.background_imagexx} style={[style.img2, { width: this.state.w, height: this.state.h }]} />
-                    <View style={[style.img3, {
-                        width: this.state.headImageW, height: this.state.headImageH, marginLeft: this.state.headImage_margin_left,
-                        marginTop: this.state.headImage_margin_top, borderRadius: this.state.headImage_borderRadius, opacity: this.state.headImage_opacity
-                    }]} />
-                    <View style={[style.img3, {
-                        width: this.state.headImageW1, height: this.state.headImageH1, marginLeft: this.state.headImage_margin_left1,
-                        marginTop: this.state.headImage_margin_top1, borderRadius: this.state.headImage_borderRadius1, opacity: this.state.headImage_opacity1
-                    }]} />
-                    <Image source={require('../img/171604419.jpg') } style={[style.img, {
-                        marginLeft: this.state.margin_left, marginTop: this.state.head_margin_top
-                        , width: this.state.head_w, height: this.state.head_h, borderRadius: this.state.head_borderRadius
-                    }]}  />
-                </TouchableOpacity>
-                <Text style={style.text}></Text>
+            <View style={ { justifyContent: 'center', alignItems: 'center' }}>
+                <View style={{
+                    height: 80 + maxSize,
+                    width: width,
+                    marginTop: this.state.firstTop
+                }}>
+                    <Image source={this.state.background_imagex} style={{
+                        width: this.state.w, height: this.state.h, borderWidth: 0, borderRadius: 35,
+                        position: "absolute", marginLeft: this.state.left, marginTop: maxSize / 2
+                    }} />
+                    <Animated.View style={{
+                        width: this.state.viewWidth_1,
+                        height: this.state.viewHeight_1,
+                        borderWidth: 0,
+                        borderRadius: this.state.viewRadius_1,
+                        backgroundColor: "green",
+                        opacity: this.state.viewOpacity_1,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        marginLeft: this.state.viewLeft_1,
+                        marginTop: this.state.viewTop_1,
+                        position: "absolute",
+                        transform: [{ scale: this.state.bounceValue_1 }]
+                    }}/>
+                    <Animated.View style={{
+                        width: this.state.viewWidth_2,
+                        height: this.state.viewHeight_2,
+                        borderWidth: 0,
+                        borderRadius: this.state.viewRadius_2,
+                        backgroundColor: "green",
+                        opacity: this.state.viewOpacity_2,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        position: "absolute",
+                        marginLeft: this.state.viewLeft_2,
+                        marginTop: this.state.viewTop_2,
+                        transform: [{ scale: this.state.bounceValue_2 }]
+                    }}/>
+                    <TouchableOpacity style={{
+                        width: 70, height: 70,
+                        borderWidth: 0,
+                        borderRadius: 35,
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        position: "absolute",
+                        marginLeft: this.state.imageLeft,
+                        marginTop: this.state.imageTop,
+                        transform: [{ scale: this.state.bounceValue_3 }]
+                    }} onPress={this._onPress.bind(this, this.props.title, this.props.rowID, 0) } ref="view">
+                        <Animated.Image source={require('../img/171604419.jpg') } style={{
+                            width: 70,
+                            height: 70,
+                            borderWidth: 0,
+                            borderRadius: 35
+                        }}  />
+                    </TouchableOpacity>
+                </View>
             </View>
         );
     }
@@ -120,7 +204,7 @@ export class NewMicItem extends Component {
             EventListener.trigger("AutoPlayAllRecord", value, rowId, 1);
             return;
         }
-        this._rippleAnima(time);
+        this._playAnimOne(time);
         if (this.state.isCisClick == false) {
             // this._playAnim(time);
         }
@@ -152,193 +236,168 @@ export class NewMicItem extends Component {
             })
         }, 100);
     }
-
-    _rippleAnima(time) {
-        this._headAnim(time);
-        this._headImageAnimaBig();
-    }
-
-    _headImageAnimaBig() {
-        if (isAndroid()) {
-            //安卓平台使用 LayoutAnimation 动画必须加上这么一句代码（否则动画会失效）
-            UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
-        }
-
-        LayoutAnimation.configureNext({
-
-            duration: 1 * 1000,   //持续时间
-            create: {
-                type: 'linear',
-                property: 'opacity'
-            },
-            update: {
-                type: 'linear'
-            }
-        });
-        background_imagex = require('../img/background_red.png')
-        this.setState({
-            background_imagexx: background_imagex,
-            head_w: this.state.head_w + 10,
-            head_h: this.state.head_h + 10,
-            margin_left: this.state.margin_left - 5,
-            head_margin_top: - 10 / 2,
-            head_borderRadius: this.state.head_w / 2,
-        })
-    }
-
-    _headImageAnimaSmall() {
-        if (isAndroid()) {
-            //安卓平台使用 LayoutAnimation 动画必须加上这么一句代码（否则动画会失效）
-            UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
-        }
-
-        LayoutAnimation.configureNext({
-
-            duration: 1 * 1000,   //持续时间
-            create: {
-                type: 'linear',
-                property: 'opacity'
-            },
-            update: {
-                type: 'linear'
-            }
-        });
-        background_imagex = require('../img/background.png');
-        this.setState({
-            background_imagexx: background_imagex,
-            head_w: 70,
-            head_h: 70,
-            margin_left: this.state.margin_left + 5,
-            head_margin_top: 0,
-            head_borderRadius: 35,
-        })
-    }
-
-    _headAnim(timesss) {
-        var maxSize = 50;
-        if (isAndroid()) {
-            //安卓平台使用 LayoutAnimation 动画必须加上这么一句代码（否则动画会失效）
-            UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
-        }
-
-        LayoutAnimation.configureNext({
-
-            duration: 1 * 1000,   //持续时间
-            create: {
-                type: 'linear',
-                property: 'opacity'
-            },
-            update: {
-                type: 'linear'
-            }
-        });
-
-        this.setState({
-            headImageW: this.state.headImageW + maxSize,
-            headImageH: this.state.headImageH + maxSize,
-            headImage_borderRadius: (this.state.headImageW + maxSize / 2) / 2,
-            headImage_margin_left: (-70 - this.state.w) / 2 - 25,
-            headImage_margin_top: - maxSize / 2,
-            headImage_opacity: 0.2,
-        })
-        setTimeout(() => {
-            console.log("1111111111111111");
-            currentTime = currentTime + 0.5;
-            console.log("xxxxxxxxxxxx", currentTime + "**" + timesss);
-            if (currentTime < timesss) {
-                this._head1Anim(timesss);
-            }
-            else {
-                currentTime = 0;
-                //头像还原
-                setTimeout(() => {
-                    this._headImageAnimaSmall();
-                }, 500);
-            }
-        }, 500);
-        setTimeout(() => {
-            console.log("222222222222222222");
-            this.setState({
-                headImageW: 70,
-                headImageH: 70,
-                headImage_margin_left: (-70 - this.state.w) / 2,
-                headImage_margin_top: 0,
-                headImage_borderRadius: 35,
-                headImage_opacity: 0
-            })
-        }, 1000);
-    }
-
-    _head1Anim(timess) {
-        var maxSize = 50;
-        if (isAndroid()) {
-            //安卓平台使用 LayoutAnimation 动画必须加上这么一句代码（否则动画会失效）
-            UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
-        }
-
-        LayoutAnimation.configureNext({
-
-            duration: 1 * 1000,   //持续时间
-            create: {
-                type: 'linear',
-                property: 'opacity'
-            },
-            update: {
-                type: 'linear'
-            }
-        });
-
-        this.setState({
-            headImageW1: this.state.headImageW1 + maxSize,
-            headImageH1: this.state.headImageH1 + maxSize,
-            headImage_borderRadius1: (this.state.headImageH1 + maxSize / 2) / 2,
-            headImage_margin_left1: (-70 - this.state.w) / 2 - 25,
-            headImage_margin_top1: - maxSize / 2,
-            headImage_opacity1: 0.2,
-        })
-        setTimeout(() => {
-            console.log("33333333333333333");
-            currentTime = currentTime + 0.5;
-            console.log("YYYYYYYYYYYYY", currentTime + "**" + timess);
-            if (currentTime < timess) {
-                this._headAnim(timess);
-            }
-            else {
-                currentTime = 0;
-                //头像还原
-                setTimeout(() => {
-                    this._headImageAnimaSmall();
-                }, 500);
-            }
-        }, 500);
-        setTimeout(() => {
-            console.log("44444444444444444");
-            this.setState({
-                headImageW1: 70,
-                headImageH1: 70,
-                headImage_margin_left1: (-70 - this.state.w) / 2,
-                headImage_margin_top1: 0,
-                headImage_borderRadius1: 35,
-                headImage_opacity1: 0
-            })
-        }, 1000);
-    }
-
+    /**
+     * 计算声音播放长度，赋值给背景
+     */
     _playAnim(time) {
-
+        var show_width = 0;
         var wid = deviceWidth - 20 - 70;
-        var show_width;
         if (time >= 20) {
             show_width = wid - 35;
         } else {
             show_width = (wid - 70) / 20 * time + 70;
         }
+        var cha = width - this.state.w - show_width;
+        var leftEvery = (this.state.w + show_width) / 2 - 70 / 2 + cha / 2;
         this.setState({
             w: this.state.w + show_width,
             h: this.state.h,
-            margin_left: this.state.margin_left - show_width / 2,
-            isCisClick: true
+            left: cha / 2,
+            imageLeft: leftEvery,
+            viewLeft_1: leftEvery,
+            viewLeft_2: leftEvery,
         })
+    }
+
+    /**
+     * 第一个声波动画
+     */
+    _playAnimOne(times) {
+        this._dillImgBig();
+        currentTime = currentTime + 0.5;
+        if (currentTime >= times) {
+            currentTime = 0;
+            this._dillImgSmall();
+            return;
+        }
+        _animateHandler = Animated.parallel([
+            Animated.timing(this.state.bounceValue_1, {
+                toValue: 1.8,  //透明度动画最终值
+                duration: 800,   //动画时长3000毫秒
+                easing: Easing.linear  //缓动函数
+            }),
+            Animated.timing(this.state.viewOpacity_1, {
+                toValue: 0,  //透明度动画最终值
+                duration: 800,   //动画时长3000毫秒
+                easing: Easing.linear  //缓动函数
+            })
+        ]);
+        this.state.viewOpacity_1.addListener((callback) => {
+            if (callback.value > 0.1) {
+                runBool_1 = false;
+            } else if (callback.value <= 0.1) {
+                if (runBool_1 === false) {
+                    this._playAnimTwo(times);
+                    runBool_1 = true;
+                }
+            }
+            if (callback.value === 0) {
+                this.setState({
+                    viewWidth_1: 70,
+                    viewHeight_1: 70,
+                    viewTop_1: maxSize / 2,
+                    viewLeft_1: leftEvery,
+                    viewRadius_1: this.state.viewHeight_1,
+                    viewOpacity_1: new Animated.Value(0.3),
+                    bounceValue_1: new Animated.Value(1),
+                })
+            }
+        });
+        _animateHandler.start && _animateHandler.start();
+    }
+    /**
+     * 第二个声波动画
+     */
+    _playAnimTwo(times) {
+        currentTime = currentTime + 0.5;
+        if (currentTime >= times) {
+            currentTime = 0;
+            this._dillImgSmall();
+            return;
+        }
+        _animateHandler2 = Animated.parallel([
+            Animated.timing(this.state.bounceValue_2, {
+                toValue: 1.8,  //透明度动画最终值
+                duration: 800,   //动画时长3000毫秒
+                easing: Easing.linear  //缓动函数
+            }),
+            Animated.timing(this.state.viewOpacity_2, {
+                toValue: 0,  //透明度动画最终值
+                duration: 800,   //动画时长3000毫秒
+                easing: Easing.linear  //缓动函数
+            })
+        ]);
+
+        this.state.viewOpacity_2.addListener(callback => {
+            console.log("this.state.viewOpacity_2", callback.value);
+            if (callback.value > 0.1) {
+                runBool_2 = false;
+            } else if (callback.value <= 0.1) {
+                if (runBool_2 === false) {
+                    this._playAnimOne(times);
+                    runBool_2 = true;
+                }
+            }
+            if (callback.value === 0) {
+                this.setState({
+                    viewWidth_2: 70,
+                    viewHeight_2: 70,
+                    viewTop_2: maxSize / 2,
+                    viewLeft_2: leftEvery,
+                    viewRadius_2: this.state.viewHeight_1,
+                    viewOpacity_2: new Animated.Value(0.3),
+                    bounceValue_2: new Animated.Value(1),
+                })
+            }
+        });
+        _animateHandler2.start && _animateHandler2.start();
+    }
+    /**
+     * 放大头像动画
+     */
+    _headImageAnimaBig() {
+        Animated.timing(this.state.bounceValue_3, {
+            toValue: 1.1,  //透明度动画最终值
+            duration: 300,   //动画时长3000毫秒
+            easing: Easing.linear  //缓动函数
+        }).start();
+    }
+    /**
+     * 缩小头像动画
+     */
+    _headImageAnimaSmall() {
+        this.setState({
+            bounceValue_3: new Animated.Value(1.1)
+        });
+        Animated.timing(this.state.bounceValue_3, {
+            toValue: 1,  //透明度动画最终值
+            duration: 300,   //动画时长3000毫秒
+            easing: Easing.linear  //缓动函数
+        }).start();
+    }
+    /**
+     * 放大头像 
+     */
+    _dillImgBig() {
+        if (this.state.imgIsBig === false) {
+            this._headImageAnimaBig();
+            this.setState({
+                imgIsBig: true,
+                background_imagex: require('../img/background2.png')
+            });
+        }
+    }
+    /**
+     * 缩小头像
+     */
+    _dillImgSmall() {
+        if (this.state.imgIsBig === true) {
+            this._headImageAnimaSmall();
+            this.setState({
+                imgIsBig: false,
+                background_imagex: require('../img/background.png')
+            });
+        }
     }
 }
 
