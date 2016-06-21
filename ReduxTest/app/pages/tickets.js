@@ -20,8 +20,10 @@ import {Common} from "./common";
 import isAndroid from '../utils/isAndroid.js';
 import ScrollableTabView, { DefaultTabBar, } from 'react-native-scrollable-tab-view';
 import { CoverFlow } from 'react-native-pan-controller';
-var {height, width} = Dimensions.get('window');
-var headImageData = [{ headImageIcon: 'http://192.168.31.221:8081/app/img/171604419.jpg' },
+var widthh = Dimensions.get('window').width
+var heightt = Dimensions.get('window').height
+var headImageData = [
+    { headImageIcon: 'http://192.168.31.221:8081/app/img/171604419.jpg' },
     { headImageIcon: 'http://192.168.31.221:8081/app/img/171604419.jpg' },
     { headImageIcon: 'http://192.168.31.221:8081/app/img/171604419.jpg' },
     { headImageIcon: 'http://192.168.31.221:8081/app/img/171604419.jpg' },
@@ -48,11 +50,12 @@ export class Tickets extends Component {
         }
     }
     render() {
+        console.log('----///-----',widthh+'----'+heightt);
         return (
             <View style={style.container}>
                 <Common navigator={this.props.navigator} title={this.props.title}/>
                 <CoverFlow style={style.converflow}>
-                    {this.state.images.map((src, i) => <Image style={{width:200,height:300,marginTop:80,marginLeft:-23,borderRadius: 5}} key={i} source={src} />) }
+                    {this.state.images.map((src, i) => <Image style={{width:widthh*(200/414),height:heightt*(300/736),marginTop:heightt*(80/736),marginLeft:-widthh*(23/414),borderRadius: 5}} key={i} source={src} />) }
                 </CoverFlow>
             </View>
 
