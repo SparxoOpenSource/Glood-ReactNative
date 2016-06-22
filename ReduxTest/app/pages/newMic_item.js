@@ -31,9 +31,9 @@ var STATUS_BAR_HEIGHT = Navigator.NavigationBar.Styles.General.StatusBarHeight;
 //     var STATUS_BAR_HEIGHT = ExtraDimensions.get('STATUS_BAR_HEIGHT');
 // }
 var maxHeight = height - Navigator.NavigationBar.Styles.General.NavBarHeight - STATUS_BAR_HEIGHT - 64 - 40;
-var maxSize = isAndroid() ? 20 : 25;
-var cha = width - 70;
-var leftEvery = 70 / 2 - 70 / 2 + cha / 2;
+var maxSize = isAndroid() ? 30 : 35;
+var cha = width - 60;
+var leftEvery = 60 / 2 - 60 / 2 + cha / 2;
 var currentTime = 0;
 var currentTime1 = 0;
 var _animateHandler;
@@ -67,21 +67,21 @@ export class NewMicItem extends Component {
         runBool_1 = false;
         runBool_2 = false;
         this.state = {
-            w: 70,
-            h: 70,
+            w: 60,
+            h: 60,
             left: cha / 2,
             imageTop: maxSize / 2,
             imageLeft: leftEvery,
-            viewWidth_1: 70,
-            viewHeight_1: 70,
+            viewWidth_1: 60,
+            viewHeight_1: 60,
             viewTop_1: maxSize / 2,
             viewLeft_1: leftEvery,
-            viewRadius_1: 35,
-            viewWidth_2: 70,
-            viewHeight_2: 70,
+            viewRadius_1: 30,
+            viewWidth_2: 60,
+            viewHeight_2: 60,
             viewTop_2: maxSize / 2,
             viewLeft_2: leftEvery,
-            viewRadius_2: 35,
+            viewRadius_2: 30,
             viewOpacity_1: viewOpacity_1,
             viewOpacity_2: viewOpacity_2,
             bounceValue_1: new Animated.Value(1),
@@ -97,7 +97,7 @@ export class NewMicItem extends Component {
         this._setTime(props.title.time);
     }
     componentDidMount() {
-        EventListener.on("AutoPlayAllRecord").then(this.playFunction.bind(this));
+        // EventListener.on("AutoPlayAllRecord").then(this.playFunction.bind(this));
         EventListener.on("AutoPlayState").then(this.changeState.bind(this));
         EventListener.on("firstTop").then(this.firstTopMargin.bind(this));
         if (isAndroid()) {
@@ -107,8 +107,8 @@ export class NewMicItem extends Component {
     }
     firstTopMargin(number) {
         if (this.props.rowID === 0) {
-            var temp = number * (80 + maxSize);
-            console.log('--*-----',temp+'--'+number);
+            var temp = number * (60 + maxSize);
+            console.log('--*-----', temp + '--' + number);
             if (maxHeight > temp) {
                 this.setState({
                     firstTop: maxHeight - temp
@@ -136,7 +136,7 @@ export class NewMicItem extends Component {
         return (
             <View style={ { justifyContent: 'center', alignItems: 'center' }}>
                 <View style={{
-                    height: 80 + maxSize,
+                    height: 60 + maxSize,
                     width: width,
                     marginTop: this.state.firstTop
                 }}>
@@ -173,7 +173,7 @@ export class NewMicItem extends Component {
                         transform: [{ scale: this.state.bounceValue_2 }]
                     }}/>
                     <TouchableOpacity style={{
-                        width: 70, height: 70,
+                        width: 60, height: 60,
                         borderWidth: 0,
                         borderRadius: 35,
                         alignItems: 'center',
@@ -184,10 +184,10 @@ export class NewMicItem extends Component {
                         transform: [{ scale: this.state.bounceValue_3 }]
                     }} onPress={this._onPress.bind(this, this.props.title, this.props.rowID, 0) } ref="view">
                         <Animated.Image source={require('../img/171604419.jpg') } style={{
-                            width: 70,
-                            height: 70,
+                            width: 60,
+                            height: 60,
                             borderWidth: 0,
-                            borderRadius: 35
+                            borderRadius: 30
                         }}  />
                     </TouchableOpacity>
                 </View>
@@ -202,7 +202,7 @@ export class NewMicItem extends Component {
         var time = value.time;
         if (time <= 0) {
             RecordAudio.prototype.recordMsg("播放失败");
-            EventListener.trigger("AutoPlayAllRecord", value, rowId, 1);
+            // EventListener.trigger("AutoPlayAllRecord", value, rowId, 1);
             return;
         }
         this._playAnimOne(time);
@@ -221,7 +221,7 @@ export class NewMicItem extends Component {
             if (bool !== 1)
                 // RecordAudio.prototype.recordMsg(back.name);
                 if (_this.state.auto) {
-                    EventListener.trigger("AutoPlayAllRecord", value, rowId, 1);
+                    // EventListener.trigger("AutoPlayAllRecord", value, rowId, 1);
                 }
         });
     }
@@ -232,8 +232,8 @@ export class NewMicItem extends Component {
         setTimeout(() => {
             this._playAnim(value);
             this.setState({
-                headImage_margin_left: (-70 - this.state.w) / 2,
-                headImage_margin_left1: (-70 - this.state.w) / 2,
+                headImage_margin_left: (-60 - this.state.w) / 2,
+                headImage_margin_left1: (-60 - this.state.w) / 2,
             })
         }, 100);
     }
@@ -242,14 +242,14 @@ export class NewMicItem extends Component {
      */
     _playAnim(time) {
         var show_width = 0;
-        var wid = deviceWidth - 20 - 70;
+        var wid = deviceWidth - 20 - 60;
         if (time >= 20) {
-            show_width = wid - 35;
+            show_width = wid - 30;
         } else {
-            show_width = (wid - 70) / 20 * time + 70;
+            show_width = (wid - 60) / 20 * time + 60;
         }
         var cha = width - this.state.w - show_width;
-        var leftEvery = (this.state.w + show_width) / 2 - 70 / 2 + cha / 2;
+        var leftEvery = (this.state.w + show_width) / 2 - 60 / 2 + cha / 2;
         this.setState({
             w: this.state.w + show_width,
             h: this.state.h,
@@ -273,7 +273,7 @@ export class NewMicItem extends Component {
         }
         _animateHandler = Animated.parallel([
             Animated.timing(this.state.bounceValue_1, {
-                toValue: 1.8,  //透明度动画最终值
+                toValue: 2.0,  //透明度动画最终值
                 duration: 800,   //动画时长3000毫秒
                 easing: Easing.linear  //缓动函数
             }),
@@ -294,8 +294,8 @@ export class NewMicItem extends Component {
             }
             if (callback.value === 0) {
                 this.setState({
-                    viewWidth_1: 70,
-                    viewHeight_1: 70,
+                    viewWidth_1: 60,
+                    viewHeight_1: 60,
                     viewTop_1: maxSize / 2,
                     viewLeft_1: leftEvery,
                     viewRadius_1: this.state.viewHeight_1,
@@ -318,7 +318,7 @@ export class NewMicItem extends Component {
         }
         _animateHandler2 = Animated.parallel([
             Animated.timing(this.state.bounceValue_2, {
-                toValue: 1.8,  //透明度动画最终值
+                toValue: 2.0,  //透明度动画最终值
                 duration: 800,   //动画时长3000毫秒
                 easing: Easing.linear  //缓动函数
             }),
@@ -341,8 +341,8 @@ export class NewMicItem extends Component {
             }
             if (callback.value === 0) {
                 this.setState({
-                    viewWidth_2: 70,
-                    viewHeight_2: 70,
+                    viewWidth_2: 60,
+                    viewHeight_2: 60,
                     viewTop_2: maxSize / 2,
                     viewLeft_2: leftEvery,
                     viewRadius_2: this.state.viewHeight_1,
@@ -358,7 +358,7 @@ export class NewMicItem extends Component {
      */
     _headImageAnimaBig() {
         Animated.timing(this.state.bounceValue_3, {
-            toValue: 1.1,  //透明度动画最终值
+            toValue: 1.2,  //透明度动画最终值
             duration: 300,   //动画时长3000毫秒
             easing: Easing.linear  //缓动函数
         }).start();
@@ -368,7 +368,7 @@ export class NewMicItem extends Component {
      */
     _headImageAnimaSmall() {
         this.setState({
-            bounceValue_3: new Animated.Value(1.1)
+            bounceValue_3: new Animated.Value(1.2)
         });
         Animated.timing(this.state.bounceValue_3, {
             toValue: 1,  //透明度动画最终值
@@ -386,6 +386,7 @@ export class NewMicItem extends Component {
                 imgIsBig: true,
                 background_imagex: require('../img/background2.png')
             });
+            EventListener.trigger("PlayState", false);
         }
     }
     /**
@@ -398,6 +399,7 @@ export class NewMicItem extends Component {
                 imgIsBig: false,
                 background_imagex: require('../img/background.png')
             });
+            EventListener.trigger("PlayState", true);
         }
     }
 }
@@ -410,37 +412,37 @@ const style = StyleSheet.create({
         marginTop: 6,
         width: 320,
         flexDirection: "row",
-        borderRadius: 35,
+        borderRadius: 30,
         backgroundColor: "#99999900",
         justifyContent: 'center',
         alignItems: 'center'
     },
     touch2: {
-        width: 70,
-        height: 70,
-        borderRadius: 35,
+        width: 60,
+        height: 60,
+        borderRadius: 30,
         backgroundColor: "#99999950",
         justifyContent: 'center',
         alignItems: 'center'
     },
     img: {
-        width: 70,
-        height: 70,
+        width: 60,
+        height: 60,
         borderWidth: 0,
-        borderRadius: 35,
+        borderRadius: 30,
         position: "absolute",
         alignItems: 'center'
     },
     img3: {
         borderWidth: 0,
-        borderRadius: 35,
+        borderRadius: 30,
         position: "absolute",
         alignItems: 'center',
         backgroundColor: "green"
     },
     img2: {
         borderWidth: 0,
-        borderRadius: 35,
+        borderRadius: 30,
         justifyContent: 'center',
         alignItems: 'center'
     },

@@ -63,7 +63,8 @@ export class NewMic extends Component {
         this.state = {
             dataSource: ds.cloneWithRows(data),
             autoImage: myImg,
-            voiceImage: voiceImg
+            voiceImage: voiceImg,
+            like: require('../img/like.png')
         }
         this._accessFileName();
     }
@@ -81,16 +82,18 @@ export class NewMic extends Component {
                         refreshPrompt="Pull down to refresh"/>
                 </View>
                 <View style={style.footer}>
-                    <TouchableOpacity onPress={this.autoPlay.bind(this) } style={{ flexDirection: 'row' }}>
+                    <View style={{ flexDirection: 'row' }}>
                         <Image source={this.state.autoImage } style={style.ImagStyle}/>
-                        <Text style={{ marginTop: 32, marginLeft: 6, fontSize: 16, color: '#000000' }}>auto</Text>
-                    </TouchableOpacity>
+                        <Image source={this.state.like} style={style.ImagStyle2}/>
+                        <Text style={{ marginTop: 32, marginLeft: 4, fontSize: 16, color: '#FFFFFF' }}>16</Text>
+                    </View>
                     <TouchableWithoutFeedback onPressOut={this._stop.bind(this) } onPressIn={this._startVoice.bind(this) }>
-                        <Image style={{ width: 54, height: 54 }}  source={this.state.voiceImage }/>
+                        <Image style={{ width: 70, height: 70 }}  source={this.state.voiceImage }/>
                     </TouchableWithoutFeedback>
                     <TouchableOpacity style={{ flexDirection: 'row' }}>
-                        <Image source={require('../img/none.png') } style={style.ImagStyle}  />
-                        <Text style={{ marginTop: 32, marginLeft: 6, fontSize: 16, color: '#00000000' }}>auto</Text>
+                        <Text style={{ marginTop: 32, fontSize: 16, color: '#00000000' }}>auto</Text>
+                        <Text style={{ marginTop: 32, fontSize: 16, color: '#00000000' }}>a</Text>
+                        <Image source={require('../img/people.png') } style={style.ImagStyle2}  />
                     </TouchableOpacity>
                 </View>
             </View>
@@ -104,9 +107,6 @@ export class NewMic extends Component {
     /**
      * 新消息进来时进行滚动
      */
-    //     <View style={[style.shieldingLayer,{backgroundColor:'red',width:deviceWidth,height:120,marginTop:-800}]}>
-    // </View>
-
     _scrollToBottom() {
         this.scrollResponder.scrollTo({
             y: footerY,
@@ -230,6 +230,7 @@ export class NewMic extends Component {
      */
     componentDidMount(props) {
         EventListener.on("RecordStop").then(this.stopRecordAll.bind(this));
+        EventListener.on("PlayState").then(this.PlayState.bind(this));
         // DeviceEventEmitter.addListener("TestEventName", info => {
         //     Alert.alert(info.name);
         // });
@@ -263,6 +264,19 @@ export class NewMic extends Component {
         this.props.app.service('messages').on('removed', result => {
             // this.deleteMessage(result);
         });
+    }
+    PlayState(bool) {
+        if (bool === false) {
+            myImg = require('../img/play2.png');
+            this.setState({
+                autoImage: myImg
+            })
+        } else {
+            myImg = require('../img/play.png');
+            this.setState({
+                autoImage: myImg
+            })
+        }
     }
     /**
      * 消息类型转换
@@ -343,7 +357,7 @@ const style = StyleSheet.create({
     },
     footer: {
         backgroundColor: '#99999900',
-        height: 64,
+        height: 74,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
@@ -353,8 +367,19 @@ const style = StyleSheet.create({
     },
     ImagStyle: {
         marginTop: 30,
-        width: 26,
-        height: 26,
+        width: 20,
+        height: 25,
+    },
+    ImagStyle2: {
+        marginTop: 30,
+        width: 25,
+        height: 25,
+        marginLeft: 20
+    },
+    ImagStyle3: {
+        marginTop: 30,
+        width: 23,
+        height: 25,
     },
     welcomeText: {
         marginLeft: 10,
