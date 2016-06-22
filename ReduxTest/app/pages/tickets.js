@@ -24,7 +24,7 @@ import { CoverFlow } from 'react-native-pan-controller';
 var image_margin_left;
 var widthh = Dimensions.get('window').width
 var STATUS_BAR_HEIGHT = Navigator.NavigationBar.Styles.General.StatusBarHeight;
-var heightt = Dimensions.get('window').height - Navigator.NavigationBar.Styles.General.NavBarHeight - STATUS_BAR_HEIGHT
+var heightt = Dimensions.get('window').height - Navigator.NavigationBar.Styles.General.NavBarHeight
 const propTypes = {
     title: PropTypes.string,
     navigator: PropTypes.object
@@ -51,7 +51,7 @@ export class Tickets extends Component {
         }
     }
     render() {
-        console.log('-*-*-*-s-*d-*sd-f*--',widthh+'--'+heightt);
+        console.log('-*-*-*-s-*d-*sd-f*--', widthh + '--' + heightt);
         if (Platform.OS === 'android') {
             image_margin_left = -widthh * (0 / 414);
         }
@@ -61,10 +61,10 @@ export class Tickets extends Component {
         return (
             <View style={style.container}>
                 <Common navigator={this.props.navigator} title={this.props.title}/>
-                <CoverFlow style={style.converflow}>
+                <CoverFlow style={{}}>
                     {this.state.images.map((src, i) =>
                         <View style={{
-                            width: widthh * (250 / 414), height: heightt * (390 / 736), marginTop: heightt * (30 / 736),
+                            width: widthh, height: heightt, marginTop: 0,
                             marginLeft: image_margin_left, borderRadius: 5
                         }}>
                             <Image style={{
@@ -86,7 +86,18 @@ export class Tickets extends Component {
                                 </View>
                             </View>
                             <View style={{ backgroundColor: '#50AEED', width: widthh * (250 / 414), height: heightt * (80 / 736), borderBottomLeftRadius: 5, borderBottomRightRadius: 5 }}>
-                                <Text style={{ color: 'white', fontSize: widthh * (20 / 414), fontFamily: 'MyriadPro-SemiboldIt', marginTop: heightt * (10 / 736), marginLeft: widthh * (50 / 414) ,width:widthh * (150 / 414) }}>{src.name}</Text>
+                                <Text style={{ color: 'white', fontSize: widthh * (20 / 414), fontFamily: 'MyriadPro-SemiboldIt', marginTop: heightt * (10 / 736), marginLeft: widthh * (50 / 414), width: widthh * (150 / 414) }}>{src.name}</Text>
+                            </View>
+                            <View style={{ backgroundColor: '#00000000', width: widthh * (250 / 414), height: heightt * (120 / 736), marginTop: widthh * (50 / 414) }}>
+                                <Image style={{ width: widthh * (120 / 414), height: heightt * (120 / 736), marginLeft: widthh * (10 / 414) }} key={i} source={require('../img/vwat.png') }/>
+                                <View style={{ backgroundColor: '#00000000', marginLeft: widthh * (150 / 414), width: widthh * (120 / 414), height: heightt * (120 / 736), marginTop: widthh * (-110 / 414) }}>
+                                    <Text style={{ color: 'black', fontSize: widthh * (16 / 414), fontFamily: 'MyriadPro-SemiboldIt' }}>Ticket Status: </Text>
+                                    <Text style={{ color: 'black', fontSize: widthh * (16 / 414), fontFamily: 'MyriadPro-SemiboldIt' }}>Valid</Text>
+                                    <Text style={{ color: 'black', fontSize: widthh * (16 / 414), fontFamily: 'MyriadPro-SemiboldIt' }}>Ticket CODE: </Text>
+                                    <Text style={{ color: 'black', fontSize: widthh * (16 / 414), fontFamily: 'MyriadPro-SemiboldIt' }}>12D2A</Text>
+                                    <Text style={{ color: 'black', fontSize: widthh * (16 / 414), fontFamily: 'MyriadPro-SemiboldIt' }}>Checked-in: </Text>
+                                    <Text style={{ color: 'black', fontSize: widthh * (16 / 414), fontFamily: 'MyriadPro-SemiboldIt' }}>1/23 9: 25 pm</Text>
+                                </View>
                             </View>
                         </View>
 
