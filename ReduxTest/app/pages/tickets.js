@@ -25,12 +25,6 @@ var image_margin_left;
 var widthh = Dimensions.get('window').width
 var STATUS_BAR_HEIGHT = Navigator.NavigationBar.Styles.General.StatusBarHeight;
 var heightt = Dimensions.get('window').height - Navigator.NavigationBar.Styles.General.NavBarHeight - STATUS_BAR_HEIGHT
-var headImageData = [
-    { headImageIcon: 'http://192.168.31.221:8081/app/img/171604419.jpg' },
-    { headImageIcon: 'http://192.168.31.221:8081/app/img/171604419.jpg' },
-    { headImageIcon: 'http://192.168.31.221:8081/app/img/171604419.jpg' },
-    { headImageIcon: 'http://192.168.31.221:8081/app/img/171604419.jpg' },
-    { headImageIcon: 'http://192.168.31.221:8081/app/img/171604419.jpg' }];
 const propTypes = {
     title: PropTypes.string,
     navigator: PropTypes.object
@@ -40,33 +34,63 @@ export class Tickets extends Component {
         super();
         this.state = {
             images: [
-                require('../img/171604419.jpg'),
-                require('../img/171604419.jpg'),
-                require('../img/171604419.jpg'),
-                require('../img/171604419.jpg'),
-                require('../img/171604419.jpg'),
-                require('../img/171604419.jpg'),
-                require('../img/171604419.jpg'),
-                require('../img/171604419.jpg'),
-                require('../img/171604419.jpg'),
+                { headImageIcon: require('../img/171604419.jpg'), eventName: '2015 Sparxo Grand Opening(SF ...)', month: 'MAY', day: '01', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias Vip' },
+                { headImageIcon: require('../img/171604419.jpg'), eventName: '2015 Sparxo Grand Opening(SF ...)', month: 'MAY', day: '02', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias Vip' },
+                { headImageIcon: require('../img/171604419.jpg'), eventName: '2015 Sparxo Grand Opening(SF ...)', month: 'MAY', day: '03', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias Vip' },
+                { headImageIcon: require('../img/171604419.jpg'), eventName: '2015 Sparxo Grand Opening(SF ...)', month: 'MAY', day: '04', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias Vip' },
+                { headImageIcon: require('../img/171604419.jpg'), eventName: '2015 Sparxo Grand Opening(SF ...)', month: 'MAY', day: '05', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias Vip' },
+                { headImageIcon: require('../img/171604419.jpg'), eventName: '2015 Sparxo Grand Opening(SF ...)', month: 'MAY', day: '06', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias Vip' },
+                { headImageIcon: require('../img/171604419.jpg'), eventName: '2015 Sparxo Grand Opening(SF ...)', month: 'MAY', day: '07', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias Vip' },
+                { headImageIcon: require('../img/171604419.jpg'), eventName: '2015 Sparxo Grand Opening(SF ...)', month: 'MAY', day: '08', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias Vip' },
+                { headImageIcon: require('../img/171604419.jpg'), eventName: '2015 Sparxo Grand Opening(SF ...)', month: 'MAY', day: '09', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias Vip' },
+                { headImageIcon: require('../img/171604419.jpg'), eventName: '2015 Sparxo Grand Opening(SF ...)', month: 'MAY', day: '10', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias Vip' },
+                { headImageIcon: require('../img/171604419.jpg'), eventName: '2015 Sparxo Grand Opening(SF ...)', month: 'MAY', day: '11', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias Vip' },
+                { headImageIcon: require('../img/171604419.jpg'), eventName: '2015 Sparxo Grand Opening(SF ...)', month: 'MAY', day: '12', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias Vip' },
+                { headImageIcon: require('../img/171604419.jpg'), eventName: '2015 Sparxo Grand Opening(SF ...)', month: 'MAY', day: '13', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias Vip' },
             ]
         }
     }
     render() {
-
-        console.log('----///-----', widthh + '----' + heightt);
+        console.log('-*-*-*-s-*d-*sd-f*--',widthh+'--'+heightt);
         if (Platform.OS === 'android') {
             image_margin_left = -widthh * (0 / 414);
         }
-        else{
-            image_margin_left = -widthh * (3 / 414);
+        else {
+            image_margin_left = -widthh * (5 / 414);
         }
         return (
             <View style={style.container}>
                 <Common navigator={this.props.navigator} title={this.props.title}/>
                 <CoverFlow style={style.converflow}>
-                    {this.state.images.map((src, i) => <Image style={{ width: widthh * (200 / 414), height: heightt * (300 / 736), marginTop: heightt * (80 / 736),
-                         marginLeft: image_margin_left, borderRadius: 5 }} key={i} source={src} />) }
+                    {this.state.images.map((src, i) =>
+                        <View style={{
+                            width: widthh * (250 / 414), height: heightt * (390 / 736), marginTop: heightt * (30 / 736),
+                            marginLeft: image_margin_left, borderRadius: 5
+                        }}>
+                            <Image style={{
+                                width: widthh * (250 / 414), height: heightt * (390 / 736), borderRadius: 5
+                            }} key={i} source={src.headImageIcon}/>
+                            <View style={{ backgroundColor: 'white', width: widthh * (250 / 414), height: heightt * (210 / 736), marginTop: heightt * (80 / 736) - heightt * (370 / 736) }}>
+                                <View style={{ backgroundColor: '#00000000', width: widthh * (250 / 414), height: heightt * (70 / 736) }}>
+                                    <Text style={{ color: 'black', fontSize: widthh * (18 / 414), fontFamily: 'MyriadPro-SemiboldIt', marginTop: heightt * (10 / 736), marginLeft: widthh * (10 / 414) }}>{src.month}</Text>
+                                    <Text style={{ color: 'black', fontSize: widthh * (25 / 414), fontFamily: 'MyriadPro-SemiboldIt', marginLeft: widthh * (10 / 414) }}>{src.day}</Text>
+                                    <Text style={{ color: 'black', fontSize: widthh * (20 / 414), fontFamily: 'MyriadPro-SemiboldIt', marginTop: widthh * (-55 / 414), marginLeft: widthh * (60 / 414) }}>{src.eventName}</Text>
+                                </View>
+                                <View style={{ backgroundColor: '#00000000', width: widthh * (250 / 414), height: heightt * (50 / 736) }}>
+                                    <Image style={{ width: widthh * (20 / 414), height: heightt * (20 / 736), marginLeft: widthh * (20 / 414), marginTop: heightt * (10 / 736) }} key={i} source={require('../img/timeicon.png') }/>
+                                    <Text style={{ color: 'black', fontSize: widthh * (16 / 414), fontFamily: 'MyriadPro-SemiboldIt', marginTop: heightt * (-20 / 736), marginLeft: widthh * (60 / 414) }}>{src.time}</Text>
+                                </View>
+                                <View style={{ backgroundColor: '#00000000', width: widthh * (250 / 414), height: heightt * (50 / 736) }}>
+                                    <Image style={{ width: widthh * (20 / 414), height: heightt * (31 / 736), marginLeft: widthh * (20 / 414), marginTop: heightt * (10 / 736) }} key={i} source={require('../img/addressicon.png') }/>
+                                    <Text style={{ color: 'black', fontSize: widthh * (16 / 414), fontFamily: 'MyriadPro-SemiboldIt', marginTop: heightt * (-28 / 736), marginLeft: widthh * (60 / 414) }}>{src.address}</Text>
+                                </View>
+                            </View>
+                            <View style={{ backgroundColor: '#50AEED', width: widthh * (250 / 414), height: heightt * (80 / 736), borderBottomLeftRadius: 5, borderBottomRightRadius: 5 }}>
+                                <Text style={{ color: 'white', fontSize: widthh * (20 / 414), fontFamily: 'MyriadPro-SemiboldIt', marginTop: heightt * (10 / 736), marginLeft: widthh * (50 / 414) ,width:widthh * (150 / 414) }}>{src.name}</Text>
+                            </View>
+                        </View>
+
+                    ) }
                 </CoverFlow>
             </View>
 
@@ -80,25 +104,5 @@ const style = StyleSheet.create({
         flex: 7,
         flexDirection: 'column',
         justifyContent: 'space-between',
-    },
-    content: {
-        marginTop: 20,
-        width: 350,
-        height: 400,
-        alignSelf: 'center',
-    },
-    icon: {
-        width: 300,
-        height: 300,
-        borderRadius: 5,
-        alignSelf: 'center',
-    },
-    scrollview: {
-        alignSelf: 'center',
-        width: 320,
-        height: 300,
-    },
-    converflow: {
-        backgroundColor: 'red',
     },
 });
