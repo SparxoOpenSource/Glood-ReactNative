@@ -21,8 +21,10 @@ import {Common} from "./common";
 import isAndroid from '../utils/isAndroid.js';
 import ScrollableTabView, { DefaultTabBar, } from 'react-native-scrollable-tab-view';
 import { CoverFlow } from 'react-native-pan-controller';
+import {EventListener} from "../listener/EventListener";
 var image_margin_left;
 var image_margin_top;
+var qr_view_opacity=1;
 var widthh = Dimensions.get('window').width
 var STATUS_BAR_HEIGHT = Navigator.NavigationBar.Styles.General.StatusBarHeight;
 var heightt = Dimensions.get('window').height - Navigator.NavigationBar.Styles.General.NavBarHeight
@@ -51,15 +53,31 @@ export class Tickets extends Component {
             ]
         }
     }
+    componentDidMount() {
+        EventListener.on("scrollOffset").then(this.scrollOffsetxxx.bind(this));
+    }
+     scrollOffsetxxx(offset) {
+         var currentPage = offset/(heightt * (390 / 736));
+         console.log('*-*-*-sdfsdfsd----',offset+'---'+currentPage);
+         if(currentPage>2){
+              this.setState({
+                 qr_view_opacity:0
+             })
+         }
+         else{
+              this.setState({
+                 qr_view_opacity:1
+             })
+         }
+     }
     render() {
-        console.log('-*-*-*-s-*d-*sd-f*--', widthh + '--' + heightt);
         if (Platform.OS === 'android') {
             image_margin_left = -widthh * (0 / 414);
-            image_margin_top = 80;
+            image_margin_top = heightt * (80 / 736);
         }
         else {
             image_margin_left = -widthh * (5 / 414);
-            image_margin_top = 110;
+            image_margin_top = heightt * (110 / 736);
         }
         return (
             <View style={style.container}>
@@ -67,11 +85,11 @@ export class Tickets extends Component {
                 <CoverFlow>
                     {this.state.images.map((src, i) =>
                         <View style={{
-                            width: widthh, height: heightt+150, marginTop: 0,
-                            marginLeft: image_margin_left, borderRadius: 5,
+                            width: widthh, height: heightt, marginTop: 0,
+                            marginLeft: image_margin_left, borderRadius: 5
                         }}>
                             <Image style={{
-                                width: widthh * (250 / 414), height: heightt * (390 / 736), borderRadius: 5,marginTop:image_margin_top,
+                                width: widthh * (250 / 414), height: heightt * (390 / 736), borderRadius: 5, marginTop: image_margin_top,
                             }} key={i} source={src.headImageIcon}/>
                             <View style={{ backgroundColor: 'white', width: widthh * (250 / 414), height: heightt * (210 / 736), marginTop: heightt * (80 / 736) - heightt * (370 / 736) }}>
                                 <View style={{ backgroundColor: '#00000000', width: widthh * (250 / 414), height: heightt * (70 / 736) }}>
@@ -91,7 +109,7 @@ export class Tickets extends Component {
                             <View style={{ backgroundColor: '#50AEED', width: widthh * (250 / 414), height: heightt * (85 / 736), borderBottomLeftRadius: 5, borderBottomRightRadius: 5 }}>
                                 <Text style={{ color: 'white', fontSize: widthh * (20 / 414), fontFamily: 'MyriadPro-SemiboldIt', marginTop: heightt * (10 / 736), marginLeft: widthh * (50 / 414), width: widthh * (150 / 414) }}>{src.name}</Text>
                             </View>
-                            <View style={{ backgroundColor: '#00000000', width: widthh * (250 / 414), height: heightt * (120 / 736), marginTop: widthh * (50 / 414) }}>
+                            <View style={{ backgroundColor: '#00000000', width: widthh * (250 / 414), height: heightt * (120 / 736), marginTop: widthh * (50 / 414),opacity: qr_view_opacity}}>
                                 <Image style={{ width: widthh * (120 / 414), height: heightt * (120 / 736), marginLeft: widthh * (10 / 414) }} key={i} source={require('../img/vwat.png') }/>
                                 <View style={{ backgroundColor: '#00000000', marginLeft: widthh * (150 / 414), width: widthh * (120 / 414), height: heightt * (120 / 736), marginTop: heightt * (-120 / 736) }}>
                                     <Text style={{ color: 'black', fontSize: heightt * (16 / 736), fontFamily: 'MyriadPro-SemiboldIt' }}>Ticket Status: </Text>
@@ -106,6 +124,7 @@ export class Tickets extends Component {
 
                     ) }
                 </CoverFlow>
+
             </View>
 
         );
