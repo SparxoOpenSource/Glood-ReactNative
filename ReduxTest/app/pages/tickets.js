@@ -22,6 +22,7 @@ import isAndroid from '../utils/isAndroid.js';
 import ScrollableTabView, { DefaultTabBar, } from 'react-native-scrollable-tab-view';
 import { CoverFlow } from 'react-native-pan-controller';
 var image_margin_left;
+var image_margin_top;
 var widthh = Dimensions.get('window').width
 var STATUS_BAR_HEIGHT = Navigator.NavigationBar.Styles.General.StatusBarHeight;
 var heightt = Dimensions.get('window').height - Navigator.NavigationBar.Styles.General.NavBarHeight
@@ -54,21 +55,23 @@ export class Tickets extends Component {
         console.log('-*-*-*-s-*d-*sd-f*--', widthh + '--' + heightt);
         if (Platform.OS === 'android') {
             image_margin_left = -widthh * (0 / 414);
+            image_margin_top = 80;
         }
         else {
             image_margin_left = -widthh * (5 / 414);
+            image_margin_top = 110;
         }
         return (
             <View style={style.container}>
                 <Common navigator={this.props.navigator} title={this.props.title}/>
-                <CoverFlow style={{}}>
+                <CoverFlow>
                     {this.state.images.map((src, i) =>
                         <View style={{
-                            width: widthh, height: heightt, marginTop: 0,
-                            marginLeft: image_margin_left, borderRadius: 5
+                            width: widthh, height: heightt+150, marginTop: 0,
+                            marginLeft: image_margin_left, borderRadius: 5,
                         }}>
                             <Image style={{
-                                width: widthh * (250 / 414), height: heightt * (390 / 736), borderRadius: 5
+                                width: widthh * (250 / 414), height: heightt * (390 / 736), borderRadius: 5,marginTop:image_margin_top,
                             }} key={i} source={src.headImageIcon}/>
                             <View style={{ backgroundColor: 'white', width: widthh * (250 / 414), height: heightt * (210 / 736), marginTop: heightt * (80 / 736) - heightt * (370 / 736) }}>
                                 <View style={{ backgroundColor: '#00000000', width: widthh * (250 / 414), height: heightt * (70 / 736) }}>
@@ -85,18 +88,18 @@ export class Tickets extends Component {
                                     <Text style={{ color: 'black', fontSize: widthh * (16 / 414), fontFamily: 'MyriadPro-SemiboldIt', marginTop: heightt * (-28 / 736), marginLeft: widthh * (60 / 414) }}>{src.address}</Text>
                                 </View>
                             </View>
-                            <View style={{ backgroundColor: '#50AEED', width: widthh * (250 / 414), height: heightt * (80 / 736), borderBottomLeftRadius: 5, borderBottomRightRadius: 5 }}>
+                            <View style={{ backgroundColor: '#50AEED', width: widthh * (250 / 414), height: heightt * (85 / 736), borderBottomLeftRadius: 5, borderBottomRightRadius: 5 }}>
                                 <Text style={{ color: 'white', fontSize: widthh * (20 / 414), fontFamily: 'MyriadPro-SemiboldIt', marginTop: heightt * (10 / 736), marginLeft: widthh * (50 / 414), width: widthh * (150 / 414) }}>{src.name}</Text>
                             </View>
                             <View style={{ backgroundColor: '#00000000', width: widthh * (250 / 414), height: heightt * (120 / 736), marginTop: widthh * (50 / 414) }}>
                                 <Image style={{ width: widthh * (120 / 414), height: heightt * (120 / 736), marginLeft: widthh * (10 / 414) }} key={i} source={require('../img/vwat.png') }/>
-                                <View style={{ backgroundColor: '#00000000', marginLeft: widthh * (150 / 414), width: widthh * (120 / 414), height: heightt * (120 / 736), marginTop: widthh * (-110 / 414) }}>
-                                    <Text style={{ color: 'black', fontSize: widthh * (16 / 414), fontFamily: 'MyriadPro-SemiboldIt' }}>Ticket Status: </Text>
-                                    <Text style={{ color: 'black', fontSize: widthh * (16 / 414), fontFamily: 'MyriadPro-SemiboldIt' }}>Valid</Text>
-                                    <Text style={{ color: 'black', fontSize: widthh * (16 / 414), fontFamily: 'MyriadPro-SemiboldIt' }}>Ticket CODE: </Text>
-                                    <Text style={{ color: 'black', fontSize: widthh * (16 / 414), fontFamily: 'MyriadPro-SemiboldIt' }}>12D2A</Text>
-                                    <Text style={{ color: 'black', fontSize: widthh * (16 / 414), fontFamily: 'MyriadPro-SemiboldIt' }}>Checked-in: </Text>
-                                    <Text style={{ color: 'black', fontSize: widthh * (16 / 414), fontFamily: 'MyriadPro-SemiboldIt' }}>1/23 9: 25 pm</Text>
+                                <View style={{ backgroundColor: '#00000000', marginLeft: widthh * (150 / 414), width: widthh * (120 / 414), height: heightt * (120 / 736), marginTop: heightt * (-120 / 736) }}>
+                                    <Text style={{ color: 'black', fontSize: heightt * (16 / 736), fontFamily: 'MyriadPro-SemiboldIt' }}>Ticket Status: </Text>
+                                    <Text style={{ color: 'black', fontSize: heightt * (16 / 736), fontFamily: 'MyriadPro-SemiboldIt' }}>Valid</Text>
+                                    <Text style={{ color: 'black', fontSize: heightt * (16 / 736), fontFamily: 'MyriadPro-SemiboldIt' }}>Ticket CODE: </Text>
+                                    <Text style={{ color: 'black', fontSize: heightt * (16 / 736), fontFamily: 'MyriadPro-SemiboldIt' }}>12D2A</Text>
+                                    <Text style={{ color: 'black', fontSize: heightt * (16 / 736), fontFamily: 'MyriadPro-SemiboldIt' }}>Checked-in: </Text>
+                                    <Text style={{ color: 'black', fontSize: heightt * (16 / 736), fontFamily: 'MyriadPro-SemiboldIt' }}>1/23 9: 25 pm</Text>
                                 </View>
                             </View>
                         </View>

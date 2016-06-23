@@ -36,6 +36,10 @@
 		CC5832291D07FC76009E28A2 /* libopencore-amrnb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC58321E1D07FC76009E28A2 /* libopencore-amrnb.a */; };
 		CC58322A1D07FC76009E28A2 /* libopencore-amrwb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC58321F1D07FC76009E28A2 /* libopencore-amrwb.a */; };
 		CC58322B1D07FC76009E28A2 /* VoiceConverter.mm in Sources */ = {isa = PBXBuildFile; fileRef = CC5832271D07FC76009E28A2 /* VoiceConverter.mm */; };
+		CC64FC941D1B7E32009F60C7 /* Bugly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC64FC931D1B7E32009F60C7 /* Bugly.framework */; };
+		CC64FCA31D1B7E3F009F60C7 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC64FCA21D1B7E3F009F60C7 /* SystemConfiguration.framework */; };
+		CC64FCA51D1B7E47009F60C7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC64FCA41D1B7E47009F60C7 /* Security.framework */; };
+		CC64FCA71D1B7E54009F60C7 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CC64FCA61D1B7E54009F60C7 /* libz.tbd */; };
 		CCA7E1961CEAFD6000EFEF04 /* ShowMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA7E1951CEAFD6000EFEF04 /* ShowMessage.m */; };
 		CCA7E1B81CEAFDFD00EFEF04 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA7E1A61CEAFDFD00EFEF04 /* MBProgressHUD.m */; };
 		CCA7E1B91CEAFDFD00EFEF04 /* MMVectorImage.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA7E1A81CEAFDFD00EFEF04 /* MMVectorImage.m */; };
@@ -197,6 +201,10 @@
 		CC5832251D07FC76009E28A2 /* if_rom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = if_rom.h; sourceTree = "<group>"; };
 		CC5832261D07FC76009E28A2 /* VoiceConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoiceConverter.h; sourceTree = "<group>"; };
 		CC5832271D07FC76009E28A2 /* VoiceConverter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = VoiceConverter.mm; sourceTree = "<group>"; };
+		CC64FC931D1B7E32009F60C7 /* Bugly.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bugly.framework; sourceTree = "<group>"; };
+		CC64FCA21D1B7E3F009F60C7 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		CC64FCA41D1B7E47009F60C7 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		CC64FCA61D1B7E54009F60C7 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		CCA7E1941CEAFD6000EFEF04 /* ShowMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowMessage.h; sourceTree = "<group>"; };
 		CCA7E1951CEAFD6000EFEF04 /* ShowMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowMessage.m; sourceTree = "<group>"; };
 		CCA7E1A51CEAFDFD00EFEF04 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
@@ -236,8 +244,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC64FCA71D1B7E54009F60C7 /* libz.tbd in Frameworks */,
+				CC64FCA51D1B7E47009F60C7 /* Security.framework in Frameworks */,
+				CC64FCA31D1B7E3F009F60C7 /* SystemConfiguration.framework in Frameworks */,
 				CC5832191D07FC23009E28A2 /* AVFoundation.framework in Frameworks */,
 				CCD8757A1CE5D8F200388995 /* libRNImagePicker.a in Frameworks */,
+				CC64FC941D1B7E32009F60C7 /* Bugly.framework in Frameworks */,
 				CCBAA0F91CE483A30035088B /* libRCTCordova.a in Frameworks */,
 				CC11EFF31CE4810B00AAEA09 /* libRCTCamera.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
@@ -394,6 +406,10 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				CC64FCA61D1B7E54009F60C7 /* libz.tbd */,
+				CC64FCA41D1B7E47009F60C7 /* Security.framework */,
+				CC64FCA21D1B7E3F009F60C7 /* SystemConfiguration.framework */,
+				CC64FC931D1B7E32009F60C7 /* Bugly.framework */,
 				CC5832181D07FC23009E28A2 /* AVFoundation.framework */,
 				CC0BD82F1D018E100071A5B8 /* MyriadPro-Bold.otf */,
 				CC0BD8301D018E100071A5B8 /* MyriadPro-BoldIt.otf */,
@@ -896,6 +912,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEAD_CODE_STRIPPING = NO;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -921,6 +941,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,

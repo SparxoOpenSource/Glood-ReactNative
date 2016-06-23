@@ -11,6 +11,8 @@
 
 #import "RCTRootView.h"
 
+#import <Bugly/Bugly.h>
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -61,6 +63,7 @@
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
+  [Bugly startWithAppId:@"900035998"];
   return YES;
 }
 
