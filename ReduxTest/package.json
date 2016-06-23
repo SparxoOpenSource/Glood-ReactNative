@@ -17,13 +17,14 @@
     "react": "^0.14.8",
     "react-native": "^0.25.1",
     "react-native-button": "^1.5.0",
-    "react-native-drawer": "^2.2.2",
+    "react-native-drawer-layout": "^1.0.0",
     "react-native-gifted-messenger": "corymsmith/react-native-gifted-messenger",
     "react-native-image-carousell": "^0.1.2",
     "react-native-image-picker": "^0.18.15",
     "react-native-pan-controller": "0.0.1",
     "react-native-refreshable-listview": "^2.0.0-beta4",
     "react-native-router-flux": "2.3.1",
+    "react-native-scrollable-tab-view": "^0.5.0",
     "react-native-sqlite": "^0.0.12",
     "react-native-vector-icons": "^2.0.2",
     "react-redux": "^4.4.5",
@@ -31,7 +32,6 @@
     "redux-thunk": "^2.1.0",
     "socket.io": "^1.4.6",
     "socket.io-client": "^1.4.6",
-    "socket.io-p2p": "^2.2.0",
-    "react-native-scrollable-tab-view":"^0.5.0"
+    "socket.io-p2p": "^2.2.0"
   }
 }

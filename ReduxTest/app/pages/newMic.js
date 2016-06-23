@@ -43,6 +43,7 @@ var auto = false;
 var inTher = false;
 var myImg = require('../img/play.png');
 var voiceImg = require('../img/voice.png');
+var {height, width} = Dimensions.get('window');
 var array = new Array();
 
 const propTypes = {
@@ -71,7 +72,7 @@ export class NewMic extends Component {
     render() {
         return (
             <View style={style.container}>
-                <Common navigator={this.props.navigator} title="Crazy May Fest 2016"/>
+                <Common navigator={this.props.navigator} ground="fw_1.png" title="Crazy May Fest 2016"/>
                 <View style={style.content}>
                     <RefreshableListView
                         enableEmptySections = {true}
@@ -80,6 +81,8 @@ export class NewMic extends Component {
                         renderRow={this._row.bind(this) }
                         loadData={this._accessFileName.bind(this) }
                         refreshPrompt="Pull down to refresh"/>
+
+                    <Image source={require('../img/fw_2.png') } style={style.background} />
                 </View>
                 <View style={style.footer}>
                     <View style={{ flexDirection: 'row' }}>
@@ -92,8 +95,8 @@ export class NewMic extends Component {
                     </TouchableWithoutFeedback>
                     <TouchableOpacity style={{ flexDirection: 'row' }}>
                         <Text style={{ marginTop: 32, fontSize: 16, color: '#00000000' }}>auto</Text>
-                        <Text style={{ marginTop: 32, fontSize: 16, color: '#00000000' }}>a</Text>
-                        <Image source={require('../img/people.png') } style={style.ImagStyle2}  />
+                        <Text style={{ marginTop: 32, fontSize: 16, color: '#00000000' }}>auto</Text>
+                        <Image source={require('../img/people.png') } style={style.ImagStyle3}  />
                     </TouchableOpacity>
                 </View>
             </View>
@@ -371,15 +374,15 @@ const style = StyleSheet.create({
         height: 25,
     },
     ImagStyle2: {
-        marginTop: 30,
+        marginTop: 35,
         width: 25,
-        height: 25,
+        height: 20,
         marginLeft: 20
     },
     ImagStyle3: {
-        marginTop: 30,
+        marginTop: 26,
         width: 23,
-        height: 25,
+        height: 29,
     },
     welcomeText: {
         marginLeft: 10,
@@ -418,4 +421,10 @@ const style = StyleSheet.create({
     //     height: everyOne,
     //     backgroundColor: 'red',
     // }
+    background: {
+        position: 'absolute',
+        width: width,
+        height: 120,
+        marginTop:-450
+    },
 });
