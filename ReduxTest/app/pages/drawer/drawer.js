@@ -49,9 +49,9 @@ export class DrawerMe extends Component {
 
         return (
             <DrawerLayout
-                onDrawerSlide={(e) => this.setState({ drawerSlideOutput: JSON.stringify(e.nativeEvent) }) }
-                onDrawerStateChanged={(e) => this.setState({ drawerStateChangedOutput: JSON.stringify(e) }) }
-                drawerWidth={300}
+                //onDrawerSlide={(e) => this.setState({ drawerSlideOutput: JSON.stringify(e.nativeEvent) }) }
+                // onDrawerStateChanged={(e) => this.setState({ drawerStateChangedOutput: JSON.stringify(e) }) }
+                drawerWidth={width - 80}
                 drawerLockMode={this.state.drawerLockMode}
                 ref={(drawer) => { return this.drawer = drawer } }
                 keyboardDismissMode="on-drag"
