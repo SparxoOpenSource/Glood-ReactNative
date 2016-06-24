@@ -10,6 +10,7 @@ import {NewCamera} from "../app/pages/newcamera"
 import {NewMic} from "../app/pages/newMic"
 import {Try} from "../app/pages/try"
 import {Tickets} from "../app/pages/tickets"
+import {Login} from "../app/pages/login"
 var {height, width} = Dimensions.get('window');
 
 
@@ -21,6 +22,8 @@ export class Root extends Component {
             case "welcome":
                 component = Home;
                 return (<Home navigator={navigator} title={"我的主页"}/>);
+                // component = Login;
+                // return (<Login navigator={navigator}/>);
             case "TICKETS":
                 return (<Tickets navigator={router.nav}  title={'Tickets'}/>);
             case "MIC":

@@ -77,7 +77,7 @@ export class Tickets extends Component {
         }
         else {
             image_margin_left = -widthh * (5 / 414);
-            image_margin_top = heightt * (110 / 736);
+            image_margin_top = heightt * (80 / 736);
         }
         return (
             <View style={style.container}>
@@ -85,7 +85,7 @@ export class Tickets extends Component {
                 <CoverFlow>
                     {this.state.images.map((src, i) =>
                         <View style={{
-                            width: widthh, height: heightt, marginTop: 0,
+                            width: widthh, height: heightt, marginTop: 20,
                             marginLeft: image_margin_left, borderRadius: 5
                         }}>
                             <Image style={{
