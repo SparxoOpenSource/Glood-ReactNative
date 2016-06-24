@@ -13,11 +13,14 @@
 
 #import <Bugly/Bugly.h>
 
+#import "UncaughtExceptionHandler.h"
+
 @implementation AppDelegate
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  InstallUncaughtExceptionHandler();
   NSURL *jsCodeLocation;
 
   /**

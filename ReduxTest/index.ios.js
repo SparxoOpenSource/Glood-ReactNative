@@ -13,4 +13,4 @@ require('ErrorUtils').setGlobalHandler(function (err) {
   console.log('Just ignore',err);
 });
 
-AppRegistry.registerComponent('ReduxTest', () => DrawerMe);
+AppRegistry.registerComponent('ReduxTest', () => Root);

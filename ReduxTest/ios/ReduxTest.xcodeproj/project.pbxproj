@@ -55,6 +55,7 @@
 		CCCFEF581D0967B600B79A10 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = CCCFEF561D0967B600B79A10 /* assets */; };
 		CCCFEF591D0967B600B79A10 /* index.ios.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = CCCFEF571D0967B600B79A10 /* index.ios.jsbundle */; };
 		CCD8757A1CE5D8F200388995 /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CCD875791CE5D8EB00388995 /* libRNImagePicker.a */; };
+		CCE6D6BF1D1D394700FAD82B /* UncaughtExceptionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CCE6D6BE1D1D394700FAD82B /* UncaughtExceptionHandler.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -230,6 +231,8 @@
 		CCCFEF561D0967B600B79A10 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = assets; sourceTree = "<group>"; };
 		CCCFEF571D0967B600B79A10 /* index.ios.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = index.ios.jsbundle; sourceTree = "<group>"; };
 		CCD875681CE5D8EB00388995 /* RNImagePicker.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNImagePicker.xcodeproj; path = "../node_modules/react-native-image-picker/ios/RNImagePicker.xcodeproj"; sourceTree = "<group>"; };
+		CCE6D6BD1D1D394700FAD82B /* UncaughtExceptionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UncaughtExceptionHandler.h; sourceTree = "<group>"; };
+		CCE6D6BE1D1D394700FAD82B /* UncaughtExceptionHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UncaughtExceptionHandler.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -351,6 +354,8 @@
 				CCCFEF571D0967B600B79A10 /* index.ios.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
+				CCE6D6BD1D1D394700FAD82B /* UncaughtExceptionHandler.h */,
+				CCE6D6BE1D1D394700FAD82B /* UncaughtExceptionHandler.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
@@ -836,6 +841,7 @@
 				CCA7E1BE1CEAFDFD00EFEF04 /* MMRadialProgressView.m in Sources */,
 				CCA7E1961CEAFD6000EFEF04 /* ShowMessage.m in Sources */,
 				CC2672AE1CEF07570018F4AB /* NSString+Base64.m in Sources */,
+				CCE6D6BF1D1D394700FAD82B /* UncaughtExceptionHandler.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 				CCA7E1BF1CEAFDFD00EFEF04 /* MMHud.m in Sources */,
 				CCA7E1C11CEAFDFD00EFEF04 /* MMProgressHUDViewController.m in Sources */,

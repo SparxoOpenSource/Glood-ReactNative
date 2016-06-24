@@ -67,8 +67,8 @@ const NSInteger UncaughtExceptionHandlerReportAddressCount = 5;
 	[self validateAndSaveCriticalApplicationData];
 	
 	UIAlertView *alert =
-		[[[UIAlertView alloc]
-			initWithTitle:NSLocalizedString(@"Unhandled exception", nil)
+		[[UIAlertView alloc]
+			initWithTitle:NSLocalizedString(@"异常", nil)
 			message:[NSString stringWithFormat:NSLocalizedString(
 				@"You can try to continue but the application may be unstable.\n\n"
 				@"Debug details follow:\n%@\n%@", nil),
@@ -76,8 +76,7 @@ const NSInteger UncaughtExceptionHandlerReportAddressCount = 5;
 				[[exception userInfo] objectForKey:UncaughtExceptionHandlerAddressesKey]]
 			delegate:self
 			cancelButtonTitle:NSLocalizedString(@"Quit", nil)
-			otherButtonTitles:NSLocalizedString(@"Continue", nil), nil]
-		autorelease];
+			otherButtonTitles:NSLocalizedString(@"Continue", nil), nil];
 	[alert show];
 	
 	CFRunLoopRef runLoop = CFRunLoopGetCurrent();
@@ -85,7 +84,7 @@ const NSInteger UncaughtExceptionHandlerReportAddressCount = 5;
 	
 	while (!dismissed)
 	{
-		for (NSString *mode in (NSArray *)allModes)
+		for (NSString *mode in (NSArray *)CFBridgingRelease(allModes))
 		{
 			CFRunLoopRunInMode((CFStringRef)mode, 0.001, false);
 		}
@@ -128,7 +127,7 @@ void HandleException(NSException *exception)
 		setObject:callStack
 		forKey:UncaughtExceptionHandlerAddressesKey];
 	
-	[[[[UncaughtExceptionHandler alloc] init] autorelease]
+	[[[UncaughtExceptionHandler alloc] init]
 		performSelectorOnMainThread:@selector(handleException:)
 		withObject:
 			[NSException
@@ -156,7 +155,7 @@ void SignalHandler(int signal)
 		setObject:callStack
 		forKey:UncaughtExceptionHandlerAddressesKey];
 	
-	[[[[UncaughtExceptionHandler alloc] init] autorelease]
+	[[[UncaughtExceptionHandler alloc] init]
 		performSelectorOnMainThread:@selector(handleException:)
 		withObject:
 			[NSException
