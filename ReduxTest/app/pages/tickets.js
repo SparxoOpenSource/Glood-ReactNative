@@ -107,7 +107,7 @@ export class Tickets extends Component {
                                 </View>
                             </View>
                             <View style={{ backgroundColor: '#50AEED', width: widthh * (250 / 414), height: heightt * (85 / 736), borderBottomLeftRadius: 5, borderBottomRightRadius: 5 }}>
-                                <Text style={{ color: 'white', fontSize: widthh * (20 / 414), fontFamily: 'MyriadPro-SemiboldIt', marginTop: heightt * (10 / 736), marginLeft: widthh * (50 / 414), width: widthh * (150 / 414) }}>{src.name}</Text>
+                                <Text style={{ backgroundColor:'#00000000',color: 'white', fontSize: widthh * (20 / 414), fontFamily: 'MyriadPro-SemiboldIt', marginTop: heightt * (10 / 736), marginLeft: widthh * (50 / 414), width: widthh * (150 / 414) }}>{src.name}</Text>
                             </View>
                             <View style={{ backgroundColor: '#00000000', width: widthh * (250 / 414), height: heightt * (120 / 736), marginTop: widthh * (50 / 414),opacity: qr_view_opacity}}>
                                 <Image style={{ width: widthh * (120 / 414), height: heightt * (120 / 736), marginLeft: widthh * (10 / 414) }} key={i} source={require('../img/vwat.png') }/>

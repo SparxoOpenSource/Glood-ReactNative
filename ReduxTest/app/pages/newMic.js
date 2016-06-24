@@ -29,8 +29,8 @@ var ss = 70;
 var tt = 70;
 var app;
 var footerY = 0;
-var everyOne = isAndroid() ? 100 : 105;
-var everyOnexxx = isAndroid() ? 100 : 105;
+var everyOne = isAndroid() ? 95 : 100;
+var everyOnexxx = isAndroid() ? 95 : 100;
 var index = 0;
 var {deviceHeight, deviceWidth} = Dimensions.get('window');
 var STATUS_BAR_HEIGHT = Navigator.NavigationBar.Styles.General.StatusBarHeight;
@@ -425,6 +425,6 @@ const style = StyleSheet.create({
         position: 'absolute',
         width: width,
         height: 120,
-        marginTop:-450
+        marginTop: isAndroid() ? -450 : -421
     },
 });

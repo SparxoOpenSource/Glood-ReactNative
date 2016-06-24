@@ -30,7 +30,7 @@ var STATUS_BAR_HEIGHT = Navigator.NavigationBar.Styles.General.StatusBarHeight;
 // if (isAndroid()) {
 //     var STATUS_BAR_HEIGHT = ExtraDimensions.get('STATUS_BAR_HEIGHT');
 // }
-var maxHeight = height - Navigator.NavigationBar.Styles.General.NavBarHeight - STATUS_BAR_HEIGHT - 64 - 40;
+var maxHeight = height - Navigator.NavigationBar.Styles.General.NavBarHeight - STATUS_BAR_HEIGHT - 64 - 10;
 var maxSize = isAndroid() ? 30 : 35;
 var cha = width - 60;
 var leftEvery = 60 / 2 - 60 / 2 + cha / 2;
@@ -92,7 +92,7 @@ export class NewMicItem extends Component {
             auto: props.auto,
             imgIsBig: false,
             background_imagex: require('../img/background.png'),
-            firstTop: props.rowID === 0 ? ((props.dateLength * (80 + maxSize)) > maxHeight ? 0 : (maxHeight - 80 - maxSize)) : 0
+            firstTop: props.rowID === 0 ? ((props.dateLength * (60 + maxSize)) > maxHeight ? 0 : (maxHeight - 60 - maxSize)) : 0
         }
         this._setTime(props.title.time);
     }
@@ -141,7 +141,7 @@ export class NewMicItem extends Component {
                     marginTop: this.state.firstTop
                 }}>
                     <Image source={this.state.background_imagex} style={{
-                        width: this.state.w, height: this.state.h, borderWidth: 0, borderRadius: 35,
+                        width: this.state.w, height: this.state.h, borderWidth: 0, borderRadius: 30,
                         position: "absolute", marginLeft: this.state.left, marginTop: maxSize / 2
                     }} />
                     <Animated.View style={{
@@ -175,7 +175,7 @@ export class NewMicItem extends Component {
                     <TouchableOpacity style={{
                         width: 60, height: 60,
                         borderWidth: 0,
-                        borderRadius: 35,
+                        borderRadius: 30,
                         alignItems: 'center',
                         justifyContent: 'center',
                         position: "absolute",
