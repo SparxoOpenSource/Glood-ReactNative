@@ -54,7 +54,7 @@ export class DrawerMe extends Component {
                 drawerWidth={300}
                 drawerLockMode={this.state.drawerLockMode}
                 ref={(drawer) => { return this.drawer = drawer } }
-                keyboardDismissMode="none"
+                keyboardDismissMode="on-drag"
                 renderNavigationView={() => navigationView}>
                 <Root style={{ width: width, height: height }}/>
             </DrawerLayout>
