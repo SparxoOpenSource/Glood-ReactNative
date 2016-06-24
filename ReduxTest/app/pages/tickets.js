@@ -54,11 +54,10 @@ export class Tickets extends Component {
         }
     }
     componentDidMount() {
-        EventListener.on("scrollOffset").then(this.scrollOffsetxxx.bind(this));
+        // EventListener.on("scrollOffset").then(this.scrollOffsetxxx.bind(this));
     }
      scrollOffsetxxx(offset) {
          var currentPage = offset/(heightt * (390 / 736));
-         console.log('*-*-*-sdfsdfsd----',offset+'---'+currentPage);
          if(currentPage>2){
               this.setState({
                  qr_view_opacity:0

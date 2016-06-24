@@ -14,7 +14,6 @@ import {Login} from "../app/pages/login"
 import {DrawerMe} from "../app/pages/drawer/drawer"
 var {height, width} = Dimensions.get('window');
 
-
 export class Root extends Component {
     renderScene(router, navigator) {
         var component = null;
@@ -32,7 +31,7 @@ export class Root extends Component {
             case "NEWMIC":
                 return (<NewMic navigator={router.nav} title={router.value} app={router.app} ip={router.ip}/>);
             case "CAMERA":
-                return (<Cameraq navigator={router.nav}  title={router.value}/>);
+                return (<Cameraqxx navigator={router.nav}  title={router.value}/>);
             case "PHOTOWALL":
                 return (<PhototWall navigator={router.nav}  title={router.value}/>);
             case "NEWCAMERA":

@@ -41,11 +41,11 @@ export class Login extends Component {
         return (
             <View style={style.container}>
                 <Animated.View style={[style.backGroundView, { transform: this.state.bigDogeTrans.getTranslateTransform() }]} >
-                    <View style={{ height: heightt, width: widthh, backgroundColor: '#00000000' }}>
+                    <View style={{ height: heightt, width: widthh, backgroundColor: 'red' }}>
                         <Image source={require('../img/171604419.jpg') }/>
                     </View>
 
-                    <View style={{ height: heightt, width: widthh, backgroundColor: '#00000000' }}>
+                    <View style={{ height: heightt, width: widthh, backgroundColor: 'green' }}>
                     </View>
                 </Animated.View>
             </View>
@@ -60,6 +60,17 @@ export class Login extends Component {
             duration: 2000,
             delay: 500
         }).start();
+        setTimeout(() => {
+            Animated.timing(this.state.bigDogeTrans, {
+            toValue: {
+                x: 0,
+                y: -heightt
+            },
+            duration: 2000,
+            delay: 500
+        }).start();
+        }, 2300);
+        
     }
 }
 Login.propTypes = propTypes;
