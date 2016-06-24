@@ -10,7 +10,11 @@ import {NewCamera} from "../app/pages/newcamera"
 import {NewMic} from "../app/pages/newMic"
 import {Try} from "../app/pages/try"
 import {Tickets} from "../app/pages/tickets"
+<<<<<<< HEAD
 import {Login} from "../app/pages/login"
+=======
+import {DrawerMe} from "../app/pages/drawer/drawer"
+>>>>>>> 2a594420e36a31ecf83bcbd378a8c06731bedc65
 var {height, width} = Dimensions.get('window');
 
 
@@ -38,6 +42,8 @@ export class Root extends Component {
                 return (<NewCamera navigator={router.nav}  title={router.value}/>);
             case "TRY":
                 return (<Try navigator={router.nav}  title={router.value}/>);
+            case "Drawer":
+                return (<DrawerMe navigator={router.nav}  title={router.value}/>);
         }
 
     }
