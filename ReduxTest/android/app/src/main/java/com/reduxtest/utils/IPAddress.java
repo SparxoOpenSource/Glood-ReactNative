@@ -3,6 +3,7 @@ package com.reduxtest.utils;
 import android.content.Context;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -46,9 +47,9 @@ public class IPAddress {
                 return strber.toString();
             }
         } catch (MalformedURLException e) {
-            e.printStackTrace();
+            Log.e("MalformedURLException", e.getMessage());
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.e("IOException", e.getMessage());
         }
         return getPhoneIp();
     }
@@ -70,6 +71,7 @@ public class IPAddress {
                 }
             }
         } catch (Exception e) {
+            Log.e("移动数据上网IP", e.getMessage());
         }
         return "127.0.0.1";
     }
@@ -82,6 +84,7 @@ public class IPAddress {
             WifiInfo info = wifi.getConnectionInfo();
             result = intToIp(info.getIpAddress());
         } catch (Exception e) {
+            Log.e("getAndroidIpAddress",e.getMessage());
             result = getPhoneIp();
         }
         if (result == null)

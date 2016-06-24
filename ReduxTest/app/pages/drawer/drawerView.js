@@ -20,15 +20,18 @@ var {height, width} = Dimensions.get('window');
 
 export class DrawerView extends Component {
     render() {
-       return(<View style={{
+        return (
+            <View style={{
                 flex: 6,
+                width: width - 80,
+                height: height,
                 flexDirection: 'row',
             }}>
                 <Image source={require('../../img/background3.png') } style={{
                     position: 'absolute',
                     left: 0,
                     top: 0,
-                    width: width,
+                    width: width - 80,
                     height: height
                 }} />
                 <View style={{
@@ -108,6 +111,6 @@ export class DrawerView extends Component {
                         marginTop: 10
                     }} source={require("../../img/yuan.png") }/>
                 </TouchableOpacity>
-            </View>) 
+            </View>)
     }
 }
