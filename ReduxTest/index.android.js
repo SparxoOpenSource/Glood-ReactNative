@@ -6,6 +6,7 @@
 import React, { Component } from 'react';
 import {Root} from './app/root';
 import {Common} from './app/pages/common';
+import {DrawerMe} from './app/pages/drawer/drawer';
 
 import {
   AppRegistry,
@@ -51,4 +52,4 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('ReduxTest', () => Root);
+AppRegistry.registerComponent('ReduxTest', () => DrawerMe);

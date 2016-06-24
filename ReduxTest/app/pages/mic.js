@@ -169,7 +169,7 @@ export class Mic extends Component {
                 //发送消息
                 _this.sendMessage(back.Base64);
                 _this._refush(data);
-                console.log("*--------",everyOne+"----"+maxHeight);
+                console.log("*--------", everyOne + "----" + maxHeight);
                 if (data.length * everyOne > maxHeight) {
                     footerY = footerY + everyOne;
                     scorll = true;
@@ -197,7 +197,8 @@ export class Mic extends Component {
             RecordAudio.prototype.accessFileName((back) => {
                 if (back.name === "有数据") {
                     array = back.param;
-                    for (var i = 0; i < array.length; i++) {
+                    var rr = array.length > 5 ? 5 : array.length;
+                    for (var i = 0; i < rr; i++) {
                         var title = {
                             name: array[i].name,
                             ip: array[i].ip,
@@ -275,7 +276,7 @@ export class Mic extends Component {
      * 发送消息
      */
     sendMessage(message = null, rowID = null) {
-        this.props.app.service('messages').create({ text: message}).then(result => {
+        this.props.app.service('messages').create({ text: message }).then(result => {
             console.log('message created!');
         }).catch((error) => {
             console.log('ERROR creating message');
