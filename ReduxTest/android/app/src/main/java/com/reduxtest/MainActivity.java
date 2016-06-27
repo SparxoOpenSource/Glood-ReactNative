@@ -1,5 +1,7 @@
 package com.reduxtest;
 
+import android.widget.Toast;
+
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;

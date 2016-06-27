@@ -11,7 +11,11 @@ import {NewMic} from "../app/pages/newMic"
 import {Try} from "../app/pages/try"
 import {Tickets} from "../app/pages/tickets"
 import {Login} from "../app/pages/login"
+<<<<<<< HEAD
 import {DrawerMe} from '../app/pages/drawer/drawer';
+=======
+import {Introduce} from "../app/pages/introduce"
+>>>>>>> 7d63d1d3da4f4b519ee2fa4736e0902cc1a48c87
 var {height, width} = Dimensions.get('window');
 
 const propTypes = {
@@ -40,6 +44,7 @@ export class Root extends Component {
                 return (<PhototWall navigator={router.nav}  title={router.value}/>);
             case "NEWCAMERA":
                 return (<NewCamera navigator={router.nav}  title={router.value}/>);
+<<<<<<< HEAD
             case "TRY":
                 return (<Try navigator={router.nav}  title={router.value}/>);
             case "DrawerMe":
@@ -51,6 +56,10 @@ export class Root extends Component {
                 component = Login;
                 return (<Login navigator={navigator}/>);
 
+=======
+            case "Introduce":
+                return (<Introduce navigator={router.nav}  title={router.value}/>);
+>>>>>>> 7d63d1d3da4f4b519ee2fa4736e0902cc1a48c87
         }
 
     }
