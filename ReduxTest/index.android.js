@@ -9,5 +9,7 @@ import {Common} from './app/pages/common';
 import {DrawerMe} from './app/pages/drawer/drawer';
 
 import {AppRegistry} from 'react-native';
-
+require('ErrorUtils').setGlobalHandler(function (err) {
+    console.log('Just ignore android', err);
+});
 AppRegistry.registerComponent('ReduxTest', () => DrawerMe);

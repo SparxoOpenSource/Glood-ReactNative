@@ -11,6 +11,7 @@ import {NewMic} from "../app/pages/newMic"
 import {Try} from "../app/pages/try"
 import {Tickets} from "../app/pages/tickets"
 import {Login} from "../app/pages/login"
+import {Introduce} from "../app/pages/introduce"
 var {height, width} = Dimensions.get('window');
 
 export class Root extends Component {
@@ -35,8 +36,8 @@ export class Root extends Component {
                 return (<PhototWall navigator={router.nav}  title={router.value}/>);
             case "NEWCAMERA":
                 return (<NewCamera navigator={router.nav}  title={router.value}/>);
-            case "TRY":
-                return (<Try navigator={router.nav}  title={router.value}/>);
+            case "Introduce":
+                return (<Introduce navigator={router.nav}  title={router.value}/>);
         }
 
     }

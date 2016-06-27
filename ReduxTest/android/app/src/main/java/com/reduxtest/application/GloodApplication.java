@@ -2,6 +2,7 @@ package com.reduxtest.application;
 
 import android.app.Application;
 
+import com.reduxtest.exception.UncaughtException;
 import com.tencent.bugly.crashreport.CrashReport;
 
 /**
@@ -10,7 +11,9 @@ import com.tencent.bugly.crashreport.CrashReport;
 public class GloodApplication extends Application {
     @Override
     public void onCreate() {
-        CrashReport.initCrashReport(getApplicationContext(), "900035325", false);
         super.onCreate();
+        CrashReport.initCrashReport(getApplicationContext(), "900035325", false);
+        UncaughtException crashHandler = UncaughtException.getInstance();
+        crashHandler.init(getApplicationContext());
     }
 }
