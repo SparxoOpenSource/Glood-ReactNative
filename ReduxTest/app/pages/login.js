@@ -33,7 +33,7 @@ export class Login extends Component {
         this.state = {
             bigDogeTrans: new Animated.ValueXY({
                 x: 0,
-                y: 0
+                y: heightt/2
             })
         }
     }
@@ -42,7 +42,10 @@ export class Login extends Component {
             <View style={style.container}>
                 <Animated.View style={[style.backGroundView, { transform: this.state.bigDogeTrans.getTranslateTransform() }]} >
                     <View style={{ height: heightt, width: widthh, backgroundColor: 'red' }}>
-                        <Image source={require('../img/171604419.jpg') }/>
+                        <Image source={require('../img/eye.png')} style={{width:widthh*(170/414),height:heightt*(175/736),backgroundColor:'#00000000',
+                        marginTop:-(heightt*(175/736)-heightt)/2-heightt*(50/736),marginLeft:(widthh-widthh*(170/414))/2}}/>
+                        <Image source={require('../img/line.png')} style={{width:widthh*(1/414),height:heightt*(150/736),backgroundColor:'#00000000',
+                        marginLeft:(widthh-widthh*(1/414))/2}}/>
                     </View>
 
                     <View style={{ height: heightt, width: widthh, backgroundColor: 'green' }}>
@@ -64,7 +67,7 @@ export class Login extends Component {
             Animated.timing(this.state.bigDogeTrans, {
             toValue: {
                 x: 0,
-                y: -heightt
+                y: -heightt-(heightt / 2)
             },
             duration: 2000,
             delay: 500

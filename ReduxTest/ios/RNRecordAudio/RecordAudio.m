@@ -4,6 +4,8 @@
 #import "ShowMessage.h"
 #import "NSString+Base64.h"
 #import "VoiceConverter.h"
+#import "KeychainItemWrapper.h"
+
 @import AVFoundation;
 @import AudioToolbox;
 
@@ -648,6 +650,7 @@ RCT_EXPORT_METHOD(recordMsg:(NSString *)msg)
 }
 
 #pragma mark ======= 获取当前设备ip地址 ======
+#define MOBILE_PHONE_UUID_FAKE @"mobile_phone_uuid_fake"
 RCT_EXPORT_METHOD(getAndroidIpAddress:(RCTResponseSenderBlock)callback)
 {
 //  NSString *address = @"error";
@@ -671,15 +674,42 @@ RCT_EXPORT_METHOD(getAndroidIpAddress:(RCTResponseSenderBlock)callback)
 //  
   // NSLog(@"-*-*-*-------ADDRE:%@",address);
   NSString *ipStr;
-  if ([[self getIPAddresses] count] == 3)
+//  if ([[self getIPAddresses] count] == 3)
+//  {
+//    ipStr = [[self getIPAddresses] objectForKey:@"pdp_ip0/ipv4"];
+//  }
+//  else
+//  {
+//    ipStr = [[self getIPAddresses] objectForKey:@"en0/ipv4"];
+//  }
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  if([[[UIDevice currentDevice] systemVersion] floatValue] >= 6)
   {
-    ipStr = [[self getIPAddresses] objectForKey:@"pdp_ip0/ipv4"];
+    KeychainItemWrapper *keyWrapper=[[KeychainItemWrapper alloc] initWithIdentifier:@"react-glood" accessGroup:nil];//xxxx 自定义
+    
+    
+    if ([NSString stringWithFormat:@"%@", [keyWrapper  objectForKey:(id)CFBridgingRelease(kSecAttrAccount)]] == nil || [[NSString stringWithFormat:@"%@", [keyWrapper  objectForKey:(id)CFBridgingRelease(kSecAttrAccount)]] isEqualToString:@"<null>"] || [[NSString stringWithFormat:@"%@", [keyWrapper  objectForKey:(id)CFBridgingRelease(kSecAttrAccount)]] isEqualToString:@"(null)"] || [[NSString stringWithFormat:@"%@", [keyWrapper  objectForKey:(id)CFBridgingRelease(kSecAttrAccount)]] isEqualToString:@""])
+    {
+      CFUUIDRef uuidRef =CFUUIDCreate(NULL);
+      
+      CFStringRef uuidStringRef =CFUUIDCreateString(NULL, uuidRef);
+      
+      CFRelease(uuidRef);
+      
+      NSString *uniqueId = (NSString *)CFBridgingRelease(uuidStringRef);
+      [keyWrapper setObject:@"myChainValues" forKey:(id)CFBridgingRelease(kSecAttrService)];
+      [keyWrapper setObject:uniqueId forKey:(id)CFBridgingRelease(kSecAttrAccount)];
+      [defaults setObject:uniqueId forKey:MOBILE_PHONE_UUID_FAKE];
+      
+    }
+    else
+    {
+      NSString *password = [keyWrapper  objectForKey:(id)CFBridgingRelease(kSecAttrAccount)];
+      [defaults setObject:password forKey:MOBILE_PHONE_UUID_FAKE];
+    }
   }
-  else
-  {
-    ipStr = [[self getIPAddresses] objectForKey:@"en0/ipv4"];
-  }
-  NSDictionary *resultsDict = @{@"IP" : ipStr};
+  NSLog(@"唯一码:%@",[defaults objectForKey:MOBILE_PHONE_UUID_FAKE]);
+  NSDictionary *resultsDict = @{@"IP" : [defaults objectForKey:MOBILE_PHONE_UUID_FAKE]};
   callback(@[resultsDict]);
 }
 

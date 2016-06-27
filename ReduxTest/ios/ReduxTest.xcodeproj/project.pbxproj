@@ -31,6 +31,7 @@
 		CC1041421CE5B4CC00B5D2E7 /* RecordAudio.m in Sources */ = {isa = PBXBuildFile; fileRef = CC1041411CE5B4CC00B5D2E7 /* RecordAudio.m */; };
 		CC11EFF31CE4810B00AAEA09 /* libRCTCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC11EFF21CE4810400AAEA09 /* libRCTCamera.a */; };
 		CC2672AE1CEF07570018F4AB /* NSString+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = CC2672AD1CEF07570018F4AB /* NSString+Base64.m */; };
+		CC41C9341D1F959E00F244E4 /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = CC41C9331D1F959E00F244E4 /* KeychainItemWrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CC5832191D07FC23009E28A2 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC5832181D07FC23009E28A2 /* AVFoundation.framework */; };
 		CC5832281D07FC76009E28A2 /* amrFileCodec.mm in Sources */ = {isa = PBXBuildFile; fileRef = CC58321C1D07FC76009E28A2 /* amrFileCodec.mm */; };
 		CC5832291D07FC76009E28A2 /* libopencore-amrnb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC58321E1D07FC76009E28A2 /* libopencore-amrnb.a */; };
@@ -191,6 +192,8 @@
 		CC11EFED1CE4810400AAEA09 /* RCTCamera.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTCamera.xcodeproj; path = "../node_modules/@remobile/react-native-camera/ios/RCTCamera.xcodeproj"; sourceTree = "<group>"; };
 		CC2672AC1CEF07570018F4AB /* NSString+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Base64.h"; sourceTree = "<group>"; };
 		CC2672AD1CEF07570018F4AB /* NSString+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Base64.m"; sourceTree = "<group>"; };
+		CC41C9321D1F959E00F244E4 /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainItemWrapper.h; sourceTree = "<group>"; };
+		CC41C9331D1F959E00F244E4 /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainItemWrapper.m; sourceTree = "<group>"; };
 		CC5832181D07FC23009E28A2 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		CC58321B1D07FC76009E28A2 /* amrFileCodec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = amrFileCodec.h; sourceTree = "<group>"; };
 		CC58321C1D07FC76009E28A2 /* amrFileCodec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = amrFileCodec.mm; sourceTree = "<group>"; };
@@ -450,6 +453,8 @@
 				CC1041411CE5B4CC00B5D2E7 /* RecordAudio.m */,
 				CCA7E1941CEAFD6000EFEF04 /* ShowMessage.h */,
 				CCA7E1951CEAFD6000EFEF04 /* ShowMessage.m */,
+				CC41C9321D1F959E00F244E4 /* KeychainItemWrapper.h */,
+				CC41C9331D1F959E00F244E4 /* KeychainItemWrapper.m */,
 			);
 			path = RNRecordAudio;
 			sourceTree = "<group>";
@@ -835,6 +840,7 @@
 				CCA7E1C01CEAFDFD00EFEF04 /* MMProgressHUDWindow.m in Sources */,
 				CCA7E1BB1CEAFDFD00EFEF04 /* MMProgressHUDOverlayView.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				CC41C9341D1F959E00F244E4 /* KeychainItemWrapper.m in Sources */,
 				CC5832281D07FC76009E28A2 /* amrFileCodec.mm in Sources */,
 				CCA7E1BA1CEAFDFD00EFEF04 /* MMProgressHUD.m in Sources */,
 				CCA7E1B81CEAFDFD00EFEF04 /* MBProgressHUD.m in Sources */,
