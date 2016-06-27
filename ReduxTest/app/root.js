@@ -26,8 +26,6 @@ export class Root extends Component {
         _navigator = navigator;
         switch (router.name) {
             case "welcome":
-                // component = Home;
-                // return (<Home navigator={navigator} title={"我的主页"}/>);
                 component = Login;
                 return (<Login navigator={navigator}/>);
             case "TICKETS":
@@ -41,9 +39,6 @@ export class Root extends Component {
             case "PHOTOWALL":
                 return (<PhototWall navigator={router.nav}  title={router.value}/>);
             case "NEWCAMERA":
-<<<<<<< HEAD
-                return (<Introduce navigator={router.nav}  title={router.value}/>);
-=======
                 return (<NewCamera navigator={router.nav}  title={router.value}/>);
             case "TRY":
                 return (<Try navigator={router.nav}  title={router.value}/>);
@@ -52,11 +47,6 @@ export class Root extends Component {
             case "Home":
                 component = Home;
                 return (<Home navigator={navigator} title={"我的主页"}/>);
-            default:
-                component = Login;
-                return (<Login navigator={navigator}/>);
-
->>>>>>> 0689e51657ec7ab57479a9c1f40e877b891c0fc0
             case "Introduce":
                 return (<Introduce navigator={router.nav}  title={router.value}/>);
             case "Activitylist":
