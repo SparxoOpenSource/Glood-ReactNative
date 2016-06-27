@@ -12,6 +12,7 @@ import {Try} from "../app/pages/try"
 import {Tickets} from "../app/pages/tickets"
 import {Login} from "../app/pages/login"
 import {Introduce} from "../app/pages/introduce"
+import {Activitylist} from "../app/pages/activitylist"
 var {height, width} = Dimensions.get('window');
 
 export class Root extends Component {
@@ -35,9 +36,11 @@ export class Root extends Component {
             case "PHOTOWALL":
                 return (<PhototWall navigator={router.nav}  title={router.value}/>);
             case "NEWCAMERA":
-                return (<NewCamera navigator={router.nav}  title={router.value}/>);
+                return (<Introduce navigator={router.nav}  title={router.value}/>);
             case "Introduce":
                 return (<Introduce navigator={router.nav}  title={router.value}/>);
+            case "Activitylist":
+                return (<Activitylist navigator={router.nav}  title={router.value}/>);
         }
 
     }

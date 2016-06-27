@@ -26,6 +26,7 @@
     "react-native-router-flux": "2.3.1",
     "react-native-scrollable-tab-view": "^0.5.0",
     "react-native-sqlite": "^0.0.12",
+    "react-native-swiper": "^1.4.5",
     "react-native-vector-icons": "^2.0.2",
     "react-redux": "^4.4.5",
     "redux": "^3.5.2",
