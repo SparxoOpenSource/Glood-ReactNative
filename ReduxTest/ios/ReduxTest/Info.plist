@@ -31,6 +31,7 @@
 	<string></string>
 	<key>UIAppFonts</key>
 	<array>
+		<string>MyriadPro-Regular.otf</string>
 		<string>OpenSans-Bold-webfont.ttf</string>
 		<string>MyriadPro-Bold.otf</string>
 		<string>MyriadPro-Bold.otf</string>
