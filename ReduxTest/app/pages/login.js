@@ -94,7 +94,7 @@ export class Login extends Component {
         );
     }
     _handerClick(navigator) {
-        this.props.navigator.push({
+        this.props.navigator.replace({
             name: "DrawerMe", value: "DrawerMe", nav: navigator
         });
     }

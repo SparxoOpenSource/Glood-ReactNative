@@ -59,12 +59,12 @@ export class Introduce extends Component {
         // } else {
         //     AlertIOS.alert(state.index + "");
         // }
-        if (state.index === 1) {
+        if (state.index === 2) {
             setTimeout(() => {
-                this.props.navigator.push({
+                this.props.navigator.replace({
                     name: "Login", value: "Login", nav: navigator
                 });
-            }, 2000);
+            }, 1000);
         }
     }
 }
