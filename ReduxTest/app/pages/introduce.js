@@ -67,6 +67,7 @@ export class Introduce extends Component {
         }
     }
 }
+
 Introduce.propTypes = propTypes;
 
 var styles = StyleSheet.create({

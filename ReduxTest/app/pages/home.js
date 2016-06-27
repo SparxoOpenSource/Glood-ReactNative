@@ -27,8 +27,8 @@ export class Home extends Component {
     constructor(props) {
         super(props);
         const options = { transports: ['websocket'], forceNew: true };
-        const socket = io('http://50.18.208.72:30030', options);
-        // const socket = io('http://192.168.31.221:3030', options);
+        // const socket = io('http://50.18.208.72:30030', options);
+        const socket = io('http://192.168.31.221:3030', options);
 
         this.state = {
             connected: false,
