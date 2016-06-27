@@ -22,7 +22,13 @@
 {
   InstallUncaughtExceptionHandler();
   NSURL *jsCodeLocation;
-
+//  NSString *str;
+//  NSDictionary *resultsDict = @{@"IP" : str};
+//  NSLog(@"%@",resultsDict);
+//  NSArray *arr=[[NSArray alloc] initWithObjects:@"x", nil];
+//  for (NSInteger i = 0; i <= [arr count]; i++) {
+//    NSLog(@"%@",[arr objectAtIndex:i]);
+//  }
   /**
    * Loading JavaScript code - uncomment the one you want.
    *
