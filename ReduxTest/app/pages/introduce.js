@@ -28,4 +28,4 @@ export class Introduce extends Component {
         return "";
     }
 }
-Introduce.prototype = prototype;
+Introduce.propTypes = propTypes;
