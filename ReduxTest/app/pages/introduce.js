@@ -22,7 +22,6 @@ import Swiper from "react-native-swiper";
 var {height, width} = Dimensions.get('window');
 
 const propTypes = {
-    title: PropTypes.string,
     navigator: PropTypes.object
 };
 /**
@@ -60,9 +59,11 @@ export class Introduce extends Component {
         // } else {
         //     AlertIOS.alert(state.index + "");
         // }
-        if (state.index === 2) {
+        if (state.index === 1) {
             setTimeout(() => {
-                
+                this.props.navigator.push({
+                    name: "Login", value: "Login", nav: navigator
+                });
             }, 2000);
         }
     }

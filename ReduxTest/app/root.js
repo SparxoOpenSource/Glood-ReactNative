@@ -25,7 +25,10 @@ export class Root extends Component {
         var component = null;
         _navigator = navigator;
         switch (router.name) {
-            case "welcome":
+            case "Introduce":
+                component = Introduce;
+                return (<Introduce navigator={navigator}/>);
+            case "Login":
                 component = Login;
                 return (<Login navigator={navigator}/>);
             case "TICKETS":
@@ -47,8 +50,6 @@ export class Root extends Component {
             case "Home":
                 component = Home;
                 return (<Home navigator={navigator} title={"我的主页"}/>);
-            case "Introduce":
-                return (<Introduce navigator={router.nav}  title={router.value}/>);
             case "Activitylist":
                 return (<Activitylist navigator={router.nav}  title={router.value}/>);
         }
@@ -66,7 +67,7 @@ export class Root extends Component {
                 <Navigator
                     ref="navigator"
                     sceneStyle={styles.container}
-                    initialRoute={{ name: this.props.title == '' ? 'welcome' : this.props.title }}
+                    initialRoute={{ name: this.props.title == null ? 'Introduce' : this.props.title }}
                     renderScene={this.renderScene} />
             </View>
         );
