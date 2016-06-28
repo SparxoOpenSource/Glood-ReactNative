@@ -100,7 +100,7 @@ export class Login extends Component {
                         </View>
                         <View style={{
                             opacity: this.state.sign_up_view_opacity,
-                            width: this.state.sign_up_view_width, height: heightt * (300 / 736), marginLeft: (widthh - (widthh * (300 / 414))) / 2,
+                            width: this.state.sign_up_view_width, height: heightt * (350 / 736), marginLeft: (widthh - (widthh * (300 / 414))) / 2,
                             marginTop: (heightt - 4 * (heightt * (300 / 736))) / 2 - heightt * (50 / 736) - 10
                         }}>
                             <Text style={{ color: '#7e7e7e', fontSize: heightt * (18 / 736), fontFamily: 'MyriadPro-Regular', marginLeft: widthh * (5 / 414) }}>email</Text>
@@ -118,11 +118,11 @@ export class Login extends Component {
                                 color: '#7e7e7e', fontSize: heightt * (18 / 736), fontFamily: 'MyriadPro-Regular', marginTop: heightt * (25 / 736),
                                 marginLeft: widthh * (160 / 414)
                             }}>forgot password?</Text>
-                            <TouchableOpacity style={{ width: widthh * (300 / 414), height: heightt * (60 / 736), marginTop: heightt * (65 / 736), marginLeft: widthh * (5 / 414) }}>
+                            <TouchableOpacity style={{width: widthh * (300 / 414), height: heightt * (60 / 736), marginTop: heightt * (65 / 736), marginLeft: widthh * (5 / 414) }}>
                                 <Image style={{width: widthh * (300 / 414), height: heightt * (60 / 736)}} source={require('../img/facebook_sign_in.png') }/>
                             </TouchableOpacity>
                         </View>
-                        <TouchableOpacity style={{ flexDirection: 'row', backgroundColor: '#53aeee', width: widthh, height: heightt * (60 / 736), marginTop: heightt * (137 / 736) }}
+                        <TouchableOpacity style={{ flexDirection: 'row', backgroundColor: '#53aeee', width: widthh, height: heightt * (60 / 736), marginTop: heightt * (87 / 736) }}
                             onPress={this._handerClick.bind(this, this.props.navigator) }>
                             <Text style={{
                                 color: 'white', fontSize: heightt * (25 / 736), width: widthh * (90 / 414), fontFamily: 'MyriadPro-Semibold', marginTop: heightt * ((60 - 30) / 736) / 2,

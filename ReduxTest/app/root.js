@@ -13,7 +13,7 @@ import {Tickets} from "../app/pages/tickets"
 import {Login} from "../app/pages/login"
 import {DrawerMe} from '../app/pages/drawer/drawer';
 import {Introduce} from "../app/pages/introduce"
-import {ActivityList} from "../app/pages/activityList"
+import {ActivityList} from "../app/pages/activitylist"
 var {height, width} = Dimensions.get('window');
 
 const propTypes = {
