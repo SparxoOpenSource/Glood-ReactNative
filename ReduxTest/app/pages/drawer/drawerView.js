@@ -16,7 +16,14 @@ import { AppRegistry,
     Dimensions,
     DeviceEventEmitter }  from 'react-native';
 import isAndroid from '../../utils/isAndroid.js';
+import {EventListener} from "../../listener/EventListener";
 var {height, width} = Dimensions.get('window');
+
+const propTypes = {
+    title: PropTypes.string,
+    navigator: PropTypes.object,
+    page: PropTypes.string
+};
 
 export class DrawerView extends Component {
     render() {
@@ -102,10 +109,11 @@ export class DrawerView extends Component {
                 <TouchableOpacity style={{
                     flex: 1,
                     flexDirection: 'column',
-                }}>
+                }}
+                    onPress={this.closeDrawer.bind(this) }>
                     <Image style={{
-                        width: 8,
-                        height: 36,
+                        width: 6,
+                        height: 31,
                         position: 'absolute',
                         marginLeft: 16,
                         marginTop: 10
@@ -113,4 +121,8 @@ export class DrawerView extends Component {
                 </TouchableOpacity>
             </View>)
     }
+    closeDrawer() {
+        EventListener.trigger("CloseDrawer");
+    }
 }
+DrawerView.propTypes = propTypes;

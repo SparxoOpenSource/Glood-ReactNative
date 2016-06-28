@@ -38,6 +38,13 @@ export class DrawerMe extends Component {
             drawerLockMode: 'locked',
         }
     }
+    /**
+     * 接收消息，并监听
+     */
+    componentDidMount(props) {
+        EventListener.on("OpenDrawer").then(this.OpenDrawer.bind(this));
+        EventListener.on("CloseDrawer").then(this.CloseDrawer.bind(this));
+    }
     render() {
         // const {
         //     drawerLockMode,
@@ -59,6 +66,12 @@ export class DrawerMe extends Component {
                 <Root style={{ width: width, height: height }} title={"ActivityList"}/>
             </DrawerLayout>
         );
+    }
+    OpenDrawer() {
+        this.drawer.openDrawer();
+    }
+    CloseDrawer() {
+        this.drawer.closeDrawer();
     }
 }
 

@@ -53,7 +53,7 @@ export class ActivityList extends Component {
     render() {
         return (
             <View style={style.container}>
-                <Common navigator={this.props.navigator} title="Crazy May Fest 2016"/>
+                <Common navigator={this.props.navigator} title="Crazy May Fest 2016" page="Main"/>
                 <View style={style.content}>
                     <RefreshableListView
                         enableEmptySections = {true}
