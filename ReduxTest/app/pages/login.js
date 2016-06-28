@@ -22,9 +22,6 @@ import Button from '@remobile/react-native-simple-button';
 var widthh = Dimensions.get('window').width
 var heightt = Dimensions.get('window').height
 
-var signIn_text_color;
-var signUp_text_color;
-
 const propTypes = {
     title: PropTypes.string,
     navigator: PropTypes.object
@@ -34,8 +31,13 @@ export class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            signIn_text_color: '#38A7EF',
-            signUp_text_color: '#A7A8AA',
+            signIn_text_color: '#A7A8AA',
+            signUp_text_color: '#38A7EF',
+            bottom_sign_title: 'sign up',
+            sign_in_view_opacity: 1,
+            sign_up_view_opacity: 0,
+            sign_in_view_width:widthh * (300 / 414),
+            sign_up_view_width:0,
             bigDogeTrans: new Animated.ValueXY({
                 x: 0,
                 y: heightt / 2,
@@ -63,13 +65,13 @@ export class Login extends Component {
                             width: widthh * (414 / 414), height: heightt * (86 / 736), backgroundColor: '#FFFFFF30',
                             marginTop: heightt * (106 / 736) + 20, borderTopWidth: 1, borderTopColor: 'white'
                         }}>
-                            <TouchableOpacity style={{ width: widthh / 2, height: heightt * (86 / 736) }} onPress={this._signIn.bind}>
+                            <TouchableOpacity style={{ width: widthh / 2, height: heightt * (86 / 736) }} onPress={this._signIn.bind(this) }>
                                 <Text style={{
                                     color: this.state.signIn_text_color, fontSize: heightt * (25 / 736), width: widthh / 2, fontFamily: 'MyriadPro-Regular', marginTop: heightt * ((86 - 20) / 736) / 2,
                                     marginLeft: widthh / 8
                                 }}>sign in</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity style={{ width: widthh / 2, height: heightt * (96 / 736), marginTop: -heightt * (86 / 736), marginLeft: widthh / 2 }} onPress={this._signUp.bind}>
+                            <TouchableOpacity style={{ width: widthh / 2, height: heightt * (96 / 736), marginTop: -heightt * (86 / 736), marginLeft: widthh / 2 }} onPress={this._signUp.bind(this) }>
                                 <Text style={{
                                     color: this.state.signUp_text_color, fontSize: heightt * (25 / 736), width: widthh / 2, fontFamily: 'MyriadPro-Regular', marginTop: heightt * ((86 - 20) / 736) / 2,
                                     marginLeft: widthh / 8
@@ -79,28 +81,53 @@ export class Login extends Component {
                     </View>
                     <View style={{ height: heightt, width: widthh, backgroundColor: '#00000000' }}>
                         <View style={{
-                            width: widthh * (340 / 414), height: heightt * (300 / 736), marginLeft: (widthh - (widthh * (340 / 414))) / 2,
+                            opacity: this.state.sign_in_view_opacity,
+                            width: this.state.sign_in_view_width, height: heightt * (300 / 736), marginLeft: (widthh - (widthh * (300 / 414))) / 2,
                             marginTop: (heightt - (heightt * (300 / 736))) / 2 - heightt * (50 / 736) - 20
                         }}>
-                            <Text style={{ color: '#7e7e7e', fontSize: heightt * (18 / 736), fontFamily: 'MyriadPro-Semibold', marginLeft: widthh * (5 / 414) }}>name</Text>
+                            <Text style={{ color: '#7e7e7e', fontSize: heightt * (18 / 736), fontFamily: 'MyriadPro-Regular', marginLeft: widthh * (5 / 414) }}>name</Text>
                             <View style={{ borderBottomWidth: 1, borderBottomColor: '#7e7e7e', height: heightt * (45 / 736) }}>
                                 <TextInput style={{ backgroundColor: '#00000000', height: heightt * (45 / 736) }}></TextInput>
                             </View>
-                            <Text style={{ color: '#7e7e7e', fontSize: heightt * (18 / 736), fontFamily: 'MyriadPro-Semibold', marginTop: heightt * (30 / 736), marginLeft: widthh * (5 / 414) }}>email</Text>
+                            <Text style={{ color: '#7e7e7e', fontSize: heightt * (18 / 736), fontFamily: 'MyriadPro-Regular', marginTop: heightt * (30 / 736), marginLeft: widthh * (5 / 414) }}>email</Text>
                             <View style={{ borderBottomWidth: 1, borderBottomColor: '#7e7e7e', height: heightt * (45 / 736) }}>
                                 <TextInput style={{ backgroundColor: '#00000000', height: heightt * (45 / 736) }}></TextInput>
                             </View>
-                            <Text style={{ color: '#7e7e7e', fontSize: heightt * (18 / 736), fontFamily: 'MyriadPro-Semibold', marginTop: heightt * (30 / 736), marginLeft: widthh * (5 / 414) }}>create password</Text>
+                            <Text style={{ color: '#7e7e7e', fontSize: heightt * (18 / 736), fontFamily: 'MyriadPro-Regular', marginTop: heightt * (30 / 736), marginLeft: widthh * (5 / 414) }}>create password</Text>
                             <View style={{ borderBottomWidth: 1, borderBottomColor: '#7e7e7e', height: heightt * (45 / 736) }}>
                                 <TextInput style={{ backgroundColor: '#00000000', height: heightt * (45 / 736) }}></TextInput>
                             </View>
+                        </View>
+                        <View style={{
+                            opacity: this.state.sign_up_view_opacity,
+                            width: this.state.sign_up_view_width, height: heightt * (300 / 736), marginLeft: (widthh - (widthh * (300 / 414))) / 2,
+                            marginTop: (heightt - 4 * (heightt * (300 / 736))) / 2 - heightt * (50 / 736) - 10
+                        }}>
+                            <Text style={{ color: '#7e7e7e', fontSize: heightt * (18 / 736), fontFamily: 'MyriadPro-Regular', marginLeft: widthh * (5 / 414) }}>email</Text>
+                            <View style={{ borderBottomWidth: 1, borderBottomColor: '#7e7e7e', height: heightt * (45 / 736) }}>
+                                <TextInput style={{ backgroundColor: '#00000000', height: heightt * (45 / 736) }}></TextInput>
+                            </View>
+                            <Text style={{
+                                color: '#7e7e7e', fontSize: heightt * (18 / 736), fontFamily: 'MyriadPro-Regular', marginTop: heightt * (30 / 736),
+                                marginLeft: widthh * (5 / 414)
+                            }}>password</Text>
+                            <View style={{ borderBottomWidth: 1, borderBottomColor: '#7e7e7e', height: heightt * (45 / 736) }}>
+                                <TextInput style={{ backgroundColor: '#00000000', height: heightt * (45 / 736) }}></TextInput>
+                            </View>
+                            <Text style={{
+                                color: '#7e7e7e', fontSize: heightt * (18 / 736), fontFamily: 'MyriadPro-Regular', marginTop: heightt * (25 / 736),
+                                marginLeft: widthh * (160 / 414)
+                            }}>forgot password?</Text>
+                            <TouchableOpacity style={{ width: widthh * (300 / 414), height: heightt * (60 / 736), marginTop: heightt * (65 / 736), marginLeft: widthh * (5 / 414) }}>
+                                <Image style={{width: widthh * (300 / 414), height: heightt * (60 / 736)}} source={require('../img/facebook_sign_in.png') }/>
+                            </TouchableOpacity>
                         </View>
                         <TouchableOpacity style={{ flexDirection: 'row', backgroundColor: '#53aeee', width: widthh, height: heightt * (60 / 736), marginTop: heightt * (137 / 736) }}
                             onPress={this._handerClick.bind(this, this.props.navigator) }>
                             <Text style={{
                                 color: 'white', fontSize: heightt * (25 / 736), width: widthh * (90 / 414), fontFamily: 'MyriadPro-Semibold', marginTop: heightt * ((60 - 30) / 736) / 2,
                                 marginLeft: (widthh - (widthh * (90 / 414))) / 2
-                            }}>sign up</Text>
+                            }}>{this.state.bottom_sign_title}</Text>
                         </TouchableOpacity>
                     </View>
                 </Animated.View>
@@ -108,20 +135,26 @@ export class Login extends Component {
         );
     }
     _signIn() {
-        this.state.signIn_text_color = '#38A7EF',
-            this.state.signUp_text_color = '#A7A8AA',
-            this.state = {
-                signIn_text_color: this.state.signIn_text_color,
-                signUp_text_color: this.state.signIn_text_color,
-            }
+        this.setState({
+            signIn_text_color: '#38A7EF',
+            signUp_text_color: '#A7A8AA',
+            bottom_sign_title: 'sign in',
+            sign_in_view_opacity: 0,
+            sign_up_view_opacity: 1,
+            sign_in_view_width:0,
+            sign_up_view_width:widthh * (300 / 414),
+        });
     }
     _signUp() {
-        this.state.signIn_text_color = '#A7A8AA',
-            this.state.signIn_text_color = '#38A7EF',
-            this.state = {
-                signUp_text_color: this.state.signIn_text_color,
-                signIn_text_color: this.state.signIn_text_color,
-            }
+        this.setState({
+            signIn_text_color: '#A7A8AA',
+            signUp_text_color: '#38A7EF',
+            bottom_sign_title: 'sign up',
+            sign_in_view_opacity: 1,
+            sign_up_view_opacity: 0,
+            sign_in_view_width:widthh * (300 / 414),
+            sign_up_view_width:0,
+        });
     }
     _handerClick(navigator) {
         this.props.navigator.replace({
