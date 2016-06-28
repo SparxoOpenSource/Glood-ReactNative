@@ -17,7 +17,6 @@ import {
 }  from 'react-native';
 import {Common} from "./common";
 import isAndroid from '../utils/isAndroid.js';
-import Button from '@remobile/react-native-simple-button';
 
 var widthh = Dimensions.get('window').width
 var heightt = Dimensions.get('window').height

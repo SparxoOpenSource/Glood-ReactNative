@@ -14,6 +14,7 @@ import {Login} from "../app/pages/login"
 import {DrawerMe} from '../app/pages/drawer/drawer';
 import {Introduce} from "../app/pages/introduce"
 import {ActivityList} from "../app/pages/activitylist"
+import {EventInfo} from "../app/pages/eventInfo"
 var {height, width} = Dimensions.get('window');
 
 const propTypes = {
@@ -26,8 +27,10 @@ export class Root extends Component {
         _navigator = navigator;
         switch (router.name) {
             case "Introduce":
-                component = Introduce;
-                return (<Introduce navigator={navigator}/>);
+            component = EventInfo;
+                return (<EventInfo navigator={navigator}/>);
+                // component = Introduce;
+                // return (<Introduce navigator={navigator}/>);
             case "Login":
                 component = Login;
                 return (<Login navigator={navigator}/>);
