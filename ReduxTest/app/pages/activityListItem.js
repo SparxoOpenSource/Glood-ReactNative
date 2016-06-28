@@ -78,7 +78,7 @@ export class ActivityListItem extends Component {
     }
     _handerClick(value, navigator) {
         this.props.navigator.push({
-            name: "TICKETS", value: value, nav: navigator
+            name: "EVENTINFO", value: value, nav: navigator
         });
     }
 }

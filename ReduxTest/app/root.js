@@ -27,15 +27,17 @@ export class Root extends Component {
         _navigator = navigator;
         switch (router.name) {
             case "Introduce":
-            component = EventInfo;
-                return (<EventInfo navigator={navigator}/>);
-                // component = Introduce;
-                // return (<Introduce navigator={navigator}/>);
+                component = Introduce;
+                return (<Introduce navigator={navigator}/>);
+                // component = EventInfo;
+                // return (<EventInfo navigator={navigator}/>);
             case "Login":
                 component = Login;
                 return (<Login navigator={navigator}/>);
             case "TICKETS":
                 return (<Tickets navigator={router.nav}  title={'Tickets'}/>);
+            case "EVENTINFO":
+                return (<EventInfo navigator={router.nav}  title={'EventInfo'}/>);
             case "MIC":
                 return (<Mic navigator={router.nav} title={router.value} app={router.app} ip={router.ip}/>);
             case "NEWMIC":

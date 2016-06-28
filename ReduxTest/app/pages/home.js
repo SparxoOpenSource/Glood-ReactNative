@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import { AppRegistry, StyleSheet, View, Text, ListView, Alert, Navigator, Image, TouchableOpacity, PropTypes, AsyncStorage }  from 'react-native';
 import {Common} from "./common";
-var data = ["TICKETS","MIC","NEWMIC", "CAMERA", "NEWCAMERA"];
+var data = ["TICKETS","MIC","NEWMIC", "EVENTINFO", "NEWCAMERA"];
 var ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
 
 import feathers from 'feathers/client'
@@ -159,7 +159,7 @@ export class Home extends Component {
             case "NEWMIC":
                 this.login(value, navigator);
                 break;
-            case "CAMERA":
+            case "EVENTINFO":
                 this.props.navigator.push({
                     name: value, value: value, nav: navigator
                 });

@@ -53,7 +53,7 @@ export class Login extends Component {
                             marginTop: -(heightt * (190 / 736) - heightt) / 2 - heightt * (170 / 736), marginLeft: (widthh - widthh * (170 / 414)) / 2
                         }}/>
                         <Image source={require('../img/line.png') } style={{
-                            width: widthh * (2 / 414), height: heightt * (175 / 736), backgroundColor: '#00000000',
+                            width: widthh * (2 / 414), height: heightt * (175 / 736), backgroundColor: '#00000010',
                             marginLeft: (widthh - widthh * (2 / 414)) / 2 - widthh * (13 / 414), marginTop: heightt * (-20 / 736)
                         }}/>
                         <Image source={require('../img/glood_text2.png') } style={{

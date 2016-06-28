@@ -59,16 +59,16 @@ constructor(props) {
             w: 90,
             h: 90,
             left: cha / 2,
-            imageTop: maxSize / 2+40,
+            imageTop: maxSize / 2+30,
             imageLeft: leftEvery,
             viewWidth_1: 90,
             viewHeight_1: 90,
-            viewTop_1: maxSize / 2+40,
+            viewTop_1: maxSize / 2+30,
             viewLeft_1: leftEvery,
             viewRadius_1: 45,
             viewWidth_2: 90,
             viewHeight_2: 90,
-            viewTop_2: maxSize / 2+40,
+            viewTop_2: maxSize / 2+30,
             viewLeft_2: leftEvery,
             viewRadius_2: 45,
             viewOpacity_1: viewOpacity_1,
@@ -86,9 +86,6 @@ constructor(props) {
         }
     }
     componentDidMount() {
-        // EventListener.on("AutoPlayAllRecord").then(this.playFunction.bind(this));
-        EventListener.on("AutoPlayState").then(this.changeState.bind(this));
-        EventListener.on("firstTop").then(this.firstTopMargin.bind(this));
         if (isAndroid()) {
             //安卓平台使用 LayoutAnimation 动画必须加上这么一句代码（否则动画会失效）
             UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
@@ -110,7 +107,7 @@ constructor(props) {
     render() {
         return (
             <View>
-                <Common navigator={this.props.navigator} title="Crazy May Fest 2017"/>
+                <Common navigator={this.props.navigator} title={"Crazy May Fest 2017"}/>
                 <Image style={{width:widthh,height:heightt*(200/736)}} source={require('../img/background_red.png')}/>
                 <Text style={{color: 'black', fontSize: heightt * (25 / 736), width: widthh * (250 / 414), 
                 fontFamily: 'MyriadPro-Semibold',marginLeft:(widthh-(widthh * (250 / 414)))/2,marginTop:heightt*(20/736)}}>Can't wait to see you at Crazy May 2016!</Text>
@@ -240,7 +237,7 @@ constructor(props) {
                 this.setState({
                     viewWidth_1: 90,
                     viewHeight_1: 90,
-                    viewTop_1: maxSize / 2+40,
+                    viewTop_1: maxSize / 2+30,
                     viewLeft_1: leftEvery,
                     viewRadius_1: this.state.viewHeight_1,
                     viewOpacity_1: new Animated.Value(0.3),
@@ -286,7 +283,7 @@ constructor(props) {
                 this.setState({
                     viewWidth_2: 90,
                     viewHeight_2: 90,
-                    viewTop_2: maxSize / 2+40,
+                    viewTop_2: maxSize / 2+30,
                     viewLeft_2: leftEvery,
                     viewRadius_2: this.state.viewHeight_1,
                     viewOpacity_2: new Animated.Value(0.3),
@@ -296,53 +293,7 @@ constructor(props) {
         });
         _animateHandler2.start && _animateHandler2.start();
     }
-    /**
-     * 放大头像动画
-     */
-    _headImageAnimaBig() {
-        Animated.timing(this.state.bounceValue_3, {
-            toValue: 1,  //透明度动画最终值
-            duration: 300,   //动画时长3000毫秒
-            easing: Easing.linear  //缓动函数
-        }).start();
-    }
-    /**
-     * 缩小头像动画
-     */
-    _headImageAnimaSmall() {
-        this.setState({
-            bounceValue_3: new Animated.Value(1)
-        });
-        Animated.timing(this.state.bounceValue_3, {
-            toValue: 1,  //透明度动画最终值
-            duration: 300,   //动画时长3000毫秒
-            easing: Easing.linear  //缓动函数
-        }).start();
-    }
-    /**
-     * 放大头像 
-     */
-    _dillImgBig() {
-        if (this.state.imgIsBig === false) {
-            this._headImageAnimaBig();
-            this.setState({
-                imgIsBig: true,
-            });
-            EventListener.trigger("PlayState", false);
-        }
-    }
-    /**
-     * 缩小头像
-     */
-    _dillImgSmall() {
-        if (this.state.imgIsBig === true) {
-            this._headImageAnimaSmall();
-            this.setState({
-                imgIsBig: false,
-            });
-            EventListener.trigger("PlayState", true);
-        }
-    }
+
 
 }
 
