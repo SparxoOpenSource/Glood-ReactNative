@@ -14,6 +14,7 @@ import {EventListener} from "../listener/EventListener";
 if (window.navigator && Object.keys(window.navigator).length == 0) {
     window = Object.assign(window, { navigator: { userAgent: 'ReactNative' } });
 }
+var bool=false;
 
 var io = require('socket.io-client/socket.io');
 const propTypes = {
@@ -24,6 +25,7 @@ const propTypes = {
 export class Login extends Component {
     constructor(props) {
         super(props);
+        bool=false;
         const options = { transports: ['websocket'], forceNew: true };
         // const socket = io('http://50.18.208.72:30030', options);
         const socket = io('http://192.168.31.221:3030', options);
@@ -65,7 +67,12 @@ export class Login extends Component {
             // Actions.offline();
         });
     }
+
     login(value, navigator) {
+        if(bool===true){
+            return;
+        }
+        bool=true;
         HardwareUtils.prototype.getAddressIp((call) => {
             this.setState({
                 loading: true,

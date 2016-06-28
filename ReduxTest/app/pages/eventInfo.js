@@ -186,7 +186,7 @@ constructor(props) {
         LayoutAnimation.configureNext({
 
 
-            duration: time * isAndroid() ? 100 : 1000,   //持续时间
+            duration: time * 1000,   //持续时间
             create: {
                 type: 'linear',
                 property: 'opacity'
