@@ -11,7 +11,8 @@ var _title = "我是导航";
 
 const propTypes = {
     title: PropTypes.string,
-    navigator: PropTypes.object
+    navigator: PropTypes.object,
+    page: PropTypes.string
 };
 
 export class Common extends Component {
@@ -30,9 +31,9 @@ export class Common extends Component {
         }
     }
     renderBackImage() {
-        if (this.props.title === "我的主页") {
+        if (this.props.page === "Main") {
             return (
-                <Image source={require('../img/none.png') } style={styles.ImagStyle}  />
+                <Image source={require('../img/menu.png') } style={styles.ImagStyle}  />
             );
         }
         return (
@@ -56,8 +57,12 @@ export class Common extends Component {
         );
     }
     _onBack() {
-        EventListener.trigger("RecordStop");
-        this.props.navigator.pop();
+        if (this.props.page === "Main") { 
+            EventListener.trigger("OpenDrawer");
+        } else {
+            EventListener.trigger("RecordStop");
+            this.props.navigator.pop();
+        }
     }
 }
 Common.PropTypes = propTypes;
