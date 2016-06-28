@@ -49,13 +49,13 @@ export class ActivityListItem extends Component {
                     alignItems: 'center'
                 }}>
                     <Text style={{
-                        fontSize: 18,
+                        fontSize: width*(18/414),
                         color: "#070909",
                         fontWeight: "bold",
                         marginLeft: 16
                     }}>{this.props.date.use}/{this.props.date.total}</Text>
                     <Text style={{
-                        fontSize: 18,
+                        fontSize: width*(18/414),
                         color: "#070909",
                         marginLeft: 8
                     }}>{this.props.date.eventName}</Text>

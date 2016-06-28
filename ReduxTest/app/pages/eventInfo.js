@@ -110,7 +110,7 @@ constructor(props) {
         return (
             <View>
                 <Common navigator={this.props.navigator} title={"Crazy May Fest 2017"}/>
-                <Image style={{width:widthh,height:heightt*(200/736)}} source={require('../img/background_red.png')}/>
+                <Image style={{width:widthh,height:heightt*(200/736)}} source={require('../img/event_background.jpg')}/>
                 <Text style={{color: 'black', fontSize: heightt * (25 / 736), width: widthh * (250 / 414), 
                 fontFamily: 'MyriadPro-Semibold',marginLeft:(widthh-(widthh * (250 / 414)))/2,marginTop:heightt*(20/736)}}>Can't wait to see you at Crazy May 2016!</Text>
                 <View style={ { justifyContent: 'center', alignItems: 'center' }}>
@@ -173,7 +173,7 @@ constructor(props) {
                 <Text style={{color: 'black', fontSize: heightt * (25 / 736), width: widthh * (230 / 414), 
                 fontFamily: 'MyriadPro-Regular',marginLeft:(widthh-(widthh * (230 / 414)))/2,marginTop:heightt*(5/736)}}>Founder of Crazy Fest</Text>
                <View style={{width:widthh,height:30,marginTop:height*(40/736),backgroundColor:'#00000030'}}>
-                  <Animated.Image source={require('../img/background_red.png')} style={{width:this.state.bottom_view_image_width,height:30}}/>
+                  <Animated.Image source={require('../img/event_background_bottom.png')} style={{width:this.state.bottom_view_image_width,height:30}}/>
                </View>
             </View>
         );
@@ -185,7 +185,8 @@ constructor(props) {
     _playAnim(time) {
         LayoutAnimation.configureNext({
 
-            duration: time * 100,   //持续时间
+
+            duration: time * isAndroid() ? 100 : 1000,   //持续时间
             create: {
                 type: 'linear',
                 property: 'opacity'
