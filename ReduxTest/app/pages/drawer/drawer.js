@@ -56,7 +56,7 @@ export class DrawerMe extends Component {
                 ref={(drawer) => { return this.drawer = drawer } }
                 keyboardDismissMode="on-drag"
                 renderNavigationView={() => navigationView}>
-                <Root style={{ width: width, height: height }} title={"Home"}/>
+                <Root style={{ width: width, height: height }} title={"ActivityList"}/>
             </DrawerLayout>
         );
     }

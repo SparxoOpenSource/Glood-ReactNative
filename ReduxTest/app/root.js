@@ -13,7 +13,7 @@ import {Tickets} from "../app/pages/tickets"
 import {Login} from "../app/pages/login"
 import {DrawerMe} from '../app/pages/drawer/drawer';
 import {Introduce} from "../app/pages/introduce"
-import {Activitylist} from "../app/pages/activitylist"
+import {ActivityList} from "../app/pages/activityList"
 var {height, width} = Dimensions.get('window');
 
 const propTypes = {
@@ -50,8 +50,9 @@ export class Root extends Component {
             case "Home":
                 component = Home;
                 return (<Home navigator={navigator} title={"我的主页"}/>);
-            case "Activitylist":
-                return (<Activitylist navigator={router.nav}  title={router.value}/>);
+            case "ActivityList":
+                component = ActivityList;
+                return (<ActivityList navigator={navigator}  title={"数据列表"}/>);
         }
 
     }
