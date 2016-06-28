@@ -35,7 +35,7 @@ export class DrawerMe extends Component {
     constructor() {
         super();
         this.state = {
-            drawerLockMode: 'locked',
+            drawerLockMode: 'locked-open',
         }
     }
     /**
@@ -44,6 +44,7 @@ export class DrawerMe extends Component {
     componentDidMount(props) {
         EventListener.on("OpenDrawer").then(this.OpenDrawer.bind(this));
         EventListener.on("CloseDrawer").then(this.CloseDrawer.bind(this));
+        EventListener.on("DrawerGo").then(this.DrawerGo.bind(this));
     }
     render() {
         // const {
@@ -71,6 +72,23 @@ export class DrawerMe extends Component {
         this.drawer.openDrawer();
     }
     CloseDrawer() {
+        this.drawer.closeDrawer();
+    }
+    DrawerGo(name) {
+        switch (name) {
+            case "Mingle":
+
+                break;
+            case "Tickets":
+                this.props.navigator.push({
+                    name: "TICKETS", value: "TICKETS", nav: this.props.navigator
+                });
+                break;
+            case "Setting":
+                break;
+            case "FeedBack":
+                break;
+        }
         this.drawer.closeDrawer();
     }
 }

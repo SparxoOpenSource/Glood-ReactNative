@@ -25,7 +25,7 @@ const propTypes = {
         eventName: React.PropTypes.string,
         id: React.PropTypes.number
     }),
-    rowID: PropTypes.object,
+    rowID: PropTypes.number,
     navigator: PropTypes.object
 };
 /**

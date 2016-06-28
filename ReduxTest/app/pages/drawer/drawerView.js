@@ -49,7 +49,8 @@ export class DrawerView extends Component {
                         flexDirection: 'row',
                         marginTop: 30,
                         marginLeft: 30
-                    }}>
+                    }}
+                        onPress={this.operation.bind(this, "Mingle") }>
                         <Image source={require("../../img/mingle.png") } style={{
                             width: 26,
                             height: 30
@@ -64,7 +65,8 @@ export class DrawerView extends Component {
                         flexDirection: 'row',
                         marginTop: 30,
                         marginLeft: 30
-                    }}>
+                    }}
+                        onPress={this.operation.bind(this, "Tickets") }>
                         <Image source={require("../../img/tickets.png") } style={{
                             width: 26,
                             height: 26
@@ -79,7 +81,8 @@ export class DrawerView extends Component {
                         flexDirection: 'row',
                         marginTop: 30,
                         marginLeft: 30
-                    }}>
+                    }}
+                        onPress={this.operation.bind(this, "Setting") }>
                         <Image source={require("../../img/setting.png") } style={{
                             width: 26,
                             height: 26
@@ -94,7 +97,8 @@ export class DrawerView extends Component {
                         flexDirection: 'row',
                         marginTop: 30,
                         marginLeft: 30
-                    }}>
+                    }}
+                        onPress={this.operation.bind(this, "FeedBack") }>
                         <Image source={require("../../img/feedback.png") } style={{
                             width: 26,
                             height: 24
@@ -123,6 +127,9 @@ export class DrawerView extends Component {
     }
     closeDrawer() {
         EventListener.trigger("CloseDrawer");
+    }
+    operation(name) {
+        EventListener.trigger("DrawerGo", name);
     }
 }
 DrawerView.propTypes = propTypes;

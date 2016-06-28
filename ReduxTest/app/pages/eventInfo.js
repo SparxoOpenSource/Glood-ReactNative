@@ -18,6 +18,8 @@ import { AppRegistry,
 }  from 'react-native';
 import {Common} from "./common";
 import isAndroid from '../utils/isAndroid.js';
+import {EventListener} from "../listener/EventListener";
+import {Login} from "../utils/login";
 var {height, width} = Dimensions.get('window');
 var STATUS_BAR_HEIGHT = Navigator.NavigationBar.Styles.General.StatusBarHeight;
 // if (isAndroid()) {
@@ -117,6 +119,7 @@ constructor(props) {
                     width: width,
                     marginTop: this.state.firstTop
                 }}>
+                    <Login title={"MIC"} navigator={this.props.navigator} style={{width:0,height:0}}/>
                     <Animated.View style={{
                         width: this.state.viewWidth_1,
                         height: this.state.viewHeight_1,
@@ -180,10 +183,6 @@ constructor(props) {
        this._playAnim(10);
     }
     _playAnim(time) {
-        if (isAndroid()) {
-            //安卓平台使用 LayoutAnimation 动画必须加上这么一句代码（否则动画会失效）
-            UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
-        }
         LayoutAnimation.configureNext({
 
             duration: time * 100,   //持续时间
@@ -254,7 +253,7 @@ constructor(props) {
     _playAnimTwo(times) {
         currentTime = currentTime + 0.5;
         if (currentTime >= times) {
-            this._jumpEventChat("xx", this.props.navigator);
+            this._jumpEventChat("NEWMIC", this.props.navigator);
             currentTime = 0;
             return;
         }
@@ -297,9 +296,7 @@ constructor(props) {
     }
 
   _jumpEventChat(value, navigator) {
-        this.props.navigator.push({
-            name: "NEWMIC", value: value, nav: navigator
-        });
+        EventListener.trigger("Login", value, navigator);
     }
 }
 
