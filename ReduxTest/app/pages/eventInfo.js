@@ -209,6 +209,7 @@ constructor(props) {
     _playAnimOne(times) {
         currentTime = currentTime + 0.5;
         if (currentTime >= times) {
+            this._jumpEventChat("xx", this.props.navigator);
             currentTime = 0;
             return;
         }
@@ -253,6 +254,7 @@ constructor(props) {
     _playAnimTwo(times) {
         currentTime = currentTime + 0.5;
         if (currentTime >= times) {
+            this._jumpEventChat("xx", this.props.navigator);
             currentTime = 0;
             return;
         }
@@ -294,7 +296,11 @@ constructor(props) {
         _animateHandler2.start && _animateHandler2.start();
     }
 
-
+  _jumpEventChat(value, navigator) {
+        this.props.navigator.push({
+            name: "NEWMIC", value: value, nav: navigator
+        });
+    }
 }
 
 EventInfo.propTypes = propTypes;
