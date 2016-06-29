@@ -21,6 +21,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
   InstallUncaughtExceptionHandler();
+  [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:NO];
   NSURL *jsCodeLocation;
 //  NSString *str;
 //  NSDictionary *resultsDict = @{@"IP" : str};

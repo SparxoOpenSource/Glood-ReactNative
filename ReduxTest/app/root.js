@@ -61,11 +61,6 @@ export class Root extends Component {
         }
 
     }
-    componentDidMount() {
-        if (Platform.OS === 'ios') {
-            StatusBarIOS.setHidden(true)
-        }
-    }
     render() {
         return (
             <View style={styles.navigatorContainer}>
