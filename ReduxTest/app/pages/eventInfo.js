@@ -19,9 +19,9 @@ import { AppRegistry,
 import {Common} from "./common";
 import isAndroid from '../utils/isAndroid.js';
 import {EventListener} from "../listener/EventListener";
-import {Login} from "../utils/login";
 var {height, width} = Dimensions.get('window');
 var STATUS_BAR_HEIGHT = Navigator.NavigationBar.Styles.General.StatusBarHeight;
+import {Initialization,LoginNow} from "../utils/SupportLogin";
 // if (isAndroid()) {
 //     var STATUS_BAR_HEIGHT = ExtraDimensions.get('STATUS_BAR_HEIGHT');
 // }
@@ -120,7 +120,6 @@ constructor(props) {
                     width: width,
                     marginTop: this.state.firstTop
                 }}>
-                    <Login title={"MIC"} navigator={this.props.navigator} style={{width:0,height:0}}/>
                     <Animated.View style={{
                         width: this.state.viewWidth_1,
                         height: this.state.viewHeight_1,
@@ -299,7 +298,8 @@ constructor(props) {
                         bottom_view_image_width: 1,
                         bottom_view_image_height:30
                     });
-        EventListener.trigger("Login", value, navigator);
+        Initialization();
+        LoginNow(value, navigator);
     }
 }
 
