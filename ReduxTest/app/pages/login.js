@@ -45,7 +45,7 @@ export class Login extends Component {
     }
     render() {
         return (
-            <View style={style.container}>
+            <Image style={style.container} source={require('../img/background3.png') }>
                 <Animated.View style={[style.backGroundView, { transform: this.state.bigDogeTrans.getTranslateTransform() }]} >
                     <View style={{ height: heightt, width: widthh, backgroundColor: '#00000000' }}>
                         <Image source={require('../img/eye.png') } style={{
@@ -130,7 +130,7 @@ export class Login extends Component {
                         </TouchableOpacity>
                     </View>
                 </Animated.View>
-            </View>
+            </Image>
         );
     }
     _signIn() {
@@ -189,6 +189,8 @@ var style = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#00000000',
+        width:widthh,
+        height:heightt
     },
     backGroundView: {
         position: 'absolute',

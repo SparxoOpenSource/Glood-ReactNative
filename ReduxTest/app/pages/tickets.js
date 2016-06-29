@@ -43,15 +43,15 @@ export class Tickets extends Component {
                 { headImageIcon: require('../img/171604419.jpg'), eventName: '2015 Sparxo Grand Opening(SF ...)', month: 'MAY', day: '02', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias Vip' },
                 { headImageIcon: require('../img/171604419.jpg'), eventName: '2015 Sparxo Grand Opening(SF ...)', month: 'MAY', day: '03', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias Vip' },
                 { headImageIcon: require('../img/171604419.jpg'), eventName: '2015 Sparxo Grand Opening(SF ...)', month: 'MAY', day: '04', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias Vip' },
-                { headImageIcon: require('../img/171604419.jpg'), eventName: '2015 Sparxo Grand Opening(SF ...)', month: 'MAY', day: '05', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias Vip' },
-                { headImageIcon: require('../img/171604419.jpg'), eventName: '2015 Sparxo Grand Opening(SF ...)', month: 'MAY', day: '06', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias Vip' },
-                { headImageIcon: require('../img/171604419.jpg'), eventName: '2015 Sparxo Grand Opening(SF ...)', month: 'MAY', day: '07', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias Vip' },
-                { headImageIcon: require('../img/171604419.jpg'), eventName: '2015 Sparxo Grand Opening(SF ...)', month: 'MAY', day: '08', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias Vip' },
-                { headImageIcon: require('../img/171604419.jpg'), eventName: '2015 Sparxo Grand Opening(SF ...)', month: 'MAY', day: '09', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias Vip' },
-                { headImageIcon: require('../img/171604419.jpg'), eventName: '2015 Sparxo Grand Opening(SF ...)', month: 'MAY', day: '10', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias Vip' },
-                { headImageIcon: require('../img/171604419.jpg'), eventName: '2015 Sparxo Grand Opening(SF ...)', month: 'MAY', day: '11', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias Vip' },
-                { headImageIcon: require('../img/171604419.jpg'), eventName: '2015 Sparxo Grand Opening(SF ...)', month: 'MAY', day: '12', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias Vip' },
-                { headImageIcon: require('../img/171604419.jpg'), eventName: '2015 Sparxo Grand Opening(SF ...)', month: 'MAY', day: '13', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias Vip' },
+                // { headImageIcon: require('../img/171604419.jpg'), eventName: '2015 Sparxo Grand Opening(SF ...)', month: 'MAY', day: '05', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias Vip' },
+                // { headImageIcon: require('../img/171604419.jpg'), eventName: '2015 Sparxo Grand Opening(SF ...)', month: 'MAY', day: '06', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias Vip' },
+                // { headImageIcon: require('../img/171604419.jpg'), eventName: '2015 Sparxo Grand Opening(SF ...)', month: 'MAY', day: '07', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias Vip' },
+                // { headImageIcon: require('../img/171604419.jpg'), eventName: '2015 Sparxo Grand Opening(SF ...)', month: 'MAY', day: '08', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias Vip' },
+                // { headImageIcon: require('../img/171604419.jpg'), eventName: '2015 Sparxo Grand Opening(SF ...)', month: 'MAY', day: '09', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias Vip' },
+                // { headImageIcon: require('../img/171604419.jpg'), eventName: '2015 Sparxo Grand Opening(SF ...)', month: 'MAY', day: '10', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias Vip' },
+                // { headImageIcon: require('../img/171604419.jpg'), eventName: '2015 Sparxo Grand Opening(SF ...)', month: 'MAY', day: '11', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias Vip' },
+                // { headImageIcon: require('../img/171604419.jpg'), eventName: '2015 Sparxo Grand Opening(SF ...)', month: 'MAY', day: '12', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias Vip' },
+                // { headImageIcon: require('../img/171604419.jpg'), eventName: '2015 Sparxo Grand Opening(SF ...)', month: 'MAY', day: '13', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias Vip' },
             ]
         }
     }
@@ -81,8 +81,7 @@ export class Tickets extends Component {
             image_margin_top = heightt * (80 / 736);
         }
         return (
-            <View style={style.container}>
-                <Image source={require('../img/background3.png') } style={style.background} />
+            <Image style={style.container} source={require('../img/background3.png') }>
                 <Common navigator={this.props.navigator} title={this.props.title}/>
                 <CoverFlow>
                     {this.state.images.map((src, i) =>
@@ -131,7 +130,7 @@ export class Tickets extends Component {
                     ) }
                 </CoverFlow>
 
-            </View>
+            </Image>
 
         );
     }
@@ -143,12 +142,7 @@ const style = StyleSheet.create({
         flex: 7,
         flexDirection: 'column',
         justifyContent: 'space-between',
-    },
-    background: {
-        position: 'absolute',
-        left: 0,
-        top: 0,
         width: width,
         height: height
-    },
+    }
 });
