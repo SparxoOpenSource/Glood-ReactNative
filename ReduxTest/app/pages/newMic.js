@@ -71,8 +71,7 @@ export class NewMic extends Component {
     }
     render() {
         return (
-            <View style={style.container}>
-                <Image source={require('../img/background3.png') } style={style.background2} />
+            <Image style={style.container} source={require('../img/background3.png') }>
                 <Common navigator={this.props.navigator} ground="fw_1.png" title="Crazy May Fest 2016"/>
                 <View style={style.content}>
                     <RefreshableListView
@@ -100,7 +99,7 @@ export class NewMic extends Component {
                         <Image source={require('../img/people.png') } style={style.ImagStyle3}  />
                     </TouchableOpacity>
                 </View>
-            </View>
+            </Image>
         );
     }
 
@@ -353,7 +352,8 @@ const style = StyleSheet.create({
         flex: 7,
         flexDirection: 'column',
         justifyContent: 'space-between',
-        backgroundColor: '#00000000',
+        width: width,
+        height: height
     },
     content: {
         flex: 6,
@@ -427,12 +427,5 @@ const style = StyleSheet.create({
         width: width,
         height: 120,
         marginTop: isAndroid() ? -450 : -421
-    },
-    background2: {
-        position: 'absolute',
-        left: 0,
-        top: 0,
-        width: width,
-        height: height
     },
 });

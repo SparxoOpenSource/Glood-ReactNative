@@ -42,9 +42,7 @@ export class DrawerMe extends Component {
      * 接收消息，并监听
      */
     componentDidMount(props) {
-        EventListener.on("OpenDrawer").then(this.OpenDrawer.bind(this));
-        EventListener.on("CloseDrawer").then(this.CloseDrawer.bind(this));
-        EventListener.on("DrawerGo").then(this.DrawerGo.bind(this));
+        EventListener.on("Drawer").then(this.OpenCloseDrawer.bind(this));
     }
     render() {
         // const {
@@ -52,7 +50,7 @@ export class DrawerMe extends Component {
         // } = this.state;
 
         const navigationView = (
-            <DrawerView/>
+            <DrawerView navigator={this.props.navigator} page={this.drawer}/>
         );
 
         return (
@@ -68,11 +66,15 @@ export class DrawerMe extends Component {
             </DrawerLayout>
         );
     }
-    OpenDrawer() {
-        this.drawer.openDrawer();
-    }
-    CloseDrawer() {
-        this.drawer.closeDrawer();
+    OpenCloseDrawer(name) {
+        switch (name) {
+            case "Open":
+                this.drawer.openDrawer();
+                break;
+            case "Close":
+                this.drawer.closeDrawer();
+                break;
+        }
     }
     DrawerGo(name) {
         switch (name) {
@@ -80,9 +82,7 @@ export class DrawerMe extends Component {
 
                 break;
             case "Tickets":
-                this.props.navigator.push({
-                    name: "TICKETS", value: "TICKETS", nav: this.props.navigator
-                });
+
                 break;
             case "Setting":
                 break;

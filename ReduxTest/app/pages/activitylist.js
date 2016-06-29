@@ -52,7 +52,7 @@ export class ActivityList extends Component {
     }
     render() {
         return (
-            <View style={style.container}>
+            <Image style={style.container} source={require('../img/background3.png') }>
                 <Common navigator={this.props.navigator} title="Crazy May Fest 2016" page="Main"/>
                 <View style={style.content}>
                     <RefreshableListView
@@ -63,7 +63,7 @@ export class ActivityList extends Component {
                         refreshPrompt="Pull down to refresh"
                         backgroundColor="#00000000"/>
                 </View>
-            </View>
+            </Image>
         );
     }
     _row(rowData, sectionID, rowID) {

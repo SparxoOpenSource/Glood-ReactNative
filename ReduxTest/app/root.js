@@ -69,7 +69,6 @@ export class Root extends Component {
     render() {
         return (
             <View style={styles.navigatorContainer}>
-                <Image source={require('../app/img/background3.png') } style={styles.background} />
                 <Navigator
                     ref="navigator"
                     sceneStyle={styles.container}
@@ -82,13 +81,6 @@ export class Root extends Component {
 var styles = StyleSheet.create({
     container: {
         flex: 1
-    },
-    background: {
-        position: 'absolute',
-        left: 0,
-        top: 0,
-        width: width,
-        height: height
     },
     navigatorContainer: {
         flex: 1,

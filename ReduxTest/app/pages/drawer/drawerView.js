@@ -22,25 +22,18 @@ var {height, width} = Dimensions.get('window');
 const propTypes = {
     title: PropTypes.string,
     navigator: PropTypes.object,
-    page: PropTypes.string
+    page: PropTypes.func
 };
 
 export class DrawerView extends Component {
     render() {
         return (
-            <View style={{
+            <Image source={require('../../img/background3.png') } style={{
                 flex: 6,
                 width: width - 80,
                 height: height,
                 flexDirection: 'row',
             }}>
-                <Image source={require('../../img/background3.png') } style={{
-                    position: 'absolute',
-                    left: 0,
-                    top: 0,
-                    width: width - 80,
-                    height: height
-                }} />
                 <View style={{
                     flex: 5,
                     flexDirection: 'column',
@@ -59,7 +52,7 @@ export class DrawerView extends Component {
                             fontSize: 18,
                             color: "#333333",
                             marginLeft: 20,
-                            backgroundColor:'#00000000'
+                            backgroundColor: '#00000000'
                         }}>Mingle</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={{
@@ -76,7 +69,7 @@ export class DrawerView extends Component {
                             fontSize: 18,
                             color: "#333333",
                             marginLeft: 20,
-                            backgroundColor:'#00000000'
+                            backgroundColor: '#00000000'
                         }}>Tickets</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={{
@@ -93,7 +86,7 @@ export class DrawerView extends Component {
                             fontSize: 18,
                             color: "#333333",
                             marginLeft: 20,
-                            backgroundColor:'#00000000'
+                            backgroundColor: '#00000000'
                         }}>Setting</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={{
@@ -110,7 +103,7 @@ export class DrawerView extends Component {
                             fontSize: 18,
                             color: "#333333",
                             marginLeft: 20,
-                            backgroundColor:'#00000000'
+                            backgroundColor: '#00000000'
                         }}>FeedBack</Text>
                     </TouchableOpacity>
                 </View>
@@ -127,13 +120,19 @@ export class DrawerView extends Component {
                         marginTop: 10
                     }} source={require("../../img/yuan.png") }/>
                 </TouchableOpacity>
-            </View>)
+            </Image>
+        )
     }
     closeDrawer() {
-        EventListener.trigger("CloseDrawer");
+        EventListener.trigger("Drawer", "Close");
+        // this.props.page.closeDrawer();
     }
     operation(name) {
-        EventListener.trigger("DrawerGo", name);
+        // EventListener.trigger("DrawerGo", name);
+        this.props.navigator.push({
+            name: "TICKETS", value: "TICKETS", nav: this.props.navigator
+        });
+        EventListener.trigger("Drawer", "Close");
     }
 }
 DrawerView.propTypes = propTypes;

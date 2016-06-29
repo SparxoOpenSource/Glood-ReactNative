@@ -57,8 +57,8 @@ export class Common extends Component {
         );
     }
     _onBack() {
-        if (this.props.page === "Main") { 
-            EventListener.trigger("OpenDrawer");
+        if (this.props.page === "Main") {
+            EventListener.trigger("Drawer", "Open");
         } else {
             EventListener.trigger("RecordStop");
             this.props.navigator.pop();
@@ -84,6 +84,6 @@ const styles = StyleSheet.create({
         fontSize: 26,
         color: 'black',
         fontFamily: 'Myriad Pro',
-        backgroundColor:'#00000000',
+        backgroundColor: '#00000000',
     }
 });
