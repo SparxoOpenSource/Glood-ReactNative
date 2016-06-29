@@ -29,6 +29,7 @@ var qr_view_opacity = 1;
 var widthh = Dimensions.get('window').width
 var STATUS_BAR_HEIGHT = Navigator.NavigationBar.Styles.General.StatusBarHeight;
 var heightt = Dimensions.get('window').height - Navigator.NavigationBar.Styles.General.NavBarHeight
+var {height, width} = Dimensions.get('window');
 const propTypes = {
     title: PropTypes.string,
     navigator: PropTypes.object
@@ -81,6 +82,7 @@ export class Tickets extends Component {
         }
         return (
             <View style={style.container}>
+                <Image source={require('../img/background3.png') } style={style.background} />
                 <Common navigator={this.props.navigator} title={this.props.title}/>
                 <CoverFlow>
                     {this.state.images.map((src, i) =>
@@ -141,5 +143,12 @@ const style = StyleSheet.create({
         flex: 7,
         flexDirection: 'column',
         justifyContent: 'space-between',
+    },
+    background: {
+        position: 'absolute',
+        left: 0,
+        top: 0,
+        width: width,
+        height: height
     },
 });

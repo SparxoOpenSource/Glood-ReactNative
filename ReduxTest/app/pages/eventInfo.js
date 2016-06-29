@@ -110,6 +110,7 @@ constructor(props) {
     render() {
         return (
             <View>
+                <Image source={require('../img/background3.png') } style={styles.background} />
                 <Common navigator={this.props.navigator} title={"Crazy May Fest 2017"}/>
                 <Image style={{width:widthh,height:heightt*(200/736)}} source={require('../img/event_background.jpg')}/>
                 <Text style={{backgroundColor:'#00000000',color: 'black', fontSize: heightt * (25 / 736), width: widthh * (250 / 414), 
@@ -353,5 +354,12 @@ touch: {
         alignItems: 'center',
         marginTop: 10,
         fontFamily: 'MyriadPro-SemiboldIt',
-    }
+    },
+    background: {
+        position: 'absolute',
+        left: 0,
+        top: 0,
+        width: width,
+        height: height
+    },
 })

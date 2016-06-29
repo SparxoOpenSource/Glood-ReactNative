@@ -72,6 +72,7 @@ export class NewMic extends Component {
     render() {
         return (
             <View style={style.container}>
+                <Image source={require('../img/background3.png') } style={style.background2} />
                 <Common navigator={this.props.navigator} ground="fw_1.png" title="Crazy May Fest 2016"/>
                 <View style={style.content}>
                     <RefreshableListView
@@ -426,5 +427,12 @@ const style = StyleSheet.create({
         width: width,
         height: 120,
         marginTop: isAndroid() ? -450 : -421
+    },
+    background2: {
+        position: 'absolute',
+        left: 0,
+        top: 0,
+        width: width,
+        height: height
     },
 });
