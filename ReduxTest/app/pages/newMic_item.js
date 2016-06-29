@@ -108,7 +108,6 @@ export class NewMicItem extends Component {
     firstTopMargin(number) {
         if (this.props.rowID === 0) {
             var temp = number * (60 + maxSize);
-            console.log('--*-----', temp + '--' + number);
             if (maxHeight > temp) {
                 this.setState({
                     firstTop: maxHeight - temp
@@ -330,7 +329,6 @@ export class NewMicItem extends Component {
         ]);
 
         this.state.viewOpacity_2.addListener(callback => {
-            console.log("this.state.viewOpacity_2", callback.value);
             if (callback.value > 0.1) {
                 runBool_2 = false;
             } else if (callback.value <= 0.1) {
