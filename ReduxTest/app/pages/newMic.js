@@ -88,14 +88,14 @@ export class NewMic extends Component {
                     <View style={{ flexDirection: 'row' }}>
                         <Image source={this.state.autoImage } style={style.ImagStyle}/>
                         <Image source={this.state.like} style={style.ImagStyle2}/>
-                        <Text style={{ marginTop: 32, marginLeft: 4, fontSize: 16, color: '#FFFFFF' }}>16</Text>
+                        <Text style={{backgroundColor:'#00000000', marginTop: 32, marginLeft: 4, fontSize: 16, color: '#FFFFFF' }}>16</Text>
                     </View>
                     <TouchableWithoutFeedback onPressOut={this._stop.bind(this) } onPressIn={this._startVoice.bind(this) }>
                         <Image style={{ width: 70, height: 70 }}  source={this.state.voiceImage }/>
                     </TouchableWithoutFeedback>
                     <TouchableOpacity style={{ flexDirection: 'row' }}>
-                        <Text style={{ marginTop: 32, fontSize: 16, color: '#00000000' }}>auto</Text>
-                        <Text style={{ marginTop: 32, fontSize: 16, color: '#00000000' }}>auto</Text>
+                        <Text style={{ backgroundColor:'#00000000',marginTop: 32, fontSize: 16, color: '#00000000' }}>auto</Text>
+                        <Text style={{ backgroundColor:'#00000000',marginTop: 32, fontSize: 16, color: '#00000000' }}>auto</Text>
                         <Image source={require('../img/people.png') } style={style.ImagStyle3}  />
                     </TouchableOpacity>
                 </View>

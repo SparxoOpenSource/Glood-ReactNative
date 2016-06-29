@@ -208,7 +208,8 @@ const style = StyleSheet.create({
         fontSize: 18,
         color: "#FFFFFF",
         alignItems: "center",
-        textAlign: "center"
+        textAlign: "center",
+        backgroundColor:'#00000000'
     },
     list: {
         marginTop: 10

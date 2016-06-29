@@ -84,5 +84,6 @@ const styles = StyleSheet.create({
         fontSize: 26,
         color: 'black',
         fontFamily: 'Myriad Pro',
+        backgroundColor:'#00000000',
     }
 });

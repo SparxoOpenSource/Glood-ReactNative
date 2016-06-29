@@ -195,5 +195,6 @@ const style = StyleSheet.create({
         alignItems: 'center',
         marginTop: 10,
         fontFamily: 'MyriadPro-SemiboldIt',
+        backgroundColor:'#00000000',
     }
 });

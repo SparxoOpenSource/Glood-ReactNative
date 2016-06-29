@@ -92,17 +92,17 @@ export class Tickets extends Component {
                             }} key={i} source={src.headImageIcon}/>
                             <View style={{ backgroundColor: 'white', width: widthh * (250 / 414), height: heightt * (210 / 736), marginTop: heightt * (80 / 736) - heightt * (370 / 736) }}>
                                 <View style={{ backgroundColor: '#00000000', width: widthh * (250 / 414), height: heightt * (70 / 736) }}>
-                                    <Text style={{ color: 'black', fontSize: widthh * (18 / 414), fontFamily: 'MyriadPro-SemiboldIt', marginTop: heightt * (10 / 736), marginLeft: widthh * (10 / 414) }}>{src.month}</Text>
-                                    <Text style={{ color: 'black', fontSize: widthh * (25 / 414), fontFamily: 'MyriadPro-SemiboldIt', marginLeft: widthh * (10 / 414) }}>{src.day}</Text>
-                                    <Text style={{ color: 'black', fontSize: widthh * (20 / 414), fontFamily: 'MyriadPro-SemiboldIt', marginTop: widthh * (-55 / 414), marginLeft: widthh * (60 / 414) }}>{src.eventName}</Text>
+                                    <Text style={{backgroundColor:'#00000000', color: 'black', fontSize: widthh * (18 / 414), fontFamily: 'MyriadPro-SemiboldIt', marginTop: heightt * (10 / 736), marginLeft: widthh * (10 / 414) }}>{src.month}</Text>
+                                    <Text style={{backgroundColor:'#00000000', color: 'black', fontSize: widthh * (25 / 414), fontFamily: 'MyriadPro-SemiboldIt', marginLeft: widthh * (10 / 414) }}>{src.day}</Text>
+                                    <Text style={{backgroundColor:'#00000000', color: 'black', fontSize: widthh * (20 / 414), fontFamily: 'MyriadPro-SemiboldIt', marginTop: widthh * (-55 / 414), marginLeft: widthh * (60 / 414) }}>{src.eventName}</Text>
                                 </View>
                                 <View style={{ backgroundColor: '#00000000', width: widthh * (250 / 414), height: heightt * (50 / 736) }}>
                                     <Image style={{ width: widthh * (20 / 414), height: heightt * (20 / 736), marginLeft: widthh * (20 / 414), marginTop: heightt * (10 / 736) }} key={i} source={require('../img/timeicon.png') }/>
-                                    <Text style={{ color: 'black', fontSize: widthh * (16 / 414), fontFamily: 'MyriadPro-SemiboldIt', marginTop: heightt * (-20 / 736), marginLeft: widthh * (60 / 414) }}>{src.time}</Text>
+                                    <Text style={{backgroundColor:'#00000000', color: 'black', fontSize: widthh * (16 / 414), fontFamily: 'MyriadPro-SemiboldIt', marginTop: heightt * (-20 / 736), marginLeft: widthh * (60 / 414) }}>{src.time}</Text>
                                 </View>
                                 <View style={{ backgroundColor: '#00000000', width: widthh * (250 / 414), height: heightt * (50 / 736) }}>
                                     <Image style={{ width: widthh * (20 / 414), height: heightt * (31 / 736), marginLeft: widthh * (20 / 414), marginTop: heightt * (10 / 736) }} key={i} source={require('../img/addressicon.png') }/>
-                                    <Text style={{ color: 'black', fontSize: widthh * (16 / 414), fontFamily: 'MyriadPro-SemiboldIt', marginTop: heightt * (-28 / 736), marginLeft: widthh * (60 / 414) }}>{src.address}</Text>
+                                    <Text style={{ backgroundColor:'#00000000',color: 'black', fontSize: widthh * (16 / 414), fontFamily: 'MyriadPro-SemiboldIt', marginTop: heightt * (-28 / 736), marginLeft: widthh * (60 / 414) }}>{src.address}</Text>
                                 </View>
                             </View>
                             <View style={{ backgroundColor: '#50AEED', width: widthh * (250 / 414), height: heightt * (85 / 736), borderBottomLeftRadius: 5, borderBottomRightRadius: 5 }}>
@@ -111,12 +111,12 @@ export class Tickets extends Component {
                             <View style={{ backgroundColor: '#00000000', width: widthh * (250 / 414), height: heightt * (120 / 736), marginTop: widthh * (50 / 414),opacity: qr_view_opacity}}>
                                 <Image style={{ width: widthh * (120 / 414), height: heightt * (120 / 736), marginLeft: widthh * (10 / 414) }} key={i} source={require('../img/vwat.png') }/>
                                 <View style={{ backgroundColor: '#00000000', marginLeft: widthh * (150 / 414), width: widthh * (120 / 414), height: heightt * (120 / 736), marginTop: heightt * (-120 / 736) }}>
-                                    <Text style={{ color: 'black', fontSize: heightt * (16 / 736), fontFamily: 'MyriadPro-SemiboldIt' }}>Ticket Status: </Text>
-                                    <Text style={{ color: 'black', fontSize: heightt * (16 / 736), fontFamily: 'MyriadPro-SemiboldIt' }}>Valid</Text>
-                                    <Text style={{ color: 'black', fontSize: heightt * (16 / 736), fontFamily: 'MyriadPro-SemiboldIt' }}>Ticket CODE: </Text>
-                                    <Text style={{ color: 'black', fontSize: heightt * (16 / 736), fontFamily: 'MyriadPro-SemiboldIt' }}>12D2A</Text>
-                                    <Text style={{ color: 'black', fontSize: heightt * (16 / 736), fontFamily: 'MyriadPro-SemiboldIt' }}>Checked-in: </Text>
-                                    <Text style={{ color: 'black', fontSize: heightt * (16 / 736), fontFamily: 'MyriadPro-SemiboldIt' }}>1/23 9: 25 pm</Text>
+                                    <Text style={{ backgroundColor:'#00000000',color: 'black', fontSize: heightt * (16 / 736), fontFamily: 'MyriadPro-SemiboldIt' }}>Ticket Status: </Text>
+                                    <Text style={{ backgroundColor:'#00000000',color: 'black', fontSize: heightt * (16 / 736), fontFamily: 'MyriadPro-SemiboldIt' }}>Valid</Text>
+                                    <Text style={{ backgroundColor:'#00000000',color: 'black', fontSize: heightt * (16 / 736), fontFamily: 'MyriadPro-SemiboldIt' }}>Ticket CODE: </Text>
+                                    <Text style={{ backgroundColor:'#00000000',color: 'black', fontSize: heightt * (16 / 736), fontFamily: 'MyriadPro-SemiboldIt' }}>12D2A</Text>
+                                    <Text style={{ backgroundColor:'#00000000',color: 'black', fontSize: heightt * (16 / 736), fontFamily: 'MyriadPro-SemiboldIt' }}>Checked-in: </Text>
+                                    <Text style={{ backgroundColor:'#00000000',color: 'black', fontSize: heightt * (16 / 736), fontFamily: 'MyriadPro-SemiboldIt' }}>1/23 9: 25 pm</Text>
                                 </View>
                             </View>
                         </View>

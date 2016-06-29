@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
     },
     loadingText: {
         marginTop: 10,
-        textAlign: 'center'
+        textAlign: 'center',
+        backgroundColor:'#00000000',
     }
 });

@@ -58,7 +58,8 @@ export class DrawerView extends Component {
                         <Text style={{
                             fontSize: 18,
                             color: "#333333",
-                            marginLeft: 20
+                            marginLeft: 20,
+                            backgroundColor:'#00000000'
                         }}>Mingle</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={{
@@ -74,7 +75,8 @@ export class DrawerView extends Component {
                         <Text style={{
                             fontSize: 18,
                             color: "#333333",
-                            marginLeft: 20
+                            marginLeft: 20,
+                            backgroundColor:'#00000000'
                         }}>Tickets</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={{
@@ -90,7 +92,8 @@ export class DrawerView extends Component {
                         <Text style={{
                             fontSize: 18,
                             color: "#333333",
-                            marginLeft: 20
+                            marginLeft: 20,
+                            backgroundColor:'#00000000'
                         }}>Setting</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={{
@@ -106,7 +109,8 @@ export class DrawerView extends Component {
                         <Text style={{
                             fontSize: 18,
                             color: "#333333",
-                            marginLeft: 20
+                            marginLeft: 20,
+                            backgroundColor:'#00000000'
                         }}>FeedBack</Text>
                     </TouchableOpacity>
                 </View>

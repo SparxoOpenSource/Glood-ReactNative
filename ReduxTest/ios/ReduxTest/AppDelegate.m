@@ -43,7 +43,7 @@
    * on the same Wi-Fi network.
    */
 
-//  jsCodeLocation = [NSURL URLWithString:@"http://192.168.31.221:8081/index.ios.bundle?platform=ios&dev=true"];
+  jsCodeLocation = [NSURL URLWithString:@"http://192.168.31.221:8081/index.ios.bundle?platform=ios&dev=true"];
 
   /**
    * OPTION 2
@@ -53,7 +53,7 @@
    * simulator in the "Release" build configuration.
    */
 
-   jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"index.ios" withExtension:@"jsbundle"];
+//   jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"index.ios" withExtension:@"jsbundle"];
   for (NSString* family in [UIFont familyNames])
   {
     NSLog(@"%@", family);
