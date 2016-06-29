@@ -82,7 +82,8 @@ constructor(props) {
             playCode: props.title,
             auto: props.auto,
             imgIsBig: false,
-            bottom_view_image_width:0,
+            bottom_view_image_width:1,
+            bottom_view_image_height:30,
             background_imagex: require('../img/background.png'),
             firstTop: props.rowID === 0 ? ((props.dateLength * (90 + maxSize)) > maxHeight ? 0 : (maxHeight - 90 - maxSize)) : 0
         }
@@ -173,7 +174,7 @@ constructor(props) {
                 <Text style={{color: 'black', fontSize: heightt * (25 / 736), width: widthh * (230 / 414), 
                 fontFamily: 'MyriadPro-Regular',marginLeft:(widthh-(widthh * (230 / 414)))/2,marginTop:heightt*(5/736)}}>Founder of Crazy Fest</Text>
                <View style={{width:widthh,height:30,marginTop:height*(40/736),backgroundColor:'#00000030'}}>
-                  <Animated.Image source={require('../img/event_background_bottom.png')} style={{width:this.state.bottom_view_image_width,height:30}}/>
+                  <Animated.Image source={require('../img/event_background_bottom.png')} style={{width:this.state.bottom_view_image_width,height:this.state.bottom_view_image_height}}/>
                </View>
             </View>
         );
@@ -195,12 +196,10 @@ constructor(props) {
                 type: 'linear'
             }
         });
-        if(this.state.bottom_view_image_width<widthh)
-        {
             this.setState({
                         bottom_view_image_width: this.state.bottom_view_image_width + widthh,
+                        bottom_view_image_height:30
                     })
-        }
         
     }
     /**
@@ -297,6 +296,11 @@ constructor(props) {
     }
 
   _jumpEventChat(value, navigator) {
+       this.setState(
+           {
+                        bottom_view_image_width: 1,
+                        bottom_view_image_height:30
+                    });
         EventListener.trigger("Login", value, navigator);
     }
 }
