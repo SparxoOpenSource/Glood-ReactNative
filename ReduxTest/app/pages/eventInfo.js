@@ -184,7 +184,7 @@ constructor(props) {
     }
     _playAnim(time) {
         LayoutAnimation.configureNext({
-            duration: time * 100,   //持续时间
+            duration: time * 1000,   //持续时间
             create: {
                 type: 'linear',
                 property: 'opacity'
