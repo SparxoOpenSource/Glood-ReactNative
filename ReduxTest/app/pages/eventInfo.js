@@ -22,10 +22,6 @@ import {EventListener} from "../listener/EventListener";
 var {height, width} = Dimensions.get('window');
 var STATUS_BAR_HEIGHT = Navigator.NavigationBar.Styles.General.StatusBarHeight;
 import {Initialization,LoginNow} from "../utils/SupportLogin";
-// if (isAndroid()) {
-//     var STATUS_BAR_HEIGHT = ExtraDimensions.get('STATUS_BAR_HEIGHT');
-// }
-var maxHeight = height - Navigator.NavigationBar.Styles.General.NavBarHeight - STATUS_BAR_HEIGHT - 64 - 10;
 var maxSize = isAndroid() ? 30 : 35;
 var deviceWidth = Dimensions.get('window').width;
 var widthh = Dimensions.get('window').width;
@@ -40,7 +36,8 @@ var viewOpacity_1 = new Animated.Value(0.3);
 var viewOpacity_2 = new Animated.Value(0.3);
 var runBool_1 = false;
 var runBool_2 = false;
-
+var maxsize_image_top = isAndroid() ? (maxSize / 2+60) : (maxSize / 2+30);
+var bottom_text_name_height = isAndroid() ? 120 :80;
 
 const propTypes = {
      title: PropTypes.string,
@@ -61,16 +58,16 @@ constructor(props) {
             w: 90,
             h: 90,
             left: cha / 2,
-            imageTop: maxSize / 2+30,
+            imageTop: maxsize_image_top,
             imageLeft: leftEvery,
             viewWidth_1: 90,
             viewHeight_1: 90,
-            viewTop_1: maxSize / 2+30,
+            viewTop_1: maxsize_image_top,
             viewLeft_1: leftEvery,
             viewRadius_1: 45,
             viewWidth_2: 90,
             viewHeight_2: 90,
-            viewTop_2: maxSize / 2+30,
+            viewTop_2: maxsize_image_top,
             viewLeft_2: leftEvery,
             viewRadius_2: 45,
             viewOpacity_1: viewOpacity_1,
@@ -85,7 +82,7 @@ constructor(props) {
             bottom_view_image_width:1,
             bottom_view_image_height:30,
             background_imagex: require('../img/background.png'),
-            firstTop: props.rowID === 0 ? ((props.dateLength * (90 + maxSize)) > maxHeight ? 0 : (maxHeight - 90 - maxSize)) : 0
+            firstTop: props.rowID === 0 ? ((props.dateLength * (90 + maxSize)) > heightt ? 0 : (heightt - 90 - maxSize)) : 0
         }
     }
     componentDidMount() {
@@ -99,9 +96,9 @@ constructor(props) {
         if (this.props.rowID === 0) {
             var temp = number * (90 + maxSize);
             console.log('--*-----', temp + '--' + number);
-            if (maxHeight > temp) {
+            if (heightt > temp) {
                 this.setState({
-                    firstTop: maxHeight - temp
+                    firstTop: heightt - temp
                 });
             }
         }
@@ -170,11 +167,11 @@ constructor(props) {
                 </View>
               </View>
                 <Text style={{backgroundColor:'#00000000',color: 'black', fontSize: heightt * (25 / 736), width: widthh * (95 / 414), 
-                fontFamily: 'MyriadPro-Regular',marginLeft:(widthh-(widthh * (95 / 414)))/2,marginTop:heightt*(80/736)}}>Christina</Text>
+                fontFamily: 'MyriadPro-Regular',marginLeft:(widthh-(widthh * (95 / 414)))/2,marginTop:heightt*(bottom_text_name_height/736)}}>Christina</Text>
                 <Text style={{backgroundColor:'#00000000',color: 'black', fontSize: heightt * (25 / 736), width: widthh * (230 / 414), 
                 fontFamily: 'MyriadPro-Regular',marginLeft:(widthh-(widthh * (230 / 414)))/2,marginTop:heightt*(5/736)}}>Founder of Crazy Fest</Text>
-               <View style={{width:widthh,height:30,marginTop:height*(40/736),backgroundColor:'#00000030'}}>
-                  <Image source={require('../img/event_background_bottom.png')} style={{width:this.state.bottom_view_image_width,height:30}}/>
+               <View style={{width:widthh,height:25,marginTop:height*(45/736),backgroundColor:'#00000030'}}>
+                  <Image source={require('../img/event_background_bottom.png')} style={{width:this.state.bottom_view_image_width,height:25}}/>
                </View>
             </View>
         );
@@ -235,7 +232,7 @@ constructor(props) {
                 this.setState({
                     viewWidth_1: 90,
                     viewHeight_1: 90,
-                    viewTop_1: maxSize / 2+30,
+                    viewTop_1: maxsize_image_top,
                     viewLeft_1: leftEvery,
                     viewRadius_1: this.state.viewHeight_1,
                     viewOpacity_1: new Animated.Value(0.3),
@@ -282,7 +279,7 @@ constructor(props) {
                 this.setState({
                     viewWidth_2: 90,
                     viewHeight_2: 90,
-                    viewTop_2: maxSize / 2+30,
+                    viewTop_2: maxsize_image_top,
                     viewLeft_2: leftEvery,
                     viewRadius_2: this.state.viewHeight_1,
                     viewOpacity_2: new Animated.Value(0.3),

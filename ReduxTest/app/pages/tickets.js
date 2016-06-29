@@ -28,7 +28,7 @@ var image_margin_top;
 var qr_view_opacity = 1;
 var widthh = Dimensions.get('window').width
 var STATUS_BAR_HEIGHT = Navigator.NavigationBar.Styles.General.StatusBarHeight;
-var heightt = Dimensions.get('window').height - Navigator.NavigationBar.Styles.General.NavBarHeight
+var heightt = Dimensions.get('window').height - Navigator.NavigationBar.Styles.General.NavBarHeight-20
 var {height, width} = Dimensions.get('window');
 const propTypes = {
     title: PropTypes.string,
@@ -100,12 +100,12 @@ export class Tickets extends Component {
                                     <Text style={{ backgroundColor: '#00000000', color: 'black', fontSize: widthh * (20 / 414), fontFamily: 'MyriadPro-SemiboldIt', marginTop: widthh * (-55 / 414), marginLeft: widthh * (60 / 414) }}>{src.eventName}</Text>
                                 </View>
                                 <View style={{ backgroundColor: '#00000000', width: widthh * (250 / 414), height: heightt * (50 / 736) }}>
-                                    <Image style={{ width: widthh * (20 / 414), height: heightt * (20 / 736), marginLeft: widthh * (20 / 414), marginTop: heightt * (10 / 736) }} key={i} source={require('../img/timeicon.png') }/>
-                                    <Text style={{ backgroundColor: '#00000000', color: 'black', fontSize: widthh * (16 / 414), fontFamily: 'MyriadPro-SemiboldIt', marginTop: heightt * (-20 / 736), marginLeft: widthh * (60 / 414) }}>{src.time}</Text>
+                                    <Image style={{ width: widthh * (20 / 414), height: heightt * (20 / 736), marginLeft: widthh * (20 / 414), marginTop: heightt * (15 / 736) }} key={i} source={require('../img/timeicon.png') }/>
+                                    <Text style={{ backgroundColor: '#00000000', color: 'black', fontSize: widthh * (16 / 414), fontFamily: 'MyriadPro-SemiboldIt', marginTop: heightt * (-15 / 736), marginLeft: widthh * (60 / 414) }}>{src.time}</Text>
                                 </View>
                                 <View style={{ backgroundColor: '#00000000', width: widthh * (250 / 414), height: heightt * (50 / 736) }}>
-                                    <Image style={{ width: widthh * (20 / 414), height: heightt * (31 / 736), marginLeft: widthh * (20 / 414), marginTop: heightt * (10 / 736) }} key={i} source={require('../img/addressicon.png') }/>
-                                    <Text style={{ backgroundColor: '#00000000', color: 'black', fontSize: widthh * (16 / 414), fontFamily: 'MyriadPro-SemiboldIt', marginTop: heightt * (-28 / 736), marginLeft: widthh * (60 / 414) }}>{src.address}</Text>
+                                    <Image style={{ width: widthh * (20 / 414), height: heightt * (31 / 736), marginLeft: widthh * (20 / 414), marginTop: heightt * (5 / 736) }} key={i} source={require('../img/addressicon.png') }/>
+                                    <Text style={{ backgroundColor: '#00000000', color: 'black', fontSize: widthh * (16 / 414), fontFamily: 'MyriadPro-SemiboldIt', marginTop: heightt * (-33 / 736), marginLeft: widthh * (60 / 414) }}>{src.address}</Text>
                                 </View>
                             </View>
                             <View style={{ backgroundColor: '#50AEED', width: widthh * (250 / 414), height: heightt * (85 / 736), borderBottomLeftRadius: 5, borderBottomRightRadius: 5 }}>
