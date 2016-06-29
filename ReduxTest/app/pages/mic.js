@@ -81,14 +81,14 @@ export class Mic extends Component {
                 <View style={style.footer}>
                     <TouchableOpacity onPress={this.autoPlay.bind(this) } style={{ flexDirection: 'row' }}>
                         <Image source={this.state.autoImage } style={style.ImagStyle}/>
-                        <Text style={{ marginTop: 32, marginLeft: 6, fontSize: 16, color: '#000000' }}>auto</Text>
+                        <Text style={{backgroundColor:'#00000000', marginTop: 32, marginLeft: 6, fontSize: 16, color: '#000000' }}>auto</Text>
                     </TouchableOpacity>
                     <TouchableWithoutFeedback onPressOut={this._stop.bind(this) } onPressIn={this._startVoice.bind(this) }>
                         <Image style={{ width: 54, height: 54 }}  source={this.state.voiceImage }/>
                     </TouchableWithoutFeedback>
                     <TouchableOpacity style={{ flexDirection: 'row' }}>
                         <Image source={require('../img/none.png') } style={style.ImagStyle}  />
-                        <Text style={{ marginTop: 32, marginLeft: 6, fontSize: 16, color: '#00000000' }}>auto</Text>
+                        <Text style={{backgroundColor:'#00000000', marginTop: 32, marginLeft: 6, fontSize: 16, color: '#00000000' }}>auto</Text>
                     </TouchableOpacity>
                 </View>
             </View>

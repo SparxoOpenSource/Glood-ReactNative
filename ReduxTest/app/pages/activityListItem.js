@@ -52,12 +52,14 @@ export class ActivityListItem extends Component {
                         fontSize: width*(18/414),
                         color: "#070909",
                         fontWeight: "bold",
-                        marginLeft: 16
+                        marginLeft: 16,
+                        backgroundColor:'#00000000'
                     }}>{this.props.date.use}/{this.props.date.total}</Text>
                     <Text style={{
                         fontSize: width*(18/414),
                         color: "#070909",
-                        marginLeft: 8
+                        marginLeft: 8,
+                        backgroundColor:'#00000000'
                     }}>{this.props.date.eventName}</Text>
                 </View>
                 <View style={{

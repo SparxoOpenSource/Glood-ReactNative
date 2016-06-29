@@ -112,7 +112,7 @@ constructor(props) {
             <View>
                 <Common navigator={this.props.navigator} title={"Crazy May Fest 2017"}/>
                 <Image style={{width:widthh,height:heightt*(200/736)}} source={require('../img/event_background.jpg')}/>
-                <Text style={{color: 'black', fontSize: heightt * (25 / 736), width: widthh * (250 / 414), 
+                <Text style={{backgroundColor:'#00000000',color: 'black', fontSize: heightt * (25 / 736), width: widthh * (250 / 414), 
                 fontFamily: 'MyriadPro-Semibold',marginLeft:(widthh-(widthh * (250 / 414)))/2,marginTop:heightt*(20/736)}}>Can't wait to see you at Crazy May 2016!</Text>
                 <View style={ { justifyContent: 'center', alignItems: 'center' }}>
                 <View style={{
@@ -169,9 +169,9 @@ constructor(props) {
                     </TouchableOpacity>
                 </View>
               </View>
-                <Text style={{color: 'black', fontSize: heightt * (25 / 736), width: widthh * (95 / 414), 
+                <Text style={{backgroundColor:'#00000000',color: 'black', fontSize: heightt * (25 / 736), width: widthh * (95 / 414), 
                 fontFamily: 'MyriadPro-Regular',marginLeft:(widthh-(widthh * (95 / 414)))/2,marginTop:heightt*(80/736)}}>Christina</Text>
-                <Text style={{color: 'black', fontSize: heightt * (25 / 736), width: widthh * (230 / 414), 
+                <Text style={{backgroundColor:'#00000000',color: 'black', fontSize: heightt * (25 / 736), width: widthh * (230 / 414), 
                 fontFamily: 'MyriadPro-Regular',marginLeft:(widthh-(widthh * (230 / 414)))/2,marginTop:heightt*(5/736)}}>Founder of Crazy Fest</Text>
                <View style={{width:widthh,height:30,marginTop:height*(40/736),backgroundColor:'#00000030'}}>
                   <Image source={require('../img/event_background_bottom.png')} style={{width:this.state.bottom_view_image_width,height:30}}/>
