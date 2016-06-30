@@ -64,6 +64,7 @@ export class Root extends Component {
         }
 
     }
+<<<<<<< HEAD
     componentDidMount() {
         if (isAndroid()) {
             BackAndroid.addEventListener('hardwareBackPress', this.onBackAndroid.bind(this));
@@ -74,6 +75,8 @@ export class Root extends Component {
             BackAndroid.addEventListener('hardwareBackPress');
         }
     }
+=======
+>>>>>>> 17233d36e8ebc2e096e78971bec744b3fb7430ac
     render() {
         return (
             <View style={styles.navigatorContainer}>
