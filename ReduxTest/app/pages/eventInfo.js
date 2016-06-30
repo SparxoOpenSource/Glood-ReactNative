@@ -85,6 +85,9 @@ constructor(props) {
             background_imagex: require('../img/background.png'),
             firstTop: props.rowID === 0 ? ((props.dateLength * (90 + maxSize)) > heightt ? 0 : (heightt - 90 - maxSize)) : 0
         }
+        setTimeout(() => {
+                this._onPress();
+            }, 1000);
     }
     componentDidMount() {
         if (isAndroid()) {
@@ -176,8 +179,8 @@ constructor(props) {
         );
     }
     _onPress() {
-       this._playAnimOne(10);
-       this._playAnim(10);
+       this._playAnimOne(5);
+       this._playAnim(5);
     }
     _playAnim(time) {
         LayoutAnimation.configureNext({
