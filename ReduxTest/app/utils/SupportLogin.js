@@ -19,8 +19,8 @@ var password;
 
 export function Initialization() {
     const options = { transports: ['websocket'], forceNew: true };
-    const socket = io('http://50.18.208.72:30030', options);
-    // const socket = io('http://192.168.31.221:3030', options);
+    // const socket = io('http://50.18.208.72:30030', options);
+    const socket = io('http://192.168.31.221:3030', options);
 
     app = feathers()
         .configure(socketio(socket))
@@ -58,7 +58,7 @@ export function LoginNow(value, navigator) {
                 name: value, value: value, nav: navigator, app: app, ip: call.IP
             });
         }).catch(error => {
-            Pop("登录失败");
+            Pop("登录失败，现在进行用户注册");
             // Pop(error);
             console.log('ERROR-1', error);
             register(value, navigator, call);

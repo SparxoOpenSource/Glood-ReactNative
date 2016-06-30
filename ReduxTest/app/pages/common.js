@@ -1,8 +1,5 @@
 import React, {Component} from "react";
-import { AppRegistry, StyleSheet, View, Text, ListView, Alert, ScrollView, TouchableOpacity, Image, NativeModules, PropTypes,
-    BackAndroid, Platform }  from 'react-native';
-import {NaviGoBack} from '../utils/CommonUtils';
-import Portal from 'react-native/Libraries/Portal/Portal.js';
+import { AppRegistry, StyleSheet, View, Text, ListView, Alert, ScrollView, TouchableOpacity, Image, NativeModules, PropTypes, Platform }  from 'react-native';
 import isAndroid from '../utils/isAndroid.js';
 import {EventListener} from "../listener/EventListener";
 
@@ -16,20 +13,7 @@ const propTypes = {
 };
 
 export class Common extends Component {
-    //监听手机自带返回按钮
-    constructor() {
-        super();
-        this.goBack = this.goBack.bind(this);
-    }
-    goBack() {
-        EventListener.trigger("RecordStop");
-        return NaviGoBack(this.props.navigator);
-    }
-    componentDidMount() {
-        if (isAndroid()) {
-            BackAndroid.addEventListener('hardwareBackPress', this.goBack);
-        }
-    }
+
     renderBackImage() {
         if (this.props.page === "Main") {
             return (

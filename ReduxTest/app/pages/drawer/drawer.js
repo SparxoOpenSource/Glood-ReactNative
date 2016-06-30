@@ -35,7 +35,7 @@ export class DrawerMe extends Component {
     constructor() {
         super();
         this.state = {
-            drawerLockMode: 'locked-open',
+            drawerLockMode: 'unlocked',
         }
     }
     /**
