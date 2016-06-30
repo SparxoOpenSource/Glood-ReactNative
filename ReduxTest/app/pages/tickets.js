@@ -43,33 +43,34 @@ export class Tickets extends Component {
                 { headImageIcon: require('../img/171604419.jpg'), eventName: '2015 Sparxo Grand Opening(SF ...)', month: 'MAY', day: '02', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias Vip' },
                 { headImageIcon: require('../img/171604419.jpg'), eventName: '2015 Sparxo Grand Opening(SF ...)', month: 'MAY', day: '03', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias Vip' },
                 { headImageIcon: require('../img/171604419.jpg'), eventName: '2015 Sparxo Grand Opening(SF ...)', month: 'MAY', day: '04', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias Vip' },
-                // { headImageIcon: require('../img/171604419.jpg'), eventName: '2015 Sparxo Grand Opening(SF ...)', month: 'MAY', day: '05', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias Vip' },
-                // { headImageIcon: require('../img/171604419.jpg'), eventName: '2015 Sparxo Grand Opening(SF ...)', month: 'MAY', day: '06', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias Vip' },
-                // { headImageIcon: require('../img/171604419.jpg'), eventName: '2015 Sparxo Grand Opening(SF ...)', month: 'MAY', day: '07', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias Vip' },
-                // { headImageIcon: require('../img/171604419.jpg'), eventName: '2015 Sparxo Grand Opening(SF ...)', month: 'MAY', day: '08', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias Vip' },
-                // { headImageIcon: require('../img/171604419.jpg'), eventName: '2015 Sparxo Grand Opening(SF ...)', month: 'MAY', day: '09', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias Vip' },
-                // { headImageIcon: require('../img/171604419.jpg'), eventName: '2015 Sparxo Grand Opening(SF ...)', month: 'MAY', day: '10', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias Vip' },
-                // { headImageIcon: require('../img/171604419.jpg'), eventName: '2015 Sparxo Grand Opening(SF ...)', month: 'MAY', day: '11', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias Vip' },
-                // { headImageIcon: require('../img/171604419.jpg'), eventName: '2015 Sparxo Grand Opening(SF ...)', month: 'MAY', day: '12', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias Vip' },
-                // { headImageIcon: require('../img/171604419.jpg'), eventName: '2015 Sparxo Grand Opening(SF ...)', month: 'MAY', day: '13', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias Vip' },
+                { headImageIcon: require('../img/171604419.jpg'), eventName: '2015 Sparxo Grand Opening(SF ...)', month: 'MAY', day: '05', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias Vip' },
+                { headImageIcon: require('../img/171604419.jpg'), eventName: '2015 Sparxo Grand Opening(SF ...)', month: 'MAY', day: '06', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias Vip' },
+                { headImageIcon: require('../img/171604419.jpg'), eventName: '2015 Sparxo Grand Opening(SF ...)', month: 'MAY', day: '07', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias Vip' },
+                { headImageIcon: require('../img/171604419.jpg'), eventName: '2015 Sparxo Grand Opening(SF ...)', month: 'MAY', day: '08', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias Vip' },
+                { headImageIcon: require('../img/171604419.jpg'), eventName: '2015 Sparxo Grand Opening(SF ...)', month: 'MAY', day: '09', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias Vip' },
+                { headImageIcon: require('../img/171604419.jpg'), eventName: '2015 Sparxo Grand Opening(SF ...)', month: 'MAY', day: '10', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias Vip' },
+                { headImageIcon: require('../img/171604419.jpg'), eventName: '2015 Sparxo Grand Opening(SF ...)', month: 'MAY', day: '11', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias Vip' },
+                { headImageIcon: require('../img/171604419.jpg'), eventName: '2015 Sparxo Grand Opening(SF ...)', month: 'MAY', day: '12', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias Vip' },
+                { headImageIcon: require('../img/171604419.jpg'), eventName: '2015 Sparxo Grand Opening(SF ...)', month: 'MAY', day: '13', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias Vip' },
             ]
         }
     }
     componentDidMount() {
-        // EventListener.on("scrollOffset").then(this.scrollOffsetxxx.bind(this));
+        EventListener.on("scrollOffset").then(this.scrollOffsetxxx.bind(this));
     }
     scrollOffsetxxx(offset) {
-        var currentPage = offset / (heightt * (390 / 736));
-        if (currentPage > 2) {
-            this.setState({
-                qr_view_opacity: 0
-            })
-        }
-        else {
-            this.setState({
-                qr_view_opacity: 1
-            })
-        }
+        console.log('xxxxxxxxxxxxxx---',offset);
+        // var currentPage = offset / (heightt * (390 / 736));
+        // if (currentPage > 2) {
+        //     this.setState({
+        //         qr_view_opacity: 0
+        //     })
+        // }
+        // else {
+        //     this.setState({
+        //         qr_view_opacity: 1
+        //     })
+        // }
     }
     render() {
         if (Platform.OS === 'android') {
@@ -110,13 +111,13 @@ export class Tickets extends Component {
                             <View style={{ backgroundColor: '#50AEED', width: widthh * (250 / 414), height: heightt * (85 / 736), borderBottomLeftRadius: 5, borderBottomRightRadius: 5 }}>
                                 <Text style={{ backgroundColor: '#00000000', color: 'white', fontSize: widthh * (20 / 414), fontFamily: 'MyriadPro-SemiboldIt', marginTop: heightt * (10 / 736), marginLeft: widthh * (50 / 414), width: widthh * (150 / 414) }}>{src.name}</Text>
                             </View>
-                            <View style={{ backgroundColor: '#00000000', width: widthh * (250 / 414), height: heightt * (120 / 736), marginTop: widthh * (50 / 414), opacity: qr_view_opacity }}>
+                            <View style={{ backgroundColor: '#00000000', width: widthh * (250 / 414), height: heightt * (120 / 736),marginLeft:width*(25/414), marginTop: widthh * (50 / 414), opacity: qr_view_opacity }}>
                                 <QRCode style={{ width: widthh * (110 / 414), height: heightt * (110 / 736), marginLeft: widthh * (10 / 414) }}
                                     value='12D2A'
                                     size={widthh * (110 / 414)}
-                                    bgColor='black'
+                                    bgColor='#20676B'
                                     fgColor='#35CED6'/>
-                                <View style={{ backgroundColor: '#00000000', marginLeft: widthh * (150 / 414), width: widthh * (120 / 414), height: heightt * (120 / 736), marginTop: heightt * (-120 / 736) }}>
+                                <View style={{ backgroundColor: '#00000000', marginLeft: widthh * (125 / 414), width: widthh * (120 / 414), height: heightt * (120 / 736), marginTop: heightt * (-120 / 736) }}>
                                     <Text style={{ backgroundColor: '#00000000', color: 'black', fontSize: heightt * (16 / 736), fontFamily: 'MyriadPro-SemiboldIt' }}>Ticket Status: </Text>
                                     <Text style={{ backgroundColor: '#00000000', color: 'black', fontSize: heightt * (16 / 736), fontFamily: 'MyriadPro-SemiboldIt' }}>Valid</Text>
                                     <Text style={{ backgroundColor: '#00000000', color: 'black', fontSize: heightt * (16 / 736), fontFamily: 'MyriadPro-SemiboldIt' }}>Ticket CODE: </Text>
