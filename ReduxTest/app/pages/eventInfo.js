@@ -19,6 +19,7 @@ import { AppRegistry,
 import {Common} from "./common";
 import isAndroid from '../utils/isAndroid.js';
 import {EventListener} from "../listener/EventListener";
+import {Pop} from "../utils/AlertPop";
 var {height, width} = Dimensions.get('window');
 var STATUS_BAR_HEIGHT = Navigator.NavigationBar.Styles.General.StatusBarHeight;
 import {Initialization,LoginNow} from "../utils/SupportLogin";
@@ -95,7 +96,6 @@ constructor(props) {
     firstTopMargin(number) {
         if (this.props.rowID === 0) {
             var temp = number * (90 + maxSize);
-            console.log('--*-----', temp + '--' + number);
             if (heightt > temp) {
                 this.setState({
                     firstTop: heightt - temp
@@ -202,7 +202,7 @@ constructor(props) {
     _playAnimOne(times) {
         currentTime = currentTime + 0.5;
         if (currentTime >= times) {
-            this._jumpEventChat("xx", this.props.navigator);
+            this._jumpEventChat("NEWMIC", this.props.navigator);
             currentTime = 0;
             return;
         }
@@ -265,7 +265,6 @@ constructor(props) {
         ]);
 
         this.state.viewOpacity_2.addListener(callback => {
-            console.log("this.state.viewOpacity_2", callback.value);
             if (callback.value > 0.1) {
                 runBool_2 = false;
             } else if (callback.value <= 0.1) {
@@ -290,6 +289,7 @@ constructor(props) {
     }
 
   _jumpEventChat(value, navigator) {
+    Pop("登录中，请稍后....");
        this.setState(
            {
                         bottom_view_image_width: 1,

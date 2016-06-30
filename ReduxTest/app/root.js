@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import { AppRegistry, StyleSheet, View, Text, ListView, Alert, Navigator, Image, TouchableOpacity, StatusBarIOS,
+import { AppRegistry, StyleSheet, View, Text, ListView, Alert, Navigator, Image, TouchableOpacity, BackAndroid,
     Platform, Dimensions, PropTypes}  from 'react-native';
 var _navigator;
 import {Home} from "../app/pages/home";
@@ -16,6 +16,9 @@ import {Introduce} from "../app/pages/introduce"
 import {ActivityList} from "../app/pages/activitylist"
 import {EventInfo} from "../app/pages/eventInfo"
 var {height, width} = Dimensions.get('window');
+import isAndroid from '../app/utils/isAndroid.js';
+import {NaviGoBack} from '../app/utils/CommonUtils';
+import {EventListener} from "../app/listener/EventListener";
 
 const propTypes = {
     title: PropTypes.string
@@ -29,8 +32,8 @@ export class Root extends Component {
             case "Introduce":
                 component = Introduce;
                 return (<Introduce navigator={navigator}/>);
-                // component = EventInfo;
-                // return (<EventInfo navigator={navigator}/>);
+            // component = EventInfo;
+            // return (<EventInfo navigator={navigator}/>);
             case "Login":
                 component = Login;
                 return (<Login navigator={navigator}/>);
@@ -62,20 +65,30 @@ export class Root extends Component {
 
     }
     componentDidMount() {
-        if (Platform.OS === 'ios') {
-            StatusBarIOS.setHidden(true)
+        if (isAndroid()) {
+            BackAndroid.addEventListener('hardwareBackPress', this.onBackAndroid.bind(this));
+        }
+    }
+    componentWillUnmount() {
+        if (isAndroid()) {
+            BackAndroid.addEventListener('hardwareBackPress');
         }
     }
     render() {
         return (
             <View style={styles.navigatorContainer}>
                 <Navigator
-                    ref="navigator"
+                    ref={(navigator) => { return this.navigator = navigator } }
                     sceneStyle={styles.container}
                     initialRoute={{ name: this.props.title == null ? 'Introduce' : this.props.title }}
                     renderScene={this.renderScene} />
             </View>
         );
+    }
+    onBackAndroid() {
+        const nav = this.navigator;
+        EventListener.trigger("RecordStop");
+        return NaviGoBack(nav);
     }
 }
 var styles = StyleSheet.create({

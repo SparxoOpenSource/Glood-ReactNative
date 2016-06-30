@@ -1,6 +1,7 @@
 package com.reduxtest.actions;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 
@@ -54,5 +55,16 @@ public class AndroidInfoModule extends ReactContextBaseJavaModule {
                 ((i >> 8) & 0xFF) + "." +
                 ((i >> 16) & 0xFF) + "." +
                 (i >> 24 & 0xFF);
+    }
+    /**
+     * 此方法是为了解决返回键退出程序后,ToastAndroid不会消失的bug
+     */
+    @ReactMethod
+    public void onBackPressed() {
+        Intent setIntent = new Intent(Intent.ACTION_MAIN);
+        setIntent.addCategory(Intent.CATEGORY_HOME);
+        setIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        getCurrentActivity().startActivity(setIntent);
+
     }
 }
