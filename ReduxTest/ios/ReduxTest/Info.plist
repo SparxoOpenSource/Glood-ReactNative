@@ -31,6 +31,15 @@
 	<string></string>
 	<key>UIAppFonts</key>
 	<array>
+		<string>OpenSans-BoldItalic-webfont.ttf</string>
+		<string>OpenSans-ExtraBold-webfont.ttf</string>
+		<string>OpenSans-ExtraBoldItalic-webfont.ttf</string>
+		<string>OpenSans-Italic-webfont.ttf</string>
+		<string>OpenSans-Light-webfont.ttf</string>
+		<string>OpenSans-LightItalic-webfont.ttf</string>
+		<string>OpenSans-Regular-webfont.ttf</string>
+		<string>OpenSans-Semibold-webfont.ttf</string>
+		<string>OpenSans-SemiboldItalic-webfont.ttf</string>
 		<string>MyriadPro-Regular.otf</string>
 		<string>OpenSans-Bold-webfont.ttf</string>
 		<string>MyriadPro-Bold.otf</string>

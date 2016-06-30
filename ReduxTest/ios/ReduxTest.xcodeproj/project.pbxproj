@@ -22,7 +22,6 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
-		CC0BD82E1D018C9D0071A5B8 /* OpenSans-Bold-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CC0BD82D1D018C9D0071A5B8 /* OpenSans-Bold-webfont.ttf */; };
 		CC0BD8341D018E100071A5B8 /* MyriadPro-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CC0BD82F1D018E100071A5B8 /* MyriadPro-Bold.otf */; };
 		CC0BD8351D018E100071A5B8 /* MyriadPro-BoldIt.otf in Resources */ = {isa = PBXBuildFile; fileRef = CC0BD8301D018E100071A5B8 /* MyriadPro-BoldIt.otf */; };
 		CC0BD8361D018E100071A5B8 /* MyriadPro-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = CC0BD8311D018E100071A5B8 /* MyriadPro-Regular.otf */; };
@@ -41,6 +40,16 @@
 		CC64FCA31D1B7E3F009F60C7 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC64FCA21D1B7E3F009F60C7 /* SystemConfiguration.framework */; };
 		CC64FCA51D1B7E47009F60C7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC64FCA41D1B7E47009F60C7 /* Security.framework */; };
 		CC64FCA71D1B7E54009F60C7 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CC64FCA61D1B7E54009F60C7 /* libz.tbd */; };
+		CC9D819D1D24FD50002C5A4C /* OpenSans-BoldItalic-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CC9D81941D24FD50002C5A4C /* OpenSans-BoldItalic-webfont.ttf */; };
+		CC9D819E1D24FD50002C5A4C /* OpenSans-ExtraBold-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CC9D81951D24FD50002C5A4C /* OpenSans-ExtraBold-webfont.ttf */; };
+		CC9D819F1D24FD50002C5A4C /* OpenSans-ExtraBoldItalic-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CC9D81961D24FD50002C5A4C /* OpenSans-ExtraBoldItalic-webfont.ttf */; };
+		CC9D81A01D24FD50002C5A4C /* OpenSans-Italic-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CC9D81971D24FD50002C5A4C /* OpenSans-Italic-webfont.ttf */; };
+		CC9D81A11D24FD50002C5A4C /* OpenSans-Light-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CC9D81981D24FD50002C5A4C /* OpenSans-Light-webfont.ttf */; };
+		CC9D81A21D24FD50002C5A4C /* OpenSans-LightItalic-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CC9D81991D24FD50002C5A4C /* OpenSans-LightItalic-webfont.ttf */; };
+		CC9D81A31D24FD50002C5A4C /* OpenSans-Regular-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CC9D819A1D24FD50002C5A4C /* OpenSans-Regular-webfont.ttf */; };
+		CC9D81A41D24FD50002C5A4C /* OpenSans-Semibold-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CC9D819B1D24FD50002C5A4C /* OpenSans-Semibold-webfont.ttf */; };
+		CC9D81A51D24FD50002C5A4C /* OpenSans-SemiboldItalic-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CC9D819C1D24FD50002C5A4C /* OpenSans-SemiboldItalic-webfont.ttf */; };
+		CC9D81A71D24FD5B002C5A4C /* OpenSans-Bold-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CC9D81A61D24FD5B002C5A4C /* OpenSans-Bold-webfont.ttf */; };
 		CCA7E1961CEAFD6000EFEF04 /* ShowMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA7E1951CEAFD6000EFEF04 /* ShowMessage.m */; };
 		CCA7E1B81CEAFDFD00EFEF04 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA7E1A61CEAFDFD00EFEF04 /* MBProgressHUD.m */; };
 		CCA7E1B91CEAFDFD00EFEF04 /* MMVectorImage.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA7E1A81CEAFDFD00EFEF04 /* MMVectorImage.m */; };
@@ -181,7 +190,6 @@
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
-		CC0BD82D1D018C9D0071A5B8 /* OpenSans-Bold-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold-webfont.ttf"; sourceTree = "<group>"; };
 		CC0BD82F1D018E100071A5B8 /* MyriadPro-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MyriadPro-Bold.otf"; sourceTree = "<group>"; };
 		CC0BD8301D018E100071A5B8 /* MyriadPro-BoldIt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MyriadPro-BoldIt.otf"; sourceTree = "<group>"; };
 		CC0BD8311D018E100071A5B8 /* MyriadPro-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MyriadPro-Regular.otf"; sourceTree = "<group>"; };
@@ -209,6 +217,16 @@
 		CC64FCA21D1B7E3F009F60C7 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		CC64FCA41D1B7E47009F60C7 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		CC64FCA61D1B7E54009F60C7 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		CC9D81941D24FD50002C5A4C /* OpenSans-BoldItalic-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-BoldItalic-webfont.ttf"; sourceTree = "<group>"; };
+		CC9D81951D24FD50002C5A4C /* OpenSans-ExtraBold-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-ExtraBold-webfont.ttf"; sourceTree = "<group>"; };
+		CC9D81961D24FD50002C5A4C /* OpenSans-ExtraBoldItalic-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-ExtraBoldItalic-webfont.ttf"; sourceTree = "<group>"; };
+		CC9D81971D24FD50002C5A4C /* OpenSans-Italic-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Italic-webfont.ttf"; sourceTree = "<group>"; };
+		CC9D81981D24FD50002C5A4C /* OpenSans-Light-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Light-webfont.ttf"; sourceTree = "<group>"; };
+		CC9D81991D24FD50002C5A4C /* OpenSans-LightItalic-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-LightItalic-webfont.ttf"; sourceTree = "<group>"; };
+		CC9D819A1D24FD50002C5A4C /* OpenSans-Regular-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular-webfont.ttf"; sourceTree = "<group>"; };
+		CC9D819B1D24FD50002C5A4C /* OpenSans-Semibold-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Semibold-webfont.ttf"; sourceTree = "<group>"; };
+		CC9D819C1D24FD50002C5A4C /* OpenSans-SemiboldItalic-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiboldItalic-webfont.ttf"; sourceTree = "<group>"; };
+		CC9D81A61D24FD5B002C5A4C /* OpenSans-Bold-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold-webfont.ttf"; sourceTree = "<group>"; };
 		CCA7E1941CEAFD6000EFEF04 /* ShowMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowMessage.h; sourceTree = "<group>"; };
 		CCA7E1951CEAFD6000EFEF04 /* ShowMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowMessage.m; sourceTree = "<group>"; };
 		CCA7E1A51CEAFDFD00EFEF04 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
@@ -424,7 +442,16 @@
 				CC0BD8311D018E100071A5B8 /* MyriadPro-Regular.otf */,
 				CC0BD8321D018E100071A5B8 /* MyriadPro-Semibold.otf */,
 				CC0BD8331D018E100071A5B8 /* MyriadPro-SemiboldIt.otf */,
-				CC0BD82D1D018C9D0071A5B8 /* OpenSans-Bold-webfont.ttf */,
+				CC9D81A61D24FD5B002C5A4C /* OpenSans-Bold-webfont.ttf */,
+				CC9D81941D24FD50002C5A4C /* OpenSans-BoldItalic-webfont.ttf */,
+				CC9D81951D24FD50002C5A4C /* OpenSans-ExtraBold-webfont.ttf */,
+				CC9D81961D24FD50002C5A4C /* OpenSans-ExtraBoldItalic-webfont.ttf */,
+				CC9D81971D24FD50002C5A4C /* OpenSans-Italic-webfont.ttf */,
+				CC9D81981D24FD50002C5A4C /* OpenSans-Light-webfont.ttf */,
+				CC9D81991D24FD50002C5A4C /* OpenSans-LightItalic-webfont.ttf */,
+				CC9D819A1D24FD50002C5A4C /* OpenSans-Regular-webfont.ttf */,
+				CC9D819B1D24FD50002C5A4C /* OpenSans-Semibold-webfont.ttf */,
+				CC9D819C1D24FD50002C5A4C /* OpenSans-SemiboldItalic-webfont.ttf */,
 				13B07FAE1A68108700A75B9A /* ReduxTest */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* ReduxTestTests */,
@@ -807,16 +834,25 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC9D81A31D24FD50002C5A4C /* OpenSans-Regular-webfont.ttf in Resources */,
+				CC9D81A11D24FD50002C5A4C /* OpenSans-Light-webfont.ttf in Resources */,
+				CC9D81A51D24FD50002C5A4C /* OpenSans-SemiboldItalic-webfont.ttf in Resources */,
 				CC0BD8361D018E100071A5B8 /* MyriadPro-Regular.otf in Resources */,
 				CC0BD8351D018E100071A5B8 /* MyriadPro-BoldIt.otf in Resources */,
+				CC9D819D1D24FD50002C5A4C /* OpenSans-BoldItalic-webfont.ttf in Resources */,
 				CC0BD8371D018E100071A5B8 /* MyriadPro-Semibold.otf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				CC9D819F1D24FD50002C5A4C /* OpenSans-ExtraBoldItalic-webfont.ttf in Resources */,
+				CC9D81A01D24FD50002C5A4C /* OpenSans-Italic-webfont.ttf in Resources */,
 				CCCFEF581D0967B600B79A10 /* assets in Resources */,
+				CC9D81A21D24FD50002C5A4C /* OpenSans-LightItalic-webfont.ttf in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				CCCFEF591D0967B600B79A10 /* index.ios.jsbundle in Resources */,
 				CC0BD8341D018E100071A5B8 /* MyriadPro-Bold.otf in Resources */,
-				CC0BD82E1D018C9D0071A5B8 /* OpenSans-Bold-webfont.ttf in Resources */,
+				CC9D81A41D24FD50002C5A4C /* OpenSans-Semibold-webfont.ttf in Resources */,
+				CC9D819E1D24FD50002C5A4C /* OpenSans-ExtraBold-webfont.ttf in Resources */,
 				CC0BD8381D018E100071A5B8 /* MyriadPro-SemiboldIt.otf in Resources */,
+				CC9D81A71D24FD5B002C5A4C /* OpenSans-Bold-webfont.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
