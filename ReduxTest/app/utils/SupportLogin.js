@@ -19,8 +19,8 @@ var password;
 
 export function Initialization() {
     const options = { transports: ['websocket'], forceNew: true };
-    // const socket = io('http://50.18.208.72:30030', options);
-    const socket = io('http://192.168.31.221:3030', options);
+    const socket = io('http://50.18.208.72:30030', options);
+    // const socket = io('http://192.168.31.221:3030', options);
 
     app = feathers()
         .configure(socketio(socket))
@@ -53,12 +53,12 @@ export function LoginNow(value, navigator) {
             email: call.IP,
             password: call.IP
         }).then(response => {
-            Pop("用户登录成功");
+            Pop("User login success");
             navigator.push({
                 name: value, value: value, nav: navigator, app: app, ip: call.IP
             });
         }).catch(error => {
-            Pop("登录失败，现在进行用户注册");
+            Pop("Login failed, now user register");
             // Pop(error);
             console.log('ERROR-1', error);
             register(value, navigator, call);
@@ -78,18 +78,18 @@ function register(value, navigator, call) {
             email: call.IP,
             password: call.IP
         }).then(response => {
-            Pop("用户注册成功");
+            Pop("User registration success");
             navigator.push({
                 name: value, value: value, nav: navigator, app: app, ip: call.IP
             });
             // re-route to main authorized chat   component
         }).catch(error => {
-            Pop("自动注册失败");
+            Pop("Automatic registration failure");
             // Pop(error);
             console.log('ERROR-2', error);
         });
     }).catch((err) => {
-            Pop("自动注册失败");
+            Pop("Automatic registration failure");
         // Pop(err);
         console.log('ERROR-3', err);
     });
