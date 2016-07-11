@@ -19,6 +19,7 @@ import { AppRegistry,
 import {Common} from "./common";
 import isAndroid from '../utils/isAndroid.js';
 import Swiper from "react-native-swiper";
+import{IntroduceWelcome} from "./introduce.welcome"
 var {height, width} = Dimensions.get('window');
 
 const propTypes = {
@@ -32,10 +33,10 @@ export class Introduce extends Component {
         return (
             <View>
                 <Swiper style={styles.wrapper}
-                    dot={<View style={{ backgroundColor: '#46BCBE', width: 60, height: 6, borderRadius: 3, marginLeft: 4, marginRight: 4, }} />}
-                    activeDot={<View style={{ backgroundColor: '#21797D', width: 60, height: 6, borderRadius: 3, marginLeft: 4, marginRight: 4 }} />}
+                    dot={<View style={{ backgroundColor: '#46BCBE', width: 50, height: 4, borderRadius: 3, marginLeft: 3, marginRight: 3, }} />}
+                    activeDot={<View style={{ backgroundColor: '#21797D', width: 50, height: 4, borderRadius: 3, marginLeft: 3, marginRight: 3 }} />}
                     paginationStyle={{
-                        bottom: 30,
+                        bottom: 46,
                     }}
                     loop={false}
                     onMomentumScrollEnd={this._onMomentumScrollEnd.bind(this) }>
@@ -48,6 +49,9 @@ export class Introduce extends Component {
                     <View style={styles.slide}>
                         <Image style={styles.image} source={require("../img/glood_3.jpg") } />
                     </View>
+                    <View style={styles.slide}>
+                        <Image style={styles.image} source={require("../img/glood_4.jpg") } />
+                    </View>
                 </Swiper>
             </View>
         );
@@ -59,7 +63,7 @@ export class Introduce extends Component {
         // } else {
         //     AlertIOS.alert(state.index + "");
         // }
-        if (state.index === 2) {
+        if (state.index === 3) {
             setTimeout(() => {
                 this.props.navigator.replace({
                     name: "Login", value: "Login", nav: navigator
