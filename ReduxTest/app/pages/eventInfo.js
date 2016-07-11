@@ -292,7 +292,7 @@ constructor(props) {
     }
 
   _jumpEventChat(value, navigator) {
-    Pop("登录中，请稍后....");
+    Pop("Log in, please...");
        this.setState(
            {
                         bottom_view_image_width: 1,
