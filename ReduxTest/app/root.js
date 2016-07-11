@@ -10,6 +10,8 @@ import {NewCamera} from "../app/pages/newcamera"
 import {NewMic} from "../app/pages/newMic"
 import {Try} from "../app/pages/try"
 import {Tickets} from "../app/pages/tickets"
+import {Setting} from "../app/pages/setting"
+import {Feedback} from "../app/pages/feedback"
 import {Login} from "../app/pages/login"
 import {DrawerMe} from '../app/pages/drawer/drawer';
 import {Introduce} from "../app/pages/introduce"
@@ -32,13 +34,17 @@ export class Root extends Component {
             case "Introduce":
                 component = Introduce;
                 return (<Introduce navigator={navigator}/>);
-            // component = EventInfo;
-            // return (<EventInfo navigator={navigator}/>);
+            // component = Feedback;
+            // return (<Feedback navigator={navigator}/>);
             case "Login":
                 component = Login;
                 return (<Login navigator={navigator}/>);
             case "TICKETS":
                 return (<Tickets navigator={router.nav}  title={'Tickets'}/>);
+            case "SETTING":
+                return (<Setting navigator={router.nav}  title={'Setting'}/>);
+            case "FEEDBACK":
+                return (<Feedback navigator={router.nav}  title={'Feedback'}/>);
             case "EVENTINFO":
                 return (<EventInfo navigator={router.nav}  title={'EventInfo'}/>);
             case "MIC":
