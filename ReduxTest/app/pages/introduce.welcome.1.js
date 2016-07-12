@@ -43,7 +43,7 @@ export class IntroduceWelcomeButton extends Component {
                         backgroundColor: 'transparent',
                         fontSize: fontSizeAndroid(40),
                         color: "#FFFFFF",
-                        fontFamily: "OpenSans-Light",
+                        fontFamily: "ProximaNova-Light",
                         fontWeight: "normal",
                         marginLeft: 36,
                         alignItems: 'center',
@@ -79,8 +79,7 @@ var styles = StyleSheet.create({
         fontSize: fontSizeAndroid(54),
         color: "#103C4D",
         marginTop: 90,
-        fontFamily: "OpenSans-Light",
-        fontWeight: "normal",
+        fontFamily: "ProximaNova-Light",
         marginLeft: 30,
         lineHeight: 72
     },

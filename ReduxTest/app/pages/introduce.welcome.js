@@ -53,8 +53,7 @@ var styles = StyleSheet.create({
         fontSize: fontSizeAndroid(54),
         color: "#103C4D",
         marginTop: 90,
-        fontFamily: "OpenSans-Light",
-        fontWeight: "normal",
+        fontFamily: "ProximaNova-Light",
         marginLeft: 30,
         lineHeight: 72
     },
