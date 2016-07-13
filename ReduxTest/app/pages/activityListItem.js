@@ -16,6 +16,8 @@ import { AppRegistry,
     DeviceEventEmitter }  from 'react-native';
 import {Common} from "./common";
 import isAndroid from '../utils/isAndroid.js';
+import {fontSizeAndroid} from "../utils/CommonUtils.js";
+
 var {height, width} = Dimensions.get('window');
 
 const propTypes = {
@@ -23,7 +25,8 @@ const propTypes = {
         user: React.PropTypes.number,
         total: React.PropTypes.number,
         eventName: React.PropTypes.string,
-        id: React.PropTypes.number
+        id: React.PropTypes.number,
+        image: React.PropTypes.string
     }),
     rowID: PropTypes.number,
     navigator: PropTypes.object
@@ -32,6 +35,12 @@ const propTypes = {
  * 活动列表
  */
 export class ActivityListItem extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            IMG: { uri: props.date.image }
+        }
+    }
     render() {
         return (
             <TouchableOpacity style={{
@@ -40,7 +49,7 @@ export class ActivityListItem extends Component {
                 width: width,
                 height: 60,
                 borderBottomWidth: 1,
-                borderBottomColor: '#12BFBB'
+                borderBottomColor: '#00000010'
             }}
                 onPress={this._handerClick.bind(this, this.props.date.eventName, this.props.navigator) }>
                 <View style={{
@@ -48,19 +57,19 @@ export class ActivityListItem extends Component {
                     flexDirection: 'row',
                     alignItems: 'center'
                 }}>
+                    <Image style={{
+                        height: 60,
+                        width: 120
+                    }} source={this.state.IMG}/>
                     <Text style={{
-                        fontSize: width*(18/414),
+                        fontSize: fontSizeAndroid(18),
                         color: "#070909",
-                        fontWeight: "bold",
-                        marginLeft: 16,
-                        backgroundColor:'#00000000'
-                    }}>{this.props.date.use}/{this.props.date.total}</Text>
-                    <Text style={{
-                        fontSize: width*(18/414),
-                        color: "#070909",
-                        marginLeft: 8,
-                        backgroundColor:'#00000000'
-                    }}>{this.props.date.eventName}</Text>
+                        marginLeft: 18,
+                        backgroundColor: '#00000000',
+                        fontFamily: "ProximaNova-Light",
+                        width: width - 120 - (width / 7)
+                    }}
+                        numberOfLines={1}>{this.props.date.eventName}</Text>
                 </View>
                 <View style={{
                     flex: 1,
@@ -69,7 +78,7 @@ export class ActivityListItem extends Component {
                     justifyContent: 'center',
                 }}>
                     <View style={{
-                        backgroundColor: "red",
+                        backgroundColor: "#ed145b",
                         width: 12,
                         height: 12,
                         borderRadius: 6,

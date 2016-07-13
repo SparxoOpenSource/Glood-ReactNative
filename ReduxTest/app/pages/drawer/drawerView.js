@@ -17,6 +17,8 @@ import { AppRegistry,
     DeviceEventEmitter }  from 'react-native';
 import isAndroid from '../../utils/isAndroid.js';
 import {EventListener} from "../../listener/EventListener";
+import {fontSizeAndroid} from "../../utils/CommonUtils.js";
+
 var {height, width} = Dimensions.get('window');
 
 const propTypes = {
@@ -41,24 +43,27 @@ export class DrawerView extends Component {
                     <TouchableOpacity style={{
                         flexDirection: 'row',
                         marginTop: 30,
-                        marginLeft: 30
+                        marginLeft: 30,
+                        alignItems: 'center',
                     }}
                         onPress={this.operation.bind(this, "Mingle") }>
                         <Image source={require("../../img/mingle.png") } style={{
                             width: 26,
-                            height: 30
+                            height: 31
                         }}/>
                         <Text style={{
-                            fontSize: 18,
+                            fontSize: fontSizeAndroid(18),
                             color: "#333333",
                             marginLeft: 20,
-                            backgroundColor: '#00000000'
+                            backgroundColor: '#00000000',
+                            fontFamily: "ProximaNova-Light",
                         }}>Mingle</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={{
                         flexDirection: 'row',
                         marginTop: 30,
-                        marginLeft: 30
+                        marginLeft: 30,
+                        alignItems: 'center',
                     }}
                         onPress={this.operation.bind(this, "Tickets") }>
                         <Image source={require("../../img/tickets.png") } style={{
@@ -66,16 +71,18 @@ export class DrawerView extends Component {
                             height: 26
                         }}/>
                         <Text style={{
-                            fontSize: 18,
+                            fontSize: fontSizeAndroid(18),
                             color: "#333333",
                             marginLeft: 20,
-                            backgroundColor: '#00000000'
+                            backgroundColor: '#00000000',
+                            fontFamily: "ProximaNova-Light",
                         }}>Tickets</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={{
                         flexDirection: 'row',
                         marginTop: 30,
-                        marginLeft: 30
+                        marginLeft: 30,
+                        alignItems: 'center',
                     }}
                         onPress={this.operation.bind(this, "Setting") }>
                         <Image source={require("../../img/setting.png") } style={{
@@ -83,16 +90,19 @@ export class DrawerView extends Component {
                             height: 26
                         }}/>
                         <Text style={{
-                            fontSize: 18,
+                            fontSize: fontSizeAndroid(18),
                             color: "#333333",
                             marginLeft: 20,
-                            backgroundColor: '#00000000'
+                            backgroundColor: '#00000000',
+                            justifyContent: 'center',
+                            fontFamily: "ProximaNova-Light",
                         }}>Setting</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={{
                         flexDirection: 'row',
                         marginTop: 30,
-                        marginLeft: 30
+                        marginLeft: 30,
+                        alignItems: 'center',
                     }}
                         onPress={this.operation.bind(this, "FeedBack") }>
                         <Image source={require("../../img/feedback.png") } style={{
@@ -100,10 +110,11 @@ export class DrawerView extends Component {
                             height: 24
                         }}/>
                         <Text style={{
-                            fontSize: 18,
+                            fontSize: fontSizeAndroid(18),
                             color: "#333333",
                             marginLeft: 20,
-                            backgroundColor: '#00000000'
+                            backgroundColor: '#00000000',
+                            fontFamily: "ProximaNova-Light",
                         }}>FeedBack</Text>
                     </TouchableOpacity>
                 </View>
@@ -113,8 +124,8 @@ export class DrawerView extends Component {
                 }}
                     onPress={this.closeDrawer.bind(this) }>
                     <Image style={{
-                        width: 6,
-                        height: 31,
+                        width: 7,
+                        height: 30,
                         position: 'absolute',
                         marginLeft: 16,
                         marginTop: 10

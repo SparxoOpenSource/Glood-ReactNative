@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import { AppRegistry, StyleSheet, View, Text, ListView, Alert, ScrollView, TouchableOpacity, Image, NativeModules, PropTypes, Platform }  from 'react-native';
 import isAndroid from '../utils/isAndroid.js';
 import {EventListener} from "../listener/EventListener";
+import {fontSizeAndroid} from "../utils/CommonUtils.js";
 
 var _navigator;
 var _title = "我是导航";
@@ -62,10 +63,10 @@ const styles = StyleSheet.create({
     },
     ImagStyle: {
         width: 26,
-        height: 26,
+        height: 23,
     },
     TextStyle: {
-        fontSize: 26,
+        fontSize: fontSizeAndroid(26),
         color: 'black',
         fontFamily: 'Myriad Pro',
         backgroundColor: '#00000000',

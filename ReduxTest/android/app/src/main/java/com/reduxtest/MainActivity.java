@@ -1,11 +1,11 @@
 package com.reduxtest;
 
-import android.widget.Toast;
-
+import com.eguma.barcodescanner.BarcodeScannerPackage;
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.imagepicker.ImagePickerPackage;
+import com.lwansbrough.RCTCamera.RCTCameraPackage;
 import com.reduxtest.actions.RecordAudioPackage;
 
 import java.util.Arrays;
@@ -40,7 +40,9 @@ public class MainActivity extends ReactActivity {
         return Arrays.<ReactPackage>asList(
                 new MainReactPackage(),
                 new RecordAudioPackage(),
-                new ImagePickerPackage()
+                new ImagePickerPackage(),
+                new RCTCameraPackage(),
+                new BarcodeScannerPackage()
         );
     }
 }
