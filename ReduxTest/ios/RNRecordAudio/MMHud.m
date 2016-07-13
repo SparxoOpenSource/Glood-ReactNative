@@ -30,8 +30,8 @@ CGFloat    const MMProgressHUDAnimateOutDurationShort   = 0.35f;
 CGSize const MMProgressHUDDefaultContentAreaSize = { 100.f, 100.f };
 CGSize const MMProgressHUDProgressContentAreaSize = { 40.f, 40.f };
 
-NSString * const MMProgressHUDFontNameBold = @"MyriadPro-Bold";
-NSString * const MMProgressHUDFontNameNormal = @"MyriadPro-Regular";
+NSString * const MMProgressHUDFontNameBold = @"ProximaNova-Semibold";
+NSString * const MMProgressHUDFontNameNormal = @"ProximaNova-Light";
 
 #ifdef DEBUG
     #ifdef MM_HUD_FRAME_DEBUG

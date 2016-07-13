@@ -110,10 +110,11 @@ constructor(props) {
     render() {
         return (
             <Image source={require('../img/background3.png') } style={styles.background} >
-                <Common navigator={this.props.navigator} title={"Crazy May Fest 2017"} rightType="Down"/>
-                <Image style={{width:widthh,height:heightt*(200/736)}} source={require('../img/event_background.jpg')}/>
-                <Text style={{backgroundColor:'#00000000',color: 'black', fontSize: heightt * (25 / 736), width: widthh * (250 / 414), 
-                fontFamily: 'MyriadPro-Semibold',marginLeft:(widthh-(widthh * (250 / 414)))/2,marginTop:heightt*(20/736)}}>Can't wait to see you at Crazy May 2016!</Text>
+                <Common navigator={this.props.navigator} title={"Crazy May Fest 2017"} page='Main' rightType="Down"/>
+                <Image style={{width:widthh,height:heightt*(200/736),marginTop:heightt*(13/736)}} source={require('../img/event_background.jpg')}/>
+                <Text style={{backgroundColor:'#00000000',color: 'black', fontSize: heightt * (23 / 736), width: widthh * (250 / 414), 
+                fontFamily: 'ProximaNova-Semibold',marginLeft:(widthh-(widthh * (240 / 414)))/2,marginTop:heightt*(17/736),
+            lineHeight:25}}>{"Can't wait to see you at \n      Crazy May 2016!"}</Text>
                 <View style={ { justifyContent: 'center', alignItems: 'center' }}>
                 <View style={{
                     height: 90 + maxSize,
@@ -125,7 +126,7 @@ constructor(props) {
                         height: this.state.viewHeight_1,
                         borderWidth: 0,
                         borderRadius: this.state.viewRadius_1,
-                        backgroundColor: "green",
+                        backgroundColor: "white",
                         opacity: this.state.viewOpacity_1,
                         justifyContent: 'center',
                         alignItems: 'center',
@@ -139,7 +140,7 @@ constructor(props) {
                         height: this.state.viewHeight_2,
                         borderWidth: 0,
                         borderRadius: this.state.viewRadius_2,
-                        backgroundColor: "green",
+                        backgroundColor: "white",
                         opacity: this.state.viewOpacity_2,
                         justifyContent: 'center',
                         alignItems: 'center',
@@ -168,11 +169,11 @@ constructor(props) {
                     </TouchableOpacity>
                 </View>
               </View>
-                <Text style={{backgroundColor:'#00000000',color: 'black', fontSize: heightt * (25 / 736), width: widthh * (95 / 414), 
-                fontFamily: 'MyriadPro-Regular',marginLeft:(widthh-(widthh * (95 / 414)))/2,marginTop:heightt*(bottom_text_name_height/736)}}>Christina</Text>
-                <Text style={{backgroundColor:'#00000000',color: 'black', fontSize: heightt * (25 / 736), width: widthh * (230 / 414), 
-                fontFamily: 'MyriadPro-Regular',marginLeft:(widthh-(widthh * (230 / 414)))/2,marginTop:heightt*(5/736)}}>Founder of Crazy Fest</Text>
-               <View style={{width:widthh,height:25,marginTop:height*(45/736),backgroundColor:'#00000030'}}>
+                <Text style={{backgroundColor:'#00000000',color: 'black', fontSize: heightt * (19 / 736), width: widthh * (95 / 414), 
+                fontFamily: 'ProximaNova-Regular',marginLeft:(widthh-(widthh * (70 / 414)))/2,marginTop:heightt*(bottom_text_name_height/736)}}>Christina</Text>
+                <Text style={{backgroundColor:'#00000000',color: 'black', fontSize: heightt * (19 / 736), width: widthh * (230 / 414), 
+                fontFamily: 'ProximaNova-Regular',marginLeft:(widthh-(widthh * (180 / 414)))/2,marginTop:heightt*(5/736)}}>Founder of Crazy Fest</Text>
+               <View style={{width:widthh,height:25,marginTop:height*(55/736),backgroundColor:'#00000030'}}>
                   <Image source={require('../img/event_background_bottom.png')} style={{width:this.state.bottom_view_image_width,height:25}}/>
                </View>
             </Image>
@@ -338,7 +339,7 @@ touch: {
         borderRadius: 45,
         position: "absolute",
         alignItems: 'center',
-        backgroundColor: "green"
+        backgroundColor: "white"
     },
     img2: {
         borderWidth: 0,
@@ -352,7 +353,7 @@ touch: {
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: 10,
-        fontFamily: 'MyriadPro-SemiboldIt',
+        fontFamily: 'ProximaNova-Semibold',
     },
     background: {
         width: width,

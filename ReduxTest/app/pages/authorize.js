@@ -33,7 +33,7 @@ export class Authorize extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            email_margin_top: heightt * (52 / 736),
+            email_margin_top: heightt * (60 / 736),
             password_margin_top: heightt * (45 / 736),
             emailTrans: new Animated.ValueXY({
                 x: 0,
@@ -54,21 +54,21 @@ export class Authorize extends Component {
             <Image style={style.container} source={require('../img/background3.png') }>
                 <Common navigator={this.props.navigator}/>
                 <Animated.View style={[style.feedbackView, { transform: this.state.backViewTrans.getTranslateTransform() }]}>
-                    <Image style={{ width: widthh * (100 / 414), height: heightt * (100 / 736), marginLeft: (widthh - (widthh * (100 / 414))) / 2, marginTop: heightt * (41 / 736) }}
+                    <Image style={{ width: widthh * (100 / 414), height: heightt * (110 / 736), marginLeft: (widthh - (widthh * (100 / 414))) / 2, marginTop: heightt * (41 / 736) }}
                         source={require('../img/logo2.png') }/>
                     <Text style={{
-                        backgroundColor: '#00000000', color: "#606060", fontSize: widthh * (22 / 414), fontFamily: 'OpenSans',
-                        marginTop: heightt * (45 / 736), marginLeft: widthh * (60 / 414)
+                        backgroundColor: '#00000000', color: "#606060", fontSize: widthh * (23 / 414), fontFamily: 'ProximaNova-Regular',
+                        marginTop: heightt * (45 / 736), marginLeft: widthh * (60 / 414),lineHeight:22,
                     }}>{"The application glood has \nrequested permission to:"}</Text>
                     <Text style={{
-                        backgroundColor: '#00000000', color: "#606060", fontSize: widthh * (22 / 414), fontFamily: 'OpenSans',
-                        marginTop: heightt * (25 / 736), marginLeft: widthh * (60 / 414)
-                    }}>{"· Confirm your Sparxo identity \n· Sparxo event list"}</Text>
+                        backgroundColor: '#00000000', color: "#606060", fontSize: widthh * (23 / 414), fontFamily: 'ProximaNova-Regular',
+                        marginTop: heightt * (30 / 736), marginLeft: widthh * (60 / 414),lineHeight:22,
+                    }}>{"• Confirm your Sparxo identity \n• Sparxo event list"}</Text>
                     <Animated.Text style={[{
                         backgroundColor: '#00000000',
                         color: '#606060',
                         fontSize: heightt * (23 / 736),
-                        fontFamily: 'OpenSans',
+                        fontFamily: 'ProximaNova-Regular',
                         marginLeft: widthh * (60 / 414),
                         marginTop: this.state.email_margin_top
                     }, { transform: this.state.emailTrans.getTranslateTransform() }]}>email</Animated.Text>
@@ -89,7 +89,7 @@ export class Authorize extends Component {
                     </View>
                     <Animated.Text style={[{
                         backgroundColor: '#00000000',
-                        color: '#606060', fontSize: heightt * (23 / 736), fontFamily: 'OpenSans', marginTop: this.state.password_margin_top,
+                        color: '#606060', fontSize: heightt * (23 / 736), fontFamily: 'ProximaNova-Regular', marginTop: this.state.password_margin_top,
                         marginLeft: widthh * (60 / 414)
                     }, { transform: this.state.passwordTrans.getTranslateTransform() }]}>password</Animated.Text>
                     <View style={{
@@ -110,17 +110,17 @@ export class Authorize extends Component {
                     </View>
                     <Text style={{
                         backgroundColor: '#00000000',
-                        color: '#7e7e7e', fontSize: heightt * (16 / 736), fontFamily: 'OpenSans', marginTop: heightt * (10 / 736),
+                        color: '#7e7e7e', fontSize: heightt * (16 / 736), fontFamily: 'ProximaNova-Regular', marginTop: heightt * (20 / 736),
                         marginLeft: widthh * (240 / 414)
                     }}>forgot password?</Text>
                     <TouchableOpacity style={{
-                        flexDirection: 'row', backgroundColor: '#53aeee', width: widthh, height: heightt * (70 / 736),
-                        marginTop: heightt * ((736 - 70 - 27 - 25 - 60 - 30 - 60 - 400) / 736)
+                        flexDirection: 'row', backgroundColor: '#53aeee', width: widthh, height: heightt * (80 / 736),
+                        marginTop: isAndroid() ?heightt * ((736 - 70 - 25  - 60 - 40 - 60 - 400) / 736):heightt * ((736 - 70 - 40  - 60 - 40 - 60 - 400) / 736)
                     }}
                         onPress={this._authorize.bind(this) }>
                         <Text style={{
                             backgroundColor: '#00000000',
-                            color: 'white', fontSize: heightt * (31 / 736), width: widthh * (150 / 414), fontFamily: 'OpenSans-Bold', marginTop: heightt * ((70 - 50) / 736) / 2,
+                            color: 'white', fontSize: heightt * (33 / 736), width: widthh * (150 / 414), fontFamily: 'ProximaNova-Bold', marginTop: heightt * ((80 - 50) / 736) / 2,
                             marginLeft: (widthh - (widthh * (130 / 414))) / 2
                         }}>authorize</Text>
                     </TouchableOpacity>
@@ -199,7 +199,7 @@ export class Authorize extends Component {
         //失去焦点
         switch (label) {
             case "email":
-                if (emailTextInput == null) {
+                if (emailTextInput == null || emailTextInput == '') {
                     Animated.timing(this.state.emailTrans, {
                         toValue: {
                             x: 0,
@@ -211,7 +211,7 @@ export class Authorize extends Component {
                 }
                 break;
             case "password":
-                if (passwordTextInput == null) {
+                if (passwordTextInput == null || passwordTextInput == '') {
                     Animated.timing(this.state.passwordTrans, {
                         toValue: {
                             x: 0,

@@ -37,39 +37,41 @@ export class Setting extends Component {
         return (
             <Image style={style.container} source={require('../img/background3.png') }>
                 <Common navigator={this.props.navigator} title={this.props.title}/>
-                <View style={{ width: widthh, height: heightt, backgroundColor: '#00000000', marginTop: heightt * (35 / 736) }}>
+                <View style={{ width: widthh, height: heightt, backgroundColor: '#00000000', marginTop: heightt * (35 / 736),overflow:'visible' }}>
                     <Text style={{
-                        color: 'black', fontSize: heightt * (27 / 736), width: widthh * (300 / 414), fontFamily: 'OpenSans',
-                        marginLeft: widthh * (30 / 414)
+                        color: 'black', fontSize: heightt * (29 / 736), width: widthh * (300 / 414), fontFamily: 'ProximaNova-Regular',
+                        marginLeft: widthh * (30 / 414),overflow:'visible'
                     }}>Conversation Notification</Text>
-                    <View style={{marginTop:heightt*(-32/736),marginLeft:widthh*(330/414)}}>
-                        <Switch style={{backgroundColor:"#00000000"}}
-                        buttonRadius={14} switchHeight={17} switchWidth={45} 
-                        activeBackgroundColor='rgba(12, 212, 196, 0.50)'
-                        inactiveBackgroundColor='rgba(172, 172, 172, 0.70)'
-                        activeButtonColor='rgba(12, 212, 196, 1)'
-                        inactiveButtonPressedColor='rgba(254, 255, 255, 1)'
-                        onChangeState={(state) => alert('change state '+ state)}/>
+                    <View style={{ marginTop: heightt * (-32 / 736), marginLeft: widthh * (330 / 414),overflow:'visible' }}>
+                        <Switch style={{ backgroundColor: "#00000000",overflow:'visible' }}
+                            buttonRadius={14} switchHeight={17} switchWidth={45}
+                            activeBackgroundColor='rgba(12, 212, 196, 0.50)'
+                            inactiveBackgroundColor='rgba(172, 172, 172, 0.70)'
+                            activeButtonColor='rgba(12, 212, 196, 1)'
+                            inactiveButtonPressedColor='rgba(254, 255, 255, 1)'
+                            onChangeState={(state) => alert('change state ' + state) }/>
                     </View>
                     <Text style={{
-                        color: 'black', fontSize: heightt * (27 / 736), width: widthh * (300 / 414), fontFamily: 'OpenSans',
-                        marginLeft: widthh * (30 / 414), marginTop: heightt * (60 / 736)
+                        color: 'black', fontSize: heightt * (29 / 736), width: widthh * (300 / 414), fontFamily: 'ProximaNova-Regular',
+                        marginLeft: widthh * (30 / 414), marginTop: heightt * (60 / 736),overflow:'visible'
                     }}>Event Organizer</Text>
-                    <View style={{marginTop:heightt*(-32/736),marginLeft:widthh*(330/414)}}>
-                        <Switch style={{backgroundColor:"#00000000"}}
-                        buttonRadius={14} switchHeight={17} switchWidth={45} 
-                        activeBackgroundColor='rgba(12, 212, 196, 0.50)'
-                        inactiveBackgroundColor='rgba(172, 172, 172, 0.70)'
-                        activeButtonColor='rgba(12, 212, 196, 1)'
-                        inactiveButtonPressedColor='rgba(254, 255, 255, 1)'
-                        onChangeState={(state) => alert('change state '+ state)}/>
+                    <View style={{ marginTop: heightt * (-32 / 736), marginLeft: widthh * (330 / 414),overflow:'visible' }}>
+                        <Switch style={{ backgroundColor: "#00000000",overflow:'visible' }}
+                            buttonRadius={14} switchHeight={17} switchWidth={45}
+                            activeBackgroundColor='rgba(12, 212, 196, 0.50)'
+                            inactiveBackgroundColor='rgba(172, 172, 172, 0.70)'
+                            activeButtonColor='rgba(12, 212, 196, 1)'
+                            inactiveButtonPressedColor='rgba(254, 255, 255, 1)'
+                            onChangeState={(state) => this._eventOran(state) }/>
                     </View>
-                    <TouchableOpacity style={{ flexDirection: 'row', backgroundColor: '#53aeee', width: widthh, height: heightt * (70 / 736), 
-                    marginTop: heightt * ((736-70-27-27-60-20-17) / 736) }}
+                    <TouchableOpacity style={{
+                        flexDirection: 'row', backgroundColor: '#53aeee', width: widthh, height: heightt * (70 / 736),
+                        marginTop: isAndroid() ? heightt * ((736 - 70 - 29  - 60 - 10 - 25) / 736) :heightt * ((736 - 70 - 29  - 60 - 20 - 25) / 736)
+                    }}
                         onPress={this._logout.bind(this) }>
                         <Text style={{
                             backgroundColor: '#00000000',
-                            color: 'white', fontSize: heightt * (32 / 736), width: widthh * (110 / 414), fontFamily: 'OpenSans-Bold', marginTop: heightt * ((70 - 50) / 736) / 2,
+                            color: 'white', fontSize: heightt * (35 / 736), width: widthh * (110 / 414), fontFamily: 'ProximaNova-Bold', marginTop: heightt * ((75 - 50) / 736) / 2,
                             marginLeft: (widthh - (widthh * (80 / 414))) / 2
                         }}>logout</Text>
                     </TouchableOpacity>
@@ -77,6 +79,14 @@ export class Setting extends Component {
             </Image>
         );
     }
+    _eventOran(state) {
+        if (state == true) {
+            this.props.navigator.push({
+                name: "Authorize", value: "Authorize", nav: this.props.navigator
+            });
+        }
+    }
+
     _logout() {
 
     }

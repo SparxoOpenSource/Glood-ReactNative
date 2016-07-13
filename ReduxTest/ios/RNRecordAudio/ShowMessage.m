@@ -32,7 +32,7 @@
     label.textColor = [UIColor whiteColor];
     label.textAlignment = 1;
     label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont fontWithName:@"MyriadPro-Bold" size:14.f];
+    label.font = [UIFont fontWithName:@"ProximaNova-Semibold" size:14.f];
     [showview addSubview:label];
     showview.frame = CGRectMake((SCREEN_WIDTH - LabelSize.width - 20)/2, SCREEN_HEIGHT - 100, LabelSize.width+20, LabelSize.height+10);
     [UIView animateWithDuration:2 animations:^{
@@ -49,7 +49,7 @@
     hud.margin = 8.f;
     //    hud.yOffset = SCREEN_HEIGHT/2-70;
     hud.removeFromSuperViewOnHide = YES;
-    hud.labelFont =[UIFont fontWithName:@"MyriadPro-Bold" size:14.f];
+    hud.labelFont =[UIFont fontWithName:@"ProximaNova-Semibold" size:14.f];
     [hud hide:YES afterDelay:2];
 }
 +(void)showLastPageMessage:(UIView *) view isHaveFooter:(Boolean) have{
@@ -66,7 +66,7 @@
         hud.yOffset = SCREEN_HEIGHT/2-25;
     }
     hud.removeFromSuperViewOnHide = YES;
-    hud.labelFont =[UIFont fontWithName:@"MyriadPro-Bold" size:12.f];
+    hud.labelFont =[UIFont fontWithName:@"ProximaNova-Semibold" size:12.f];
     [hud hide:YES afterDelay:2];
 }
 

@@ -69,6 +69,8 @@ export class Root extends Component {
                 return (<ActivityList navigator={navigator}  title={"数据列表"}/>);
             case "QrcodeReader":
                 return (<QrcodeReader navigator={router.nav}  title={"QR"}/>);
+            case "Authorize":
+                return (<Authorize navigator={router.nav}/>);
         }
 
     }

@@ -148,7 +148,7 @@ export class NewMicItem extends Component {
                         height: this.state.viewHeight_1,
                         borderWidth: 0,
                         borderRadius: this.state.viewRadius_1,
-                        backgroundColor: "green",
+                        backgroundColor: "white",
                         opacity: this.state.viewOpacity_1,
                         justifyContent: 'center',
                         alignItems: 'center',
@@ -162,7 +162,7 @@ export class NewMicItem extends Component {
                         height: this.state.viewHeight_2,
                         borderWidth: 0,
                         borderRadius: this.state.viewRadius_2,
-                        backgroundColor: "green",
+                        backgroundColor: "white",
                         opacity: this.state.viewOpacity_2,
                         justifyContent: 'center',
                         alignItems: 'center',
@@ -450,6 +450,6 @@ const style = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: 10,
-        fontFamily: 'MyriadPro-SemiboldIt',
+        fontFamily: 'ProximaNova-Semibold',
     }
 });
