@@ -94,9 +94,6 @@ var styles = StyleSheet.create({
     borderRadius: 4,
     width: width - 80,
     height: width - 80,
-    marginLeft: 40,
-    marginRight: 40,
-    marginTop: 66,
   },
 
   rectangleContainer: {
