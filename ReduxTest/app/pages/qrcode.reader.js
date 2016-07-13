@@ -20,7 +20,6 @@ import {fontSizeAndroid} from "../utils/CommonUtils.js";
 import {RecordAudio} from "../utils/RecordAudio";
 
 import {QRCodeScreen} from './QRCodeScreen';
-import BarcodeScanner from 'react-native-barcodescanner';
 
 var {height, width} = Dimensions.get('window');
 
@@ -65,21 +64,6 @@ export class QrcodeReader extends Component {
     }
 
     returnView() {
-        if (isAndroid()) {
-            return (
-                <BarcodeScanner style={{
-                    borderRadius: 4,
-                    width: width - 80,
-                    height: width - 80,
-                    marginLeft: 40,
-                    marginRight: 40,
-                    marginTop: 66,
-                }}
-                    onBarCodeRead={this.onBarCodeRead.bind(this) }
-                    torchMode={this.state.torchMode}
-                    cameraType={this.state.cameraType}/>
-            );
-        } else {
             return (
                 <QRCodeScreen style={{
                     borderRadius: 4,
@@ -94,6 +78,5 @@ export class QrcodeReader extends Component {
                     cameraType={this.state.cameraType}/>
             );
         }
-    }
 }
 QrcodeReader.propTypes = propTypes

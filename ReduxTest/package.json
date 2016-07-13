@@ -16,7 +16,6 @@
     "feathers-socketio": "^1.4.0",
     "react": "^0.14.8",
     "react-native": "^0.25.1",
-    "react-native-barcode-reader": "^1.0.0",
     "react-native-barcodescanner": "^3.0.0",
     "react-native-button": "^1.5.0",
     "react-native-camera": "git+https://github.com/lwansbrough/react-native-camera.git",
