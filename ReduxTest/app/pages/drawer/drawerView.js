@@ -140,26 +140,8 @@ export class DrawerView extends Component {
     }
     operation(name) {
         // EventListener.trigger("DrawerGo", name);
-        switch (name) {
-            case "Mingle":
-                break;
-            case "Tickets":
-                this.props.navigator.push({
-                    name: "TICKETS", value: "TICKETS", nav: this.props.navigator
-                });
-                break;
-            case "Setting":
-                this.props.navigator.push({
-                    name: "SETTING", value: "SETTING", nav: this.props.navigator
-                });
-                break;
-            case "FeedBack":
-                this.props.navigator.push({
-                    name: "FEEDBACK", value: "FEEDBACK", nav: this.props.navigator
-                });
-                break;
-        }
-        EventListener.trigger("Drawer", "Close");
+        EventListener.trigger("DrawerOpenPage", name);
+        this.props.page.closeDrawer();
     }
 }
 DrawerView.propTypes = propTypes;
