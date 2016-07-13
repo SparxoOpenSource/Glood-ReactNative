@@ -56,7 +56,7 @@ export class DrawerView extends Component {
                             color: "#333333",
                             marginLeft: 20,
                             backgroundColor: '#00000000',
-                            fontFamily: "ProximaNova-Light",
+                            fontFamily: "ProximaNova-Regular",
                         }}>Mingle</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={{
@@ -75,7 +75,7 @@ export class DrawerView extends Component {
                             color: "#333333",
                             marginLeft: 20,
                             backgroundColor: '#00000000',
-                            fontFamily: "ProximaNova-Light",
+                            fontFamily: "ProximaNova-Regular",
                         }}>Tickets</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={{
@@ -95,7 +95,7 @@ export class DrawerView extends Component {
                             marginLeft: 20,
                             backgroundColor: '#00000000',
                             justifyContent: 'center',
-                            fontFamily: "ProximaNova-Light",
+                            fontFamily: "ProximaNova-Regular",
                         }}>Setting</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={{
@@ -114,7 +114,7 @@ export class DrawerView extends Component {
                             color: "#333333",
                             marginLeft: 20,
                             backgroundColor: '#00000000',
-                            fontFamily: "ProximaNova-Light",
+                            fontFamily: "ProximaNova-Regular",
                         }}>FeedBack</Text>
                     </TouchableOpacity>
                 </View>
