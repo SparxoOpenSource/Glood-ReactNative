@@ -13,15 +13,21 @@ import { AppRegistry,
     PropTypes,
     Animated,
     Dimensions,
-    DeviceEventEmitter }  from 'react-native';
+    DeviceEventEmitter,
+    NativeModules}  from 'react-native';
 import {Common} from "./common";
 import isAndroid from '../utils/isAndroid.js';
 import {fontSizeAndroid} from "../utils/CommonUtils.js";
 import {RecordAudio} from "../utils/RecordAudio";
 
 import {QRCodeScreen} from './QRCodeScreen';
+import BarcodeScanner from 'react-native-barcodescanner';
+import {EventListener} from "../listener/EventListener";
+
+const Camera = NativeModules.RNBarcodeScannerView;
 
 var {height, width} = Dimensions.get('window');
+var temp = <Text style={{ fontSize: fontSizeAndroid(17), color: "#FFFFFF", fontFamily: "ProximaNova-Light" }}>Please wait...</Text>;
 
 const propTypes = {
     navigator: PropTypes.object,
@@ -32,9 +38,11 @@ export class QrcodeReader extends Component {
         super();
         this.state = {
             content: "You can join a community by scanning\nthe QR code from your tickets",
-            torchMode: 'on',
+            torchMode: 'off',
             cameraType: 'back',
+            view: temp
         }
+        this.returnView();
     }
     render() {
         return (
@@ -43,7 +51,21 @@ export class QrcodeReader extends Component {
                 <View style={{
                     flexDirection: "column",
                 }}>
-                    {this.returnView() }
+                    <View style={{
+                        borderRadius: 4,
+                        width: width - 80,
+                        height: width - 80,
+                        marginLeft: 40,
+                        marginRight: 40,
+                        marginTop: 66,
+                        backgroundColor: "#3E767350",
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                    }}>
+                        {
+                            this.state.view
+                        }
+                    </View>
                     <Text style={{
                         fontSize: fontSizeAndroid(17),
                         color: "#000000",
@@ -62,21 +84,44 @@ export class QrcodeReader extends Component {
     onBarCodeRead(result) {
         RecordAudio.prototype.recordMsg(result.data);
     }
-
-    returnView() {
-            return (
-                <QRCodeScreen style={{
-                    borderRadius: 4,
-                    width: width - 80,
-                    height: width - 80,
-                    marginLeft: 40,
-                    marginRight: 40,
-                    marginTop: 66,
-                }}
-                    onBarCodeRead={this.onBarCodeRead.bind(this) }
-                    torchMode={this.state.torchMode}
-                    cameraType={this.state.cameraType}/>
-            );
+    componentDidMount() {
+        if (isAndroid()) {
+            EventListener.on("RecordStop").then(this.stopCamera.bind(this));
         }
+    }
+    stopCamera() {
+        Camera.stopCamera();
+    }
+    returnView() {
+        setTimeout(() => {
+            if (isAndroid()) {
+                var View =
+                    <BarcodeScanner style={{
+                        borderRadius: 4,
+                        width: width - 80,
+                        height: width - 80,
+                    }}
+                        onBarCodeRead={this.onBarCodeRead.bind(this) }
+                        torchMode={this.state.torchMode}
+                        cameraType={this.state.cameraType}/>
+                this.setState(
+                    { view: View }
+                );
+            } else {
+                var View =
+                    <QRCodeScreen style={{
+                        borderRadius: 4,
+                        width: width - 80,
+                        height: width - 80,
+                    }}
+                        onBarCodeRead={this.onBarCodeRead.bind(this) }
+                        torchMode={this.state.torchMode}
+                        cameraType={this.state.cameraType}/>
+                this.setState(
+                    { view: View }
+                );
+            }
+        }, 500);
+    }
 }
 QrcodeReader.propTypes = propTypes
