@@ -16,6 +16,7 @@ import { AppRegistry,
     UIManager,
     Easing,
     TextInput,
+    Platform,
 }  from 'react-native';
 import {Common} from "./common";
 import isAndroid from '../utils/isAndroid.js';
@@ -58,11 +59,11 @@ export class Authorize extends Component {
                         source={require('../img/logo2.png') }/>
                     <Text style={{
                         backgroundColor: '#00000000', color: "#606060", fontSize: widthh * (23 / 414), fontFamily: 'ProximaNova-Regular',
-                        marginTop: heightt * (45 / 736), marginLeft: widthh * (60 / 414),lineHeight:22,
+                        marginTop: heightt * (45 / 736), marginLeft: widthh * (60 / 414), lineHeight: 22,
                     }}>{"The application glood has \nrequested permission to:"}</Text>
                     <Text style={{
                         backgroundColor: '#00000000', color: "#606060", fontSize: widthh * (23 / 414), fontFamily: 'ProximaNova-Regular',
-                        marginTop: heightt * (30 / 736), marginLeft: widthh * (60 / 414),lineHeight:22,
+                        marginTop: heightt * (30 / 736), marginLeft: widthh * (60 / 414), lineHeight: 22,
                     }}>{"• Confirm your Sparxo identity \n• Sparxo event list"}</Text>
                     <Animated.Text style={[{
                         backgroundColor: '#00000000',
@@ -115,7 +116,7 @@ export class Authorize extends Component {
                     }}>forgot password?</Text>
                     <TouchableOpacity style={{
                         flexDirection: 'row', backgroundColor: '#53aeee', width: widthh, height: heightt * (80 / 736),
-                        marginTop: isAndroid() ?heightt * ((736 - 70 - 25  - 60 - 40 - 60 - 400) / 736):heightt * ((736 - 70 - 40  - 60 - 40 - 60 - 400) / 736)
+                        marginTop: isAndroid() ? heightt * ((736 - 70 - 25 - 60 - 40 - 60 - 400) / 736) : heightt * ((736 - 70 - 40 - 60 - 40 - 60 - 400) / 736)
                     }}
                         onPress={this._authorize.bind(this) }>
                         <Text style={{
@@ -132,37 +133,39 @@ export class Authorize extends Component {
         Alert.alert('Authorize success');
     }
     _onFocus(label) {
-        //获得焦点
-        Animated.timing(this.state.backViewTrans, {
-            toValue: {
-                x: 0,
-                y: -heightt * (200 / 736)
-            },
-            duration: 200,
-            delay: 200
-        }).start();
-        switch (label) {
-            case "email":
-                Animated.timing(this.state.emailTrans, {
-                    toValue: {
-                        x: 0,
-                        y: -heightt * (25 / 736)
-                    },
-                    duration: 200,
-                    delay: 200
-                }).start();
-                break;
-            case "password":
-                Animated.timing(this.state.passwordTrans, {
-                    toValue: {
-                        x: 0,
-                        y: -heightt * (25 / 736)
-                    },
-                    duration: 200,
-                    delay: 200
-                }).start();
-                break;
+        if (Platform.OS === 'ios') {
+            Animated.timing(this.state.backViewTrans, {
+                toValue: {
+                    x: 0,
+                    y: -heightt * (200 / 736)
+                },
+                duration: 200,
+                delay: 200
+            }).start();
+            switch (label) {
+                case "email":
+                    Animated.timing(this.state.emailTrans, {
+                        toValue: {
+                            x: 0,
+                            y: -heightt * (25 / 736)
+                        },
+                        duration: 200,
+                        delay: 200
+                    }).start();
+                    break;
+                case "password":
+                    Animated.timing(this.state.passwordTrans, {
+                        toValue: {
+                            x: 0,
+                            y: -heightt * (25 / 736)
+                        },
+                        duration: 200,
+                        delay: 200
+                    }).start();
+                    break;
+            }
         }
+        //获得焦点
     }
     _onSubmitEditing(label) {
         //输入结束，按return

@@ -16,6 +16,7 @@ import { AppRegistry,
     UIManager,
     Easing,
     TextInput,
+    Platform,
 }  from 'react-native';
 import {Common} from "./common";
 import isAndroid from '../utils/isAndroid.js';
@@ -45,7 +46,7 @@ export class Feedback extends Component {
                     <Image style={{ width: 93, height: 113, marginLeft: (widthh - 93) / 2, }} source={require('../img/feedbackeys.png') } />
                     <Text style={{
                         backgroundColor: '#00000000', color: 'black', fontSize: widthh * (23 / 414), fontFamily: 'ProximaNova-Regular',
-                        marginTop: heightt * (45 / 736), marginLeft: widthh * (35 / 414),lineHeight:25,
+                        marginTop: heightt * (45 / 736), marginLeft: widthh * (35 / 414), lineHeight: 25,
                     }}>{"If you have some good idea that \nyou think will improve our \ncommunity experience, please \nshare them!"}</Text>
                     <View style={{
                         backgroundColor: 'white', height: heightt * (250 / 736), width: widthh * (345 / 414),
@@ -64,8 +65,10 @@ export class Feedback extends Component {
                             ) }
                             blurOnSubmit={true}></TextInput>
                     </View>
-                    <TouchableOpacity style={{ flexDirection: 'row', backgroundColor: '#53aeee', width: widthh, height: heightt * (70 / 736), 
-                    marginTop: isAndroid() ? heightt * (85 / 736) :heightt * (37 / 736) }}
+                    <TouchableOpacity style={{
+                        flexDirection: 'row', backgroundColor: '#53aeee', width: widthh, height: heightt * (70 / 736),
+                        marginTop: isAndroid() ? heightt * (85 / 736) : heightt * (37 / 736)
+                    }}
                         onPress={this._send.bind(this) }>
                         <Text style={{
                             backgroundColor: '#00000000',
@@ -77,19 +80,25 @@ export class Feedback extends Component {
             </Animated.Image>
         );
     }
+    updateText(){
+
+    }
     _send() {
         Alert.alert('Send success');
     }
     _onFocus(label) {
         //获得焦点
-        Animated.timing(this.state.backViewTrans, {
-            toValue: {
-                x: 0,
-                y: -heightt * (250 / 736)
-            },
-            duration: 200,
-            delay: 200
-        }).start();
+        if (Platform.OS === 'ios') {
+            Animated.timing(this.state.backViewTrans, {
+                toValue: {
+                    x: 0,
+                    y: -heightt * (250 / 736)
+                },
+                duration: 200,
+                delay: 200
+            }).start();
+        }
+
     }
     _onSubmitEditing(label) {
         //输入结束，按return

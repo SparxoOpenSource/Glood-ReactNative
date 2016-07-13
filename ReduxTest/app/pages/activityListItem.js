@@ -58,8 +58,9 @@ export class ActivityListItem extends Component {
                     alignItems: 'center'
                 }}>
                     <Image style={{
-                        height: 60,
-                        width: 120
+                        height: 59,
+                        width: 120,
+                        marginBottom:1,
                     }} source={this.state.IMG}/>
                     <Text style={{
                         fontSize: fontSizeAndroid(18),
