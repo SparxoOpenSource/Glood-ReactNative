@@ -184,7 +184,7 @@ export class NewMic extends Component {
                     this._setTime();
                 }
             } else {
-                RecordAudio.prototype.recordMsg("录音读取失败");
+                RecordAudio.prototype.recordMsg("Failed recording");
             }
         });
     }

@@ -21,6 +21,7 @@ var {height, width} = Dimensions.get('window');
 import isAndroid from '../app/utils/isAndroid.js';
 import {NaviGoBack} from '../app/utils/CommonUtils';
 import {EventListener} from "../app/listener/EventListener";
+import {QrcodeReader} from "../app/pages/qrcode.reader"
 
 const propTypes = {
     title: PropTypes.string
@@ -67,6 +68,8 @@ export class Root extends Component {
             case "ActivityList":
                 component = ActivityList;
                 return (<ActivityList navigator={navigator}  title={"数据列表"}/>);
+            case "QrcodeReader":
+                return (<QrcodeReader navigator={router.nav}  title={"QR"}/>);
         }
 
     }

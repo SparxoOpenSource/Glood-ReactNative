@@ -18,6 +18,8 @@ import {Common} from "./common";
 import {ActivityListItem} from "./activityListItem";
 import isAndroid from '../utils/isAndroid.js';
 import RefreshableListView from "react-native-refreshable-listview";
+import {fontSizeAndroid} from "../utils/CommonUtils.js";
+
 var {height, width} = Dimensions.get('window');
 
 const propTypes = {
@@ -25,19 +27,19 @@ const propTypes = {
     navigator: PropTypes.object
 };
 var event = [
-    { use: 1, total: 20, eventName: '2015 Sparxo Grand Opening' },
-    { use: 2, total: 20, eventName: '2015 Sparxo Grand Opening' },
-    { use: 3, total: 20, eventName: '2015 Sparxo Grand Opening' },
-    { use: 4, total: 20, eventName: '2015 Sparxo Grand Opening' },
-    { use: 5, total: 20, eventName: '2015 Sparxo Grand Opening' },
-    { use: 6, total: 20, eventName: '2015 Sparxo Grand Opening' },
-    { use: 7, total: 20, eventName: '2015 Sparxo Grand Opening' },
-    { use: 8, total: 20, eventName: '2015 Sparxo Grand Opening' },
-    { use: 9, total: 20, eventName: '2015 Sparxo Grand Opening' },
-    { use: 10, total: 20, eventName: '2015 Sparxo Grand Opening' },
-    { use: 0, total: 20, eventName: '2015 Sparxo Grand Opening' },
-    { use: 11, total: 20, eventName: '2015 Sparxo Grand Opening' },
-    { use: 12, total: 20, eventName: '2015 Sparxo Grand Opening' },
+    { use: 1, total: 20, eventName: '2015 Sparxo Grand Opening', image: "http://cdn.myfonts.net/s/aw/720x360/40/0/20979.jpg" },
+    { use: 2, total: 20, eventName: '2015 Sparxo Grand Opening', image: "http://cdn.myfonts.net/s/aw/720x360/40/0/20979.jpg" },
+    { use: 3, total: 20, eventName: '2015 Sparxo Grand Opening', image: "http://cdn.myfonts.net/s/aw/720x360/40/0/20979.jpg" },
+    { use: 4, total: 20, eventName: '2015 Sparxo Grand Opening', image: "http://cdn.myfonts.net/s/aw/720x360/40/0/20979.jpg" },
+    { use: 5, total: 20, eventName: '2015 Sparxo Grand Opening', image: "http://cdn.myfonts.net/s/aw/720x360/40/0/20979.jpg" },
+    { use: 6, total: 20, eventName: '2015 Sparxo Grand Opening', image: "http://cdn.myfonts.net/s/aw/720x360/40/0/20979.jpg" },
+    { use: 7, total: 20, eventName: '2015 Sparxo Grand Opening', image: "http://cdn.myfonts.net/s/aw/720x360/40/0/20979.jpg" },
+    { use: 8, total: 20, eventName: '2015 Sparxo Grand Opening', image: "http://cdn.myfonts.net/s/aw/720x360/40/0/20979.jpg" },
+    { use: 9, total: 20, eventName: '2015 Sparxo Grand Opening', image: "http://cdn.myfonts.net/s/aw/720x360/40/0/20979.jpg" },
+    { use: 10, total: 20, eventName: '2015 Sparxo Grand Opening', image: "http://cdn.myfonts.net/s/aw/720x360/40/0/20979.jpg" },
+    { use: 0, total: 20, eventName: '2015 Sparxo Grand Opening', image: "http://cdn.myfonts.net/s/aw/720x360/40/0/20979.jpg" },
+    { use: 11, total: 20, eventName: '2015 Sparxo Grand Opening', image: "http://cdn.myfonts.net/s/aw/720x360/40/0/20979.jpg" },
+    { use: 12, total: 20, eventName: '2015 Sparxo Grand Opening', image: "http://cdn.myfonts.net/s/aw/720x360/40/0/20979.jpg" },
 ];
 var ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
 /**
@@ -61,9 +63,33 @@ export class ActivityList extends Component {
                         renderRow={this._row.bind(this) }
                         loadData={this._access.bind(this) }
                         refreshPrompt="Pull down to refresh"
-                        backgroundColor="#00000000"/>
+                        backgroundColor="#00000000"
+                        renderSectionHeader ={this.renderSectionHeader.bind(this)}/>
                 </View>
             </Image>
+        );
+    }
+    renderSectionHeader() {
+        return (
+            <TouchableOpacity style={{
+                flexDirection: "row",
+                width: width, height: 60,
+                alignItems: 'center',
+                justifyContent: 'center',
+                borderBottomWidth: 1,
+                borderBottomColor: '#00000010',
+            }}
+                onPress={this.QR.bind(this) }>
+                <Image
+                    style={{ width: 20, height: 20 }}
+                    source={require("../img/add.png") }/>
+                <Text style={{
+                    fontSize: fontSizeAndroid(20),
+                    color: "#000000",
+                    fontFamily: "ProximaNova-Semibold",
+                    marginLeft: 50
+                }}>Add new community</Text>
+            </TouchableOpacity>
         );
     }
     _row(rowData, sectionID, rowID) {
@@ -72,6 +98,11 @@ export class ActivityList extends Component {
     }
     _access() {
 
+    }
+    QR() {
+        this.props.navigator.push({
+            name: "QrcodeReader", value: "QrcodeReader", nav: this.props.navigator
+        });
     }
 }
 

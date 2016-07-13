@@ -1,6 +1,8 @@
 package com.reduxtest.application;
 
 import android.app.Application;
+import android.content.Context;
+import android.support.multidex.MultiDex;
 
 import com.reduxtest.exception.UncaughtException;
 import com.tencent.bugly.crashreport.CrashReport;

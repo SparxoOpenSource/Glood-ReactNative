@@ -36,7 +36,7 @@ export class IntroduceWelcomeButton extends Component {
                 </View>
                 <TouchableOpacity style={{
                     flexDirection: 'row', flex: 1,
-                    marginTop: 16
+                    alignItems: 'center',
                 }}
                     onPress={this.go.bind(this) }>
                     <Text style={{
@@ -48,10 +48,12 @@ export class IntroduceWelcomeButton extends Component {
                         marginLeft: 36,
                         alignItems: 'center',
                     }}>get started</Text>
-                    <Image source={require("../img/go.jpg") }
+                    <Image source={require("../img/go.png") }
                         style={{
-                            alignItems: 'center', width: 60, height: 35, marginLeft: 30,
-                            marginTop: 6
+                            alignItems: 'center',
+                            width: 57,
+                            height: 35,
+                            marginLeft: 30,
                         }}/>
                 </TouchableOpacity>
             </Image>
