@@ -54,7 +54,7 @@ export class Authorize extends Component {
             <Image style={style.container} source={require('../img/background3.png') }>
                 <Common navigator={this.props.navigator}/>
                 <Animated.View style={[style.feedbackView, { transform: this.state.backViewTrans.getTranslateTransform() }]}>
-                    <Image style={{ width: widthh * (100 / 414), height: heightt * (100 / 736), marginLeft: (widthh - (widthh * (100 / 414))) / 2, marginTop: heightt * (41 / 736) }}
+                    <Image style={{ width: widthh * (100 / 414), height: heightt * (110 / 736), marginLeft: (widthh - (widthh * (100 / 414))) / 2, marginTop: heightt * (41 / 736) }}
                         source={require('../img/logo2.png') }/>
                     <Text style={{
                         backgroundColor: '#00000000', color: "#606060", fontSize: widthh * (23 / 414), fontFamily: 'ProximaNova-Regular',
@@ -63,7 +63,7 @@ export class Authorize extends Component {
                     <Text style={{
                         backgroundColor: '#00000000', color: "#606060", fontSize: widthh * (23 / 414), fontFamily: 'ProximaNova-Regular',
                         marginTop: heightt * (30 / 736), marginLeft: widthh * (60 / 414),lineHeight:22,
-                    }}>{"· Confirm your Sparxo identity \n· Sparxo event list"}</Text>
+                    }}>{"• Confirm your Sparxo identity \n• Sparxo event list"}</Text>
                     <Animated.Text style={[{
                         backgroundColor: '#00000000',
                         color: '#606060',
@@ -115,7 +115,7 @@ export class Authorize extends Component {
                     }}>forgot password?</Text>
                     <TouchableOpacity style={{
                         flexDirection: 'row', backgroundColor: '#53aeee', width: widthh, height: heightt * (80 / 736),
-                        marginTop: heightt * ((736 - 70 - 30  - 60 - 40 - 60 - 400) / 736)
+                        marginTop: isAndroid() ?heightt * ((736 - 70 - 25  - 60 - 40 - 60 - 400) / 736):heightt * ((736 - 70 - 40  - 60 - 40 - 60 - 400) / 736)
                     }}
                         onPress={this._authorize.bind(this) }>
                         <Text style={{
@@ -197,7 +197,6 @@ export class Authorize extends Component {
     }
     _onBlur(label) {
         //失去焦点
-        console.log('xxxxxxxxxx',emailTextInput+'---'+passwordTextInput);
         switch (label) {
             case "email":
                 if (emailTextInput == null || emailTextInput == '') {

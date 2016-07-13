@@ -64,7 +64,8 @@ export class Feedback extends Component {
                             ) }
                             blurOnSubmit={true}></TextInput>
                     </View>
-                    <TouchableOpacity style={{ flexDirection: 'row', backgroundColor: '#53aeee', width: widthh, height: heightt * (70 / 736), marginTop: heightt * (37 / 736) }}
+                    <TouchableOpacity style={{ flexDirection: 'row', backgroundColor: '#53aeee', width: widthh, height: heightt * (70 / 736), 
+                    marginTop: isAndroid() ? heightt * (85 / 736) :heightt * (37 / 736) }}
                         onPress={this._send.bind(this) }>
                         <Text style={{
                             backgroundColor: '#00000000',
