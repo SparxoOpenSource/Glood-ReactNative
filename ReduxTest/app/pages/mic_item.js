@@ -194,7 +194,7 @@ const style = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: 10,
-        fontFamily: 'MyriadPro-SemiboldIt',
+        fontFamily: 'ProximaNova-Semibold',
         backgroundColor:'#00000000',
     }
 });

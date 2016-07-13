@@ -53,7 +53,7 @@
 		CCF2B7281D35E8FA009F359D /* ProximaNova-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CCF2B7211D35E8FA009F359D /* ProximaNova-Bold.otf */; };
 		CCF2B7291D35E8FA009F359D /* ProximaNova-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = CCF2B7221D35E8FA009F359D /* ProximaNova-Light.otf */; };
 		CCF2B72A1D35E8FA009F359D /* ProximaNova-LightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = CCF2B7231D35E8FA009F359D /* ProximaNova-LightItalic.otf */; };
-		CCF2B72B1D35E8FA009F359D /* ProximaNova-Reg.otf in Resources */ = {isa = PBXBuildFile; fileRef = CCF2B7241D35E8FA009F359D /* ProximaNova-Reg.otf */; };
+		CCF2B72B1D35E8FA009F359D /* ProximaNova-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = CCF2B7241D35E8FA009F359D /* ProximaNova-Regular.otf */; };
 		CCF2B72C1D35E8FA009F359D /* ProximaNova-RegularItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = CCF2B7251D35E8FA009F359D /* ProximaNova-RegularItalic.otf */; };
 		CCF2B72D1D35E8FA009F359D /* ProximaNova-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CCF2B7261D35E8FA009F359D /* ProximaNova-Semibold.otf */; };
 		CCF2B72E1D35E8FA009F359D /* ProximaNova-SemiboldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = CCF2B7271D35E8FA009F359D /* ProximaNova-SemiboldItalic.otf */; };
@@ -138,13 +138,6 @@
 			remoteGlobalIDString = 58B5119B1A9E6C1200147676;
 			remoteInfo = RCTText;
 		};
-		CC11EFF11CE4810400AAEA09 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CC11EFED1CE4810400AAEA09 /* RCTCamera.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 32A87E981BF598330048D713;
-			remoteInfo = RCTCamera;
-		};
 		CCBAA0EE1CE4838A0035088B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CCBAA0E81CE4838A0035088B /* RCTCordova.xcodeproj */;
@@ -191,7 +184,6 @@
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		CC1041401CE5B4CC00B5D2E7 /* RecordAudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordAudio.h; sourceTree = "<group>"; };
 		CC1041411CE5B4CC00B5D2E7 /* RecordAudio.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordAudio.m; sourceTree = "<group>"; };
-		CC11EFED1CE4810400AAEA09 /* RCTCamera.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTCamera.xcodeproj; path = "../node_modules/@remobile/react-native-camera/ios/RCTCamera.xcodeproj"; sourceTree = "<group>"; };
 		CC2672AC1CEF07570018F4AB /* NSString+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Base64.h"; sourceTree = "<group>"; };
 		CC2672AD1CEF07570018F4AB /* NSString+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Base64.m"; sourceTree = "<group>"; };
 		CC41C9321D1F959E00F244E4 /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainItemWrapper.h; sourceTree = "<group>"; };
@@ -241,7 +233,7 @@
 		CCF2B7211D35E8FA009F359D /* ProximaNova-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Bold.otf"; sourceTree = "<group>"; };
 		CCF2B7221D35E8FA009F359D /* ProximaNova-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Light.otf"; sourceTree = "<group>"; };
 		CCF2B7231D35E8FA009F359D /* ProximaNova-LightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-LightItalic.otf"; sourceTree = "<group>"; };
-		CCF2B7241D35E8FA009F359D /* ProximaNova-Reg.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Reg.otf"; sourceTree = "<group>"; };
+		CCF2B7241D35E8FA009F359D /* ProximaNova-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Regular.otf"; sourceTree = "<group>"; };
 		CCF2B7251D35E8FA009F359D /* ProximaNova-RegularItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-RegularItalic.otf"; sourceTree = "<group>"; };
 		CCF2B7261D35E8FA009F359D /* ProximaNova-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Semibold.otf"; sourceTree = "<group>"; };
 		CCF2B7271D35E8FA009F359D /* ProximaNova-SemiboldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-SemiboldItalic.otf"; sourceTree = "<group>"; };
@@ -399,7 +391,6 @@
 				CCF2B73C1D35F08B009F359D /* RCTCamera.xcodeproj */,
 				CCD875681CE5D8EB00388995 /* RNImagePicker.xcodeproj */,
 				CCBAA0E81CE4838A0035088B /* RCTCordova.xcodeproj */,
-				CC11EFED1CE4810400AAEA09 /* RCTCamera.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
 				00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */,
 				00C302B51ABCB90400DB3ED1 /* RCTGeolocation.xcodeproj */,
@@ -433,7 +424,7 @@
 				CCF2B7211D35E8FA009F359D /* ProximaNova-Bold.otf */,
 				CCF2B7221D35E8FA009F359D /* ProximaNova-Light.otf */,
 				CCF2B7231D35E8FA009F359D /* ProximaNova-LightItalic.otf */,
-				CCF2B7241D35E8FA009F359D /* ProximaNova-Reg.otf */,
+				CCF2B7241D35E8FA009F359D /* ProximaNova-Regular.otf */,
 				CCF2B7251D35E8FA009F359D /* ProximaNova-RegularItalic.otf */,
 				CCF2B7261D35E8FA009F359D /* ProximaNova-Semibold.otf */,
 				CCF2B7271D35E8FA009F359D /* ProximaNova-SemiboldItalic.otf */,
@@ -469,14 +460,6 @@
 				CC41C9331D1F959E00F244E4 /* KeychainItemWrapper.m */,
 			);
 			path = RNRecordAudio;
-			sourceTree = "<group>";
-		};
-		CC11EFEE1CE4810400AAEA09 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				CC11EFF21CE4810400AAEA09 /* libRCTCamera.a */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		CC26729E1CEF07220018F4AB /* NSString+Base64 */ = {
@@ -669,10 +652,6 @@
 					ProjectRef = CCF2B73C1D35F08B009F359D /* RCTCamera.xcodeproj */;
 				},
 				{
-					ProductGroup = CC11EFEE1CE4810400AAEA09 /* Products */;
-					ProjectRef = CC11EFED1CE4810400AAEA09 /* RCTCamera.xcodeproj */;
-				},
-				{
 					ProductGroup = CCBAA0E91CE4838A0035088B /* Products */;
 					ProjectRef = CCBAA0E81CE4838A0035088B /* RCTCordova.xcodeproj */;
 				},
@@ -796,13 +775,6 @@
 			remoteRef = 832341B41AAA6A8300B99B32 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		CC11EFF21CE4810400AAEA09 /* libRCTCamera.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libRCTCamera.a;
-			remoteRef = CC11EFF11CE4810400AAEA09 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		CCBAA0EF1CE4838A0035088B /* libRCTCordova.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -846,7 +818,7 @@
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				CCCFEF591D0967B600B79A10 /* index.ios.jsbundle in Resources */,
 				CCF2B72E1D35E8FA009F359D /* ProximaNova-SemiboldItalic.otf in Resources */,
-				CCF2B72B1D35E8FA009F359D /* ProximaNova-Reg.otf in Resources */,
+				CCF2B72B1D35E8FA009F359D /* ProximaNova-Regular.otf in Resources */,
 				CCF2B7291D35E8FA009F359D /* ProximaNova-Light.otf in Resources */,
 				CCF2B72C1D35E8FA009F359D /* ProximaNova-RegularItalic.otf in Resources */,
 			);

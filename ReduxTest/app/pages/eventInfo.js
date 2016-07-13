@@ -113,7 +113,7 @@ constructor(props) {
                 <Common navigator={this.props.navigator} title={"Crazy May Fest 2017"}/>
                 <Image style={{width:widthh,height:heightt*(200/736)}} source={require('../img/event_background.jpg')}/>
                 <Text style={{backgroundColor:'#00000000',color: 'black', fontSize: heightt * (25 / 736), width: widthh * (250 / 414), 
-                fontFamily: 'MyriadPro-Semibold',marginLeft:(widthh-(widthh * (250 / 414)))/2,marginTop:heightt*(20/736)}}>Can't wait to see you at Crazy May 2016!</Text>
+                fontFamily: 'ProximaNova-Semibold',marginLeft:(widthh-(widthh * (250 / 414)))/2,marginTop:heightt*(20/736)}}>Can't wait to see you at Crazy May 2016!</Text>
                 <View style={ { justifyContent: 'center', alignItems: 'center' }}>
                 <View style={{
                     height: 90 + maxSize,
@@ -169,9 +169,9 @@ constructor(props) {
                 </View>
               </View>
                 <Text style={{backgroundColor:'#00000000',color: 'black', fontSize: heightt * (25 / 736), width: widthh * (95 / 414), 
-                fontFamily: 'MyriadPro-Regular',marginLeft:(widthh-(widthh * (95 / 414)))/2,marginTop:heightt*(bottom_text_name_height/736)}}>Christina</Text>
+                fontFamily: 'ProximaNova-Light',marginLeft:(widthh-(widthh * (95 / 414)))/2,marginTop:heightt*(bottom_text_name_height/736)}}>Christina</Text>
                 <Text style={{backgroundColor:'#00000000',color: 'black', fontSize: heightt * (25 / 736), width: widthh * (230 / 414), 
-                fontFamily: 'MyriadPro-Regular',marginLeft:(widthh-(widthh * (230 / 414)))/2,marginTop:heightt*(5/736)}}>Founder of Crazy Fest</Text>
+                fontFamily: 'ProximaNova-Light',marginLeft:(widthh-(widthh * (230 / 414)))/2,marginTop:heightt*(5/736)}}>Founder of Crazy Fest</Text>
                <View style={{width:widthh,height:25,marginTop:height*(45/736),backgroundColor:'#00000030'}}>
                   <Image source={require('../img/event_background_bottom.png')} style={{width:this.state.bottom_view_image_width,height:25}}/>
                </View>
@@ -352,7 +352,7 @@ touch: {
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: 10,
-        fontFamily: 'MyriadPro-SemiboldIt',
+        fontFamily: 'ProximaNova-Semibold',
     },
     background: {
         width: width,

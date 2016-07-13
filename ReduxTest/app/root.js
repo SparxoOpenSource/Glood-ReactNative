@@ -34,8 +34,10 @@ export class Root extends Component {
         _navigator = navigator;
         switch (router.name) {
             case "Introduce":
-                component = Introduce;
-                return (<Introduce navigator={navigator}/>);
+                // component = Introduce;
+                // return (<Introduce navigator={navigator}/>);
+                component = Setting;
+                return (<Setting navigator={navigator}/>);
             case "Login":
                 component = Login;
                 return (<Login navigator={navigator}/>);
@@ -69,6 +71,8 @@ export class Root extends Component {
                 return (<ActivityList navigator={navigator}  title={"数据列表"}/>);
             case "QrcodeReader":
                 return (<QrcodeReader navigator={router.nav}  title={"QR"}/>);
+            case "Authorize":
+                return (<Authorize navigator={router.nav}/>);
         }
 
     }

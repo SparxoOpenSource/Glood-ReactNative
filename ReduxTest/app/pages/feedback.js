@@ -44,8 +44,8 @@ export class Feedback extends Component {
                 <View style={style.feedbackView}>
                     <Image style={{ width: 93, height: 113, marginLeft: (widthh - 93) / 2, }} source={require('../img/feedbackeys.png') } />
                     <Text style={{
-                        backgroundColor: '#00000000', color: 'black', fontSize: widthh * (22 / 414), fontFamily: 'OpenSans',
-                        marginTop: heightt * (45 / 736), marginLeft: widthh * (35 / 414)
+                        backgroundColor: '#00000000', color: 'black', fontSize: widthh * (23 / 414), fontFamily: 'ProximaNova-Regular',
+                        marginTop: heightt * (45 / 736), marginLeft: widthh * (35 / 414),lineHeight:25,
                     }}>{"If you have some good idea that \nyou think will improve our \ncommunity experience, please \nshare them!"}</Text>
                     <View style={{
                         backgroundColor: 'white', height: heightt * (250 / 736), width: widthh * (345 / 414),
@@ -64,11 +64,11 @@ export class Feedback extends Component {
                             ) }
                             blurOnSubmit={true}></TextInput>
                     </View>
-                    <TouchableOpacity style={{ flexDirection: 'row', backgroundColor: '#53aeee', width: widthh, height: heightt * (70 / 736), marginTop: heightt * (47 / 736) }}
+                    <TouchableOpacity style={{ flexDirection: 'row', backgroundColor: '#53aeee', width: widthh, height: heightt * (70 / 736), marginTop: heightt * (37 / 736) }}
                         onPress={this._send.bind(this) }>
                         <Text style={{
                             backgroundColor: '#00000000',
-                            color: 'white', fontSize: heightt * (32 / 736), width: widthh * (90 / 414), fontFamily: 'OpenSans-Bold', marginTop: heightt * ((70 - 50) / 736) / 2,
+                            color: 'white', fontSize: heightt * (33 / 736), width: widthh * (90 / 414), fontFamily: 'ProximaNova-Bold', marginTop: heightt * ((85 - 50) / 736) / 2,
                             marginLeft: (widthh - (widthh * (80 / 414))) / 2
                         }}>send</Text>
                     </TouchableOpacity>

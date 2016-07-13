@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     TextStyle: {
         fontSize: fontSizeAndroid(26),
         color: 'black',
-        fontFamily: 'Myriad Pro',
+        fontFamily: 'ProximaNova-Light',
         backgroundColor: '#00000000',
     }
 });
