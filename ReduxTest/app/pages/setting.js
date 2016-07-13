@@ -38,41 +38,6 @@ export class Setting extends Component {
         return (
             <Image style={style.container} source={require('../img/background3.png') }>
                 <Common navigator={this.props.navigator} title={this.props.title}/>
-                <View style={{
-                    flexDirection: "column",
-                    width: width - 60,
-                    marginLeft: 30,
-                    marginRight: 30
-                }}>
-                    <View style={{
-                        alignItems: 'center',
-                        flexDirection: "row",
-                        height: 38,
-                        width: width - 60
-                    }}>
-                        <Text style={{
-                            color: 'black', fontSize: heightt * (29 / 736), width: width - 60 - 67, fontFamily: 'ProximaNova-Regular', overflow: 'visible'
-                        }}>Conversation Notification</Text>
-                        <Switch style={{
-                            backgroundColor: "#000000", overflow: 'visible', height: 38, width: 67,
-                            flexDirection: "row",
-                        }}
-                            buttonRadius={14} switchHeight={14} switchWidth={45}
-                            activeBackgroundColor='rgba(12, 212, 196, 0.50)'
-                            inactiveBackgroundColor='rgba(172, 172, 172, 0.70)'
-                            activeButtonColor='rgba(12, 212, 196, 1)'
-                            inactiveButtonPressedColor='rgba(254, 255, 255, 1)'
-                            onChangeState={(state) => alert('change state ' + state) }/>
-                    </View>
-                </View>
-
-
-
-
-
-
-
-
                 <View style={{ width: widthh, height: heightt, backgroundColor: '#00000000', marginTop: heightt * (35 / 736), overflow: 'visible' }}>
                     <Text style={{
                         color: 'black', fontSize: heightt * (29 / 736), width: widthh * (300 / 414), fontFamily: 'ProximaNova-Regular',
