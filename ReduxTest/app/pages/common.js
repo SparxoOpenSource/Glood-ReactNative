@@ -49,7 +49,7 @@ export class Common extends Component {
                     <View style={{
                         flexDirection: 'row', width: 34,
                         height: 23,
-                        marginTop:4
+                        marginTop: 4
                     }}>
                         <Image source={require('../img/down_1.png') } style={{
                             width: 18, height: 8,
@@ -89,7 +89,7 @@ export class Common extends Component {
                         {this.renderBackImage() }
                     </TouchableOpacity>
                     <View style={styles.TextStyle2}>
-                    <Text style={styles.TextStyle} numberOfLines={1}>{this.props.title}</Text>
+                        <Text style={styles.TextStyle} numberOfLines={1}>{this.props.title}</Text>
                     </View>
                     <TouchableOpacity onPress={this.UpAndDown.bind(this) } style={{
                         alignItems: 'center',
@@ -137,8 +137,8 @@ const styles = StyleSheet.create({
         width: width - 26 - 26 - 15 - 15 - 20,
         marginLeft: 10,
         marginRight: 10,
-                    alignItems: 'center',
-                    justifyContent: 'center',
+        alignItems: 'center',
+        justifyContent: 'center',
         backgroundColor: '#00000000',
     }
 });

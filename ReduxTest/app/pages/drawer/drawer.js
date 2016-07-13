@@ -62,17 +62,19 @@ export class DrawerMe extends Component {
                 ref={(drawer) => { return this.drawer = drawer } }
                 keyboardDismissMode="on-drag"
                 renderNavigationView={() => navigationView}>
-                <Root style={{ width: width, height: height }} title={"ActivityList"}/>
+                <Root style={{ width: width, height: height }} title={"ActivityList"} drawer={this.drawer}/>
             </DrawerLayout>
         );
     }
     OpenCloseDrawer(name) {
         switch (name) {
             case "Open":
-                this.drawer.openDrawer();
+                if (this.drawer != null)
+                    this.drawer.openDrawer();
                 break;
             case "Close":
-                this.drawer.closeDrawer();
+                if (this.drawer != null)
+                    this.drawer.closeDrawer();
                 break;
         }
     }
@@ -89,7 +91,8 @@ export class DrawerMe extends Component {
             case "FeedBack":
                 break;
         }
-        this.drawer.closeDrawer();
+        if (this.drawer != null)
+            this.drawer.openDrawer();
     }
 }
 
