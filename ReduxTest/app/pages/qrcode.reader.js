@@ -114,7 +114,9 @@ export class QrcodeReader extends Component {
                         width: width - 80,
                         height: width - 80,
                     }}
-                        onBarCodeRead={this.onBarCodeRead.bind(this) }/>
+                        onBarCodeRead={this.onBarCodeRead.bind(this) }
+                        torchMode={this.state.torchMode}
+                        cameraType={this.state.cameraType}/>
                 this.setState(
                     { view: View }
                 );

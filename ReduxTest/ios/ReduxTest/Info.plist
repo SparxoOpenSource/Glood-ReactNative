@@ -31,22 +31,13 @@
 	<string></string>
 	<key>UIAppFonts</key>
 	<array>
-		<string>OpenSans-BoldItalic.ttf</string>
-		<string>OpenSans-ExtraBold.ttf</string>
-		<string>OpenSans-ExtraBoldItalic.ttf</string>
-		<string>OpenSans-Italic.ttf</string>
-		<string>OpenSans-Light.ttf</string>
-		<string>OpenSans-LightItalic.ttf</string>
-		<string>OpenSans-Regular.ttf</string>
-		<string>OpenSans-Semibold.ttf</string>
-		<string>OpenSans-SemiboldItalic.ttf</string>
-		<string>MyriadPro-Regular.otf</string>
-		<string>OpenSans-Bold.ttf</string>
-		<string>MyriadPro-Bold.otf</string>
-		<string>MyriadPro-Bold.otf</string>
-		<string>MyriadPro-Semibold.otf</string>
-		<string>MyriadPro-SemiboldIt.otf</string>
-		<string>MyriadPro-BoldIt.otf</string>
+		<string>ProximaNova-SemiboldItalic.otf</string>
+		<string>ProximaNova-Semibold.otf</string>
+		<string>ProximaNova-RegularItalic.otf</string>
+		<string>ProximaNova-Reg.otf</string>
+		<string>ProximaNova-LightItalic.otf</string>
+		<string>ProximaNova-Bold.otf</string>
+		<string>ProximaNova-Light.otf</string>
 	</array>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
