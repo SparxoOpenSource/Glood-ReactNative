@@ -49,7 +49,7 @@ public class UncaughtException implements UncaughtExceptionHandler {
     private Map<String, String> infos = new HashMap<String, String>();
 
     // 用来显示Toast中的信息
-    private static String error = "程序错误，额，不对，我应该说，服务器正在维护中，请稍后再试";
+    private static String error = "Please try again later.";
 
     private static final Map<String, String> regexMap = new HashMap<String, String>();
 
@@ -276,17 +276,17 @@ public class UncaughtException implements UncaughtExceptionHandler {
         // OutOfMemoryError
         // StackOverflowError
         // RuntimeException
-        regexMap.put(".*NullPointerException.*", "嘿，无中生有~Boom!");
-        regexMap.put(".*ClassNotFoundException.*", "你确定你能找得到它？");
-        regexMap.put(".*ArithmeticException.*", "我猜你的数学是体育老师教的，对吧？");
-        regexMap.put(".*ArrayIndexOutOfBoundsException.*", "恩，无下限=无节操，请不要跟我搭话");
-        regexMap.put(".*IllegalArgumentException.*", "你的出生就是一场错误。");
-        regexMap.put(".*IllegalAccessException.*", "很遗憾，你的信用卡账号被冻结了，无权支付");
-        regexMap.put(".*SecturityException.*", "死神马上降临");
-        regexMap.put(".*NumberFormatException.*", "想要改变一下自己形象？去泰国吧，包你满意");
-        regexMap.put(".*OutOfMemoryError.*", "或许你该减减肥了");
-        regexMap.put(".*StackOverflowError.*", "啊，啊，憋不住了！");
-        regexMap.put(".*RuntimeException.*", "你的人生走错了方向，重来吧");
+//        regexMap.put(".*NullPointerException.*", "嘿，无中生有~Boom!");
+//        regexMap.put(".*ClassNotFoundException.*", "你确定你能找得到它？");
+//        regexMap.put(".*ArithmeticException.*", "我猜你的数学是体育老师教的，对吧？");
+//        regexMap.put(".*ArrayIndexOutOfBoundsException.*", "恩，无下限=无节操，请不要跟我搭话");
+//        regexMap.put(".*IllegalArgumentException.*", "你的出生就是一场错误。");
+//        regexMap.put(".*IllegalAccessException.*", "很遗憾，你的信用卡账号被冻结了，无权支付");
+//        regexMap.put(".*SecturityException.*", "死神马上降临");
+//        regexMap.put(".*NumberFormatException.*", "想要改变一下自己形象？去泰国吧，包你满意");
+//        regexMap.put(".*OutOfMemoryError.*", "或许你该减减肥了");
+//        regexMap.put(".*StackOverflowError.*", "啊，啊，憋不住了！");
+//        regexMap.put(".*RuntimeException.*", "你的人生走错了方向，重来吧");
 
     }
 }

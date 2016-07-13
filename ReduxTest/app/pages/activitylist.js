@@ -55,7 +55,7 @@ export class ActivityList extends Component {
     render() {
         return (
             <Image style={style.container} source={require('../img/background3.png') }>
-                <Common navigator={this.props.navigator} title="Crazy May Fest 2016" page="Main"/>
+                <Common navigator={this.props.navigator} title="Crazy May Fest 2016" page="Main" rightType="Up"/>
                 <View style={style.content}>
                     <RefreshableListView
                         enableEmptySections = {true}

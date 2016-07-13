@@ -110,7 +110,7 @@ constructor(props) {
     render() {
         return (
             <Image source={require('../img/background3.png') } style={styles.background} >
-                <Common navigator={this.props.navigator} title={"Crazy May Fest 2017"} page='Main'/>
+                <Common navigator={this.props.navigator} title={"Crazy May Fest 2017"} page='Main' rightType="Down"/>
                 <Image style={{width:widthh,height:heightt*(200/736),marginTop:heightt*(13/736)}} source={require('../img/event_background.jpg')}/>
                 <Text style={{backgroundColor:'#00000000',color: 'black', fontSize: heightt * (23 / 736), width: widthh * (250 / 414), 
                 fontFamily: 'ProximaNova-Semibold',marginLeft:(widthh-(widthh * (240 / 414)))/2,marginTop:heightt*(17/736),

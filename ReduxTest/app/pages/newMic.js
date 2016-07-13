@@ -21,6 +21,7 @@ import isAndroid from '../utils/isAndroid.js';
 import RefreshableListView from "react-native-refreshable-listview";
 // import ExtraDimensions from 'react-native-extra-dimensions-android';
 import {EventListener} from "../listener/EventListener";
+import {fontSizeAndroid} from "../utils/CommonUtils.js";
 
 var data = new Array();
 var ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
@@ -41,6 +42,7 @@ var maxHeight = Dimensions.get('window').height - Navigator.NavigationBar.Styles
 var scorll = false;
 var auto = false;
 var inTher = false;
+var likeMe = false;
 var myImg = require('../img/play.png');
 var voiceImg = require('../img/voice.png');
 var {height, width} = Dimensions.get('window');
@@ -65,14 +67,15 @@ export class NewMic extends Component {
             dataSource: ds.cloneWithRows(data),
             autoImage: myImg,
             voiceImage: voiceImg,
-            like: require('../img/like.png')
+            like: (likeMe ? require('../img/like2.png') : require('../img/like.png')),
+            likeSum: 16
         }
         this._accessFileName();
     }
     render() {
         return (
             <Image style={style.container} source={require('../img/background3.png') }>
-                <Common navigator={this.props.navigator} ground="fw_1.png" title="Crazy May Fest 2016"/>
+                <Common navigator={this.props.navigator} ground="fw_1.png" title="Crazy May Fest 2016"  rightType="Down"/>
                 <View style={style.content}>
                     <RefreshableListView
                         enableEmptySections = {true}
@@ -87,15 +90,17 @@ export class NewMic extends Component {
                 <View style={style.footer}>
                     <View style={{ flexDirection: 'row' }}>
                         <Image source={this.state.autoImage } style={style.ImagStyle}/>
-                        <Image source={this.state.like} style={style.ImagStyle2}/>
-                        <Text style={{ backgroundColor: '#00000000', marginTop: 32, marginLeft: 4, fontSize: 16, color: '#FFFFFF' }}>16</Text>
+                        <TouchableOpacity style={style.ImagStyle2} onPress={this.like.bind(this) }>
+                            <Image source={this.state.like} style={{ width: 25, height: 20 }}/>
+                        </TouchableOpacity>
+                        <Text style={{ backgroundColor: '#00000000', marginTop: 32, marginLeft: 4, fontSize: fontSizeAndroid(16), color: '#FFFFFF00', fontFamily: "ProximaNova-Light" }}>{this.state.likeSum}</Text>
                     </View>
                     <TouchableWithoutFeedback onPressOut={this._stop.bind(this) } onPressIn={this._startVoice.bind(this) }>
                         <Image style={{ width: 70, height: 70 }}  source={this.state.voiceImage }/>
                     </TouchableWithoutFeedback>
                     <TouchableOpacity style={{ flexDirection: 'row' }}>
-                        <Text style={{ backgroundColor: '#00000000', marginTop: 32, fontSize: 16, color: '#00000000' }}>auto</Text>
-                        <Text style={{ backgroundColor: '#00000000', marginTop: 32, fontSize: 16, color: '#00000000' }}>auto</Text>
+                        <Text style={{ backgroundColor: '#00000000', marginTop: 32, fontSize: fontSizeAndroid(16), color: '#00000000', fontFamily: "ProximaNova-Light" }}>auto</Text>
+                        <Text style={{ backgroundColor: '#00000000', marginTop: 32, fontSize: fontSizeAndroid(16), color: '#00000000', fontFamily: "ProximaNova-Light" }}>auto</Text>
                         <Image source={require('../img/people.png') } style={style.ImagStyle3}  />
                     </TouchableOpacity>
                 </View>
@@ -343,6 +348,21 @@ export class NewMic extends Component {
         inTher = false;
         RecordAudio.prototype.stopAllRecord();
     }
+    like() {
+        if (!likeMe) {
+            this.setState({
+                like: require('../img/like2.png'),
+                likeSum: this.state.likeSum + 1
+            });
+            likeMe = true;
+        } else {
+            this.setState({
+                like: require('../img/like.png'),
+                likeSum: this.state.likeSum - 1
+            });
+            likeMe = false;
+        }
+    }
 }
 
 NewMic.propTypes = propTypes;
@@ -371,7 +391,7 @@ const style = StyleSheet.create({
     },
     ImagStyle: {
         marginTop: 30,
-        width: 20,
+        width: 16,
         height: 25,
     },
     ImagStyle2: {
