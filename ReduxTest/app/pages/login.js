@@ -29,7 +29,7 @@ const propTypes = {
 export class Login extends Component {
     constructor(props) {
         super(props);
-        this.state = {
+        this.state = { 
             signIn_text_color: '#A7A8AA',
             signUp_text_color: '#38A7EF',
             bottom_sign_title: 'sign up',

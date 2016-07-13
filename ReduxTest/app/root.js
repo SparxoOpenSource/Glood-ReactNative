@@ -12,6 +12,7 @@ import {Try} from "../app/pages/try"
 import {Tickets} from "../app/pages/tickets"
 import {Setting} from "../app/pages/setting"
 import {Feedback} from "../app/pages/feedback"
+import {Authorize} from "../app/pages/authorize"
 import {Login} from "../app/pages/login"
 import {DrawerMe} from '../app/pages/drawer/drawer';
 import {Introduce} from "../app/pages/introduce"
@@ -34,8 +35,8 @@ export class Root extends Component {
             case "Introduce":
                 // component = Introduce;
                 // return (<Introduce navigator={navigator}/>);
-            component = Setting;
-            return (<Setting navigator={navigator} title={'Setting'}/>);
+            component = Feedback;
+            return (<Feedback navigator={navigator}/>);
             case "Login":
                 component = Login;
                 return (<Login navigator={navigator}/>);

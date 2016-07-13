@@ -28,14 +28,18 @@ const propTypes = {
     navigator: PropTypes.object
 };
 export class Feedback extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
+            backViewTrans: new Animated.ValueXY({
+                x: 0,
+                y: 0,
+            })
         }
     }
     render() {
         return (
-            <Image style={style.container} source={require('../img/background3.png') }>
+            <Animated.Image style={[style.container, { transform: this.state.backViewTrans.getTranslateTransform() }]} source={require('../img/background3.png') }>
                 <Common navigator={this.props.navigator}/>
                 <View style={style.feedbackView}>
                     <Image style={{ width: 93, height: 113, marginLeft: (widthh - 93) / 2, }} source={require('../img/feedbackeys.png') } />
@@ -50,22 +54,52 @@ export class Feedback extends Component {
                         <TextInput style={{
                             backgroundColor: 'white', height: heightt * (245 / 736), width: widthh * (340 / 414),
                             marginTop: heightt * (2.5 / 736), marginLeft: widthh * (3 / 414), fontSize: 17
-                        }} multiline={true}/>
+                        }}
+                            multiline={true}
+                            onSubmitEditing={() => this._onSubmitEditing('feedback') }
+                            onFocus={() => this._onFocus('feedback') }
+                            onBlur={() => this._onBlur('feedback') }
+                            onChange={(event) => this.updateText(
+                                event.nativeEvent.text
+                            ) }
+                            blurOnSubmit={true}></TextInput>
                     </View>
                     <TouchableOpacity style={{ flexDirection: 'row', backgroundColor: '#53aeee', width: widthh, height: heightt * (70 / 736), marginTop: heightt * (47 / 736) }}
                         onPress={this._send.bind(this) }>
                         <Text style={{
                             backgroundColor: '#00000000',
-                            color: 'white', fontSize: heightt * (32 / 736), width: widthh * (90 / 414), fontFamily: 'OpenSans-Bold', marginTop: heightt * ((70-50) / 736) / 2,
+                            color: 'white', fontSize: heightt * (32 / 736), width: widthh * (90 / 414), fontFamily: 'OpenSans-Bold', marginTop: heightt * ((70 - 50) / 736) / 2,
                             marginLeft: (widthh - (widthh * (80 / 414))) / 2
                         }}>send</Text>
                     </TouchableOpacity>
                 </View>
-            </Image>
+            </Animated.Image>
         );
     }
     _send() {
         Alert.alert('Send success');
+    }
+    _onFocus(label) {
+        //获得焦点
+        Animated.timing(this.state.backViewTrans, {
+            toValue: {
+                x: 0,
+                y: -heightt * (250 / 736)
+            },
+            duration: 200,
+            delay: 200
+        }).start();
+    }
+    _onSubmitEditing(label) {
+        //输入结束，按return
+        Animated.timing(this.state.backViewTrans, {
+            toValue: {
+                x: 0,
+                y: 0
+            },
+            duration: 0,
+            delay: 0
+        }).start();
     }
 }
 Feedback.propTypes = propTypes;
