@@ -83,7 +83,7 @@ export class Tickets extends Component {
         }
         return (
             <Image style={style.container} source={require('../img/background3.png') }>
-                <Common navigator={this.props.navigator} title={this.props.title} page='Main'/>
+                <Common navigator={this.props.navigator} title={this.props.title} page='Main' rightTip='Share'/>
                 <CoverFlow>
                     {this.state.images.map((src, i) =>
                         <View style={{
