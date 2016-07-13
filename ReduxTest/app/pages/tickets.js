@@ -110,7 +110,7 @@ export class Tickets extends Component {
                                 </View>
                                 <View style={{ backgroundColor: '#00000000', width: widthh * (250 / 414), height: heightt * (50 / 736) }}>
                                     <Image style={{ width: widthh * (17 / 414), height: heightt * (28 / 736), marginLeft: widthh * (17 / 414), 
-                                        marginTop: heightt * (15 / 736) }} key={i} source={require('../img/addressicon.png') }/>
+                                        marginTop: heightt * (0 / 736) }} key={i} source={require('../img/addressicon.png') }/>
                                     <Text style={{ backgroundColor: '#00000000', color: 'black', fontSize: widthh * (16 / 414), fontFamily: 'ProximaNova-Regular', 
                                     marginTop: heightt * (-30 / 736), marginLeft: widthh * (45 / 414),lineHeight:15 }}>{src.address}</Text>
                                 </View>
