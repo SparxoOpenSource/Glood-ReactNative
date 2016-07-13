@@ -64,7 +64,7 @@ export class ActivityList extends Component {
                         loadData={this._access.bind(this) }
                         refreshPrompt="Pull down to refresh"
                         backgroundColor="#00000000"
-                        renderSectionHeader ={this.renderSectionHeader.bind(this)}/>
+                        renderHeader ={this.renderSectionHeader.bind(this)}/>
                 </View>
             </Image>
         );
