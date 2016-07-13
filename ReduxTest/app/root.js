@@ -34,10 +34,8 @@ export class Root extends Component {
         _navigator = navigator;
         switch (router.name) {
             case "Introduce":
-                // component = Introduce;
-                // return (<Introduce navigator={navigator}/>);
-                component = Setting;
-                return (<Setting navigator={navigator}/>);
+                component = Introduce;
+                return (<Introduce navigator={navigator}/>);
             case "Login":
                 component = Login;
                 return (<Login navigator={navigator}/>);
