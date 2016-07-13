@@ -79,7 +79,7 @@ export class Root extends Component {
     }
     componentWillUnmount() {
         if (isAndroid()) {
-            BackAndroid.addEventListener('hardwareBackPress');
+            BackAndroid.removeEventListener('hardwareBackPress');
         }
     }
     render() {
