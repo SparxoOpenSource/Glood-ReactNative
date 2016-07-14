@@ -69,7 +69,7 @@ export class Setting extends Component {
                     </View>
                     <TouchableOpacity style={{
                         flexDirection: 'row', backgroundColor: '#53aeee', width: widthh, height: heightt * (70 / 736),
-                        marginTop: isAndroid() ? heightt * ((736 - 70 - 29 - 60 - 10 - 25) / 736) : heightt * ((736 - 70 - 29 - 60 - 20 - 25) / 736)
+                        marginTop: isAndroid() ? heightt * ((736 - 70 - 29 - 60 - 20 - 35) / 736) : heightt * ((736 - 70 - 29 - 60 - 30 - 35) / 736)
                     }}
                         onPress={this._logout.bind(this) }>
                         <Text style={{

@@ -142,7 +142,9 @@ export class Authorize extends Component {
                 duration: 200,
                 delay: 200
             }).start();
-            switch (label) {
+        }
+        //获得焦点
+        switch (label) {
                 case "email":
                     Animated.timing(this.state.emailTrans, {
                         toValue: {
@@ -164,8 +166,6 @@ export class Authorize extends Component {
                     }).start();
                     break;
             }
-        }
-        //获得焦点
     }
     _onSubmitEditing(label) {
         //输入结束，按return
