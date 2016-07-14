@@ -23,6 +23,7 @@ import ScrollableTabView, { DefaultTabBar, } from 'react-native-scrollable-tab-v
 import { CoverFlow } from 'react-native-pan-controller';
 import {EventListener} from "../listener/EventListener";
 import {fontSizeAndroid} from "../utils/CommonUtils.js";
+import {LoadingView} from "../components/LoadingView";
 
 var QRCode = require('react-native-qrcode');
 var image_margin_left;
@@ -39,7 +40,7 @@ var temp = <View style={{
     alignItems: 'center',
     justifyContent: 'center',
 }}>
-    <Text style={{ fontSize: fontSizeAndroid(24), color: "#FFFFFF", fontFamily: "ProximaNova-Light" }}>Please wait...</Text>
+    <LoadingView style={{ width: 50, height: 50 }}/>
 </View>;
 
 const propTypes = {
