@@ -54,7 +54,7 @@ var temp = <View style={{
     alignItems: 'center',
     justifyContent: 'center',
 }}>
-    <LoadingView style={{ width: 50, height: 50 }}/>
+    <LoadingView/>
 </View>;
 
 const propTypes = {
