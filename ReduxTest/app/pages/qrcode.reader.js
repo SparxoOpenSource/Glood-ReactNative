@@ -23,11 +23,12 @@ import {RecordAudio} from "../utils/RecordAudio";
 import {QRCodeScreen} from './QRCodeScreen';
 import BarcodeScanner from 'react-native-barcodescanner';
 import {EventListener} from "../listener/EventListener";
+import {LoadingView} from "../components/LoadingView";
 
 const Camera = NativeModules.RNBarcodeScannerView;
 
 var {height, width} = Dimensions.get('window');
-var temp = <Text style={{ fontSize: fontSizeAndroid(17), color: "#FFFFFF", fontFamily: "ProximaNova-Light" }}>Please wait...</Text>;
+var temp = <LoadingView style={{ width: 50, height: 50 }}/>;
 
 const propTypes = {
     navigator: PropTypes.object,
@@ -67,7 +68,7 @@ export class QrcodeReader extends Component {
                         }
                     </View>
                     <Text style={{
-                        fontSize: isAndroid()?fontSizeAndroid(17):height*(18/736),
+                        fontSize: isAndroid() ? fontSizeAndroid(17) : height * (18 / 736),
                         color: "#000000",
                         marginLeft: 40,
                         marginRight: 40,
