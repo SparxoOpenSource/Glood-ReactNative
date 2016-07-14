@@ -86,8 +86,8 @@ android {
         applicationId "com.reduxtest"
         minSdkVersion 19
         targetSdkVersion 22
-        versionCode 8
-        versionName "1.0.7"
+        versionCode 9
+        versionName "1.0.8"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }

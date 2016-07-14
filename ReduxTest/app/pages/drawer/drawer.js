@@ -91,8 +91,8 @@ export class DrawerMe extends Component {
             case "FeedBack":
                 break;
         }
-        if (this.drawer != null)
-            this.drawer.openDrawer();
+        // if (this.drawer != null)
+        //     this.drawer.openDrawer();
     }
 }
 

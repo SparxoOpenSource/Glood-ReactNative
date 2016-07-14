@@ -28,7 +28,7 @@ import {LoadingView} from "../components/LoadingView";
 const Camera = NativeModules.RNBarcodeScannerView;
 
 var {height, width} = Dimensions.get('window');
-var temp = <LoadingView style={{ width: 50, height: 50 }}/>;
+var temp = <LoadingView/>;
 
 const propTypes = {
     navigator: PropTypes.object,
