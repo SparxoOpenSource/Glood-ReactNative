@@ -67,7 +67,7 @@ export class QrcodeReader extends Component {
                         }
                     </View>
                     <Text style={{
-                        fontSize: fontSizeAndroid(17),
+                        fontSize: isAndroid()?fontSizeAndroid(17):height*(18/736),
                         color: "#000000",
                         marginLeft: 40,
                         marginRight: 40,
