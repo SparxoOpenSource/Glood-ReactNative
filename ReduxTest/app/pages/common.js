@@ -28,14 +28,16 @@ export class Common extends Component {
             return (
                 <Image source={require('../img/menu.png') } style={{
                     width: 26,
-                    height: 28
+                    height: 28,
+                    marginLeft: 15
                 }}  />
             );
         } else {
             return (
                 <Image source={require('../img/back.png') } style={{
                     width: 26,
-                    height: 23
+                    height: 23,
+                    marginLeft: 15
                 }}  />
             );
         }
@@ -49,7 +51,8 @@ export class Common extends Component {
                     <View style={{
                         flexDirection: 'row', width: 36,
                         height: 23,
-                        marginTop: 4
+                        marginTop: 4,
+                        marginRight: 15
                     }}>
                         <Image source={require('../img/down_1.png') } style={{
                             width: 18, height: 8,
@@ -84,7 +87,7 @@ export class Common extends Component {
             <View>
                 <View style = {styles.view}>
                     <TouchableOpacity style={{
-                        alignItems: 'center',
+                        justifyContent: 'center', width: 70, height: 54
                     }} onPress={this._onBack.bind(this) }>
                         {this.renderBackImage() }
                     </TouchableOpacity>
@@ -92,7 +95,7 @@ export class Common extends Component {
                         <Text style={styles.TextStyle} numberOfLines={1}>{this.props.title}</Text>
                     </View>
                     <TouchableOpacity onPress={this.UpAndDown.bind(this) } style={{
-                        alignItems: 'center',
+                        alignItems: 'center', width: 70, height: 54, justifyContent: 'center'
                     }} >
                         {this.renderRightIMG() }
                     </TouchableOpacity>
@@ -119,13 +122,12 @@ const styles = StyleSheet.create({
         height: 54,
         flexDirection: 'row',
         justifyContent: 'space-between',
-        alignItems: 'center',
-        paddingLeft: 15,
-        paddingRight: 15,
+        alignItems: 'center'
     },
     ImagStyle: {
         width: 26,
-        height: 23
+        height: 23,
+        marginRight: 15
     },
     TextStyle: {
         fontSize: fontSizeAndroid(22),
@@ -134,9 +136,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#00000000',
     },
     TextStyle2: {
-        width: width - 26 - 26 - 15 - 15 - 20-2,
-        marginLeft: 10,
-        marginRight: 10,
+        width: width - 70 - 70 - 2,
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#00000000',

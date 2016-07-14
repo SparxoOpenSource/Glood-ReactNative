@@ -28,9 +28,16 @@ const propTypes = {
     title: PropTypes.string
 };
 
+const CustomPushFromRightWithoutGestures = Object.assign(
+    {},
+    Navigator.SceneConfigs.FloatFromRight,
+    { gestures: {} }
+);
+
 export class Root extends Component {
     renderScene(router, navigator) {
         var component = null;
+        EventListener.trigger("Drawer", "Close");
         _navigator = navigator;
         switch (router.name) {
             case "Introduce":
@@ -72,7 +79,6 @@ export class Root extends Component {
             case "Authorize":
                 return (<Authorize navigator={router.nav}/>);
         }
-
     }
     componentDidMount() {
         if (isAndroid()) {
@@ -91,7 +97,10 @@ export class Root extends Component {
                     ref={(navigator) => { return this.navigator = navigator } }
                     sceneStyle={styles.container}
                     initialRoute={{ name: this.props.title == null ? 'Introduce' : this.props.title }}
-                    renderScene={this.renderScene} />
+                    renderScene={this.renderScene}
+                    configureScene={(route) => {
+                        return CustomPushFromRightWithoutGestures;
+                    } }/>
             </View>
         );
     }
