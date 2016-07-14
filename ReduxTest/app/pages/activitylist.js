@@ -27,7 +27,7 @@ const propTypes = {
     navigator: PropTypes.object
 };
 var event = [
-    { use: 1, total: 20, eventName: '2015 Sparxo Grand Opening', image: "http://i1.s2.dpfile.com/pc/170955571fdcb7b3bab5df4f69f156e7%28700x700%29/thumb.jpg" },
+    { use: 1, total: 20, eventName: '2015 Sparxo Grand Opening', image: "http://att.bbs.duowan.com/forum/201508/17/184055uzl9qq6ly9xqhhl8.jpg" },
     { use: 2, total: 20, eventName: '2015 Sparxo Grand Opening', image: "http://i2.s2.dpfile.com/pc/638089fd18888ca0e0a45f1635659b7b%28700x700%29/thumb.jpg" },
     { use: 3, total: 20, eventName: '2015 Sparxo Grand Opening', image: "http://i1.s2.dpfile.com/pc/d23976621b193f9c821756bd4f79aaec%28700x700%29/thumb.jpg" },
     { use: 4, total: 20, eventName: '2015 Sparxo Grand Opening', image: "http://www.shandongqingdian.com/uploads/allimg/150714/142R32033-4.jpg" },
