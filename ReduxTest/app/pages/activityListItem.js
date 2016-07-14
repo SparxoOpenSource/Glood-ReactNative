@@ -61,7 +61,8 @@ export class ActivityListItem extends Component {
                         height: 59,
                         width: 120,
                         marginBottom:1,
-                    }} source={this.state.IMG}/>
+                    }} source={this.state.IMG}
+                    resizeMode="cover"/>
                     <Text style={{
                         fontSize: fontSizeAndroid(18),
                         color: "#070909",

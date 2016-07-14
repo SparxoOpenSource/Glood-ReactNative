@@ -115,7 +115,7 @@ export class Tickets extends Component {
                     }}>
                         <Image style={{
                             width: widthh * (250 / 414), height: heightt * (390 / 736), borderRadius: 5, marginTop: image_margin_top,
-                        }} key={i} source={{ uri: src.headImageIcon }}/>
+                        }} key={i} source={{ uri: src.headImageIcon }} resizeMode="cover"/>
                         <View style={{ backgroundColor: 'white', width: widthh * (250 / 414), height: heightt * (210 / 736), marginTop: heightt * (80 / 736) - heightt * (370 / 736) }}>
                             <View style={{ backgroundColor: '#00000000', width: widthh * (250 / 414), height: heightt * (70 / 736) }}>
                                 <Text style={{
