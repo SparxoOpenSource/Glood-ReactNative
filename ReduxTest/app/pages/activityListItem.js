@@ -17,6 +17,7 @@ import { AppRegistry,
 import {Common} from "./common";
 import isAndroid from '../utils/isAndroid.js';
 import {fontSizeAndroid} from "../utils/CommonUtils.js";
+import {EventListener} from "../listener/EventListener";
 
 var {height, width} = Dimensions.get('window');
 
@@ -89,9 +90,7 @@ export class ActivityListItem extends Component {
         );
     }
     _handerClick(value, navigator) {
-        this.props.navigator.push({
-            name: "EVENTINFO", value: value, nav: navigator
-        });
+        EventListener.trigger("DrawerOpenPage", "EventInfo", this.props.navigator);
     }
 }
 ActivityListItem.propTypes = propTypes;

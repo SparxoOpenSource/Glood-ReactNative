@@ -19,7 +19,6 @@ import {ActivityListItem} from "./activityListItem";
 import isAndroid from '../utils/isAndroid.js';
 import RefreshableListView from "react-native-refreshable-listview";
 import {fontSizeAndroid} from "../utils/CommonUtils.js";
-import {EventListener} from "../listener/EventListener";
 
 var {height, width} = Dimensions.get('window');
 
@@ -52,12 +51,6 @@ export class ActivityList extends Component {
         this.state = {
             dataSource: ds.cloneWithRows(event),
         }
-    }
-    /**
-     * 接收消息，并监听
-     */
-    componentDidMount(props) {
-        EventListener.on("DrawerOpenPage").then(this.OpenPage.bind(this));
     }
     render() {
         return (
@@ -110,27 +103,6 @@ export class ActivityList extends Component {
         this.props.navigator.push({
             name: "QrcodeReader", value: "QrcodeReader", nav: this.props.navigator
         });
-    }
-    OpenPage(name) {
-        switch (name) {
-            case "Mingle":
-                break;
-            case "Tickets":
-                this.props.navigator.push({
-                    name: "TICKETS", value: "TICKETS", nav: this.props.navigator
-                });
-                break;
-            case "Setting":
-                this.props.navigator.push({
-                    name: "SETTING", value: "SETTING", nav: this.props.navigator
-                });
-                break;
-            case "FeedBack":
-                this.props.navigator.push({
-                    name: "FEEDBACK", value: "FEEDBACK", nav: this.props.navigator
-                });
-                break;
-        }
     }
 }
 

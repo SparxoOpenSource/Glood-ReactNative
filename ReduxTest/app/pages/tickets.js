@@ -186,7 +186,7 @@ export class Tickets extends Component {
             this.setState({
                 viewCoverFlow: view
             });
-        }, 1000);
+        }, 100);
     }
 
 

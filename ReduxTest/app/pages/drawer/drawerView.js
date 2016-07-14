@@ -24,7 +24,7 @@ var {height, width} = Dimensions.get('window');
 const propTypes = {
     title: PropTypes.string,
     navigator: PropTypes.object,
-    page: PropTypes.func
+    page: PropTypes.object
 };
 
 export class DrawerView extends Component {
@@ -140,8 +140,7 @@ export class DrawerView extends Component {
     }
     operation(name) {
         // EventListener.trigger("DrawerGo", name);
-        EventListener.trigger("DrawerOpenPage", name);
-        this.props.page.closeDrawer();
+        EventListener.trigger("DrawerOpenPage", name, this.props.navigator);
     }
 }
 DrawerView.propTypes = propTypes;

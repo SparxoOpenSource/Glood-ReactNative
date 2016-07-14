@@ -109,6 +109,7 @@ export class Root extends Component {
         EventListener.trigger("RecordStop");
         return NaviGoBack(nav);
     }
+    
 }
 var styles = StyleSheet.create({
     container: {

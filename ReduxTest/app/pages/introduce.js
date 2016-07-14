@@ -75,7 +75,7 @@ export class Introduce extends Component {
 
     }
     _onMomentumScrollEnd(e, state, context) {
-        console.log(state, context.state)
+        // console.log(state, context.state)
         if (state.index === 3) {
             LayoutAnimation.configureNext({
                 duration: 200,   //持续时间

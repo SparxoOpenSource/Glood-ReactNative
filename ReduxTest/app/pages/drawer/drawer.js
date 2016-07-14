@@ -25,6 +25,10 @@ import {DrawerView} from "./drawerView";
 var {height, width} = Dimensions.get('window');
 import {Root} from "../../../app/root";
 
+import {Tickets} from "../../pages/tickets"
+import {ActivityList} from "../../pages/activitylist"
+import {EventInfo} from "../../pages/eventInfo"
+
 
 const propTypes = {
     title: PropTypes.string,
@@ -36,6 +40,7 @@ export class DrawerMe extends Component {
         super();
         this.state = {
             drawerLockMode: 'unlocked',
+            indexView: <Root style={{ width: width, height: height }} title={"ActivityList"}/>
         }
     }
     /**
@@ -43,6 +48,7 @@ export class DrawerMe extends Component {
      */
     componentDidMount(props) {
         EventListener.on("Drawer").then(this.OpenCloseDrawer.bind(this));
+        EventListener.on("DrawerOpenPage").then(this.OpenPage.bind(this));
     }
     render() {
         // const {
@@ -62,7 +68,7 @@ export class DrawerMe extends Component {
                 ref={(drawer) => { return this.drawer = drawer } }
                 keyboardDismissMode="on-drag"
                 renderNavigationView={() => navigationView}>
-                <Root style={{ width: width, height: height }} title={"ActivityList"} drawer={this.drawer}/>
+                {this.state.indexView}
             </DrawerLayout>
         );
     }
@@ -78,21 +84,41 @@ export class DrawerMe extends Component {
                 break;
         }
     }
-    DrawerGo(name) {
+    OpenPage(name, navigator) {
+        var sr = "NULL";
         switch (name) {
             case "Mingle":
-
+                sr = <ActivityList navigator={this.props.navigator} title={"Mingle"}/>;
+                this.setState({
+                    indexView: sr
+                });
                 break;
             case "Tickets":
-
+                sr = <Tickets navigator={this.props.navigator} title={"Tickets"}/>;
+                this.setState({
+                    indexView: sr
+                });
                 break;
             case "Setting":
+                this.props.navigator.push({
+                    name: "SETTING", value: "SETTING", nav: this.props.navigator
+                });
                 break;
             case "FeedBack":
+                this.props.navigator.push({
+                    name: "FEEDBACK", value: "FEEDBACK", nav: this.props.navigator
+                });
                 break;
+            case "EventInfo":
+                sr = <EventInfo navigator={this.props.navigator} title={"EventInfo"}/>;
+                this.setState({
+                    indexView: sr
+                });
+                break;
+
         }
-        // if (this.drawer != null)
-        //     this.drawer.openDrawer();
+        if (this.drawer != null)
+            this.drawer.closeDrawer();
     }
 }
 
