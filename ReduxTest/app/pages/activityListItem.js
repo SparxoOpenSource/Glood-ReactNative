@@ -67,7 +67,7 @@ export class ActivityListItem extends Component {
                         color: "#070909",
                         marginLeft: 18,
                         backgroundColor: '#00000000',
-                        fontFamily: "ProximaNova-Light",
+                        fontFamily: "ProximaNova-Regular",
                         width: width - 120 - (width / 7)
                     }}
                         numberOfLines={1}>{this.props.date.eventName}</Text>

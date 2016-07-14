@@ -95,6 +95,7 @@ export class QrcodeReader extends Component {
     returnView() {
         setTimeout(() => {
             if (isAndroid()) {
+                console.log("888888888888888" + height);
                 var View =
                     <BarcodeScanner style={{
                         borderRadius: 4,

@@ -47,7 +47,7 @@ export class Common extends Component {
             case "Down":
                 return (
                     <View style={{
-                        flexDirection: 'row', width: 34,
+                        flexDirection: 'row', width: 36,
                         height: 23,
                         marginTop: 4
                     }}>
@@ -58,10 +58,10 @@ export class Common extends Component {
                         <View style={{
                             alignItems: 'center',
                             justifyContent: 'center',
-                            width: 14, height: 14,
-                            borderRadius: 7,
+                            width: 16, height: 16,
+                            borderRadius: 8,
                             backgroundColor: "red",
-                            marginBottom: 8,
+                            marginTop: -3,
                             marginLeft: 2
                         }}>
                             <Text style={{
@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#00000000',
     },
     TextStyle2: {
-        width: width - 26 - 26 - 15 - 15 - 20,
+        width: width - 26 - 26 - 15 - 15 - 20-2,
         marginLeft: 10,
         marginRight: 10,
         alignItems: 'center',
