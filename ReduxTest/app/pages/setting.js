@@ -19,10 +19,10 @@ import { AppRegistry,
 import {Common} from "./common";
 import isAndroid from '../utils/isAndroid.js';
 var Switch = require('react-native-material-switch');
-var widthh = Dimensions.get('window').width
-var STATUS_BAR_HEIGHT = Navigator.NavigationBar.Styles.General.StatusBarHeight;
-var heightt = Dimensions.get('window').height - Navigator.NavigationBar.Styles.General.NavBarHeight - 20
 var {height, width} = Dimensions.get('window');
+var widthh = width;
+var STATUS_BAR_HEIGHT = Navigator.NavigationBar.Styles.General.StatusBarHeight;
+var heightt = height - Navigator.NavigationBar.Styles.General.NavBarHeight - 20
 
 const propTypes = {
     title: PropTypes.string,
@@ -38,12 +38,12 @@ export class Setting extends Component {
         return (
             <Image style={style.container} source={require('../img/background3.png') }>
                 <Common navigator={this.props.navigator} title={this.props.title}/>
-                <View style={{ width: widthh, height: heightt, backgroundColor: '#00000000', marginTop: heightt * (35 / 736), overflow: 'visible' }}>
+                <View style={{ width: widthh, height: heightt, backgroundColor: '#00000000', marginTop: heightt * (36 / 736), overflow: 'visible' }}>
                     <Text style={{
                         color: 'black', fontSize: heightt * (29 / 736), width: widthh * (300 / 414), fontFamily: 'ProximaNova-Regular',
                         marginLeft: widthh * (30 / 414), overflow: 'visible'
                     }}>Conversation Notification</Text>
-                    <View style={{ marginTop: heightt * (-32 / 736), marginLeft: widthh * (330 / 414), overflow: 'visible' }}>
+                    <View style={{ marginTop: heightt * (-36 / 736), marginLeft: widthh * (330 / 414), overflow: 'visible' }}>
                         <Switch style={{ backgroundColor: "#00000000", overflow: 'visible' }}
                             buttonRadius={14} switchHeight={17} switchWidth={45}
                             activeBackgroundColor='rgba(12, 212, 196, 0.50)'
@@ -54,10 +54,12 @@ export class Setting extends Component {
                     </View>
                     <Text style={{
                         color: 'black', fontSize: heightt * (29 / 736), width: widthh * (300 / 414), fontFamily: 'ProximaNova-Regular',
-                        marginLeft: widthh * (30 / 414), marginTop: heightt * (60 / 736), overflow: 'visible'
+                        marginLeft: widthh * (30 / 414), marginTop: heightt * (61 / 736), overflow: 'visible'
                     }}>Event Organizer</Text>
-                    <View style={{ marginTop: heightt * (-32 / 736), marginLeft: widthh * (330 / 414), overflow: 'visible' }}>
-                        <Switch style={{ backgroundColor: "#00000000", overflow: 'visible' }}
+                    <View style={{
+                        marginTop: heightt * (-36 / 736), marginLeft: widthh * (330 / 414), overflow: 'visible',
+                    }}>
+                        <Switch style={{ backgroundColor: "#00000000", overflow: 'visible', }}
                             buttonRadius={14} switchHeight={17} switchWidth={45}
                             activeBackgroundColor='rgba(12, 212, 196, 0.50)'
                             inactiveBackgroundColor='rgba(172, 172, 172, 0.70)'
