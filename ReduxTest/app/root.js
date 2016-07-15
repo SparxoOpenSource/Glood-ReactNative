@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import { AppRegistry, StyleSheet, View, Text, ListView, Alert, Navigator, Image, TouchableOpacity, BackAndroid,
     Platform, Dimensions, PropTypes}  from 'react-native';
-var _navigator;
 import {Home} from "../app/pages/home";
 import {Mic} from "../app/pages/mic";
 import {Cameraq} from "../app/pages/camera";
@@ -41,13 +40,10 @@ export class Root extends Component {
         var component = null;
         EventListener.trigger("Drawer", "Close");
         singleton.setNav(navigator);
-        _navigator = navigator;
         switch (router.name) {
             case "Introduce":
-                component = Introduce;
                 return (<Introduce/>);
             case "Login":
-                component = Login;
                 return (<Login/>);
             case "TICKETS":
                 return (<Tickets/>);
@@ -72,10 +68,8 @@ export class Root extends Component {
             case "DrawerMe":
                 return (<DrawerMe/>);
             case "Home":
-                component = Home;
                 return (<Home/>);
             case "ActivityList":
-                component = ActivityList;
                 return (<ActivityList/>);
             case "QrcodeReader":
                 return (<QrcodeReader/>);
