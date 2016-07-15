@@ -22,7 +22,9 @@ var {height, width} = Dimensions.get('window');
 import isAndroid from '../app/utils/isAndroid.js';
 import {NaviGoBack} from '../app/utils/CommonUtils';
 import {EventListener} from "../app/listener/EventListener";
-import {QrcodeReader} from "../app/pages/qrcode.reader"
+import {QrcodeReader} from "../app/pages/qrcode.reader";
+import Singleton from '../app/utils/Singleton';
+let singleton = new Singleton();
 
 const propTypes = {
     title: PropTypes.string
@@ -38,46 +40,47 @@ export class Root extends Component {
     renderScene(router, navigator) {
         var component = null;
         EventListener.trigger("Drawer", "Close");
+        singleton.setNav(navigator);
         _navigator = navigator;
         switch (router.name) {
             case "Introduce":
                 component = Introduce;
-                return (<Introduce navigator={navigator}/>);
+                return (<Introduce/>);
             case "Login":
                 component = Login;
-                return (<Login navigator={navigator}/>);
+                return (<Login/>);
             case "TICKETS":
-                return (<Tickets navigator={router.nav}  title={'Tickets'}/>);
+                return (<Tickets/>);
             case "SETTING":
-                return (<Setting navigator={router.nav}  title={'Setting'}/>);
+                return (<Setting/>);
             case "FEEDBACK":
-                return (<Feedback navigator={router.nav}  title={'Feedback'}/>);
+                return (<Feedback/>);
             case "EVENTINFO":
-                return (<EventInfo navigator={router.nav}  title={'EventInfo'}/>);
+                return (<EventInfo/>);
             case "MIC":
-                return (<Mic navigator={router.nav} title={router.value} app={router.app} ip={router.ip}/>);
+                return (<Mic/>);
             case "NEWMIC":
-                return (<NewMic navigator={router.nav} title={router.value} app={router.app} ip={router.ip}/>);
+                return (<NewMic/>);
             case "CAMERA":
-                return (<Cameraqxx navigator={router.nav}  title={router.value}/>);
+                return (<Cameraqxx/>);
             case "PHOTOWALL":
-                return (<PhototWall navigator={router.nav}  title={router.value}/>);
+                return (<PhototWall/>);
             case "NEWCAMERA":
-                return (<NewCamera navigator={router.nav}  title={router.value}/>);
+                return (<NewCamera/>);
             case "TRY":
-                return (<Try navigator={router.nav}  title={router.value}/>);
+                return (<Try/>);
             case "DrawerMe":
-                return (<DrawerMe navigator={router.nav}  title={router.value}/>);
+                return (<DrawerMe/>);
             case "Home":
                 component = Home;
-                return (<Home navigator={navigator} title={"我的主页"}/>);
+                return (<Home/>);
             case "ActivityList":
                 component = ActivityList;
-                return (<ActivityList navigator={navigator}  title={"数据列表"}/>);
+                return (<ActivityList/>);
             case "QrcodeReader":
-                return (<QrcodeReader navigator={router.nav}  title={"QR"}/>);
+                return (<QrcodeReader/>);
             case "Authorize":
-                return (<Authorize navigator={router.nav}/>);
+                return (<Authorize/>);
         }
     }
     componentDidMount() {
@@ -109,7 +112,7 @@ export class Root extends Component {
         EventListener.trigger("RecordStop");
         return NaviGoBack(nav);
     }
-    
+
 }
 var styles = StyleSheet.create({
     container: {

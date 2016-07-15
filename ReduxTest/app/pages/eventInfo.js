@@ -20,9 +20,10 @@ import {Common} from "./common";
 import isAndroid from '../utils/isAndroid.js';
 import {EventListener} from "../listener/EventListener";
 import {Pop} from "../utils/AlertPop";
+import Singleton from '../utils/Singleton';
+
 var {height, width} = Dimensions.get('window');
 var STATUS_BAR_HEIGHT = Navigator.NavigationBar.Styles.General.StatusBarHeight;
-import {Initialization,LoginNow} from "../utils/SupportLogin";
 var maxSize = isAndroid() ? 30 : 35;
 var deviceWidth = Dimensions.get('window').width;
 var widthh = Dimensions.get('window').width;
@@ -37,17 +38,18 @@ var viewOpacity_1 = new Animated.Value(0.3);
 var viewOpacity_2 = new Animated.Value(0.3);
 var runBool_1 = false;
 var runBool_2 = false;
-var maxsize_image_top = isAndroid() ? (maxSize / 2+60) : (maxSize / 2+30);
-var bottom_text_name_height = isAndroid() ? 120 :80;
+var maxsize_image_top = isAndroid() ? (maxSize / 2 + 60) : (maxSize / 2 + 30);
+var bottom_text_name_height = isAndroid() ? 120 : 80;
+let singleton = new Singleton();
 
 const propTypes = {
-     title: PropTypes.string,
-     navigator: PropTypes.object
+    title: PropTypes.string,
+    navigator: PropTypes.object
 };
 
 export class EventInfo extends Component {
 
-constructor(props) {
+    constructor(props) {
         super(props);
         currentTime = 0;
         currentTime1 = 0;
@@ -77,24 +79,24 @@ constructor(props) {
             bounceValue_2: new Animated.Value(1),
             bounceValue_3: new Animated.Value(1),
             isCisClick: false,
-            playCode: props.title,
+            playCode: singleton.getTitle(),
             auto: props.auto,
             imgIsBig: false,
-            bottom_view_image_width:1,
-            bottom_view_image_height:30,
+            bottom_view_image_width: 1,
+            bottom_view_image_height: 30,
             background_imagex: require('../img/background.png'),
             firstTop: props.rowID === 0 ? ((props.dateLength * (90 + maxSize)) > heightt ? 0 : (heightt - 90 - maxSize)) : 0
         }
         setTimeout(() => {
-                this._onPress();
-            }, 1000);
+            this._onPress();
+        }, 1000);
     }
     componentDidMount() {
         if (isAndroid()) {
             //安卓平台使用 LayoutAnimation 动画必须加上这么一句代码（否则动画会失效）
             UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
         }
-        
+
     }
     firstTopMargin(number) {
         if (this.props.rowID === 0) {
@@ -110,78 +112,84 @@ constructor(props) {
     render() {
         return (
             <Image source={require('../img/background3.png') } style={styles.background} >
-                <Common navigator={this.props.navigator} title={"Crazy May Fest 2017"} page='Main' rightType="Down"/>
-                <Image style={{width:widthh,height:heightt*(200/736),marginTop:heightt*(13/736)}} source={require('../img/event_background.jpg')}/>
-                <Text style={{backgroundColor:'#00000000',color: 'black', fontSize: heightt * (23 / 736), width: widthh * (250 / 414), 
-                fontFamily: 'ProximaNova-Semibold',marginLeft:(widthh-(widthh * (240 / 414)))/2,marginTop:heightt*(17/736),
-            lineHeight:25}}>{"Can't wait to see you at \n      Crazy May 2016!"}</Text>
+                <Common  title={"Crazy May Fest 2017"} page='Main' rightType="Down"/>
+                <Image style={{ width: widthh, height: heightt * (200 / 736), marginTop: heightt * (13 / 736) }} source={require('../img/event_background.jpg') }/>
+                <Text style={{
+                    backgroundColor: '#00000000', color: 'black', fontSize: heightt * (23 / 736), width: widthh * (250 / 414),
+                    fontFamily: 'ProximaNova-Semibold', marginLeft: (widthh - (widthh * (240 / 414))) / 2, marginTop: heightt * (17 / 736),
+                    lineHeight: 25
+                }}>{"Can't wait to see you at \n      Crazy May 2016!"}</Text>
                 <View style={ { justifyContent: 'center', alignItems: 'center' }}>
-                <View style={{
-                    height: 90 + maxSize,
-                    width: width,
-                    marginTop: this.state.firstTop
-                }}>
-                    <Animated.View style={{
-                        width: this.state.viewWidth_1,
-                        height: this.state.viewHeight_1,
-                        borderWidth: 0,
-                        borderRadius: this.state.viewRadius_1,
-                        backgroundColor: "white",
-                        opacity: this.state.viewOpacity_1,
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        marginLeft: this.state.viewLeft_1,
-                        marginTop: this.state.viewTop_1,
-                        position: "absolute",
-                        transform: [{ scale: this.state.bounceValue_1 }]
-                    }}/>
-                    <Animated.View style={{
-                        width: this.state.viewWidth_2,
-                        height: this.state.viewHeight_2,
-                        borderWidth: 0,
-                        borderRadius: this.state.viewRadius_2,
-                        backgroundColor: "white",
-                        opacity: this.state.viewOpacity_2,
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        position: "absolute",
-                        marginLeft: this.state.viewLeft_2,
-                        marginTop: this.state.viewTop_2,
-                        transform: [{ scale: this.state.bounceValue_2 }]
-                    }}/>
-                    <TouchableOpacity style={{
-                        width: 90, height: 90,
-                        borderWidth: 0,
-                        borderRadius: 45,
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        position: "absolute",
-                        marginLeft: this.state.imageLeft,
-                        marginTop: this.state.imageTop,
-                        transform: [{ scale: this.state.bounceValue_3 }]
-                    }} onPress={this._onPress.bind(this)} ref="view">
-                        <Animated.Image source={require('../img/171604419.jpg') } style={{
-                            width: 90,
-                            height: 90,
+                    <View style={{
+                        height: 90 + maxSize,
+                        width: width,
+                        marginTop: this.state.firstTop
+                    }}>
+                        <Animated.View style={{
+                            width: this.state.viewWidth_1,
+                            height: this.state.viewHeight_1,
                             borderWidth: 0,
-                            borderRadius: 45
-                        }}  />
-                    </TouchableOpacity>
+                            borderRadius: this.state.viewRadius_1,
+                            backgroundColor: "white",
+                            opacity: this.state.viewOpacity_1,
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            marginLeft: this.state.viewLeft_1,
+                            marginTop: this.state.viewTop_1,
+                            position: "absolute",
+                            transform: [{ scale: this.state.bounceValue_1 }]
+                        }}/>
+                        <Animated.View style={{
+                            width: this.state.viewWidth_2,
+                            height: this.state.viewHeight_2,
+                            borderWidth: 0,
+                            borderRadius: this.state.viewRadius_2,
+                            backgroundColor: "white",
+                            opacity: this.state.viewOpacity_2,
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            position: "absolute",
+                            marginLeft: this.state.viewLeft_2,
+                            marginTop: this.state.viewTop_2,
+                            transform: [{ scale: this.state.bounceValue_2 }]
+                        }}/>
+                        <TouchableOpacity style={{
+                            width: 90, height: 90,
+                            borderWidth: 0,
+                            borderRadius: 45,
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            position: "absolute",
+                            marginLeft: this.state.imageLeft,
+                            marginTop: this.state.imageTop,
+                            transform: [{ scale: this.state.bounceValue_3 }]
+                        }} onPress={this._onPress.bind(this) } ref="view">
+                            <Animated.Image source={require('../img/171604419.jpg') } style={{
+                                width: 90,
+                                height: 90,
+                                borderWidth: 0,
+                                borderRadius: 45
+                            }}  />
+                        </TouchableOpacity>
+                    </View>
                 </View>
-              </View>
-                <Text style={{backgroundColor:'#00000000',color: 'black', fontSize: heightt * (19 / 736), width: widthh * (95 / 414), 
-                fontFamily: 'ProximaNova-Regular',marginLeft:(widthh-(widthh * (70 / 414)))/2,marginTop:heightt*(bottom_text_name_height/736)}}>Christina</Text>
-                <Text style={{backgroundColor:'#00000000',color: 'black', fontSize: heightt * (19 / 736), width: widthh * (230 / 414), 
-                fontFamily: 'ProximaNova-Regular',marginLeft:(widthh-(widthh * (180 / 414)))/2,marginTop:heightt*(5/736)}}>Founder of Crazy Fest</Text>
-               <View style={{width:widthh,height:25,marginTop:height*(55/736),backgroundColor:'#00000030'}}>
-                  <Image source={require('../img/event_background_bottom.png')} style={{width:this.state.bottom_view_image_width,height:25}}/>
-               </View>
+                <Text style={{
+                    backgroundColor: '#00000000', color: 'black', fontSize: heightt * (19 / 736), width: widthh * (95 / 414),
+                    fontFamily: 'ProximaNova-Regular', marginLeft: (widthh - (widthh * (70 / 414))) / 2, marginTop: heightt * (bottom_text_name_height / 736)
+                }}>Christina</Text>
+                <Text style={{
+                    backgroundColor: '#00000000', color: 'black', fontSize: heightt * (19 / 736), width: widthh * (230 / 414),
+                    fontFamily: 'ProximaNova-Regular', marginLeft: (widthh - (widthh * (180 / 414))) / 2, marginTop: heightt * (5 / 736)
+                }}>Founder of Crazy Fest</Text>
+                <View style={{ width: widthh, height: 25, marginTop: height * (55 / 736), backgroundColor: '#00000030' }}>
+                    <Image source={require('../img/event_background_bottom.png') } style={{ width: this.state.bottom_view_image_width, height: 25 }}/>
+                </View>
             </Image>
         );
     }
     _onPress() {
-       this._playAnimOne(5);
-       this._playAnim(5);
+        this._playAnimOne(5);
+        this._playAnim(5);
     }
     _playAnim(time) {
         LayoutAnimation.configureNext({
@@ -194,11 +202,11 @@ constructor(props) {
                 type: 'linear'
             }
         });
-            this.setState({
-                        bottom_view_image_width: this.state.bottom_view_image_width + widthh,
-                        bottom_view_image_height:30
-                    })
-        
+        this.setState({
+            bottom_view_image_width: this.state.bottom_view_image_width + widthh,
+            bottom_view_image_height: 30
+        })
+
     }
     /**
      * 第一个声波动画
@@ -206,7 +214,7 @@ constructor(props) {
     _playAnimOne(times) {
         currentTime = currentTime + 0.5;
         if (currentTime >= times) {
-            this._jumpEventChat("NEWMIC", this.props.navigator);
+            this._jumpEventChat("NEWMIC");
             currentTime = 0;
             return;
         }
@@ -251,7 +259,7 @@ constructor(props) {
     _playAnimTwo(times) {
         currentTime = currentTime + 0.5;
         if (currentTime >= times) {
-            this._jumpEventChat("NEWMIC", this.props.navigator);
+            this._jumpEventChat("NEWMIC");
             currentTime = 0;
             return;
         }
@@ -292,22 +300,23 @@ constructor(props) {
         _animateHandler2.start && _animateHandler2.start();
     }
 
-  _jumpEventChat(value, navigator) {
-    Pop("Log in, please...");
-       this.setState(
-           {
-                        bottom_view_image_width: 1,
-                        bottom_view_image_height:30
-                    });
-        Initialization();
-        LoginNow(value, navigator);
+    _jumpEventChat(value, navigator) {
+        this.setState(
+            {
+                bottom_view_image_width: 1,
+                bottom_view_image_height: 30
+            });
+        singleton.setTitle("Crazy May Fest 2016");
+        singleton.getNav().push({
+            name: value
+        });
     }
 }
 
 EventInfo.propTypes = propTypes;
 
 var styles = StyleSheet.create({
-touch: {
+    touch: {
         marginLeft: 10,
         marginRight: 10,
         marginTop: 6,

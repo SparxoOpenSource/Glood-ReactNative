@@ -18,16 +18,15 @@ import { AppRegistry,
 }  from 'react-native';
 import {Common} from "./common";
 import isAndroid from '../utils/isAndroid.js';
+import Singleton from '../utils/Singleton';
+let singleton = new Singleton();
+
 var Switch = require('react-native-material-switch');
 var {height, width} = Dimensions.get('window');
 var widthh = width;
 var STATUS_BAR_HEIGHT = Navigator.NavigationBar.Styles.General.StatusBarHeight;
 var heightt = height - Navigator.NavigationBar.Styles.General.NavBarHeight - 20
 
-const propTypes = {
-    title: PropTypes.string,
-    navigator: PropTypes.object
-};
 export class Setting extends Component {
     constructor() {
         super();
@@ -37,7 +36,7 @@ export class Setting extends Component {
     render() {
         return (
             <Image style={style.container} source={require('../img/background3.png') }>
-                <Common navigator={this.props.navigator} title={this.props.title}/>
+                <Common/>
                 <View style={{ width: widthh, height: heightt, backgroundColor: '#00000000', marginTop: heightt * (36 / 736), overflow: 'visible' }}>
                     <Text style={{
                         color: 'black', fontSize: heightt * (29 / 736), width: widthh * (300 / 414), fontFamily: 'ProximaNova-Regular',
@@ -84,8 +83,9 @@ export class Setting extends Component {
     }
     _eventOran(state) {
         if (state == true) {
-            this.props.navigator.push({
-                name: "Authorize", value: "Authorize", nav: this.props.navigator
+            singleton.setTitle("Authorize");
+            singleton.getNav().push({
+                name: "Authorize"
             });
         }
     }
@@ -94,7 +94,6 @@ export class Setting extends Component {
 
     }
 }
-Setting.propTypes = propTypes;
 
 const style = StyleSheet.create({
     container: {

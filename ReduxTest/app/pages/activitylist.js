@@ -19,13 +19,11 @@ import {ActivityListItem} from "./activityListItem";
 import isAndroid from '../utils/isAndroid.js';
 import RefreshableListView from "react-native-refreshable-listview";
 import {fontSizeAndroid} from "../utils/CommonUtils.js";
+import Singleton from '../utils/Singleton';
+let singleton = new Singleton();
 
 var {height, width} = Dimensions.get('window');
 
-const propTypes = {
-    title: PropTypes.string,
-    navigator: PropTypes.object
-};
 var event = [
     { use: 1, total: 20, eventName: '2015 Sparxo Grand Opening', image: "http://att.bbs.duowan.com/forum/201508/17/184055uzl9qq6ly9xqhhl8.jpg" },
     { use: 2, total: 20, eventName: '2015 Sparxo Grand Opening', image: "http://i2.s2.dpfile.com/pc/638089fd18888ca0e0a45f1635659b7b%28700x700%29/thumb.jpg" },
@@ -55,7 +53,7 @@ export class ActivityList extends Component {
     render() {
         return (
             <Image style={style.container} source={require('../img/background3.png') }>
-                <Common navigator={this.props.navigator} title="Crazy May Fest 2016" page="Main" rightType="Up"/>
+                <Common page="Main" rightType="Up"/>
                 <View style={style.content}>
                     <RefreshableListView
                         enableEmptySections = {true}
@@ -93,15 +91,15 @@ export class ActivityList extends Component {
         );
     }
     _row(rowData, sectionID, rowID) {
-        let item = <ActivityListItem date={rowData} rowID={parseInt(rowID) } navigator={this.props.navigator}/>;
+        let item = <ActivityListItem date={rowData} rowID={parseInt(rowID) }/>;
         return item;
     }
     _access() {
 
     }
     QR() {
-        this.props.navigator.push({
-            name: "QrcodeReader", value: "QrcodeReader", nav: this.props.navigator
+        singleton.getNav().push({
+            name: "QrcodeReader",
         });
     }
 }
@@ -120,5 +118,3 @@ const style = StyleSheet.create({
         height: height-60
     }
 });
-
-ActivityList.propTypes = propTypes;

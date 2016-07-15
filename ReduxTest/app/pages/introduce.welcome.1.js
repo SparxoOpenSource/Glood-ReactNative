@@ -19,9 +19,10 @@ import { AppRegistry,
 import isAndroid from '../utils/isAndroid.js';
 var {height, width} = Dimensions.get('window');
 import {fontSizeAndroid} from "../utils/CommonUtils.js";
+import Singleton from '../utils/Singleton';
+let singleton = new Singleton();
 
 const propTypes = {
-    navigator: PropTypes.object,
     content: PropTypes.string
 };
 /**
@@ -60,8 +61,9 @@ export class IntroduceWelcomeButton extends Component {
         );
     }
     go() {
-        this.props.navigator.replace({
-            name: "Login", value: "Login", nav: this.props.navigator
+        singleton.setTitle("Login");
+        singleton.getNav().replace({
+            name: "Login"
         });
     }
 }

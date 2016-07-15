@@ -57,10 +57,6 @@ var temp = <View style={{
     <LoadingView/>
 </View>;
 
-const propTypes = {
-    title: PropTypes.string,
-    navigator: PropTypes.object
-};
 export class Tickets extends Component {
     constructor() {
         super();
@@ -99,7 +95,7 @@ export class Tickets extends Component {
         }
         return (
             <Image style={style.container} source={require('../img/background3.png') }>
-                <Common navigator={this.props.navigator} title={this.props.title} page='Main' rightType='Share'/>
+                <Common page='Main' rightType='Share'/>
                 {this.state.viewCoverFlow }
             </Image>
 
@@ -193,7 +189,6 @@ export class Tickets extends Component {
 
 
 }
-Tickets.propTypes = propTypes;
 
 const style = StyleSheet.create({
     container: {

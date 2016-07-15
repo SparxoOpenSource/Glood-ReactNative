@@ -21,7 +21,6 @@ var {height, width} = Dimensions.get('window');
 import {fontSizeAndroid} from "../utils/CommonUtils.js";
 
 const propTypes = {
-    navigator: PropTypes.object,
     content: PropTypes.string
 };
 /**

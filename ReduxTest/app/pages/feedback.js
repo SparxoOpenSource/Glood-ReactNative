@@ -24,10 +24,6 @@ var widthh = Dimensions.get('window').width
 var STATUS_BAR_HEIGHT = Navigator.NavigationBar.Styles.General.StatusBarHeight;
 var heightt = Dimensions.get('window').height - Navigator.NavigationBar.Styles.General.NavBarHeight
 
-const propTypes = {
-    title: PropTypes.string,
-    navigator: PropTypes.object
-};
 export class Feedback extends Component {
     constructor(props) {
         super(props);
@@ -41,7 +37,7 @@ export class Feedback extends Component {
     render() {
         return (
             <Animated.Image style={[style.container, { transform: this.state.backViewTrans.getTranslateTransform() }]} source={require('../img/background3.png') }>
-                <Common navigator={this.props.navigator}/>
+                <Common/>
                 <View style={style.feedbackView}>
                     <Image style={{ width: 93, height: 113, marginLeft: (widthh - 93) / 2, }} source={require('../img/feedbackeys.png') } />
                     <Text style={{
@@ -112,7 +108,6 @@ export class Feedback extends Component {
         }).start();
     }
 }
-Feedback.propTypes = propTypes;
 
 const style = StyleSheet.create({
     container: {

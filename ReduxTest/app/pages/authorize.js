@@ -20,16 +20,13 @@ import { AppRegistry,
 }  from 'react-native';
 import {Common} from "./common";
 import isAndroid from '../utils/isAndroid.js';
+
 var widthh = Dimensions.get('window').width
 var STATUS_BAR_HEIGHT = Navigator.NavigationBar.Styles.General.StatusBarHeight;
 var heightt = Dimensions.get('window').height - Navigator.NavigationBar.Styles.General.NavBarHeight
 var emailTextInput = null;
 var passwordTextInput = null;
 
-const propTypes = {
-    title: PropTypes.string,
-    navigator: PropTypes.object
-};
 export class Authorize extends Component {
     constructor(props) {
         super(props);
@@ -53,7 +50,7 @@ export class Authorize extends Component {
     render() {
         return (
             <Image style={style.container} source={require('../img/background3.png') }>
-                <Common navigator={this.props.navigator}/>
+                <Common/>
                 <Animated.View style={[style.feedbackView, { transform: this.state.backViewTrans.getTranslateTransform() }]}>
                     <Image style={{ width: widthh * (100 / 414), height: heightt * (110 / 736), marginLeft: (widthh - (widthh * (100 / 414))) / 2, marginTop: heightt * (41 / 736) }}
                         source={require('../img/logo2.png') }/>
@@ -228,7 +225,6 @@ export class Authorize extends Component {
         }
     }
 }
-Authorize.propTypes = propTypes;
 
 const style = StyleSheet.create({
     container: {
