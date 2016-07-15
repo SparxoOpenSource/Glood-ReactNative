@@ -30,10 +30,6 @@ const Camera = NativeModules.RNBarcodeScannerView;
 var {height, width} = Dimensions.get('window');
 var temp = <LoadingView/>;
 
-const propTypes = {
-    navigator: PropTypes.object,
-    title: PropTypes.string
-};
 export class QrcodeReader extends Component {
     constructor() {
         super();
@@ -48,7 +44,7 @@ export class QrcodeReader extends Component {
     render() {
         return (
             <Image style={{ width: width, height: height, flexDirection: "column", }} source={require('../img/background3.png') }>
-                <Common navigator={this.props.navigator} title={this.props.title} page="NoMain"/>
+                <Common page="NoMain"/>
                 <View style={{
                     flexDirection: "column",
                 }}>
@@ -125,4 +121,3 @@ export class QrcodeReader extends Component {
         }, 500);
     }
 }
-QrcodeReader.propTypes = propTypes

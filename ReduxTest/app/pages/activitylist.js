@@ -98,6 +98,7 @@ export class ActivityList extends Component {
 
     }
     QR() {
+        singleton.setTitle("QrcodeReader");
         singleton.getNav().push({
             name: "QrcodeReader",
         });
