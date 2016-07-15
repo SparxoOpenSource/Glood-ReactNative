@@ -21,12 +21,6 @@ import {fontSizeAndroid} from "../../utils/CommonUtils.js";
 
 var {height, width} = Dimensions.get('window');
 
-const propTypes = {
-    title: PropTypes.string,
-    navigator: PropTypes.object,
-    page: PropTypes.object
-};
-
 export class DrawerView extends Component {
     render() {
         return (
@@ -136,11 +130,8 @@ export class DrawerView extends Component {
     }
     closeDrawer() {
         EventListener.trigger("Drawer", "Close");
-        // this.props.page.closeDrawer();
     }
     operation(name) {
-        // EventListener.trigger("DrawerGo", name);
-        EventListener.trigger("DrawerOpenPage", name, this.props.navigator);
+        EventListener.trigger("DrawerOpenPage", name);
     }
 }
-DrawerView.propTypes = propTypes;

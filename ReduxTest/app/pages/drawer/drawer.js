@@ -28,19 +28,17 @@ import {Root} from "../../../app/root";
 import {Tickets} from "../../pages/tickets"
 import {ActivityList} from "../../pages/activitylist"
 import {EventInfo} from "../../pages/eventInfo"
-
-
-const propTypes = {
-    title: PropTypes.string,
-    navigator: PropTypes.object
-};
+import {Initialization, LoginNow} from "../../utils/SupportLogin";
+import Singleton from '../../utils/Singleton';
+let singleton = new Singleton();
+singleton.setTitle("Crazy May Fest 2016");
 
 export class DrawerMe extends Component {
     constructor(props) {
         super(props);
         this.state = {
             drawerLockMode: 'unlocked',
-            indexView: <ActivityList navigator={props.navigator} title={"Mingle"}/>
+            indexView: <ActivityList/>
         }
     }
     /**
@@ -49,6 +47,10 @@ export class DrawerMe extends Component {
     componentDidMount(props) {
         EventListener.on("Drawer").then(this.OpenCloseDrawer.bind(this));
         EventListener.on("DrawerOpenPage").then(this.OpenPage.bind(this));
+        Initialization();//连接聊天服务器
+        setTimeout(() => {
+            LoginNow();
+        }, 1500);
     }
     render() {
         // const {
@@ -56,7 +58,7 @@ export class DrawerMe extends Component {
         // } = this.state;
 
         const navigationView = (
-            <DrawerView navigator={this.props.navigator} page={this.drawer}/>
+            <DrawerView/>
         );
 
         return (
@@ -84,33 +86,38 @@ export class DrawerMe extends Component {
                 break;
         }
     }
-    OpenPage(name, navigator) {
+    OpenPage(name) {
         var sr = "NULL";
         switch (name) {
             case "Mingle":
-                sr = <ActivityList navigator={this.props.navigator} title={"Mingle"}/>;
+                singleton.setTitle("Crazy May Fest 2016");
+                sr = <ActivityList/>;
                 this.setState({
                     indexView: sr
                 });
                 break;
             case "Tickets":
-                sr = <Tickets navigator={this.props.navigator} title={"Tickets"}/>;
+                singleton.setTitle("Tickets");
+                sr = <Tickets/>;
                 this.setState({
                     indexView: sr
                 });
                 break;
             case "Setting":
-                this.props.navigator.push({
-                    name: "SETTING", value: "SETTING", nav: this.props.navigator
+                singleton.setTitle("SETTING");
+                singleton.getNav().push({
+                    name: "SETTING"
                 });
                 break;
             case "FeedBack":
-                this.props.navigator.push({
-                    name: "FEEDBACK", value: "FEEDBACK", nav: this.props.navigator
+                singleton.setTitle("FEEDBACK");
+                singleton.getNav().push({
+                    name: "FEEDBACK"
                 });
                 break;
             case "EventInfo":
-                sr = <EventInfo navigator={this.props.navigator} title={"EventInfo"}/>;
+                singleton.setTitle("Crazy May Fest 2017");
+                sr = <EventInfo/>;
                 this.setState({
                     indexView: sr
                 });
@@ -144,4 +151,3 @@ var styles = StyleSheet.create({
         paddingLeft: 10,
     }
 });
-DrawerMe.propTypes = propTypes;

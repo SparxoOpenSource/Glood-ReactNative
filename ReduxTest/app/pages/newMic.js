@@ -22,13 +22,15 @@ import RefreshableListView from "react-native-refreshable-listview";
 // import ExtraDimensions from 'react-native-extra-dimensions-android';
 import {EventListener} from "../listener/EventListener";
 import {fontSizeAndroid} from "../utils/CommonUtils.js";
+import {LoadingView} from "../components/LoadingView";
+import Singleton from '../utils/Singleton';
+let singleton = new Singleton();
 
 var data = new Array();
 var ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
 const LISTVIEW_REF = 'listView'
 var ss = 70;
 var tt = 70;
-var app;
 var footerY = 0;
 var everyOne = isAndroid() ? 95 : 100;
 var everyOnexxx = isAndroid() ? 95 : 100;
@@ -47,13 +49,6 @@ var myImg = require('../img/play.png');
 var voiceImg = require('../img/voice.png');
 var {height, width} = Dimensions.get('window');
 var array = new Array();
-
-const propTypes = {
-    title: PropTypes.string,
-    navigator: PropTypes.object,
-    app: PropTypes.object,
-    ip: PropTypes.string
-};
 
 export class NewMic extends Component {
     constructor() {
@@ -75,7 +70,7 @@ export class NewMic extends Component {
     render() {
         return (
             <Image style={style.container} source={require('../img/background3.png') }>
-                <Common navigator={this.props.navigator} ground="fw_1.png" title="Crazy May Fest 2016"  rightType="Down"/>
+                <Common ground="fw_1.png"  rightType="Down"/>
                 <View style={style.content}>
                     <RefreshableListView
                         enableEmptySections = {true}
@@ -157,9 +152,8 @@ export class NewMic extends Component {
      * 开始录音
      */
     _startVoice() {
-        var _this = this;
         this.voiceStatus(true);
-        RecordAudio.prototype.startRecord(_this.props.ip, (back) => {
+        RecordAudio.prototype.startRecord(singleton.getIP(), (back) => {
             // RecordAudio.prototype.recordMsg("开始录音");
         });
     }
@@ -175,7 +169,7 @@ export class NewMic extends Component {
             if (back.success == true) {
                 var title = {
                     name: back.name,
-                    ip: _this.props.ip,
+                    ip: singleton.getIP(),
                     time: back.time
                 };
                 data = [...data, title];
@@ -245,11 +239,11 @@ export class NewMic extends Component {
 
         var self = this;
         this.scrollResponder = this.refs.listView.getScrollResponder();
-        this.props.app.service('messages').on('created', message => {
+        singleton.getMicFunction().service('messages').on('created', message => {
             if (!inTher)
                 return;
             var newMessage = this.formatMessage(message);
-            if (this.props.app.get('user')._id !== newMessage.userid) {
+            if (singleton.getMicFunction().get('user')._id !== newMessage.userid) {
                 RecordAudio.prototype.saveRecord(newMessage.text, newMessage.name, (back) => {
                     if (back.success == true) {
                         var title = {
@@ -269,7 +263,7 @@ export class NewMic extends Component {
             }
         });
 
-        this.props.app.service('messages').on('removed', result => {
+        singleton.getMicFunction().service('messages').on('removed', result => {
             // this.deleteMessage(result);
         });
     }
@@ -304,7 +298,7 @@ export class NewMic extends Component {
      * 发送消息
      */
     sendMessage(message = null, rowID = null) {
-        this.props.app.service('messages').create({ text: message }).then(result => {
+        singleton.getMicFunction().service('messages').create({ text: message }).then(result => {
             console.log('message created!');
         }).catch((error) => {
             console.log('ERROR creating message');
@@ -364,8 +358,6 @@ export class NewMic extends Component {
         }
     }
 }
-
-NewMic.propTypes = propTypes;
 
 const style = StyleSheet.create({
     container: {

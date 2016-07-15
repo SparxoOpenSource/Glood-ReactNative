@@ -4,13 +4,10 @@ import isAndroid from '../utils/isAndroid.js';
 import {EventListener} from "../listener/EventListener";
 import {fontSizeAndroid} from "../utils/CommonUtils.js";
 var {height, width} = Dimensions.get('window');
-
-var _navigator;
-var _title = "我是导航";
+import Singleton from '../utils/Singleton';
+let singleton = new Singleton();
 
 const propTypes = {
-    title: PropTypes.string,
-    navigator: PropTypes.object,
     page: PropTypes.string,
     rightType: PropTypes.string
 };
@@ -92,7 +89,7 @@ export class Common extends Component {
                         {this.renderBackImage() }
                     </TouchableOpacity>
                     <View style={styles.TextStyle2}>
-                        <Text style={styles.TextStyle} numberOfLines={1}>{this.props.title}</Text>
+                        <Text style={styles.TextStyle} numberOfLines={1}>{singleton.getTitle() }</Text>
                     </View>
                     <TouchableOpacity onPress={this.UpAndDown.bind(this) } style={{
                         alignItems: 'center', width: 70, height: 54, justifyContent: 'center'
@@ -108,7 +105,7 @@ export class Common extends Component {
             EventListener.trigger("Drawer", "Open");
         } else {
             EventListener.trigger("RecordStop");
-            this.props.navigator.pop();
+            singleton.getNav().pop();
         }
     }
     UpAndDown() {

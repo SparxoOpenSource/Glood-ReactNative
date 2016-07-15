@@ -29,8 +29,7 @@ const propTypes = {
         id: React.PropTypes.number,
         image: React.PropTypes.string
     }),
-    rowID: PropTypes.number,
-    navigator: PropTypes.object
+    rowID: PropTypes.number
 };
 /**
  * 活动列表
@@ -61,9 +60,9 @@ export class ActivityListItem extends Component {
                     <Image style={{
                         height: 59,
                         width: 120,
-                        marginBottom:1,
+                        marginBottom: 1,
                     }} source={this.state.IMG}
-                    resizeMode="cover"/>
+                        resizeMode="cover"/>
                     <Text style={{
                         fontSize: fontSizeAndroid(18),
                         color: "#070909",
@@ -91,7 +90,7 @@ export class ActivityListItem extends Component {
         );
     }
     _handerClick(value, navigator) {
-        EventListener.trigger("DrawerOpenPage", "EventInfo", this.props.navigator);
+        EventListener.trigger("DrawerOpenPage", "EventInfo");
     }
 }
 ActivityListItem.propTypes = propTypes;

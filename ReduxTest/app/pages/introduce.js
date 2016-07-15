@@ -25,9 +25,6 @@ import {IntroduceWelcomeButton} from "./introduce.welcome.1"
 var {height, width} = Dimensions.get('window');
 var index = 0;
 
-const propTypes = {
-    navigator: PropTypes.object
-};
 /**
  * 介绍
  */
@@ -61,7 +58,7 @@ export class Introduce extends Component {
                         <IntroduceWelcome style={styles.image} content={"Connect\nwith enemt\norganizers!"}/>
                     </View>
                     <View style={styles.slide}>
-                        <IntroduceWelcomeButton style={styles.image} navigator={this.props.navigator} content={"All your\ntickets in\none place!"}/>
+                        <IntroduceWelcomeButton style={styles.image}  content={"All your\ntickets in\none place!"}/>
                     </View>
                 </Swiper>
             </View>
@@ -110,8 +107,6 @@ export class Introduce extends Component {
         index = state.index;
     }
 }
-
-Introduce.propTypes = propTypes;
 
 var styles = StyleSheet.create({
     wrapper: {

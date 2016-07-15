@@ -19,14 +19,11 @@ import {
 }  from 'react-native';
 import {Common} from "./common";
 import isAndroid from '../utils/isAndroid.js';
+import Singleton from '../utils/Singleton';
+let singleton = new Singleton();
 
 var widthh = Dimensions.get('window').width
 var heightt = Dimensions.get('window').height
-
-const propTypes = {
-    title: PropTypes.string,
-    navigator: PropTypes.object
-};
 
 export class Login extends Component {
     constructor(props) {
@@ -156,7 +153,7 @@ export class Login extends Component {
                             </TouchableOpacity>
                         </View>
                         <TouchableOpacity style={{ flexDirection: 'row', backgroundColor: '#53aeee', width: widthh, height: heightt * (70 / 736), marginTop: isAndroid()?heightt * (73 / 736):heightt * (83 / 736) }}
-                            onPress={this._handerClick.bind(this, this.props.navigator) }>
+                            onPress={this._handerClick.bind(this) }>
                             <Text style={{
                                 backgroundColor: '#00000000',
                                 color: 'white', fontSize: heightt * (32 / 736), width: widthh * (110 / 414), fontFamily: 'ProximaNova-Bold', marginTop: heightt * ((60 - 30) / 736) / 2,
@@ -215,9 +212,10 @@ export class Login extends Component {
             sign_up_view_width: 1,
         });
     }
-    _handerClick(navigator) {
-        this.props.navigator.replace({
-            name: "DrawerMe", value: "DrawerMe", nav: navigator
+    _handerClick() {
+        singleton.setTitle("Crazy May Fest 2017");
+        singleton.getNav().replace({
+            name: "DrawerMe"
         });
     }
     componentDidMount() {
@@ -242,7 +240,7 @@ export class Login extends Component {
 
     }
 }
-Login.propTypes = propTypes;
+
 var style = StyleSheet.create({
     container: {
         flex: 1,

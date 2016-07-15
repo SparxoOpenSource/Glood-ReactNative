@@ -7,6 +7,8 @@ import {HardwareUtils} from "./HardwareUtils";
 import {EventListener} from "../listener/EventListener";
 import {Pop} from "./AlertPop";
 import {AsyncStorage}  from 'react-native';
+import Singleton from './Singleton';
+let singleton = new Singleton();
 
 // This is required for socket.io-client due to a bug in React Native debugger
 if (window.navigator && Object.keys(window.navigator).length == 0) {
@@ -39,11 +41,11 @@ export function Initialization() {
     });
 
     app.io.on('disconnect', () => {
-        
+
     });
 }
 
-export function LoginNow(value, navigator) {
+export function LoginNow() {
     HardwareUtils.prototype.getAddressIp((call) => {
 
         email = call.IP;
@@ -53,20 +55,22 @@ export function LoginNow(value, navigator) {
             email: call.IP,
             password: call.IP
         }).then(response => {
-            Pop("User login success");
-            navigator.push({
-                name: value, value: value, nav: navigator, app: app, ip: call.IP
-            });
+            // Pop("User login success");
+            // navigator.push({
+            //     name: value, value: value, nav: navigator, app: app, ip: call.IP
+            // });
+            singleton.setIP(call.IP);
+            singleton.setMicFunction(app);
         }).catch(error => {
-            Pop("Login failed, now user register");
+            // Pop("Login failed, now user register");
             // Pop(error);
             console.log('ERROR-1', error);
-            register(value, navigator, call);
+            register(call);
             return;
         });
     });
 }
-function register(value, navigator, call) {
+function register(call) {
     var userData = {
         email: call.IP,
         password: call.IP
@@ -78,18 +82,20 @@ function register(value, navigator, call) {
             email: call.IP,
             password: call.IP
         }).then(response => {
-            Pop("User registration success");
-            navigator.push({
-                name: value, value: value, nav: navigator, app: app, ip: call.IP
-            });
+            // Pop("User registration success");
+            // navigator.push({
+            //     name: value, value: value, nav: navigator, app: app, ip: call.IP
+            // });
+            singleton.setIP(call.IP);
+            singleton.setMicFunction(app);
             // re-route to main authorized chat   component
         }).catch(error => {
-            Pop("Automatic registration failure");
+            // Pop("Automatic registration failure");
             // Pop(error);
             console.log('ERROR-2', error);
         });
     }).catch((err) => {
-            Pop("Automatic registration failure");
+        // Pop("Automatic registration failure");
         // Pop(err);
         console.log('ERROR-3', err);
     });
