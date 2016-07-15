@@ -36,11 +36,11 @@ const propTypes = {
 };
 
 export class DrawerMe extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             drawerLockMode: 'unlocked',
-            indexView: <Root style={{ width: width, height: height }} title={"ActivityList"}/>
+            indexView: <ActivityList navigator={props.navigator} title={"Mingle"}/>
         }
     }
     /**
