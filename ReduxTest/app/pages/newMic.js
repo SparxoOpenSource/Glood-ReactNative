@@ -24,6 +24,7 @@ import {EventListener} from "../listener/EventListener";
 import {fontSizeAndroid} from "../utils/CommonUtils.js";
 import {LoadingView} from "../components/LoadingView";
 import Singleton from '../utils/Singleton';
+import {sendMessageInRoom} from '../utils/CommonUtils';
 let singleton = new Singleton();
 
 var data = new Array();
@@ -153,7 +154,7 @@ export class NewMic extends Component {
      */
     _startVoice() {
         this.voiceStatus(true);
-        RecordAudio.prototype.startRecord(singleton.getIP(), (back) => {
+        RecordAudio.prototype.startRecord('GG', (back) => {
             // RecordAudio.prototype.recordMsg("开始录音");
         });
     }
@@ -231,41 +232,38 @@ export class NewMic extends Component {
      * 接收消息，并监听
      */
     componentDidMount(props) {
-        EventListener.on("RecordStop").then(this.stopRecordAll.bind(this));
-        EventListener.on("PlayState").then(this.PlayState.bind(this));
-        // DeviceEventEmitter.addListener("TestEventName", info => {
-        //     Alert.alert(info.name);
+        // EventListener.on("RecordStop").then(this.stopRecordAll.bind(this));
+        // EventListener.on("PlayState").then(this.PlayState.bind(this));
+
+        // var self = this;
+        // this.scrollResponder = this.refs.listView.getScrollResponder();
+        // singleton.getMicFunction().service('messages').on('created', message => {
+        //     if (!inTher)
+        //         return;
+        //     var newMessage = this.formatMessage(message);
+        //     if (singleton.getMicFunction().get('user')._id !== newMessage.userid) {
+        //         RecordAudio.prototype.saveRecord(newMessage.text, newMessage.name, (back) => {
+        //             if (back.success == true) {
+        //                 var title = {
+        //                     name: back.name,
+        //                     ip: newMessage.name,
+        //                     time: back.time
+        //                 };
+        //                 data = [...data, title];
+        //                 self._refush(data);
+        //             }
+        //         });
+        //         footerY = footerY + everyOne;
+        //         if (data.length * everyOne > maxHeight) {
+        //             scorll = true;
+        //             this._setTime();
+        //         }
+        //     }
         // });
 
-        var self = this;
-        this.scrollResponder = this.refs.listView.getScrollResponder();
-        singleton.getMicFunction().service('messages').on('created', message => {
-            if (!inTher)
-                return;
-            var newMessage = this.formatMessage(message);
-            if (singleton.getMicFunction().get('user')._id !== newMessage.userid) {
-                RecordAudio.prototype.saveRecord(newMessage.text, newMessage.name, (back) => {
-                    if (back.success == true) {
-                        var title = {
-                            name: back.name,
-                            ip: newMessage.name,
-                            time: back.time
-                        };
-                        data = [...data, title];
-                        self._refush(data);
-                    }
-                });
-                footerY = footerY + everyOne;
-                if (data.length * everyOne > maxHeight) {
-                    scorll = true;
-                    this._setTime();
-                }
-            }
-        });
-
-        singleton.getMicFunction().service('messages').on('removed', result => {
-            // this.deleteMessage(result);
-        });
+        // singleton.getMicFunction().service('messages').on('removed', result => {
+        //     // this.deleteMessage(result);
+        // });
     }
     PlayState(bool) {
         if (bool === false) {
@@ -298,12 +296,13 @@ export class NewMic extends Component {
      * 发送消息
      */
     sendMessage(message = null, rowID = null) {
-        singleton.getMicFunction().service('messages').create({ text: message }).then(result => {
-            console.log('message created!');
-        }).catch((error) => {
-            console.log('ERROR creating message');
-            console.log(error);
-        });
+        sendMessageInRoom(message);
+        // singleton.getMicFunction().service('messages').create({ text: message }).then(result => {
+        //     console.log('message created!');
+        // }).catch((error) => {
+        //     console.log('ERROR creating message');
+        //     console.log(error);
+        // });
     }
     /**
      * 自动播放

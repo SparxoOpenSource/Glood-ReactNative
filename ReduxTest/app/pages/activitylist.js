@@ -25,12 +25,12 @@ let singleton = new Singleton();
 var {height, width} = Dimensions.get('window');
 
 var event = [
-    { use: 1, total: 20, eventName: '2015 Sparxo Grand Opening', image: "http://att.bbs.duowan.com/forum/201508/17/184055uzl9qq6ly9xqhhl8.jpg" },
-    { use: 2, total: 20, eventName: '2015 Sparxo Grand Opening', image: "http://i2.s2.dpfile.com/pc/638089fd18888ca0e0a45f1635659b7b%28700x700%29/thumb.jpg" },
-    { use: 3, total: 20, eventName: '2015 Sparxo Grand Opening', image: "http://i1.s2.dpfile.com/pc/d23976621b193f9c821756bd4f79aaec%28700x700%29/thumb.jpg" },
-    { use: 4, total: 20, eventName: '2015 Sparxo Grand Opening', image: "http://www.shandongqingdian.com/uploads/allimg/150714/142R32033-4.jpg" },
-    { use: 5, total: 20, eventName: '2015 Sparxo Grand Opening', image: "http://www.mimvm.com/uploads/allimg/photo/20140531165328867.jpg" },
-    { use: 6, total: 20, eventName: '2015 Sparxo Grand Opening', image: "http://www.sydphotos.cn/wp-content/uploads/2013/06/58aed1e4c4664cabe3d7ad849f1005bc.jpg" },
+    { use: 1, total: 20, eventName: '1', image: "http://att.bbs.duowan.com/forum/201508/17/184055uzl9qq6ly9xqhhl8.jpg" },
+    { use: 2, total: 20, eventName: '2', image: "http://i2.s2.dpfile.com/pc/638089fd18888ca0e0a45f1635659b7b%28700x700%29/thumb.jpg" },
+    { use: 3, total: 20, eventName: '3', image: "http://i1.s2.dpfile.com/pc/d23976621b193f9c821756bd4f79aaec%28700x700%29/thumb.jpg" },
+    { use: 4, total: 20, eventName: '4', image: "http://www.shandongqingdian.com/uploads/allimg/150714/142R32033-4.jpg" },
+    { use: 5, total: 20, eventName: '5', image: "http://www.mimvm.com/uploads/allimg/photo/20140531165328867.jpg" },
+    { use: 6, total: 20, eventName: '2015 Sparxo Grand Opening', image: "http://img3.xgo-img.com.cn/dealer_article/203_500x375/deBcjvv5hBHU.jpg" },
     { use: 7, total: 20, eventName: '2015 Sparxo Grand Opening', image: "http://img.izaojiao.com/upload/month_1412/201412110930465369.jpg" },
     { use: 8, total: 20, eventName: '2015 Sparxo Grand Opening', image: "http://i2.s1.dpfile.com/pc/8e91cfcf85c30b051adfac7506776d11%28700x700%29/thumb.jpg" },
     { use: 9, total: 20, eventName: '2015 Sparxo Grand Opening', image: "http://img3.douban.com/view/note/large/public/p223383491-7.jpg" },
