@@ -16,6 +16,7 @@ HardwareUtils.prototype.getAddressIp((call) => {
   userNamexx = call.IP;
 });
 var eventNamexx;
+var isLoginSuccess = 'no';
 export function NaviGoBack(navigator) {
   if (navigator && navigator.getCurrentRoutes().length > 1) {
     navigator.pop();
@@ -58,6 +59,7 @@ export function start() {
   signalr.connection.start().done(() => {
     Pop("login ...");
     signalr.logOn((userNamexx)).done(() => {
+      isLoginSuccess = 'yes';
       Pop("connection server Success");
       signalr.loadEventChatRooms().done((room) => {
         console.log('------***', room);
@@ -71,15 +73,18 @@ export function start() {
 }
 
 export function joinEventChatRoom(eventName) {
-  Pop("joinEventChatRoom ...");
-  eventNamexx = eventName;
-  serSignalr.joinEventChatRoom((eventName)).done(() => {
-    // Pop('joinEventChatRoom success');
-    EventListener.trigger("DrawerOpenPage", "EventInfo");
-    console.log('sdfsdf-------', eventName);
-  }).fail(() => {
-    Alert.alert('joinEventChatRoom ERROR');
-  })
+  if (isLoginSuccess == 'yes') {
+    Pop("joinEventChatRoom ...");
+    eventNamexx = eventName;
+    serSignalr.joinEventChatRoom((eventName)).done(() => {
+      // Pop('joinEventChatRoom success');
+      EventListener.trigger("DrawerOpenPage", "EventInfo");
+      console.log('sdfsdf-------', eventName);
+    }).fail(() => {
+      Alert.alert('joinEventChatRoom ERROR');
+    })
+  }
+
 }
 
 export function sendMessageInRoom(message) {
