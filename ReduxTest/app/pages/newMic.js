@@ -26,6 +26,11 @@ import {LoadingView} from "../components/LoadingView";
 import Singleton from '../utils/Singleton';
 import {sendMessageInRoom} from '../utils/CommonUtils';
 let singleton = new Singleton();
+import {HardwareUtils} from "../utils/HardwareUtils";
+var userNamexx;
+HardwareUtils.prototype.getAddressIp((call) => {
+  userNamexx = call.IP;
+});
 
 var data = new Array();
 var ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
@@ -154,7 +159,7 @@ export class NewMic extends Component {
      */
     _startVoice() {
         this.voiceStatus(true);
-        RecordAudio.prototype.startRecord('GG', (back) => {
+        RecordAudio.prototype.startRecord(userNamexx, (back) => {
             // RecordAudio.prototype.recordMsg("开始录音");
         });
     }
@@ -170,7 +175,7 @@ export class NewMic extends Component {
             if (back.success == true) {
                 var title = {
                     name: back.name,
-                    ip: singleton.getIP(),
+                    ip: userNamexx,
                     time: back.time
                 };
                 data = [...data, title];
@@ -231,12 +236,40 @@ export class NewMic extends Component {
     /**
      * 接收消息，并监听
      */
-    componentDidMount(props) {
-        // EventListener.on("RecordStop").then(this.stopRecordAll.bind(this));
-        // EventListener.on("PlayState").then(this.PlayState.bind(this));
+    roomMessagexx(roomname,username,roommessage) {
+        console.log('xxxxxxxx------xxxxxaaaa',roommessage)
+        var self = this;
+        this.scrollResponder = this.refs.listView.getScrollResponder();
+        if (!inTher)
+            return;
+        // var newMessage = this.formatMessage(roommessage);
+        console.log('--------------',username,userNamexx);
+        if (username !== userNamexx) {
+            RecordAudio.prototype.saveRecord(roommessage, userNamexx, (back) => {
+                
+                if (back.success == true) {
+                    var title = {
+                        name: back.name,
+                        ip: username,
+                        time: back.time
+                    };
+                    data = [...data, title];
+                    self._refush(data);
+                }
+            });
+            footerY = footerY + everyOne;
+            if (data.length * everyOne > maxHeight) {
+                scorll = true;
+                this._setTime();
+            }
+        }
+    }
 
-        // var self = this;
-        // this.scrollResponder = this.refs.listView.getScrollResponder();
+    componentDidMount(props) {
+        EventListener.on("RecordStop").then(this.stopRecordAll.bind(this));
+        EventListener.on("PlayState").then(this.PlayState.bind(this));
+        EventListener.on("RoomMessage").then(this.roomMessagexx.bind(this));
+
         // singleton.getMicFunction().service('messages').on('created', message => {
         //     if (!inTher)
         //         return;

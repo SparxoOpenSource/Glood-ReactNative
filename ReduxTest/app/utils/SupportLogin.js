@@ -47,7 +47,6 @@ export function Initialization() {
 }
 
 export function LoginNow() {
- 
     start();
     // HardwareUtils.prototype.getAddressIp();
     // console.log('xxxxxxx--*-*----',HardwareUtils.prototype.getAddressIp());

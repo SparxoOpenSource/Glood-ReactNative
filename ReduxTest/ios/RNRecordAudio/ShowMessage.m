@@ -14,6 +14,7 @@
 
 @implementation ShowMessage
 
+
 +(void)showMessage:(NSString *)message
 {
     UIWindow * window = [UIApplication sharedApplication].keyWindow;
@@ -31,6 +32,8 @@
     label.text = message;
     label.textColor = [UIColor whiteColor];
     label.textAlignment = 1;
+  label.numberOfLines = 0;
+  label.lineBreakMode = NSLineBreakByWordWrapping;
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont fontWithName:@"ProximaNova-Semibold" size:14.f];
     [showview addSubview:label];
@@ -52,6 +55,12 @@
     hud.labelFont =[UIFont fontWithName:@"ProximaNova-Semibold" size:14.f];
     [hud hide:YES afterDelay:2];
 }
+
++(void)dismissMessage
+{
+  
+}
+
 +(void)showLastPageMessage:(UIView *) view isHaveFooter:(Boolean) have{
     if(!view) {
         return;

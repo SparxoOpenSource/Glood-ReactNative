@@ -221,7 +221,6 @@ RCT_EXPORT_METHOD(startRecord:(NSString *)fileName
       
       //开始录音
       [self.recorder record];
-      NSLog(@"-*-*--*-x-xxx %@",fileName);
       NSDictionary *resultsDict = @{
                                     @"success" : @YES,
                                     @"param" : @"Successfully started.",

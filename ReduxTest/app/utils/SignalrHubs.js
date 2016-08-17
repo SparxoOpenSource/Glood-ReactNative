@@ -14,5 +14,4 @@ export class SignalrHubs {
             return proxy.invoke("SendMessageInRoom",roomName,message);
         },
     }
-
 }
