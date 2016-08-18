@@ -90,6 +90,7 @@ export class ActivityListItem extends Component {
         );
     }
     _handerClick(value, navigator) {
+        //加入聊天房间，在加入成功后进行跳转界面
         joinEventChatRoom(value);
     }
 }

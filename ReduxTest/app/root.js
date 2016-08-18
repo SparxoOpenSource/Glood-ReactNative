@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import { AppRegistry, StyleSheet, View, Text, ListView, Alert, Navigator, Image, TouchableOpacity, BackAndroid,
-    Platform, Dimensions, PropTypes}  from 'react-native';
+    Platform, Dimensions, PropTypes, DeviceEventEmitter, NativeModules}  from 'react-native';
 import {Home} from "../app/pages/home";
 import {Mic} from "../app/pages/mic";
 import {Cameraq} from "../app/pages/camera";
@@ -24,6 +24,9 @@ import {EventListener} from "../app/listener/EventListener";
 import {QrcodeReader} from "../app/pages/qrcode.reader";
 import Singleton from '../app/utils/Singleton';
 let singleton = new Singleton();
+import FCM from 'react-native-fcm';
+const not = NativeModules.NotificationFCM;
+
 
 const propTypes = {
     title: PropTypes.string
@@ -81,11 +84,38 @@ export class Root extends Component {
         if (isAndroid()) {
             BackAndroid.addEventListener('hardwareBackPress', this.onBackAndroid.bind(this));
         }
+
+        FCM.requestPermissions(); // for iOS
+        FCM.getFCMToken().then(token => {
+            console.log(token)
+            // store fcm token in your server
+        });
+        this.notificationUnsubscribe = FCM.on('notification', (notif) => {
+            // there are two parts of notif. notif.notification contains the notification payload, notif.data contains data payload
+
+            console.log(notif)
+            not.sendNotification(notif);
+        });
+        this.refreshUnsubscribe = FCM.on('refreshToken', (token) => {
+            console.log(token)
+            // fcm token may not be available on first load, catch it here
+        });
+
+        FCM.subscribeToTopic('/topics/foo-bar');
+        FCM.unsubscribeFromTopic('/topics/foo-bar');
+
+        DeviceEventEmitter.addListener("FCMNotificationReceived", info => {
+            // Alert.alert(info.name);
+            Console.log("FCMNotificationReceived", info.body);
+        });
     }
     componentWillUnmount() {
         if (isAndroid()) {
             BackAndroid.removeEventListener('hardwareBackPress');
         }
+
+        this.refreshUnsubscribe();
+        this.notificationUnsubscribe();
     }
     render() {
         return (
