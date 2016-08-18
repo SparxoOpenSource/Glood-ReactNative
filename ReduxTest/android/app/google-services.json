@@ -1,0 +1,73 @@
+{
+  "project_info": {
+    "project_number": "82672281806",
+    "firebase_url": "https://fcmtest-ea77d.firebaseio.com",
+    "project_id": "fcmtest-ea77d",
+    "storage_bucket": "fcmtest-ea77d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:82672281806:android:5920de3503a2d18c",
+        "android_client_info": {
+          "package_name": "com.google.firebase.quickstart.fcm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "82672281806-hohvmslk339pieica01vpl1560g3fmc3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8vYLSBSmkAk31qROxVuX70FB0Wi5Aylk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:82672281806:android:5b2f93b53fe12f3d",
+        "android_client_info": {
+          "package_name": "com.reduxtest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "82672281806-hohvmslk339pieica01vpl1560g3fmc3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8vYLSBSmkAk31qROxVuX70FB0Wi5Aylk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

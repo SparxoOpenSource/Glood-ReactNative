@@ -49,6 +49,7 @@ export class DrawerMe extends Component {
         EventListener.on("DrawerOpenPage").then(this.OpenPage.bind(this));
         Initialization();//连接聊天服务器
         setTimeout(() => {
+            //连接聊天服务器，用户进行登录操作，系统分配用户名，ID和记录登录时间
             LoginNow();
         }, 1500);
     }

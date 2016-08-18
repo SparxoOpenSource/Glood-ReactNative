@@ -1,11 +1,15 @@
 package com.reduxtest;
 
+import android.content.Intent;
+
 import com.eguma.barcodescanner.BarcodeScannerPackage;
+import com.evollu.react.fcm.FIRMessagingPackage;
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.imagepicker.ImagePickerPackage;
 import com.lwansbrough.RCTCamera.RCTCameraPackage;
+import com.reduxtest.actions.NotificationPackageForAndroid;
 import com.reduxtest.actions.RecordAudioPackage;
 
 import java.util.Arrays;
@@ -42,7 +46,15 @@ public class MainActivity extends ReactActivity {
                 new RecordAudioPackage(),
                 new ImagePickerPackage(),
                 new RCTCameraPackage(),
-                new BarcodeScannerPackage()
+                new BarcodeScannerPackage(),
+                new FIRMessagingPackage(),
+                new NotificationPackageForAndroid()
         );
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
     }
 }
