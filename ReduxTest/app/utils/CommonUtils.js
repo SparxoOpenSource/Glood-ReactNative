@@ -7,6 +7,7 @@ import SignalrH from './SignalrH';
 import {Pop} from "./AlertPop";
 var serSignalr;
 import Singleton from './Singleton';
+let singleton = new Singleton();
 import {HardwareUtils} from "./HardwareUtils";
 if (window.navigator && Object.keys(window.navigator).length == 0) {
   window = Object.assign(window, { navigator: { userAgent: 'ReactNative' } });
@@ -49,7 +50,7 @@ export function start() {
       }
     },
     roomMessage: function (roomName, username, message) {
-      console.log('xxxxxxxxxx33333', message);
+      Pop(roomName+"号聊天室" + "有新消息了");
       EventListener.trigger("RoomMessage", roomName, username, message);
     },
   });
@@ -76,6 +77,7 @@ export function joinEventChatRoom(eventName) {
   if (isLoginSuccess == 'yes') {
     Pop("joinEventChatRoom ...");
     eventNamexx = eventName;
+    singleton.setRoomName(eventName);
     serSignalr.joinEventChatRoom((eventName)).done(() => {
       // Pop('joinEventChatRoom success');
       EventListener.trigger("DrawerOpenPage", "EventInfo");
