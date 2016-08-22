@@ -25,7 +25,7 @@ import {QrcodeReader} from "../app/pages/qrcode.reader";
 import Singleton from '../app/utils/Singleton';
 let singleton = new Singleton();
 import FCM from 'react-native-fcm';
-const not = NativeModules.NotificationFCM;
+import {sendNotification} from "../app/utils/PushNotifications";
 
 
 const propTypes = {
@@ -92,9 +92,10 @@ export class Root extends Component {
         });
         this.notificationUnsubscribe = FCM.on('notification', (notif) => {
             // there are two parts of notif. notif.notification contains the notification payload, notif.data contains data payload
-
+            //点击事件
             console.log(notif)
-            not.sendNotification(notif);
+            clickNotification(notif);
+            Alert.alert(notif.title);
         });
         this.refreshUnsubscribe = FCM.on('refreshToken', (token) => {
             console.log(token)
@@ -104,9 +105,9 @@ export class Root extends Component {
         FCM.subscribeToTopic('/topics/foo-bar');
         FCM.unsubscribeFromTopic('/topics/foo-bar');
 
-        DeviceEventEmitter.addListener("FCMNotificationReceived", info => {
-            // Alert.alert(info.name);
-            Console.log("FCMNotificationReceived", info.body);
+        DeviceEventEmitter.addListener("ReadableMap", info => {
+            Alert.alert(info.title);
+            // console.log("ReadableMap", info.body);
         });
     }
     componentWillUnmount() {
