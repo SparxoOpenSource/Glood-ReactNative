@@ -45,4 +45,12 @@ export default class Singleton {
     getTitle() {
         return this.title;
     }
+
+    setRoomName(name) {
+        this.name = name;
+    }
+
+    getRoomName() {
+        return this.name;
+    }
 }  

@@ -56,11 +56,6 @@
     [hud hide:YES afterDelay:2];
 }
 
-+(void)dismissMessage
-{
-  
-}
-
 +(void)showLastPageMessage:(UIView *) view isHaveFooter:(Boolean) have{
     if(!view) {
         return;

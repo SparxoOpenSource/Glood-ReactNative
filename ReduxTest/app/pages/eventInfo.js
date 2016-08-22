@@ -112,7 +112,7 @@ export class EventInfo extends Component {
     render() {
         return (
             <Image source={require('../img/background3.png') } style={styles.background} >
-                <Common  title={"Crazy May Fest 2017"} page='Main' rightType="Down"/>
+                <Common  title={singleton.getRoomName()} page='Main' rightType="Down"/>
                 <Image style={{ width: widthh, height: heightt * (200 / 736), marginTop: heightt * (13 / 736) }} source={require('../img/event_background.jpg') }/>
                 <Text style={{
                     backgroundColor: '#00000000', color: 'black', fontSize: heightt * (23 / 736), width: widthh * (250 / 414),

@@ -221,6 +221,7 @@ RCT_EXPORT_METHOD(startRecord:(NSString *)fileName
       
       //开始录音
       [self.recorder record];
+      NSLog(@"xxxxxxxxx filename:%@",fileName);
       NSDictionary *resultsDict = @{
                                     @"success" : @YES,
                                     @"param" : @"Successfully started.",
@@ -246,12 +247,8 @@ RCT_EXPORT_METHOD(stopRecord:(RCTResponseSenderBlock)successCallback) {
 #warning wav转amr
     if ([VoiceConverter ConvertWavToAmr:self.recordFilePath amrSavePath:amrPath]){
       
-      //设置label信息
-//      NSLog(@"%@",[NSString stringWithFormat:@"原wav转amr:\n%@",[self getVoiceFileInfoByPath:amrPath convertTime:[[NSDate date] timeIntervalSinceDate:date]]]);
-      
       date = [NSDate date];
       NSString *convertedPath = [self GetPathByFileName:[self.recordFileName stringByAppendingString:@""] ofType:@"wav"];
-//      NSLog(@"dafdfadfa-----%@---%@",convertedPath,amrPath);
       //获取时间
       NSURL *audioFileURL = [NSURL fileURLWithPath:convertedPath];
       AVURLAsset* audioAsset =[AVURLAsset URLAssetWithURL:audioFileURL options:nil];
@@ -261,9 +258,8 @@ RCT_EXPORT_METHOD(stopRecord:(RCTResponseSenderBlock)successCallback) {
       //转码
       NSFileManager *fileManager = [NSFileManager defaultManager];
       wavdata = [fileManager contentsAtPath:amrPath];
-//      NSLog(@"wavdata:%@",wavdata);
       NSString *pictureDataString=[wavdata base64Encoding];
-//      NSLog(@"amr:%@",pictureDataString,timeStr);
+      NSLog(@"---------***** %@",[NSString stringWithFormat:@"%@.wav",self.recordFileName]);
       NSDictionary *resultsDict = @{
                                     @"success" : @YES,
                                     @"param"  : convertedPath,
@@ -272,119 +268,10 @@ RCT_EXPORT_METHOD(stopRecord:(RCTResponseSenderBlock)successCallback) {
                                     @"Base64": pictureDataString
                                     };
       
-      // Call the JavaScript sucess handler
       successCallback(@[resultsDict]);
-//#warning amr转wav
-//      if ([VoiceConverter ConvertAmrToWav:amrPath wavSavePath:convertedPath]){
-//        //设置label信息
-//        NSLog(@"%@",[NSString stringWithFormat:@"amr转wav:\n%@",[self getVoiceFileInfoByPath:convertedPath convertTime:[[NSDate date] timeIntervalSinceDate:date]]]);
-//      }else
-//        NSLog(@"amr转wav失败");
-      
     }else
       NSLog(@"wav转amr失败");
 }
-
-// Persist data
-/*
-#pragma mark ======== 停止录音 ============
-RCT_EXPORT_METHOD(stopRecord:(RCTResponseSenderBlock)successCallback) {
- 
-    endStr = @"";
-    endStr = [self getTimeNow];
-    // Validate that the file exists
-    NSFileManager *fileManager = [NSFileManager defaultManager];
- 
-    // Check if file exists
-    if (![fileManager fileExistsAtPath:pathForFile]){
-        
-        // Show failure message
-        NSDictionary *resultsDict = @{
-                                      @"success" : @NO,
-                                      @"param"  : @"File does not exist in app documents directory."
-                                      };
-        
-        // Javascript error handling
-        successCallback(@[resultsDict]);
-        return;
-        
-    }
-    
-    // Validate that session and recorder exist to stop
-    if (recordSession && audioRecorder) {
-        
-        // if recording is in progress, stop
-        if (audioRecorder.recording) {
-          
-            [audioRecorder stop];
-            [recordSession setActive:NO error:nil];
-            
-            // Craft a success return message
-//          NSString *timerStr;
-//          NSArray *array = [[self intervalFromLastDate:startStr toTheDate:endStr] componentsSeparatedByString:@":"];
-//          if ([array objectAtIndex:1] == 0)
-//          {
-//            timerStr = [array objectAtIndex:2];
-//          }
-//          else
-//          {
-//            timerStr = [NSString stringWithFormat:@"%ld",[[array objectAtIndex:1] integerValue]*60+[[array objectAtIndex:2] integerValue]];
-//          }
-          
-          wavdata = [fileManager contentsAtPath:pathForFile];
-          NSString *aString = [[NSString alloc] initWithData:wavdata encoding:NSUTF8StringEncoding];
-          NSString *pictureDataString=[wavdata base64Encoding];
-          // NSLog(@"***********data:%@--%@",wavdata,pictureDataString);
-          NSURL *audioFileURL = [NSURL fileURLWithPath:pathForFile];
-          AVURLAsset* audioAsset =[AVURLAsset URLAssetWithURL:audioFileURL options:nil];
-          
-          CMTime audioDuration = audioAsset.duration;
-          
-          float audioDurationSeconds =CMTimeGetSeconds(audioDuration);
-          NSString *timeStr = [NSString stringWithFormat:@"%.1f",audioDurationSeconds];
-          NSDictionary *resultsDict = @{
-                                        @"success" : @YES,
-                                        @"param"  : pathForFile,
-                                        @"name" : newFileName,
-                                        @"time" : timeStr,
-                                        @"Base64": pictureDataString
-                                        };
-         
-            
-            // Call the JavaScript sucess handler
-            successCallback(@[resultsDict]);
-            return;
-            
-        } else {
-            
-            // Show failure message
-            NSDictionary *resultsDict = @{
-                                          @"success" : @NO,
-                                          @"param"  : @"Recording not in progress. Can not be stopped."
-                                          };
-            
-            // Javascript error handling
-          
-            successCallback(@[resultsDict]);
-            return;
-        }
-        
-    } else {
-        
-        // Show failure message
-        NSDictionary *resultsDict = @{
-                                      @"success" : @NO,
-                                      @"param"  : @"Recording was not ever started. Can not be stopped."
-                                      };
-        
-        // Javascript error handling
-      
-        successCallback(@[resultsDict]);
-        return;
-        
-    }
-}
- */
 
 #pragma mark ======== 播放录音 ============
 RCT_EXPORT_METHOD(playRecord:(NSString *)playName
@@ -427,196 +314,6 @@ RCT_EXPORT_METHOD(playRecord:(NSString *)playName
   });
   dispatch_resume(_timer);
 }
-/*
-#pragma mark ======== 播放录音 ============
-RCT_EXPORT_METHOD(playRecord:(NSString *)playName
-                  Callback:(RCTResponseSenderBlock)callBack) {
-//  playName = newFileName;
-   NSLog(@"*-*-*-*-***--*******  %@",playName);
-  // Validate the file name has positive length
-  if ([playName length] < 1) {
-    
-    // Show failure message
-    NSDictionary *resultsDict = @{
-                                  @"success" : @NO,
-                                  @"errMsg"  : @"Your file does not have a name."
-                                  };
-    
-    // Javascript error handling
-    callBack(@[resultsDict]);
-    return;
-    
-  }
-  
-  // Validate the file name has an extension
-  NSRange isRange = [playName rangeOfString:@"." options:NSCaseInsensitiveSearch];
-  if (isRange.location == 0) {
-    
-    // Show failure message
-    NSDictionary *resultsDict = @{
-                                  @"success" : @NO,
-                                  @"errMsg"  : @"Your file does not have a valid name and extension."
-                                  };
-    
-    // Javascript error handling
-    callBack(@[resultsDict]);
-    return;
-    
-  } else {
-    
-    if (isRange.location == NSNotFound) {
-      
-      // Show failure message
-      NSDictionary *resultsDict = @{
-                                    @"success" : @NO,
-                                    @"errMsg"  : @"Your file does not have a valid extension."
-                                    };
-      
-      // Javascript error handling
-      callBack(@[resultsDict]);
-      return;
-    }
-    
-  }
-  
-  // Validate for .caf, .mp3, .aac, , .wav, .aiff
-  NSRange isRangeCaf = [playName rangeOfString:@".caf" options:NSCaseInsensitiveSearch];
-  NSRange isRangeMp3 = [playName rangeOfString:@".mp3" options:NSCaseInsensitiveSearch];
-  NSRange isRangeM4a= [playName rangeOfString:@".m4a" options:NSCaseInsensitiveSearch];
-  NSRange isRangeWav = [playName rangeOfString:@".wav" options:NSCaseInsensitiveSearch];
-  NSRange isRangeAif = [playName rangeOfString:@".aif" options:NSCaseInsensitiveSearch];
-  
-  if ((isRangeCaf.location == NSNotFound) && (isRangeMp3.location == NSNotFound) && (isRangeM4a.location == NSNotFound) && (isRangeWav.location == NSNotFound) && (isRangeAif.location == NSNotFound)) {
-    
-    // Show failure message
-    NSDictionary *resultsDict = @{
-                                  @"success" : @NO,
-                                  @"errMsg"  : @"File should be either a .caf, .mp3, .m4a, .wav, or .aif"
-                                  };
-    
-    // Javascript error handling
-    callBack(@[resultsDict]);
-    return;
-    
-  }
-  
-  // Create an array of directory Paths, to allow us to get the documents directory
-  NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-  
-  // The documents directory is the first item
-  NSString *documentsDirectory = [paths objectAtIndex:0];
-  
-  // Create the path that the file will be stored at
-  NSString *pathForFile = [NSString stringWithFormat:@"%@/%@", documentsDirectory, playName];
-  
-  NSURL *audioFileURL = [NSURL fileURLWithPath:pathForFile];
-   NSLog(@"播放－－－－－%@",audioFileURL);
-  // Validate that the file exists
-  NSFileManager *fileManager = [NSFileManager defaultManager];
-  
-  // Check if file exists
-//  NSString * filepath = [self getCachePath];
-  NSString *convertedPath = [self GetPathByFileName:[self.recordFileName stringByAppendingString:@"IOS-"] ofType:@"wav"];
-  BOOL exists = [fileManager fileExistsAtPath:convertedPath isDirectory:false];
-  if (!exists){
-    
-    // Show failure message
-    NSDictionary *resultsDict = @{
-                                  @"success" : @NO,
-                                  @"errMsg"  : @"File does not exist in app documents directory."
-                                  };
-    
-    // Javascript error handling
-    callBack(@[resultsDict]);
-    return;
-    
-  }
-  
-  NSError *error = nil;
-  
-  // Check if audioPlayer exists for initialization
-//  if (!audioPlayer) {
-  
-    // NSLog(@"heihiehiehi  %@",audioFileURL);
-    audioPlayer = [[AVAudioPlayer alloc]
-                   initWithContentsOfURL: audioFileURL
-                   error:&error];
-//    audioPlayer = [[AVAudioPlayer alloc] initWithData:wavdata error:&error];
-    [audioPlayer setDelegate:self];
-    
-//  }
-  
-  NSError *audioError = nil;
-  BOOL success = [recordSession overrideOutputAudioPort:AVAudioSessionPortOverrideSpeaker error:&audioError];
-  if(!success)
-    {
-       NSLog(@"error doing outputaudioportoverride - %@", [audioError localizedDescription]);
-    }
-  
-  // Validate no errors in the session initialization
-  if (error) {
-    
-    // Show failure message
-    NSDictionary *resultsDict = @{
-                                  @"success" : @NO,
-                                  @"errMsg"  : [error localizedDescription]
-                                  };
-    
-    // Javascript error handling
-    callBack(@[resultsDict]);
-    return;
-    
-  } else {
-    
-    // play the recording
-    //准备播放
-    [audioPlayer prepareToPlay];
-    //播放
-    [audioPlayer play];
-    
-    // Craft a success return message
-//    NSDictionary *resultsDict = @{
-//                                  @"success" : @YES,
-//                                  @"successMsg" : @"Successfully started."
-//                                  };
-    
-    AVURLAsset* audioAsset =[AVURLAsset URLAssetWithURL:audioFileURL options:nil];
-    
-    CMTime audioDuration = audioAsset.duration;
-    
-    float audioDurationSeconds =CMTimeGetSeconds(audioDuration);
-//    NSString *timeStr = [NSString stringWithFormat:@"%.1f",audioDurationSeconds];
-    __block float timeout = audioDurationSeconds+0.5;
-    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_source_t _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
-    dispatch_source_set_timer(_timer,dispatch_walltime(NULL, 0),1*NSEC_PER_SEC, 0);
-    dispatch_source_set_event_handler(_timer, ^{
-      if(timeout<=0){
-//        resultsDict = @{@"name" : @"播放完毕"};
-        
-        NSDictionary *resultsDict = @{
-                                      @"name" : @"播放完毕"
-                                      };
-        dispatch_source_cancel(_timer);
-        callBack(@[resultsDict]);
-        dispatch_async(dispatch_get_main_queue(), ^{
-//          [ShowMessage showMessage:@"播放完毕"];
-        });
-      } else {
-        dispatch_async(dispatch_get_main_queue(), ^{
-          timeout--;
-        });
-      }
-    });
-    dispatch_resume(_timer);
-    
-    // Call the JavaScript sucess handler
-    
-    
-  }
-  
-}
- */
 
 #pragma mark ======停止播放=============
 RCT_EXPORT_METHOD(stopAllRecord)
@@ -626,18 +323,6 @@ RCT_EXPORT_METHOD(stopAllRecord)
   [audioPlayer stop];
   audioPlayer = nil;
 }
-
-//- (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
-//{
-//  NSDictionary *resultsDict = @{
-//                                @"name" : @"播放完毕"
-//                                };
-//  dispatch_async(dispatch_get_main_queue(), ^
-//                 {
-//                   [ShowMessage showMessage:@"播放完毕"];
-//                   
-//                 });
-//}
 
 RCT_EXPORT_METHOD(recordMsg:(NSString *)msg)
 {
@@ -649,39 +334,26 @@ RCT_EXPORT_METHOD(recordMsg:(NSString *)msg)
                  });
 }
 
+#pragma mark ======= 读取缓存文件 ======
+RCT_EXPORT_METHOD(accessFileName:(RCTResponseSenderBlock)callback) {
+  NSMutableArray *arr = [[NSMutableArray alloc] initWithCapacity:10];
+//  for (NSInteger i = 0; i <= []; i ++) {
+//    <#statements#>
+//  }
+  NSString *convertedPath = [self GetPathByFileName:@"7E603935-BB49-407D-8C12-0A6926035E9C" ofType:@"wav"];
+  NSLog(@"-----xxx---- %@",convertedPath);
+  NSDictionary *resultsDict = @{
+                                @"name" : @"有数据",
+                                @"param":arr
+                                };
+  callback(@[resultsDict]);
+}
+
 #pragma mark ======= 获取当前设备ip地址 ======
 #define MOBILE_PHONE_UUID_FAKE @"mobile_phone_uuid_fake"
 RCT_EXPORT_METHOD(getAndroidIpAddress:(RCTResponseSenderBlock)callback)
 {
-//  NSString *address = @"error";
-//  struct ifaddrs *interfaces = NULL;
-//  struct ifaddrs *temp_addr = NULL;
-//  int success = 0;
-//  // retrieve the current interfaces - returns 0 on success
-//  success = getifaddrs(&interfaces);
-//  if (success == 0) {
-//    temp_addr = interfaces;
-//    while(temp_addr != NULL) {
-//      if(temp_addr->ifa_addr->sa_family == AF_INET) {
-//        if([[NSString stringWithUTF8String:temp_addr->ifa_name] isEqualToString:@"en0"]) {
-//          address = [NSString stringWithUTF8String:inet_ntoa(((struct sockaddr_in *)temp_addr->ifa_addr)->sin_addr)];
-//        }
-//      }
-//      temp_addr = temp_addr->ifa_next;
-//    }
-//  }
-//  freeifaddrs(interfaces);
-//  
-  // NSLog(@"-*-*-*-------ADDRE:%@",address);
   NSString *ipStr;
-//  if ([[self getIPAddresses] count] == 3)
-//  {
-//    ipStr = [[self getIPAddresses] objectForKey:@"pdp_ip0/ipv4"];
-//  }
-//  else
-//  {
-//    ipStr = [[self getIPAddresses] objectForKey:@"en0/ipv4"];
-//  }
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   if([[[UIDevice currentDevice] systemVersion] floatValue] >= 6)
   {
@@ -768,12 +440,9 @@ NSLog(@"Base64解码--%@",decodeStr);
 RCT_EXPORT_METHOD(saveRecord:(NSString *)base64 addressIp:(NSString *)IP
                   Callback:(RCTResponseSenderBlock)callBack)
 {
-//  NSLog(@"---*-*-*-  %@",base64);
    NSString *fileName = [NSString stringWithFormat:@"%@",[self GetCurrentTimeString]];
-//    NSRange isRangeWav = [fileName rangeOfString:@".wav" options:NSCaseInsensitiveSearch];
     NSString *cachePath = [self getCachePath];
   NSString *convertedPath = [self GetPathByFileName:fileName ofType:@"amr"];
-//  NSString *convertedPath = [self GetPathByFileName:[self.recordFileName stringByAppendingString:@""] ofType:@"amr"];
     BOOL isDir = NO;
     NSFileManager *fileManager = [NSFileManager defaultManager];
     BOOL existed = [fileManager fileExistsAtPath:convertedPath isDirectory:&isDir];
@@ -781,24 +450,12 @@ RCT_EXPORT_METHOD(saveRecord:(NSString *)base64 addressIp:(NSString *)IP
     {
       [fileManager createDirectoryAtPath:convertedPath withIntermediateDirectories:YES attributes:nil error:nil];
     }
-    // Create the path that the file will be stored at
-  
-  
-//  NSString *base64Str = [base64 base64EncodedString];
-//  NSLog(@"Base64编码--%@",base64Str);
-//  
-//  NSString *decodeStr = [base64 base64DecodedString];
-//  NSLog(@"Base64解码--%@",decodeStr);
   pathForFile = [NSString stringWithFormat:@"%@/%@", convertedPath, fileName];
   NSData *sData   = [[NSData alloc] initWithBase64Encoding:base64];
   BOOL ss = [sData writeToFile:pathForFile atomically:YES];
-//  NSLog(@"-*-*--777----%@---%@--%d",convertedPath,sData,ss);
-//  NSLog(@"wavdata**:%@",sData);
   self.recordFilePath = [self GetPathByFileName:fileName ofType:@"wav"];
-//  NSLog(@"-*-*--888----%@",self.recordFilePath);
 #warning amr转wav
   if ([VoiceConverter ConvertAmrToWav:pathForFile wavSavePath:self.recordFilePath]){
-    //设置label信息
     NSLog(@"amr转wav成功");
   }else
   {

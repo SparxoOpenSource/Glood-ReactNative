@@ -208,7 +208,7 @@ export class NewMic extends Component {
      * 读取保存在磁盘中的录音文件
      */
     _accessFileName() {
-        if (isAndroid()) {
+        // if (isAndroid()) {
             var _this = this;
             RecordAudio.prototype.accessFileName((back) => {
                 if (back.name === "有数据") {
@@ -231,7 +231,7 @@ export class NewMic extends Component {
                     this._setTime2();
                 }
             });
-        }
+        // }
     }
     /**
      * 接收消息，并监听
