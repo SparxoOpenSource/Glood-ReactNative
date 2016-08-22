@@ -15,12 +15,16 @@
 
 #import "UncaughtExceptionHandler.h"
 
+#import "Firebase.h"
+#import "RNFIRMessaging.h"
+
 @implementation AppDelegate
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
   InstallUncaughtExceptionHandler();
+  [FIRApp configure];
   [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:NO];
   NSURL *jsCodeLocation;
 //  NSString *str;
@@ -44,7 +48,7 @@
    * on the same Wi-Fi network.
    */
 
-  jsCodeLocation = [NSURL URLWithString:@"http://192.168.31.221:8081/index.ios.bundle?platform=ios&dev=true"];
+  jsCodeLocation = [NSURL URLWithString:@"http://192.168.31.153:8081/index.ios.bundle?platform=ios&dev=true"];
 
 //  jsCodeLocation = [NSURL URLWithString:@"http://192.168.2.102:8081/index.ios.bundle?platform=ios&dev=true"];
 
@@ -65,7 +69,19 @@
       NSLog(@" %@", name);
     }
   }
-  
+  //推送
+  [application setApplicationIconBadgeNumber:0];
+  //#if SUPPORT_IOS8
+  if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
+    UIUserNotificationType myTypes = UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound;
+    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:myTypes categories:nil];
+    [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+  }else
+    //#endif
+  {
+    UIRemoteNotificationType myTypes = UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeSound;
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:myTypes];
+  }
   
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
                                                       moduleName:@"ReduxTest"
@@ -80,6 +96,30 @@
   [Bugly startWithAppId:@"900035998"];
   return YES;
 }
+
+//#if SUPPORT_IOS8
+- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
+{
+  //register to receive notifications
+  [application registerForRemoteNotifications];
+}
+//#endif
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)pToken
+{
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  NSString *tokenStr = [[NSString stringWithFormat:@"%@",pToken] stringByReplacingOccurrencesOfString:@"<" withString:@""];
+  tokenStr = [tokenStr stringByReplacingOccurrencesOfString:@">" withString:@""];
+  tokenStr = [tokenStr stringByReplacingOccurrencesOfString:@" " withString:@""];
+  NSLog(@"regisger success:%@",tokenStr);
+  //注册成功，将deviceToken保存到应用服务器数据库中
+  
+}
+
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)notification fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))handler {
+    [[NSNotificationCenter defaultCenter] postNotificationName:FCMNotificationReceived object:self userInfo:notification];
+    handler(UIBackgroundFetchResultNewData);
+  }
 
 @end
 
