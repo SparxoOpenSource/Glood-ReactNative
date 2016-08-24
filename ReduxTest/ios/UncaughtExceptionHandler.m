@@ -91,6 +91,7 @@ const NSInteger UncaughtExceptionHandlerReportAddressCount = 5;
 	}
 	
 	CFRelease(allModes);
+  
 
 	NSSetUncaughtExceptionHandler(NULL);
 	signal(SIGABRT, SIG_DFL);

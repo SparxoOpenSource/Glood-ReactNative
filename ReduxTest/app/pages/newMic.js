@@ -31,6 +31,9 @@ var userNamexx;
 HardwareUtils.prototype.getAddressIp((call) => {
   userNamexx = call.IP;
 });
+var SQLite = require('react-native-sqlite-storage');
+// import SQLite from "react_native_sqlite";
+// var database = SQLite.open('mic.sqlite');
 
 var data = new Array();
 var ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
@@ -269,6 +272,8 @@ export class NewMic extends Component {
         EventListener.on("RecordStop").then(this.stopRecordAll.bind(this));
         EventListener.on("PlayState").then(this.PlayState.bind(this));
         EventListener.on("RoomMessage").then(this.roomMessagexx.bind(this));
+
+
 
         // singleton.getMicFunction().service('messages').on('created', message => {
         //     if (!inTher)
