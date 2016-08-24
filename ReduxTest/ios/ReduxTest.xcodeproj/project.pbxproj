@@ -27,6 +27,7 @@
 		CC1041421CE5B4CC00B5D2E7 /* RecordAudio.m in Sources */ = {isa = PBXBuildFile; fileRef = CC1041411CE5B4CC00B5D2E7 /* RecordAudio.m */; };
 		CC2672AE1CEF07570018F4AB /* NSString+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = CC2672AD1CEF07570018F4AB /* NSString+Base64.m */; };
 		CC41C9341D1F959E00F244E4 /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = CC41C9331D1F959E00F244E4 /* KeychainItemWrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		CC4B60101D6D59C200C41EF0 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CC4B600F1D6D59C200C41EF0 /* libsqlite3.0.tbd */; };
 		CC5832191D07FC23009E28A2 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC5832181D07FC23009E28A2 /* AVFoundation.framework */; };
 		CC5832281D07FC76009E28A2 /* amrFileCodec.mm in Sources */ = {isa = PBXBuildFile; fileRef = CC58321C1D07FC76009E28A2 /* amrFileCodec.mm */; };
 		CC5832291D07FC76009E28A2 /* libopencore-amrnb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC58321E1D07FC76009E28A2 /* libopencore-amrnb.a */; };
@@ -47,6 +48,7 @@
 		CCA7E1BF1CEAFDFD00EFEF04 /* MMHud.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA7E1B31CEAFDFD00EFEF04 /* MMHud.m */; };
 		CCA7E1C01CEAFDFD00EFEF04 /* MMProgressHUDWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA7E1B51CEAFDFD00EFEF04 /* MMProgressHUDWindow.m */; };
 		CCA7E1C11CEAFDFD00EFEF04 /* MMProgressHUDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA7E1B71CEAFDFD00EFEF04 /* MMProgressHUDViewController.m */; };
+		CCAE14971D6DA99700650CBC /* libSQLite.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CCAE14961D6DA99000650CBC /* libSQLite.a */; };
 		CCBAA0F91CE483A30035088B /* libRCTCordova.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CCBAA0EF1CE4838A0035088B /* libRCTCordova.a */; };
 		CCCFEF581D0967B600B79A10 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = CCCFEF561D0967B600B79A10 /* assets */; };
 		CCCFEF591D0967B600B79A10 /* index.ios.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = CCCFEF571D0967B600B79A10 /* index.ios.jsbundle */; };
@@ -142,6 +144,13 @@
 			remoteGlobalIDString = 58B5119B1A9E6C1200147676;
 			remoteInfo = RCTText;
 		};
+		CCAE14951D6DA99000650CBC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CCAE14841D6DA99000650CBC /* SQLite.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E23D7B471ACEFE2A00C59171;
+			remoteInfo = SQLite;
+		};
 		CCBAA0EE1CE4838A0035088B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CCBAA0E81CE4838A0035088B /* RCTCordova.xcodeproj */;
@@ -197,6 +206,7 @@
 		CC2672AD1CEF07570018F4AB /* NSString+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Base64.m"; sourceTree = "<group>"; };
 		CC41C9321D1F959E00F244E4 /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainItemWrapper.h; sourceTree = "<group>"; };
 		CC41C9331D1F959E00F244E4 /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainItemWrapper.m; sourceTree = "<group>"; };
+		CC4B600F1D6D59C200C41EF0 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		CC5832181D07FC23009E28A2 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		CC58321B1D07FC76009E28A2 /* amrFileCodec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = amrFileCodec.h; sourceTree = "<group>"; };
 		CC58321C1D07FC76009E28A2 /* amrFileCodec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = amrFileCodec.mm; sourceTree = "<group>"; };
@@ -233,6 +243,7 @@
 		CCA7E1B51CEAFDFD00EFEF04 /* MMProgressHUDWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMProgressHUDWindow.m; sourceTree = "<group>"; };
 		CCA7E1B61CEAFDFD00EFEF04 /* MMProgressHUDViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMProgressHUDViewController.h; sourceTree = "<group>"; };
 		CCA7E1B71CEAFDFD00EFEF04 /* MMProgressHUDViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMProgressHUDViewController.m; sourceTree = "<group>"; };
+		CCAE14841D6DA99000650CBC /* SQLite.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SQLite.xcodeproj; path = "../node_modules/react-native-sqlite-storage/src/ios/SQLite.xcodeproj"; sourceTree = "<group>"; };
 		CCBAA0E81CE4838A0035088B /* RCTCordova.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTCordova.xcodeproj; path = "../node_modules/@remobile/react-native-cordova/ios/RCTCordova.xcodeproj"; sourceTree = "<group>"; };
 		CCCFEF561D0967B600B79A10 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = assets; sourceTree = "<group>"; };
 		CCCFEF571D0967B600B79A10 /* index.ios.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = index.ios.jsbundle; sourceTree = "<group>"; };
@@ -266,6 +277,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCAE14971D6DA99700650CBC /* libSQLite.a in Frameworks */,
+				CC4B60101D6D59C200C41EF0 /* libsqlite3.0.tbd in Frameworks */,
 				CCF2B7431D35F1B2009F359D /* libRCTCamera.a in Frameworks */,
 				CC64FCA71D1B7E54009F60C7 /* libz.tbd in Frameworks */,
 				CC64FCA51D1B7E47009F60C7 /* Security.framework in Frameworks */,
@@ -417,6 +430,7 @@
 		7EE28D0CBFB5C799E5A2066C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CC4B600F1D6D59C200C41EF0 /* libsqlite3.0.tbd */,
 				D549A9DC8BDEC6B32264DEBC /* libPods-ReduxTest.a */,
 				0B535D4D5B945CD99557AC0B /* libPods-ReduxTestTests.a */,
 			);
@@ -426,6 +440,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				CCAE14841D6DA99000650CBC /* SQLite.xcodeproj */,
 				CCF2B73C1D35F08B009F359D /* RCTCamera.xcodeproj */,
 				CCD875681CE5D8EB00388995 /* RNImagePicker.xcodeproj */,
 				CCBAA0E81CE4838A0035088B /* RCTCordova.xcodeproj */,
@@ -586,6 +601,14 @@
 			name = MBProgressHUD;
 			sourceTree = "<group>";
 		};
+		CCAE14851D6DA99000650CBC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CCAE14961D6DA99000650CBC /* libSQLite.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		CCBAA0E91CE4838A0035088B /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -744,6 +767,10 @@
 					ProductGroup = CCD875691CE5D8EB00388995 /* Products */;
 					ProjectRef = CCD875681CE5D8EB00388995 /* RNImagePicker.xcodeproj */;
 				},
+				{
+					ProductGroup = CCAE14851D6DA99000650CBC /* Products */;
+					ProjectRef = CCAE14841D6DA99000650CBC /* SQLite.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -822,6 +849,13 @@
 			fileType = archive.ar;
 			path = libRCTText.a;
 			remoteRef = 832341B41AAA6A8300B99B32 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CCAE14961D6DA99000650CBC /* libSQLite.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libSQLite.a;
+			remoteRef = CCAE14951D6DA99000650CBC /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		CCBAA0EF1CE4838A0035088B /* libRCTCordova.a */ = {
