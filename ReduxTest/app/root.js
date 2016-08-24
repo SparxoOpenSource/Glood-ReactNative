@@ -87,18 +87,22 @@ export class Root extends Component {
 
         FCM.requestPermissions(); // for iOS
         FCM.getFCMToken().then(token => {
-            console.log('----------***** 1111*',token)
+            console.log('----------***** 1111*', token)
             // store fcm token in your server
         });
         this.notificationUnsubscribe = FCM.on('notification', (notif) => {
             // there are two parts of notif. notif.notification contains the notification payload, notif.data contains data payload
             //点击事件
-            console.log(notif)
-            clickNotification(notif);
-            Alert.alert(notif.title);
+            console.log("--------------notif",notif)
+            // clickNotification(notif);
+            // Alert.alert(notif.title);
+            singleton.setTitle("Crazy May Fest 2017");
+            singleton.getNav().replace({
+                name: "DrawerMe"
+            });
         });
         this.refreshUnsubscribe = FCM.on('refreshToken', (token) => {
-            console.log('----------******',token)
+            console.log('----------******', token)
             // fcm token may not be available on first load, catch it here
         });
 
