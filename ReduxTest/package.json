@@ -20,6 +20,7 @@
     "react-native-button": "^1.5.0",
     "react-native-camera": "git+https://github.com/lwansbrough/react-native-camera.git",
     "react-native-drawer-layout": "^1.0.0",
+    "react-native-fcm": "^1.0.15",
     "react-native-gifted-messenger": "corymsmith/react-native-gifted-messenger",
     "react-native-image-carousell": "^0.1.2",
     "react-native-image-picker": "^0.18.15",
@@ -38,7 +39,6 @@
     "redux-thunk": "^2.1.0",
     "socket.io": "^1.4.6",
     "socket.io-client": "^1.4.6",
-    "socket.io-p2p": "^2.2.0",
-    "react-native-fcm": "^1.0.15"
+    "socket.io-p2p": "^2.2.0"
   }
 }

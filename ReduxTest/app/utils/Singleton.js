@@ -4,6 +4,8 @@ var IPAddress;
 var MicFunction;
 var Nav;
 var title;
+var name;
+var route;
 
 export default class Singleton {
 
@@ -52,5 +54,13 @@ export default class Singleton {
 
     getRoomName() {
         return this.name;
+    }
+
+    setRoute(route) {
+        this.route = route;
+    }
+
+    getRoute() {
+        return this.route;
     }
 }  

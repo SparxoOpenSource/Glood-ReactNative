@@ -93,13 +93,15 @@ export class Root extends Component {
         this.notificationUnsubscribe = FCM.on('notification', (notif) => {
             // there are two parts of notif. notif.notification contains the notification payload, notif.data contains data payload
             //点击事件
-            console.log("--------------notif",notif)
+            console.log("--------------notif", notif)
             // clickNotification(notif);
             // Alert.alert(notif.title);
             singleton.setTitle("Crazy May Fest 2017");
+            singleton.setRoute("DrawerMe");
             singleton.getNav().replace({
                 name: "DrawerMe"
             });
+            console.log("singleton—------1", singleton.getRoute());
         });
         this.refreshUnsubscribe = FCM.on('refreshToken', (token) => {
             console.log('----------******', token)
@@ -123,12 +125,13 @@ export class Root extends Component {
         this.notificationUnsubscribe();
     }
     render() {
+        console.log("singleton-------- 2", singleton.getRoute());
         return (
             <View style={styles.navigatorContainer}>
                 <Navigator
                     ref={(navigator) => { return this.navigator = navigator } }
                     sceneStyle={styles.container}
-                    initialRoute={{ name: this.props.title == null ? 'Introduce' : this.props.title }}
+                    initialRoute={{ name: singleton.getRoute() == null ? 'Introduce' : singleton.getRoute() }}
                     renderScene={this.renderScene}
                     configureScene={(route) => {
                         return CustomPushFromRightWithoutGestures;
