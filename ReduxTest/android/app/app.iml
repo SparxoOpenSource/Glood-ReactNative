@@ -136,8 +136,8 @@
     <orderEntry type="library" exported="" name="okio-1.6.0" level="project" />
     <orderEntry type="library" exported="" name="okhttp-2.5.0" level="project" />
     <orderEntry type="library" exported="" name="crashreport-2.2.2" level="project" />
-    <orderEntry type="library" exported="" name="jsr305-3.0.0" level="project" />
     <orderEntry type="library" exported="" name="stetho-1.2.0" level="project" />
+    <orderEntry type="library" exported="" name="jsr305-3.0.0" level="project" />
     <orderEntry type="library" exported="" name="fbcore-0.8.1" level="project" />
     <orderEntry type="library" exported="" name="commons-cli-1.2" level="project" />
     <orderEntry type="library" exported="" name="firebase-analytics-impl-9.4.0" level="project" />
@@ -165,6 +165,7 @@
     <orderEntry type="library" exported="" name="firebase-analytics-9.4.0" level="project" />
     <orderEntry type="library" exported="" name="react-native-0.20.1" level="project" />
     <orderEntry type="library" exported="" name="nativecrashreport-3.0" level="project" />
+    <orderEntry type="module" module-name="react-native-sqlite-storage" exported="" />
     <orderEntry type="module" module-name="react-native-camera" exported="" />
     <orderEntry type="module" module-name="react-native-barcodescanner" exported="" />
     <orderEntry type="module" module-name="react-native-image-picker" exported="" />

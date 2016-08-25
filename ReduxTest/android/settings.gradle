@@ -9,3 +9,5 @@ include ':react-native-barcodescanner', ':app'
 project(':react-native-barcodescanner').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-barcodescanner/android')
 include ':react-native-fcm', ':app'
 project(':react-native-fcm').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-fcm/android')
+include ':react-native-sqlite-storage'
+project(':react-native-sqlite-storage').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-sqlite-storage/src/android')

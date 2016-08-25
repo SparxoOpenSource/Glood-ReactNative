@@ -12,6 +12,8 @@ import com.lwansbrough.RCTCamera.RCTCameraPackage;
 import com.reduxtest.actions.NotificationPackageForAndroid;
 import com.reduxtest.actions.RecordAudioPackage;
 
+import org.pgsqlite.SQLitePluginPackage;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -48,7 +50,8 @@ public class MainActivity extends ReactActivity {
                 new RCTCameraPackage(),
                 new BarcodeScannerPackage(),
                 new FIRMessagingPackage(),
-                new NotificationPackageForAndroid()
+                new NotificationPackageForAndroid(),
+                new SQLitePluginPackage()
         );
     }
 

@@ -26,6 +26,7 @@ import Singleton from '../app/utils/Singleton';
 let singleton = new Singleton();
 import FCM from 'react-native-fcm';
 import {sendNotification} from "../app/utils/PushNotifications";
+import {DBPage} from "../app/pages/db"
 
 
 const propTypes = {
@@ -78,6 +79,8 @@ export class Root extends Component {
                 return (<QrcodeReader/>);
             case "Authorize":
                 return (<Authorize/>);
+            case "DBPage":
+                return (<DBPage/>);
         }
     }
     componentDidMount() {
@@ -98,9 +101,6 @@ export class Root extends Component {
             // Alert.alert(notif.title);
             singleton.setTitle("Crazy May Fest 2017");
             singleton.setRoute("DrawerMe");
-            singleton.getNav().replace({
-                name: "DrawerMe"
-            });
             console.log("singleton—------1", singleton.getRoute());
         });
         this.refreshUnsubscribe = FCM.on('refreshToken', (token) => {
@@ -115,6 +115,11 @@ export class Root extends Component {
             Alert.alert(info.title);
             // console.log("ReadableMap", info.body);
         });
+        // setTimeout(() => {
+        //     singleton.getNav().replace({
+        //         name: "DrawerMe"
+        //     });
+        // }, 5000)
     }
     componentWillUnmount() {
         if (isAndroid()) {
@@ -131,7 +136,7 @@ export class Root extends Component {
                 <Navigator
                     ref={(navigator) => { return this.navigator = navigator } }
                     sceneStyle={styles.container}
-                    initialRoute={{ name: singleton.getRoute() == null ? 'Introduce' : singleton.getRoute() }}
+                    initialRoute={{ name: singleton.getRoute() == null ? 'DBPage' : singleton.getRoute() }}
                     renderScene={this.renderScene}
                     configureScene={(route) => {
                         return CustomPushFromRightWithoutGestures;
