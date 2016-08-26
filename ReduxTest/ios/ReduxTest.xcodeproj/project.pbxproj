@@ -25,6 +25,10 @@
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		C778DFD783987D62197C174A /* libPods-ReduxTest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D549A9DC8BDEC6B32264DEBC /* libPods-ReduxTest.a */; };
 		CC1041421CE5B4CC00B5D2E7 /* RecordAudio.m in Sources */ = {isa = PBXBuildFile; fileRef = CC1041411CE5B4CC00B5D2E7 /* RecordAudio.m */; };
+		CC1F05261D6FF90D00973DFB /* libRealmJS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC1F051D1D6FF7D600973DFB /* libRealmJS.a */; };
+		CC1F05271D6FF91400973DFB /* libGCDWebServers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC1F051B1D6FF7D600973DFB /* libGCDWebServers.a */; };
+		CC1F05281D6FF93800973DFB /* RealmJS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC1F051F1D6FF7D600973DFB /* RealmJS.framework */; };
+		CC1F05291D6FF93C00973DFB /* RealmReact.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC1F05231D6FF7D600973DFB /* RealmReact.framework */; };
 		CC2672AE1CEF07570018F4AB /* NSString+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = CC2672AD1CEF07570018F4AB /* NSString+Base64.m */; };
 		CC41C9341D1F959E00F244E4 /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = CC41C9331D1F959E00F244E4 /* KeychainItemWrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CC4B60101D6D59C200C41EF0 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CC4B600F1D6D59C200C41EF0 /* libsqlite3.0.tbd */; };
@@ -144,6 +148,41 @@
 			remoteGlobalIDString = 58B5119B1A9E6C1200147676;
 			remoteInfo = RCTText;
 		};
+		CC1F051A1D6FF7D600973DFB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CC1F05051D6FF7D600973DFB /* RealmJS.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F63FF2F01C16405C00B3B8E0;
+			remoteInfo = GCDWebServers;
+		};
+		CC1F051C1D6FF7D600973DFB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CC1F05051D6FF7D600973DFB /* RealmJS.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F63FF2B11C1241E500B3B8E0;
+			remoteInfo = "RealmJS static";
+		};
+		CC1F051E1D6FF7D600973DFB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CC1F05051D6FF7D600973DFB /* RealmJS.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 02B58CB11AE99CEC009B348C;
+			remoteInfo = RealmJS;
+		};
+		CC1F05201D6FF7D600973DFB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CC1F05051D6FF7D600973DFB /* RealmJS.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 02B58CBC1AE99CEC009B348C;
+			remoteInfo = RealmJSTests;
+		};
+		CC1F05221D6FF7D600973DFB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CC1F05051D6FF7D600973DFB /* RealmJS.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 02B29A161B7CF7C9008A7E6B;
+			remoteInfo = RealmReact;
+		};
 		CCAE14951D6DA99000650CBC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CCAE14841D6DA99000650CBC /* SQLite.xcodeproj */;
@@ -202,6 +241,7 @@
 		9C8293DD142566B8F83B5226 /* Pods-ReduxTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReduxTest.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ReduxTest/Pods-ReduxTest.debug.xcconfig"; sourceTree = "<group>"; };
 		CC1041401CE5B4CC00B5D2E7 /* RecordAudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordAudio.h; sourceTree = "<group>"; };
 		CC1041411CE5B4CC00B5D2E7 /* RecordAudio.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordAudio.m; sourceTree = "<group>"; };
+		CC1F05051D6FF7D600973DFB /* RealmJS.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RealmJS.xcodeproj; path = ../node_modules/realm/RealmJS.xcodeproj; sourceTree = "<group>"; };
 		CC2672AC1CEF07570018F4AB /* NSString+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Base64.h"; sourceTree = "<group>"; };
 		CC2672AD1CEF07570018F4AB /* NSString+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Base64.m"; sourceTree = "<group>"; };
 		CC41C9321D1F959E00F244E4 /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainItemWrapper.h; sourceTree = "<group>"; };
@@ -277,6 +317,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC1F05291D6FF93C00973DFB /* RealmReact.framework in Frameworks */,
+				CC1F05281D6FF93800973DFB /* RealmJS.framework in Frameworks */,
+				CC1F05271D6FF91400973DFB /* libGCDWebServers.a in Frameworks */,
+				CC1F05261D6FF90D00973DFB /* libRealmJS.a in Frameworks */,
 				CCAE14971D6DA99700650CBC /* libSQLite.a in Frameworks */,
 				CC4B60101D6D59C200C41EF0 /* libsqlite3.0.tbd in Frameworks */,
 				CCF2B7431D35F1B2009F359D /* libRCTCamera.a in Frameworks */,
@@ -440,6 +484,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				CC1F05051D6FF7D600973DFB /* RealmJS.xcodeproj */,
 				CCAE14841D6DA99000650CBC /* SQLite.xcodeproj */,
 				CCF2B73C1D35F08B009F359D /* RCTCamera.xcodeproj */,
 				CCD875681CE5D8EB00388995 /* RNImagePicker.xcodeproj */,
@@ -515,6 +560,18 @@
 				CC41C9331D1F959E00F244E4 /* KeychainItemWrapper.m */,
 			);
 			path = RNRecordAudio;
+			sourceTree = "<group>";
+		};
+		CC1F05061D6FF7D600973DFB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CC1F051B1D6FF7D600973DFB /* libGCDWebServers.a */,
+				CC1F051D1D6FF7D600973DFB /* libRealmJS.a */,
+				CC1F051F1D6FF7D600973DFB /* RealmJS.framework */,
+				CC1F05211D6FF7D600973DFB /* RealmJSTests.xctest */,
+				CC1F05231D6FF7D600973DFB /* RealmReact.framework */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		CC26729E1CEF07220018F4AB /* NSString+Base64 */ = {
@@ -764,6 +821,10 @@
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
 				},
 				{
+					ProductGroup = CC1F05061D6FF7D600973DFB /* Products */;
+					ProjectRef = CC1F05051D6FF7D600973DFB /* RealmJS.xcodeproj */;
+				},
+				{
 					ProductGroup = CCD875691CE5D8EB00388995 /* Products */;
 					ProjectRef = CCD875681CE5D8EB00388995 /* RNImagePicker.xcodeproj */;
 				},
@@ -849,6 +910,41 @@
 			fileType = archive.ar;
 			path = libRCTText.a;
 			remoteRef = 832341B41AAA6A8300B99B32 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CC1F051B1D6FF7D600973DFB /* libGCDWebServers.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libGCDWebServers.a;
+			remoteRef = CC1F051A1D6FF7D600973DFB /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CC1F051D1D6FF7D600973DFB /* libRealmJS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRealmJS.a;
+			remoteRef = CC1F051C1D6FF7D600973DFB /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CC1F051F1D6FF7D600973DFB /* RealmJS.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = RealmJS.framework;
+			remoteRef = CC1F051E1D6FF7D600973DFB /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CC1F05211D6FF7D600973DFB /* RealmJSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = RealmJSTests.xctest;
+			remoteRef = CC1F05201D6FF7D600973DFB /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CC1F05231D6FF7D600973DFB /* RealmReact.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = RealmReact.framework;
+			remoteRef = CC1F05221D6FF7D600973DFB /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		CCAE14961D6DA99000650CBC /* libSQLite.a */ = {
