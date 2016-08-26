@@ -121,11 +121,11 @@ export class NewMic extends Component {
      * 新消息进来时进行滚动
      */
     _scrollToBottom() {
-        this.scrollResponder.scrollTo({
-            y: footerY,
-            x: 0,
-            animated: true,
-        });
+        // this.scrollResponder.scrollTo({
+        //     y: footerY,
+        //     x: 0,
+        //     animated: true,
+        // });
     }
     /**
      * 设置延迟时间
@@ -139,11 +139,11 @@ export class NewMic extends Component {
     }
 
     _scrollToBottom2() {
-        this.scrollResponder.scrollTo({
-            y: footerY,
-            x: 0,
-            animated: true,
-        });
+        // this.scrollResponder.scrollTo({
+        //     y: footerY,
+        //     x: 0,
+        //     animated: true,
+        // });
         this._setTime2();
     }
     _setTime2() {
@@ -182,7 +182,7 @@ export class NewMic extends Component {
                     ip: userNamexx,
                     time: back.time
                 };
-                Add(singleton.getRoomName(), back.name, back.time);
+                Add(singleton.getRoomName(), back.name="tttttt", back.time);
                 data = [...data, title];
                 //发送消息
                 _this.sendMessage(back.Base64);

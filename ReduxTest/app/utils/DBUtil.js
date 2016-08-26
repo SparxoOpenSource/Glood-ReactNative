@@ -5,22 +5,28 @@ var db = SQLite.openDatabase({ name: "Glood.db" });
 
 export function Add(roomName, fileName, time) {
     db.transaction((tx) => {
-        tx.executeSql('CREATE TABLE IF NOT EXISTS GloodRecord (RoomName string, FileName string, Time string)');
-        var sql = "INSERT INTO student (RoomName, FileName ,Time) VALUES (" + roomName + ", " + fileName + "," + time + ")";
+        tx.executeSql('CREATE TABLE IF NOT EXISTS GloodRecord (RoomName varchar(100), FileName varchar(100), Time varchar(100))');
+        var sql = "INSERT INTO GloodRecord (RoomName, FileName ,Time) VALUES ('" + roomName + "','" + fileName + "','" + time + "')";
         tx.executeSql(sql, [], (tx, rs) => {
-            Alert.alert(rs.rows.item.length + "");
+            //插入数据成功，受影响的行数
+            console.log("插入数据成功，受影响的行数" + rs.rows.item.length);
+            Alert.alert("插入数据成功，受影响的行数" + rs.rows.item.length);
         });
         // Select(tx);
     }, (e) => { console.log(e) });
 }
 export function Select(tx) {
-    tx.executeSql('SELECT * FROM student', [], (tx, results) => {
-        var len = results.rows.length, i;
-        for (i = 0; i < len; i++) {
-            console.log(results.rows.item(i).id + ':' + results.rows.item(i).log);
-            Alert.alert(results.rows.item(i).id + ':' + results.rows.item(i).log);
-        }
-    }, null);
+    db.transaction((tx) => {
+        tx.executeSql('SELECT * FROM student', [], (tx, results) => {
+            var len = results.rows.length, i;
+            for (i = 0; i < len; i++) {
+                console.log(results.rows.item(i).id + ':' + results.rows.item(i).log);
+                Alert.alert(results.rows.item(i).id + ':' + results.rows.item(i).log);
+            }
+        }, null);
+    }, (e) => {
+        console.log(e);
+    });
 }
 export function DeleteMin() {
     db.transaction((tx) => {
