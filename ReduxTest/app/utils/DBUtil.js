@@ -3,17 +3,16 @@ import SQLite from 'react-native-sqlite-storage';
 import {Alert}  from 'react-native';
 var db = SQLite.openDatabase({ name: "Glood.db" });
 
-export function Add() {
+export function Add(roomName, fileName, time) {
     db.transaction((tx) => {
-        tx.executeSql('CREATE TABLE IF NOT EXISTS student (id integer, log integer)');
-        tx.executeSql('INSERT INTO student (id, log) VALUES (1, 1)');
-        tx.executeSql('INSERT INTO student (id, log) VALUES (2, 2)');
-        tx.executeSql('INSERT INTO student (id, log) VALUES (3, 3)');
-        tx.executeSql('INSERT INTO student (id, log) VALUES (4, 4)');
-        Select(tx);
+        tx.executeSql('CREATE TABLE IF NOT EXISTS GloodRecord (RoomName string, FileName string, Time string)');
+        var sql = "INSERT INTO student (RoomName, FileName ,Time) VALUES (" + roomName + ", " + fileName + "," + time + ")";
+        tx.executeSql(sql, [], (tx, rs) => {
+            Alert.alert(rs.rows.item.length + "");
+        });
+        // Select(tx);
     }, (e) => { console.log(e) });
 }
-
 export function Select(tx) {
     tx.executeSql('SELECT * FROM student', [], (tx, results) => {
         var len = results.rows.length, i;

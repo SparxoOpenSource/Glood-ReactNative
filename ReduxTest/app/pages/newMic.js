@@ -25,11 +25,12 @@ import {fontSizeAndroid} from "../utils/CommonUtils.js";
 import {LoadingView} from "../components/LoadingView";
 import Singleton from '../utils/Singleton';
 import {sendMessageInRoom} from '../utils/CommonUtils';
+import {Add, Select, DeleteMin, Drop, Update} from "../utils/DBUtil"
 let singleton = new Singleton();
 import {HardwareUtils} from "../utils/HardwareUtils";
 var userNamexx;
 HardwareUtils.prototype.getAddressIp((call) => {
-  userNamexx = call.IP;
+    userNamexx = call.IP;
 });
 var SQLite = require('react-native-sqlite-storage');
 // import SQLite from "react_native_sqlite";
@@ -181,6 +182,7 @@ export class NewMic extends Component {
                     ip: userNamexx,
                     time: back.time
                 };
+                Add(singleton.getRoomName(), back.name, back.time);
                 data = [...data, title];
                 //发送消息
                 _this.sendMessage(back.Base64);
@@ -212,44 +214,44 @@ export class NewMic extends Component {
      */
     _accessFileName() {
         // if (isAndroid()) {
-            var _this = this;
-            RecordAudio.prototype.accessFileName((back) => {
-                if (back.name === "有数据") {
-                    array = back.param;
-                    var rr = array.length > 5 ? 5 : array.length;
-                    for (var i = 0; i < rr; i++) {
-                        var title = {
-                            name: array[i].name,
-                            ip: array[i].ip,
-                            time: array[i].time
-                        };
-                        data = [...data, title];
-                    }
-                } else {
-                    RecordAudio.prototype.recordMsg(back.name);
+        var _this = this;
+        RecordAudio.prototype.accessFileName((back) => {
+            if (back.name === "有数据") {
+                array = back.param;
+                var rr = array.length > 5 ? 5 : array.length;
+                for (var i = 0; i < rr; i++) {
+                    var title = {
+                        name: array[i].name,
+                        ip: array[i].ip,
+                        time: array[i].time
+                    };
+                    data = [...data, title];
                 }
-                this._refush(data);
-                if (data.length * everyOne > maxHeight) {
-                    scorll = true;
-                    this._setTime2();
-                }
-            });
+            } else {
+                RecordAudio.prototype.recordMsg(back.name);
+            }
+            this._refush(data);
+            if (data.length * everyOne > maxHeight) {
+                scorll = true;
+                this._setTime2();
+            }
+        });
         // }
     }
     /**
      * 接收消息，并监听
      */
-    roomMessagexx(roomname,username,roommessage) {
-        console.log('xxxxxxxx------xxxxxaaaa',roommessage)
+    roomMessagexx(roomname, username, roommessage) {
+        console.log('xxxxxxxx------xxxxxaaaa', roommessage)
         var self = this;
         this.scrollResponder = this.refs.listView.getScrollResponder();
         if (!inTher)
             return;
         // var newMessage = this.formatMessage(roommessage);
-        console.log('--------------',username,userNamexx);
+        console.log('--------------', username, userNamexx);
         if (username !== userNamexx) {
             RecordAudio.prototype.saveRecord(roommessage, userNamexx, (back) => {
-                
+
                 if (back.success == true) {
                     var title = {
                         name: back.name,
