@@ -204,7 +204,7 @@ export class NewMic extends Component {
      * 接收消息，并监听
      */
     roomMessagexx(roomname, username, roommessage) {
-        var self=this;
+        var self = this;
         if (!inTher)
             return;
         RecordAudio.prototype.saveRecord(roommessage, userNamexx, (back) => {
@@ -221,13 +221,14 @@ export class NewMic extends Component {
                     return;
                 data = [...data, title];
                 self._refush(data);
+
+                footerY = footerY + everyOne;
+                if (data.length * everyOne > maxHeight) {
+                    scorll = true;
+                    this._setTime();
+                }
             }
         });
-        footerY = footerY + everyOne;
-        if (data.length * everyOne > maxHeight) {
-            scorll = true;
-            this._setTime();
-        }
     }
 
     componentDidMount(props) {
@@ -238,7 +239,7 @@ export class NewMic extends Component {
         EventListener.on("SelectByRoomName").then(this.SelectByRoomName.bind(this));
 
     }
-    componentWillUnmount(){
+    componentWillUnmount() {
         EventListener.off("RecordStop");
         EventListener.off("PlayState");
         EventListener.off("RoomMessage");
@@ -328,7 +329,8 @@ export class NewMic extends Component {
         }
     }
     SelectByRoomName(item) {
-
+        if (item.length > 0)
+            return;
         console.log("收到新消息", item);
         data = [...item];
         this._refush(data);
