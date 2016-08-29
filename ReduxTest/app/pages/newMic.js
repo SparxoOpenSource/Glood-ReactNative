@@ -329,7 +329,7 @@ export class NewMic extends Component {
         }
     }
     SelectByRoomName(item) {
-        if (item.length > 0)
+        if (item.length === 0)
             return;
         console.log("收到新消息", item);
         data = [...item];
