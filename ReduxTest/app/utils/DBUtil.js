@@ -109,11 +109,11 @@ export function Drop() {
         tx.executeSql('DROP TABLE GloodRecord');
     });
 }
-export function Update() {
+export function Update(roomName, fileName, time, userName) {
     db.transaction((tx) => {
-        tx.executeSql('UPDATE GloodRecord SET log=log+? WHERE id=8', [2], (tx, rs) => {
+        tx.executeSql('UPDATE GloodRecord SET RoomName=?,Time=? WHERE FileName=?', [roomName,time,fileName], (tx, rs) => {
             if (rs.rowsAffected === 0) {
-                tx.executeSql('INSERT INTO GloodRecord (id, log) VALUES (?, ?)', [8, 8], (tx, rs) => {
+                tx.executeSql('INSERT INTO GloodRecord (RoomName, FileName ,Time ,UserName) VALUES (?,?,?,?)', [roomName, fileName, time, userName], (tx, rs) => {
                     Select(tx);
                 });
             } else {
