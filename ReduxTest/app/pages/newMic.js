@@ -75,7 +75,7 @@ export class NewMic extends Component {
             like: (likeMe ? require('../img/like2.png') : require('../img/like.png')),
             likeSum: 16
         }
-        SelectAll();
+        SelectByRoomName(singleton.getRoomName());
     }
     render() {
         return (
