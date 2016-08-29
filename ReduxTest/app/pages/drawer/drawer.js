@@ -53,6 +53,10 @@ export class DrawerMe extends Component {
             LoginNow();
         }, 1500);
     }
+    componentWillUnmount() {
+        EventListener.off("Drawer");
+        EventListener.off("DrawerOpenPage");
+    }
     render() {
         // const {
         //     drawerLockMode,

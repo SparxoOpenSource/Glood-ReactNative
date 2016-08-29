@@ -63,7 +63,7 @@ var array = new Array();
 export class NewMic extends Component {
     constructor() {
         super();
-        data = new Array();
+        data = [];
         footerY = 0;
         index = 0;
         scorll = false;
@@ -175,24 +175,9 @@ export class NewMic extends Component {
         var _this = this;
         this.voiceStatus(false);
         RecordAudio.prototype.stopRecord((back) => {
-            // RecordAudio.prototype.recordMsg("停止录音");
             if (back.success == true) {
-                var title = {
-                    name: back.name,
-                    ip: userNamexx,
-                    time: back.time
-                };
-                Add(singleton.getRoomName(), back.name, back.time, userNamexx);
-                data = [...data, title];
                 //发送消息
                 _this.sendMessage(back.Base64);
-                _this._refush(data);
-                console.log("*--------", everyOne + "----" + maxHeight);
-                if (data.length * everyOne > maxHeight) {
-                    footerY = footerY + everyOne;
-                    scorll = true;
-                    this._setTime();
-                }
             } else {
                 RecordAudio.prototype.recordMsg("Failed recording");
             }
@@ -213,100 +198,51 @@ export class NewMic extends Component {
      * 读取保存在磁盘中的录音文件
      */
     _accessFileName() {
-        // if (isAndroid()) {
-        var _this = this;
-        RecordAudio.prototype.accessFileName((back) => {
-            if (back.name === "有数据") {
-                array = back.param;
-                var rr = array.length > 5 ? 5 : array.length;
-                for (var i = 0; i < rr; i++) {
-                    var title = {
-                        name: array[i].name,
-                        ip: array[i].ip,
-                        time: array[i].time
-                    };
-                    data = [...data, title];
-                }
-            } else {
-                RecordAudio.prototype.recordMsg(back.name);
-            }
-            this._refush(data);
-            if (data.length * everyOne > maxHeight) {
-                scorll = true;
-                this._setTime2();
-            }
-        });
-        // }
+        SelectByRoomName(singleton.getRoomName());
     }
     /**
      * 接收消息，并监听
      */
     roomMessagexx(roomname, username, roommessage) {
-        console.log('xxxxxxxx------xxxxxaaaa', roommessage)
-        var self = this;
-        this.scrollResponder = this.refs.listView.getScrollResponder();
+        var self=this;
         if (!inTher)
             return;
-        // var newMessage = this.formatMessage(roommessage);
-        console.log('--------------', username, userNamexx);
-        if (username !== userNamexx) {
-            RecordAudio.prototype.saveRecord(roommessage, userNamexx, (back) => {
+        RecordAudio.prototype.saveRecord(roommessage, userNamexx, (back) => {
 
-                if (back.success == true) {
-                    var title = {
-                        name: back.name,
-                        ip: username,
-                        time: back.time
-                    };
-
-                    Add(singleton.getRoomName(), back.name, back.time, username);
-                    data = [...data, title];
-                    self._refush(data);
-                }
-            });
-            footerY = footerY + everyOne;
-            if (data.length * everyOne > maxHeight) {
-                scorll = true;
-                this._setTime();
+            if (back.success == true) {
+                var title = {
+                    name: back.name,
+                    ip: username,
+                    time: back.time
+                };
+                Add(roomname, back.name, back.time, username);
+                console.log("singleton.getRoomName", singleton.getRoomName + "!==" + roomname);
+                if (singleton.getRoomName() !== roomname)
+                    return;
+                data = [...data, title];
+                self._refush(data);
             }
+        });
+        footerY = footerY + everyOne;
+        if (data.length * everyOne > maxHeight) {
+            scorll = true;
+            this._setTime();
         }
     }
 
     componentDidMount(props) {
+        this.scrollResponder = this.refs.listView.getScrollResponder();
         EventListener.on("RecordStop").then(this.stopRecordAll.bind(this));
         EventListener.on("PlayState").then(this.PlayState.bind(this));
         EventListener.on("RoomMessage").then(this.roomMessagexx.bind(this));
         EventListener.on("SelectByRoomName").then(this.SelectByRoomName.bind(this));
 
-
-
-        // singleton.getMicFunction().service('messages').on('created', message => {
-        //     if (!inTher)
-        //         return;
-        //     var newMessage = this.formatMessage(message);
-        //     if (singleton.getMicFunction().get('user')._id !== newMessage.userid) {
-        //         RecordAudio.prototype.saveRecord(newMessage.text, newMessage.name, (back) => {
-        //             if (back.success == true) {
-        //                 var title = {
-        //                     name: back.name,
-        //                     ip: newMessage.name,
-        //                     time: back.time
-        //                 };
-        //                 data = [...data, title];
-        //                 self._refush(data);
-        //             }
-        //         });
-        //         footerY = footerY + everyOne;
-        //         if (data.length * everyOne > maxHeight) {
-        //             scorll = true;
-        //             this._setTime();
-        //         }
-        //     }
-        // });
-
-        // singleton.getMicFunction().service('messages').on('removed', result => {
-        //     // this.deleteMessage(result);
-        // });
+    }
+    componentWillUnmount(){
+        EventListener.off("RecordStop");
+        EventListener.off("PlayState");
+        EventListener.off("RoomMessage");
+        EventListener.off("SelectByRoomName");
     }
     PlayState(bool) {
         if (bool === false) {
@@ -330,8 +266,6 @@ export class NewMic extends Component {
             name: message.sentBy.email,
             text: message.text,
             userid: message.sentBy._id,
-            // position: message.sentBy._id === this.app.get('user')._id ? 'left' : 'right',
-            // image: { uri: message.sentBy.avatar ? message.sentBy.avatar : PLACEHOLDER },
             date: new Date(message.createdAt)
         };
     }
@@ -340,12 +274,6 @@ export class NewMic extends Component {
      */
     sendMessage(message = null, rowID = null) {
         sendMessageInRoom(message);
-        // singleton.getMicFunction().service('messages').create({ text: message }).then(result => {
-        //     console.log('message created!');
-        // }).catch((error) => {
-        //     console.log('ERROR creating message');
-        //     console.log(error);
-        // });
     }
     /**
      * 自动播放

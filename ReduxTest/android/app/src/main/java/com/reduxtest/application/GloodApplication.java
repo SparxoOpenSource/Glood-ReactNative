@@ -15,7 +15,7 @@ public class GloodApplication extends Application {
     public void onCreate() {
         super.onCreate();
         CrashReport.initCrashReport(getApplicationContext(), "900035325", false);
-        UncaughtException crashHandler = UncaughtException.getInstance();
-        crashHandler.init(getApplicationContext());
+//        UncaughtException crashHandler = UncaughtException.getInstance();
+//        crashHandler.init(getApplicationContext());
     }
 }
