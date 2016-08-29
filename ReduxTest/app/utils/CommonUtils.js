@@ -50,7 +50,7 @@ export function start() {
       }
     },
     roomMessage: function (roomName, username, message) {
-      Pop(roomName+"号聊天室" + "有新消息了");
+      Pop(roomName + "号聊天室" + "有新消息了");
       EventListener.trigger("RoomMessage", roomName, username, message);
     },
   });
@@ -75,7 +75,7 @@ export function start() {
 
 export function joinEventChatRoom(eventName) {
   if (isLoginSuccess == 'yes') {
-    Pop("joinEventChatRoom ...");
+    Pop("joinEventChatRoom ..." + eventName);
     eventNamexx = eventName;
     singleton.setRoomName(eventName);
     serSignalr.joinEventChatRoom((eventName)).done(() => {

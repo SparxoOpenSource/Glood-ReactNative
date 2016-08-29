@@ -23,7 +23,7 @@ export function TabbleIsExist(tableName) {
  */
 export function CreatTable() {
     db.transaction((tx) => {
-        tx.executeSql('CREATE TABLE IF NOT EXISTS GloodRecord (RoomName varchar(100), FileName varchar(100), Time varchar(100),UserName varchar(100))');
+        tx.executeSql('CREATE TABLE IF NOT EXISTS GloodRecord (RoomName varchar(100), FileName varchar(100), Time double, UserName varchar(100))');
     }, (e) => { console.log(e) });
 }
 /**
