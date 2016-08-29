@@ -40,5 +40,8 @@
     "socket.io": "^1.4.6",
     "socket.io-client": "^1.4.6",
     "socket.io-p2p": "^2.2.0"
+  },
+  "devDependencies": {
+    "jest-cli": "^14.1.0"
   }
 }
