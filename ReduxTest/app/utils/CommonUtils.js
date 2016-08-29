@@ -65,7 +65,7 @@ export function start() {
       signalr.loadEventChatRooms().done((room) => {
         console.log('------***', room);
       }).fail(() => {
-        Alert.alert('loadRooms ERROR');
+        Pop('loadRooms ERROR');
       })
     }).fail(() => {
       Pop("connection server ERROR");
@@ -83,7 +83,7 @@ export function joinEventChatRoom(eventName) {
       EventListener.trigger("DrawerOpenPage", "EventInfo");
       console.log('sdfsdf-------', eventName);
     }).fail(() => {
-      Alert.alert('joinEventChatRoom ERROR');
+      Pop('joinEventChatRoom ERROR');
     })
   }
 
@@ -94,7 +94,7 @@ export function sendMessageInRoom(message) {
   serSignalr.sendMessageInRoom((eventNamexx), (message)).done(() => {
     Pop('sendMessageInRoom success');
   }).fail(() => {
-    Alert.alert('sendMessageInRoom ERROR');
+    Pop('sendMessageInRoom ERROR');
   })
 
 }

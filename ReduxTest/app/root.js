@@ -26,7 +26,7 @@ import Singleton from '../app/utils/Singleton';
 let singleton = new Singleton();
 import FCM from 'react-native-fcm';
 import {sendNotification} from "../app/utils/PushNotifications";
-import {DBPage} from "../app/pages/db"
+import {TabbleIsExist, CreatTable} from "../app/utils/DBUtil"
 
 
 const propTypes = {
@@ -79,11 +79,10 @@ export class Root extends Component {
                 return (<QrcodeReader/>);
             case "Authorize":
                 return (<Authorize/>);
-            case "DBPage":
-                return (<DBPage/>);
         }
     }
     componentDidMount() {
+        CreatTable();
         if (isAndroid()) {
             BackAndroid.addEventListener('hardwareBackPress', this.onBackAndroid.bind(this));
         }

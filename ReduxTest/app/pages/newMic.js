@@ -25,7 +25,7 @@ import {fontSizeAndroid} from "../utils/CommonUtils.js";
 import {LoadingView} from "../components/LoadingView";
 import Singleton from '../utils/Singleton';
 import {sendMessageInRoom} from '../utils/CommonUtils';
-import {Add, Select, DeleteMin, Drop, Update} from "../utils/DBUtil"
+import {Add, SelectByRoomName, DeleteMin, Drop, Update, SelectAll} from "../utils/DBUtil"
 let singleton = new Singleton();
 import {HardwareUtils} from "../utils/HardwareUtils";
 var userNamexx;
@@ -75,7 +75,7 @@ export class NewMic extends Component {
             like: (likeMe ? require('../img/like2.png') : require('../img/like.png')),
             likeSum: 16
         }
-        this._accessFileName();
+        SelectAll();
     }
     render() {
         return (
@@ -182,7 +182,7 @@ export class NewMic extends Component {
                     ip: userNamexx,
                     time: back.time
                 };
-                Add(singleton.getRoomName(), back.name="tttttt", back.time);
+                Add(singleton.getRoomName(), back.name, back.time, userNamexx);
                 data = [...data, title];
                 //发送消息
                 _this.sendMessage(back.Base64);
@@ -274,6 +274,7 @@ export class NewMic extends Component {
         EventListener.on("RecordStop").then(this.stopRecordAll.bind(this));
         EventListener.on("PlayState").then(this.PlayState.bind(this));
         EventListener.on("RoomMessage").then(this.roomMessagexx.bind(this));
+        EventListener.on("SelectByRoomName").then(this.SelectByRoomName.bind(this));
 
 
 
@@ -394,6 +395,16 @@ export class NewMic extends Component {
                 likeSum: this.state.likeSum - 1
             });
             likeMe = false;
+        }
+    }
+    SelectByRoomName(item) {
+
+        console.log("收到新消息", item);
+        data = [...item];
+        this._refush(data);
+        if (data.length * everyOne > maxHeight) {
+            scorll = true;
+            this._setTime2();
         }
     }
 }
