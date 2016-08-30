@@ -91,28 +91,16 @@ export class NewMicItem extends Component {
             playCode: props.title,
             auto: props.auto,
             imgIsBig: false,
-            background_imagex: require('../img/background.png'),
-            firstTop: props.rowID === 0 ? ((props.dateLength * (60 + maxSize)) > maxHeight ? 0 : (maxHeight - 60 - maxSize)) : 0
+            background_imagex: require('../img/background.png')
         }
         this._setTime(props.title.time);
     }
     componentDidMount() {
         // EventListener.on("AutoPlayAllRecord").then(this.playFunction.bind(this));
         EventListener.on("AutoPlayState").then(this.changeState.bind(this));
-        EventListener.on("firstTop").then(this.firstTopMargin.bind(this));
         if (isAndroid()) {
             //安卓平台使用 LayoutAnimation 动画必须加上这么一句代码（否则动画会失效）
             UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
-        }
-    }
-    firstTopMargin(number) {
-        if (this.props.rowID === 0) {
-            var temp = number * (60 + maxSize);
-            if (maxHeight > temp) {
-                this.setState({
-                    firstTop: maxHeight - temp
-                });
-            }
         }
     }
     changeState(auto) {
@@ -136,8 +124,7 @@ export class NewMicItem extends Component {
             <View style={ { justifyContent: 'center', alignItems: 'center' }}>
                 <View style={{
                     height: 60 + maxSize,
-                    width: width,
-                    marginTop: this.state.firstTop
+                    width: width
                 }}>
                     <Image source={this.state.background_imagex} style={{
                         width: this.state.w, height: this.state.h, borderWidth: 0, borderRadius: 30,
