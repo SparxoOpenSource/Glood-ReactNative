@@ -6,7 +6,7 @@ import {Mic} from "../app/pages/mic";
 import {Cameraq} from "../app/pages/camera";
 import {PhototWall} from "../app/pages/photoWall"
 import {NewCamera} from "../app/pages/newcamera"
-import {NewMic} from "../app/pages/newMic.1"
+import {NewMic} from "../app/pages/newMic"
 import {Try} from "../app/pages/try"
 import {Tickets} from "../app/pages/tickets"
 import {Setting} from "../app/pages/setting"

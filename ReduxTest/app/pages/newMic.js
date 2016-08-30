@@ -42,8 +42,8 @@ const LISTVIEW_REF = 'listView'
 var ss = 70;
 var tt = 70;
 var footerY = 0;
-var everyOne = isAndroid() ? 95 : 100;
-var everyOnexxx = isAndroid() ? 95 : 100;
+var everyOne = isAndroid() ? 95 : 95;
+var everyOnexxx = isAndroid() ? 95 : 95;
 var index = 0;
 var {deviceHeight, deviceWidth} = Dimensions.get('window');
 var STATUS_BAR_HEIGHT = Navigator.NavigationBar.Styles.General.StatusBarHeight;
@@ -58,6 +58,7 @@ var likeMe = false;
 var myImg = require('../img/play.png');
 var voiceImg = require('../img/voice.png');
 var {height, width} = Dimensions.get('window');
+var array = new Array();
 
 export class NewMic extends Component {
     constructor() {
@@ -121,7 +122,7 @@ export class NewMic extends Component {
      */
     _scrollToBottom() {
         this.scrollResponder.scrollTo({
-            y: footerY-maxHeight,
+            y: footerY+44,
             x: 0,
             animated: true,
         });
@@ -139,7 +140,7 @@ export class NewMic extends Component {
 
     _scrollToBottom2() {
         this.scrollResponder.scrollTo({
-            y: footerY-maxHeight,
+            y: footerY+44,
             x: 0,
             animated: true,
         });
@@ -149,8 +150,11 @@ export class NewMic extends Component {
         var len = data.length;
         if (len > index) {
             index = index + 1;
-            footerY = footerY + everyOne;
-            console.log('yyyyyyyy----',len,index,footerY ,everyOne);
+            if ((index-1) * everyOne > maxHeight) {
+                    footerY = footerY + everyOne;
+                    console.log('xxxxxxx****-------',footerY,everyOne,maxHeight,index * everyOne);
+                }
+            
             setTimeout(() => {
                 if (scorll)
                     this._scrollToBottom2();
@@ -198,7 +202,7 @@ export class NewMic extends Component {
      * 读取保存在磁盘中的录音文件
      */
     _accessFileName() {
-        SelectByRoomName(singleton.getRoomName());
+        // SelectByRoomName(singleton.getRoomName());
     }
     /**
      * 接收消息，并监听
@@ -222,8 +226,9 @@ export class NewMic extends Component {
                 data = [...data, title];
                 self._refush(data);
 
-                footerY = footerY + everyOne;
+                
                 if (data.length * everyOne > maxHeight) {
+                    footerY = footerY + everyOne;
                     scorll = true;
                     this._setTime();
                 }
@@ -334,7 +339,6 @@ export class NewMic extends Component {
         console.log("收到新消息", item);
         data = [...item];
         this._refush(data);
-        console.log('xxxxxxxxxx-----',data.length*everyOne);
         if (data.length * everyOne > maxHeight) {
             scorll = true;
             this._setTime2();
@@ -352,7 +356,7 @@ const style = StyleSheet.create({
     },
     content: {
         flex: 6,
-        marginBottom: 16,
+        marginBottom: 16
     },
     footer: {
         backgroundColor: '#99999900',

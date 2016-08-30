@@ -30,7 +30,7 @@ var STATUS_BAR_HEIGHT = Navigator.NavigationBar.Styles.General.StatusBarHeight;
 // if (isAndroid()) {
 //     var STATUS_BAR_HEIGHT = ExtraDimensions.get('STATUS_BAR_HEIGHT');
 // }
-var maxHeight = height - Navigator.NavigationBar.Styles.General.NavBarHeight - STATUS_BAR_HEIGHT - 64 - 10;
+var maxHeight = height - Navigator.NavigationBar.Styles.General.NavBarHeight - STATUS_BAR_HEIGHT - 64;
 var maxSize = isAndroid() ? 30 : 35;
 var cha = width - 60;
 var leftEvery = 60 / 2 - 60 / 2 + cha / 2;
@@ -92,20 +92,20 @@ export class NewMicItem extends Component {
             auto: props.auto,
             imgIsBig: false,
             background_imagex: require('../img/background.png'),
-            /*firstTop: props.rowID === 0 ? ((props.dateLength * (60 + maxSize)) > maxHeight ? 0 : (maxHeight - 60 - maxSize)) : 0*/
+            firstTop: props.rowID === 0 ? ((props.dateLength * (60 + maxSize)) > maxHeight ? 0 : (maxHeight - 60 - maxSize)) : 0
         }
         this._setTime(props.title.time);
     }
     componentDidMount() {
         // EventListener.on("AutoPlayAllRecord").then(this.playFunction.bind(this));
         EventListener.on("AutoPlayState").then(this.changeState.bind(this));
-        /*EventListener.on("firstTop").then(this.firstTopMargin.bind(this));*/
+        EventListener.on("firstTop").then(this.firstTopMargin.bind(this));
         if (isAndroid()) {
             //安卓平台使用 LayoutAnimation 动画必须加上这么一句代码（否则动画会失效）
             UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
         }
     }
-    /*firstTopMargin(number) {
+    firstTopMargin(number) {
         if (this.props.rowID === 0) {
             var temp = number * (60 + maxSize);
             if (maxHeight > temp) {
@@ -114,7 +114,7 @@ export class NewMicItem extends Component {
                 });
             }
         }
-    }*/
+    }
     changeState(auto) {
         this.setState({
             auto: auto
@@ -137,7 +137,7 @@ export class NewMicItem extends Component {
                 <View style={{
                     height: 60 + maxSize,
                     width: width,
-                    /*marginTop: this.state.firstTop*/
+                    marginTop: this.state.firstTop
                 }}>
                     <Image source={this.state.background_imagex} style={{
                         width: this.state.w, height: this.state.h, borderWidth: 0, borderRadius: 30,
