@@ -84,9 +84,12 @@ export class NewMic extends Component {
                 <Common ground="fw_1.png"  rightType="Down"/>
                 <View style={style.content}>
                     <ListView
-                        automaticallyAdjustContentInsets={false}
+                        automaticallyAdjustContentInsets={true}
+                        enableEmptySections={true}
+                        keyboardShouldPersistTaps={true}
                         renderScrollComponent={props => <InvertibleScrollView {...props} inverted />}
                         ref={LISTVIEW_REF}
+                        initialListSize={20}
                         dataSource={this.state.dataSource}
                         renderRow={this._row.bind(this) }/>
 

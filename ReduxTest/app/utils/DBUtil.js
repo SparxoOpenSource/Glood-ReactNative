@@ -1,6 +1,7 @@
 
 import SQLite from 'react-native-sqlite-storage';
 import {Alert}  from 'react-native';
+import moment from "moment";
 import {EventListener} from "../listener/EventListener";
 var db = SQLite.openDatabase({ name: "Glood.db" });
 var item = [];
@@ -23,7 +24,7 @@ export function TabbleIsExist(tableName) {
  */
 export function CreatTable() {
     db.transaction((tx) => {
-        tx.executeSql('CREATE TABLE IF NOT EXISTS GloodRecord (RoomName varchar(100), FileName varchar(100), Time double, UserName varchar(100))');
+        tx.executeSql('CREATE TABLE IF NOT EXISTS GloodRecord (RoomName varchar(100), FileName varchar(100), Time double, UserName varchar(100),Date timestring)');
     }, (e) => { console.log(e) });
 }
 /**
@@ -31,8 +32,8 @@ export function CreatTable() {
  */
 export function Add(roomName, fileName, time, userName) {
     db.transaction((tx) => {
-        var sql = "INSERT INTO GloodRecord (RoomName, FileName ,Time ,UserName) VALUES (?,?,?,?)";
-        tx.executeSql(sql, [roomName, fileName, time, userName], (tx, rs) => {
+        var sql = "INSERT INTO GloodRecord (RoomName, FileName ,Time ,UserName,Date) VALUES (?,?,?,?,?)";
+        tx.executeSql(sql, [roomName, fileName, time, userName, moment().format("YYYY-MM-DD HH:mm:ss")], (tx, rs) => {
             //插入数据成功，受影响的行数
             console.log("插入数据成功，受影响的行数" + rs.rows.item.length);
         });

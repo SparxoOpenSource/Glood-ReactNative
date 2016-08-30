@@ -20,6 +20,7 @@ import isAndroid from '../utils/isAndroid.js';
 import RefreshableListView from "react-native-refreshable-listview";
 import {fontSizeAndroid} from "../utils/CommonUtils.js";
 import Singleton from '../utils/Singleton';
+import moment from "moment";
 let singleton = new Singleton();
 
 var {height, width} = Dimensions.get('window');
@@ -30,7 +31,7 @@ var event = [
     { use: 3, total: 20, eventName: '3', image: "http://i1.s2.dpfile.com/pc/d23976621b193f9c821756bd4f79aaec%28700x700%29/thumb.jpg" },
     { use: 4, total: 20, eventName: '4', image: "http://www.shandongqingdian.com/uploads/allimg/150714/142R32033-4.jpg" },
     { use: 5, total: 20, eventName: '5', image: "http://www.mimvm.com/uploads/allimg/photo/20140531165328867.jpg" },
-    { use: 6, total: 20, eventName: '2015 Sparxo Grand Opening', image: "http://img3.xgo-img.com.cn/dealer_article/203_500x375/deBcjvv5hBHU.jpg" },
+    { use: 6, total: 20, eventName: moment().format("YYYY-MM-DD HH:mm:ss"), image: "http://img3.xgo-img.com.cn/dealer_article/203_500x375/deBcjvv5hBHU.jpg" },
     { use: 7, total: 20, eventName: '2015 Sparxo Grand Opening', image: "http://img.izaojiao.com/upload/month_1412/201412110930465369.jpg" },
     { use: 8, total: 20, eventName: '2015 Sparxo Grand Opening', image: "http://i2.s1.dpfile.com/pc/8e91cfcf85c30b051adfac7506776d11%28700x700%29/thumb.jpg" },
     { use: 9, total: 20, eventName: '2015 Sparxo Grand Opening', image: "http://img3.douban.com/view/note/large/public/p223383491-7.jpg" },
