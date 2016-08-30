@@ -83,9 +83,9 @@ export class NewMic extends Component {
             <Image style={style.container} source={require('../img/background3.png') }>
                 <Common ground="fw_1.png"  rightType="Down"/>
                 <View style={style.content}>
-                    <ListView
+                    <RefreshableListView
                         renderScrollComponent={props => <InvertibleScrollView {...props} inverted />}
-                        automaticallyAdjustContentInsets={false}
+                        automaticallyAdjustContentInsets={true}
                         ref={LISTVIEW_REF}
                         dataSource={this.state.dataSource}
                         renderRow={this._row.bind(this) }/>
@@ -152,11 +152,13 @@ export class NewMic extends Component {
         this.setState({
             dataSource: this.state.dataSource.cloneWithRows(rows, rowIds),
         });
-        this.scrollResponder.scrollTo({
-            y: 0,
-            x: 0,
-            animated: true,
-        });
+        setTimeout(() => {
+            this.scrollResponder.scrollTo({
+                y: 0,
+                x: 0,
+                animated: true,
+            });
+        }, 200);
     }
     /**
      * 读取保存在磁盘中的录音文件
