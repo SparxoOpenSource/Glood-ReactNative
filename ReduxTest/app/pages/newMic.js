@@ -58,7 +58,6 @@ var likeMe = false;
 var myImg = require('../img/play.png');
 var voiceImg = require('../img/voice.png');
 var {height, width} = Dimensions.get('window');
-var array = new Array();
 
 export class NewMic extends Component {
     constructor() {
@@ -122,7 +121,7 @@ export class NewMic extends Component {
      */
     _scrollToBottom() {
         this.scrollResponder.scrollTo({
-            y: footerY,
+            y: footerY-maxHeight,
             x: 0,
             animated: true,
         });
@@ -140,7 +139,7 @@ export class NewMic extends Component {
 
     _scrollToBottom2() {
         this.scrollResponder.scrollTo({
-            y: footerY,
+            y: footerY-maxHeight,
             x: 0,
             animated: true,
         });
@@ -151,6 +150,7 @@ export class NewMic extends Component {
         if (len > index) {
             index = index + 1;
             footerY = footerY + everyOne;
+            console.log('yyyyyyyy----',len,index,footerY ,everyOne);
             setTimeout(() => {
                 if (scorll)
                     this._scrollToBottom2();
@@ -334,6 +334,7 @@ export class NewMic extends Component {
         console.log("收到新消息", item);
         data = [...item];
         this._refush(data);
+        console.log('xxxxxxxxxx-----',data.length*everyOne);
         if (data.length * everyOne > maxHeight) {
             scorll = true;
             this._setTime2();
@@ -351,7 +352,7 @@ const style = StyleSheet.create({
     },
     content: {
         flex: 6,
-        marginBottom: 16
+        marginBottom: 16,
     },
     footer: {
         backgroundColor: '#99999900',
