@@ -16,7 +16,7 @@ import { AppRegistry,
     DeviceEventEmitter }  from 'react-native';
 import {Common} from "./common";
 import {RecordAudio} from "../utils/RecordAudio";
-import {NewMicItem} from "./newMic_item";
+import {NewMicItem} from "./newMic_item.1";
 import isAndroid from '../utils/isAndroid.js';
 import RefreshableListView from "react-native-refreshable-listview";
 // import ExtraDimensions from 'react-native-extra-dimensions-android';
@@ -83,9 +83,9 @@ export class NewMic extends Component {
             <Image style={style.container} source={require('../img/background3.png') }>
                 <Common ground="fw_1.png"  rightType="Down"/>
                 <View style={style.content}>
-                    <RefreshableListView
+                    <ListView
+                        automaticallyAdjustContentInsets={false}
                         renderScrollComponent={props => <InvertibleScrollView {...props} inverted />}
-                        automaticallyAdjustContentInsets={true}
                         ref={LISTVIEW_REF}
                         dataSource={this.state.dataSource}
                         renderRow={this._row.bind(this) }/>
