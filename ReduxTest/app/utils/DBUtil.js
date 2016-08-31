@@ -46,7 +46,8 @@ export function Add(roomName, fileName, time, userName) {
  */
 export function SelectByRoomName(value) {
     db.transaction((tx) => {
-        var sql = "SELECT * FROM GloodRecord WHERE RoomName=?";
+        // var sql = "SELECT * FROM GloodRecord WHERE RoomName=? ORDER BY Date DESC";
+        var sql = "SELECT * FROM GloodRecord WHERE RoomName=? ORDER BY Date ASC";
         tx.executeSql(sql, [value], (tx, results) => {
             var len = results.rows.length, i;
             item = [];
@@ -57,7 +58,8 @@ export function SelectByRoomName(value) {
                     Time: results.rows.item(i).Time,
                     name: results.rows.item(i).FileName,
                     ip: results.rows.item(i).UserName,
-                    time: results.rows.item(i).Time
+                    time: results.rows.item(i).Time,
+                    date:results.rows.item(i).Date
                 };
                 item = [...item, value];
             }
@@ -81,7 +83,8 @@ export function SelectAll() {
                     Time: results.rows.item(i).Time,
                     name: results.rows.item(i).FileName,
                     ip: results.rows.item(i).UserName,
-                    time: results.rows.item(i).Time
+                    time: results.rows.item(i).Time,
+                    date:results.rows.item(i).Date
                 };
                 item = [...item, value];
             }
