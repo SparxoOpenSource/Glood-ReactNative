@@ -2,7 +2,6 @@
 import SQLite from 'react-native-sqlite-storage';
 import {Alert}  from 'react-native';
 import moment from "moment";
-import {EventListener} from "../listener/EventListener";
 var db = SQLite.openDatabase({ name: "Glood.db" });
 var item = [];
 /**
@@ -40,11 +39,23 @@ export function Add(roomName, fileName, time, userName) {
         // Select(tx);
     }, (e) => { console.log(e) });
 }
-
+export function SelectByRoomNameCount(value, callback) {
+    db.transaction((tx) => {
+        // var sql = "SELECT * FROM GloodRecord WHERE RoomName=? ORDER BY Date DESC";
+        var sql = "SELECT * FROM GloodRecord WHERE RoomName=? ORDER BY Date ASC";
+        tx.executeSql(sql, [value], (tx, results) => {
+            var len = results.rows.length;
+            callback && callback(len);
+        }, null);
+    }, (e) => {
+        console.log(e);
+        callback && callback(0);
+    });
+}
 /**
  * 根据房间查询该房间下的所有数据
  */
-export function SelectByRoomName(value) {
+export function SelectByRoomName(value, callback) {
     db.transaction((tx) => {
         // var sql = "SELECT * FROM GloodRecord WHERE RoomName=? ORDER BY Date DESC";
         var sql = "SELECT * FROM GloodRecord WHERE RoomName=? ORDER BY Date ASC";
@@ -59,19 +70,19 @@ export function SelectByRoomName(value) {
                     name: results.rows.item(i).FileName,
                     ip: results.rows.item(i).UserName,
                     time: results.rows.item(i).Time,
-                    date:results.rows.item(i).Date
+                    date: results.rows.item(i).Date
                 };
                 item = [...item, value];
             }
             if (item.length > 0) {
-                EventListener.trigger("SelectByRoomName", item);
+                callback && callback(item);
             }
         }, null);
     }, (e) => {
         console.log(e);
     });
 }
-export function SelectAll() {
+export function SelectAll(callback) {
     db.transaction((tx) => {
         tx.executeSql('SELECT * FROM GloodRecord', [], (tx, results) => {
             var len = results.rows.length, i;
@@ -84,13 +95,12 @@ export function SelectAll() {
                     name: results.rows.item(i).FileName,
                     ip: results.rows.item(i).UserName,
                     time: results.rows.item(i).Time,
-                    date:results.rows.item(i).Date
+                    date: results.rows.item(i).Date
                 };
                 item = [...item, value];
             }
-            console.log(item);
             if (item.length > 0) {
-                EventListener.trigger("SelectByRoomName", item);
+                callback && callback(item);
             }
         }, null);
     }, (e) => {
@@ -115,7 +125,7 @@ export function Drop() {
 }
 export function Update(roomName, fileName, time, userName) {
     db.transaction((tx) => {
-        tx.executeSql('UPDATE GloodRecord SET RoomName=?,Time=? WHERE FileName=?', [roomName,time,fileName], (tx, rs) => {
+        tx.executeSql('UPDATE GloodRecord SET RoomName=?,Time=? WHERE FileName=?', [roomName, time, fileName], (tx, rs) => {
             if (rs.rowsAffected === 0) {
                 tx.executeSql('INSERT INTO GloodRecord (RoomName, FileName ,Time ,UserName) VALUES (?,?,?,?)', [roomName, fileName, time, userName], (tx, rs) => {
                     Select(tx);

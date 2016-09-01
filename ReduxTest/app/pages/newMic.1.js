@@ -76,7 +76,9 @@ export class NewMic extends Component {
             like: (likeMe ? require('../img/like2.png') : require('../img/like.png')),
             likeSum: 16
         }
-        SelectByRoomName(singleton.getRoomName());
+        SelectByRoomName(singleton.getRoomName(), (callback) => {
+            this.SelectByRoomName(callback);
+        });
     }
     render() {
         return (
@@ -84,12 +86,10 @@ export class NewMic extends Component {
                 <Common ground="fw_1.png"  rightType="Down"/>
                 <View style={style.content}>
                     <ListView
-                        automaticallyAdjustContentInsets={true}
                         enableEmptySections={true}
-                        keyboardShouldPersistTaps={true}
                         renderScrollComponent={props => <InvertibleScrollView {...props} inverted />}
                         ref={LISTVIEW_REF}
-                        initialListSize={20}
+                        initialListSize={10}
                         dataSource={this.state.dataSource}
                         renderRow={this._row.bind(this) }/>
 
@@ -199,14 +199,12 @@ export class NewMic extends Component {
         EventListener.on("RecordStop").then(this.stopRecordAll.bind(this));
         EventListener.on("PlayState").then(this.PlayState.bind(this));
         EventListener.on("RoomMessage").then(this.roomMessagexx.bind(this));
-        EventListener.on("SelectByRoomName").then(this.SelectByRoomName.bind(this));
 
     }
     componentWillUnmount() {
         EventListener.off("RecordStop");
         EventListener.off("PlayState");
         EventListener.off("RoomMessage");
-        EventListener.off("SelectByRoomName");
     }
     PlayState(bool) {
         if (bool === false) {

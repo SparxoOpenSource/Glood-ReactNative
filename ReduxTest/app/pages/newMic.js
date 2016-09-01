@@ -75,7 +75,9 @@ export class NewMic extends Component {
             like: (likeMe ? require('../img/like2.png') : require('../img/like.png')),
             likeSum: 16
         }
-        SelectByRoomName(singleton.getRoomName());
+        SelectByRoomName(singleton.getRoomName(), (callback) => {
+            this.SelectByRoomName(callback);
+        });
     }
     render() {
         return (
@@ -122,7 +124,7 @@ export class NewMic extends Component {
      */
     _scrollToBottom() {
         this.scrollResponder.scrollTo({
-            y: footerY+44,
+            y: footerY + 44,
             x: 0,
             animated: true,
         });
@@ -140,7 +142,7 @@ export class NewMic extends Component {
 
     _scrollToBottom2() {
         this.scrollResponder.scrollTo({
-            y: footerY+44,
+            y: footerY + 44,
             x: 0,
             animated: true,
         });
@@ -150,11 +152,11 @@ export class NewMic extends Component {
         var len = data.length;
         if (len > index) {
             index = index + 1;
-            if ((index-1) * everyOne > maxHeight) {
-                    footerY = footerY + everyOne;
-                    console.log('xxxxxxx****-------',footerY,everyOne,maxHeight,index * everyOne);
-                }
-            
+            if ((index - 1) * everyOne > maxHeight) {
+                footerY = footerY + everyOne;
+                console.log('xxxxxxx****-------', footerY, everyOne, maxHeight, index * everyOne);
+            }
+
             setTimeout(() => {
                 if (scorll)
                     this._scrollToBottom2();
@@ -226,7 +228,7 @@ export class NewMic extends Component {
                 data = [...data, title];
                 self._refush(data);
 
-                
+
                 if (data.length * everyOne > maxHeight) {
                     footerY = footerY + everyOne;
                     scorll = true;
@@ -241,14 +243,12 @@ export class NewMic extends Component {
         EventListener.on("RecordStop").then(this.stopRecordAll.bind(this));
         EventListener.on("PlayState").then(this.PlayState.bind(this));
         EventListener.on("RoomMessage").then(this.roomMessagexx.bind(this));
-        EventListener.on("SelectByRoomName").then(this.SelectByRoomName.bind(this));
 
     }
     componentWillUnmount() {
         EventListener.off("RecordStop");
         EventListener.off("PlayState");
         EventListener.off("RoomMessage");
-        EventListener.off("SelectByRoomName");
     }
     PlayState(bool) {
         if (bool === false) {
