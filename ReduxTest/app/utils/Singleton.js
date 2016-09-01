@@ -63,4 +63,8 @@ export default class Singleton {
     getRoute() {
         return this.route;
     }
+
+    getPageSize() {
+        return 6;
+    }
 }  

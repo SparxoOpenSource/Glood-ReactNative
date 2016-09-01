@@ -221,19 +221,19 @@ export class NewMic extends Component {
                     ip: username,
                     time: back.time
                 };
-                Add(roomname, back.name, back.time, username);
-                console.log("singleton.getRoomName", singleton.getRoomName + "!==" + roomname);
-                if (singleton.getRoomName() !== roomname)
-                    return;
-                data = [...data, title];
-                self._refush(data);
-
-
-                if (data.length * everyOne > maxHeight) {
-                    footerY = footerY + everyOne;
-                    scorll = true;
-                    this._setTime();
-                }
+                Add(roomname, back.name, back.time, username, (callback) => {
+                    if (callback === 0)
+                        return;
+                    if (singleton.getRoomName() !== roomname)
+                        return;
+                    data = [...data, title];
+                    self._refush(data);
+                    if (data.length * everyOne > maxHeight) {
+                        footerY = footerY + everyOne;
+                        scorll = true;
+                        this._setTime();
+                    }
+                });
             }
         });
     }

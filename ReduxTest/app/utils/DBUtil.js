@@ -23,18 +23,19 @@ export function TabbleIsExist(tableName) {
  */
 export function CreatTable() {
     db.transaction((tx) => {
-        tx.executeSql('CREATE TABLE IF NOT EXISTS GloodRecord (RoomName varchar(100), FileName varchar(100), Time double, UserName varchar(100),Date timestring)');
+        tx.executeSql('CREATE TABLE IF NOT EXISTS GloodRecord (Id integer PRIMARY KEY autoincrement,RoomName varchar(100), FileName varchar(100), Time double, UserName varchar(100),Date timestring)');
     }, (e) => { console.log(e) });
 }
 /**
  * 新增数据
  */
-export function Add(roomName, fileName, time, userName) {
+export function Add(roomName, fileName, time, userName,callback) {
     db.transaction((tx) => {
         var sql = "INSERT INTO GloodRecord (RoomName, FileName ,Time ,UserName,Date) VALUES (?,?,?,?,?)";
         tx.executeSql(sql, [roomName, fileName, time, userName, moment().format("YYYY-MM-DD HH:mm:ss")], (tx, rs) => {
             //插入数据成功，受影响的行数
             console.log("插入数据成功，受影响的行数" + rs.rows.item.length);
+            callback&&callback(rs.rows.item.length);
         });
         // Select(tx);
     }, (e) => { console.log(e) });
@@ -42,7 +43,7 @@ export function Add(roomName, fileName, time, userName) {
 export function SelectByRoomNameCount(value, callback) {
     db.transaction((tx) => {
         // var sql = "SELECT * FROM GloodRecord WHERE RoomName=? ORDER BY Date DESC";
-        var sql = "SELECT * FROM GloodRecord WHERE RoomName=? ORDER BY Date ASC";
+        var sql = "SELECT * FROM GloodRecord WHERE RoomName=?";
         tx.executeSql(sql, [value], (tx, results) => {
             var len = results.rows.length;
             callback && callback(len);
@@ -70,7 +71,8 @@ export function SelectByRoomName(value, callback) {
                     name: results.rows.item(i).FileName,
                     ip: results.rows.item(i).UserName,
                     time: results.rows.item(i).Time,
-                    date: results.rows.item(i).Date
+                    date: results.rows.item(i).Date,
+                    id: results.rows.item(i).Id
                 };
                 item = [...item, value];
             }
@@ -82,6 +84,68 @@ export function SelectByRoomName(value, callback) {
         console.log(e);
     });
 }
+/**
+ * 查询最后一条数据
+ */
+export function SelectLastByRoomName(roomName,callback){
+    db.transaction((tx) => {
+        var sql ="select * from GloodRecord WHERE RoomName=? order by Date desc limit 1"
+        tx.executeSql(sql, [roomName], (tx, results) => {
+            var len = results.rows.length, i;
+            item = [];
+            for (i = 0; i < len; i++) {
+                var value = {
+                    RoomName: results.rows.item(i).RoomName,
+                    FileName: results.rows.item(i).FileName,
+                    Time: results.rows.item(i).Time,
+                    name: results.rows.item(i).FileName,
+                    ip: results.rows.item(i).UserName,
+                    time: results.rows.item(i).Time,
+                    date: results.rows.item(i).Date,
+                    id: results.rows.item(i).Id
+                };
+                item = [...item, value];
+            }
+            if (item.length > 0) {
+                callback && callback(item);
+            }
+        }, null);
+    }, (e) => {
+        console.log(e);
+    });
+}
+/**
+ * 分页数据查询
+ */
+export function SelectByRoomNamePage(roomName, pageSize, lastId, callback) {
+    db.transaction((tx) => {
+        tx.executeSql('SELECT * FROM GloodRecord WHERE RoomName=? AND Id < ? ORDER BY Date DESC limit ?', [roomName, lastId, pageSize], (tx, results) => {
+            var len = results.rows.length, i;
+            item = [];
+            for (i = 0; i < len; i++) {
+                var value = {
+                    RoomName: results.rows.item(i).RoomName,
+                    FileName: results.rows.item(i).FileName,
+                    Time: results.rows.item(i).Time,
+                    name: results.rows.item(i).FileName,
+                    ip: results.rows.item(i).UserName,
+                    time: results.rows.item(i).Time,
+                    date: results.rows.item(i).Date,
+                    id: results.rows.item(i).Id
+                };
+                item = [...item, value];
+            }
+            if (item.length > 0) {
+                callback && callback(item);
+            }
+        }, null);
+    }, (e) => {
+        console.log(e);
+    });
+ }
+/**
+ * 查询所有数据
+ */
 export function SelectAll(callback) {
     db.transaction((tx) => {
         tx.executeSql('SELECT * FROM GloodRecord', [], (tx, results) => {
