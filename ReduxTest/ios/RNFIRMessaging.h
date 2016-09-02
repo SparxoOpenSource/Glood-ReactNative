@@ -12,4 +12,6 @@ extern NSString *const FCMNotificationReceived;
 
 @property (nonatomic, assign) bool connectedToFCM;
 
+- (void)setBridge:(RCTBridge *)bridge;
+
 @end

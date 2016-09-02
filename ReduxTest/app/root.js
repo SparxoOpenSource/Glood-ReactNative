@@ -1,12 +1,12 @@
 import React, {Component} from "react";
 import { AppRegistry, StyleSheet, View, Text, ListView, Alert, Navigator, Image, TouchableOpacity, BackAndroid,
-    Platform, Dimensions, PropTypes, DeviceEventEmitter, NativeModules}  from 'react-native';
+    Platform, Dimensions, PropTypes, DeviceEventEmitter, NativeModules, NativeAppEventEmitter}  from 'react-native';
 import {Home} from "../app/pages/home";
 import {Mic} from "../app/pages/mic";
 import {Cameraq} from "../app/pages/camera";
 import {PhototWall} from "../app/pages/photoWall"
 import {NewCamera} from "../app/pages/newcamera"
-import {NewMic} from "../app/pages/newMic.1"
+import {NewMic} from "../app/pages/newMic"
 import {Try} from "../app/pages/try"
 import {Tickets} from "../app/pages/tickets"
 import {Setting} from "../app/pages/setting"
@@ -81,7 +81,12 @@ export class Root extends Component {
                 return (<Authorize/>);
         }
     }
+
+   
+
+
     componentDidMount() {
+        
         CreatTable();
         if (isAndroid()) {
             BackAndroid.addEventListener('hardwareBackPress', this.onBackAndroid.bind(this));
@@ -99,8 +104,12 @@ export class Root extends Component {
             // clickNotification(notif);
             // Alert.alert(notif.title);
             singleton.setTitle("Crazy May Fest 2017");
-            singleton.setRoute("DrawerMe");
-            console.log("singleton—------1", singleton.getRoute());
+            // singleton.setRoute("SETTING");
+            // singleton.getNav().push({
+            //         name: singleton.getRoute()
+            //     });
+            //     Alert.alert(singleton.getRoute());
+            // console.log("singleton—------1", singleton.getRoute());
         });
         this.refreshUnsubscribe = FCM.on('refreshToken', (token) => {
             console.log('----------******', token)
@@ -110,15 +119,19 @@ export class Root extends Component {
         FCM.subscribeToTopic('/topics/foo-bar');
         FCM.unsubscribeFromTopic('/topics/foo-bar');
 
-        DeviceEventEmitter.addListener("ReadableMap", info => {
-            Alert.alert(info.title);
-            // console.log("ReadableMap", info.body);
+        DeviceEventEmitter.addListener("FCMNotificationReceived", info => {
+            singleton.getNav().push({
+                    name: info.aps.alert.title
+                });
+        //  Alert.alert(info.aps.alert.title);
+            console.log("FCMNotificationReceived------", info.alert);
         });
         // setTimeout(() => {
         //     singleton.getNav().replace({
         //         name: "DrawerMe"
         //     });
         // }, 5000)
+
     }
     componentWillUnmount() {
         if (isAndroid()) {

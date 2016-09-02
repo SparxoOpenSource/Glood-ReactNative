@@ -50,7 +50,9 @@ export function start() {
       }
     },
     roomMessage: function (roomName, username, message) {
-      Pop(roomName + "号聊天室" + "有新消息了");
+      if (username != userNamexx) {
+        Pop(roomName + "号聊天室" + "有新消息了");
+      }
       EventListener.trigger("RoomMessage", roomName, username, message);
     },
   });
@@ -61,6 +63,13 @@ export function start() {
     Pop("login ...");
     signalr.logOn((userNamexx)).done(() => {
       isLoginSuccess = 'yes';
+      // DeviceEventEmitter.addListener("FCMNotificationReceived", info => {
+      //       singleton.getNav().push({
+      //               name: info.aps.alert.title
+      //           });
+      //    Alert.alert(info.aps.alert.title);
+      //       console.log("FCMNotificationReceived------", info.alert);
+      //   });
       Pop("connection server Success");
       signalr.loadEventChatRooms().done((room) => {
         console.log('------***', room);
@@ -90,7 +99,6 @@ export function joinEventChatRoom(eventName) {
 }
 
 export function sendMessageInRoom(message) {
-  Pop('sendMessageInRoom ...');
   serSignalr.sendMessageInRoom((eventNamexx), (message)).done(() => {
     Pop('sendMessageInRoom success');
   }).fail(() => {

@@ -94,6 +94,8 @@
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
   [Bugly startWithAppId:@"900035998"];
+  
+  
   return YES;
 }
 
@@ -114,7 +116,6 @@
   //注册成功，将deviceToken保存到应用服务器数据库中
   
 }
-
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)notification fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))handler {
     [[NSNotificationCenter defaultCenter] postNotificationName:FCMNotificationReceived object:self userInfo:notification];
