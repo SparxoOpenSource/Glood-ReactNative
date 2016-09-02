@@ -26,7 +26,7 @@ import InvertibleScrollView from 'react-native-invertible-scroll-view';
 import {LoadingView} from "../components/LoadingView";
 import Singleton from '../utils/Singleton';
 import {sendMessageInRoom} from '../utils/CommonUtils';
-import {Add, SelectByRoomName, DeleteMin, Drop, Update, SelectAll} from "../utils/DBUtil"
+import {Add, SelectByRoomName, DeleteMin, Drop, Update, SelectAll, SelectByRoomNameCount, SelectLastByRoomName, SelectByRoomNamePage} from "../utils/DBUtil"
 let singleton = new Singleton();
 import {HardwareUtils} from "../utils/HardwareUtils";
 var userNamexx;
@@ -76,7 +76,19 @@ export class NewMic extends Component {
             like: (likeMe ? require('../img/like2.png') : require('../img/like.png')),
             likeSum: 16
         }
-        SelectByRoomName(singleton.getRoomName());
+        // SelectByRoomName(singleton.getRoomName(), (callback) => {
+        //     this.SelectByRoomName(callback);
+        // });
+        // SelectByRoomNameCount(singleton.getRoomName(), (callback) => {
+
+        // });
+        SelectLastByRoomName(singleton.getRoomName(), (callback) => {
+            console.log("-------------SelectLastByRoomName---------------", callback);
+            SelectByRoomNamePage(singleton.getRoomName(), singleton.getPageSize(), callback.id, (back) => {
+                console.log("-------------SelectByRoomNamePage---------------", back);
+                this.SelectByRoomName(back);
+            });
+        });
     }
     render() {
         return (
@@ -84,12 +96,10 @@ export class NewMic extends Component {
                 <Common ground="fw_1.png"  rightType="Down"/>
                 <View style={style.content}>
                     <ListView
-                        automaticallyAdjustContentInsets={true}
                         enableEmptySections={true}
-                        keyboardShouldPersistTaps={true}
                         renderScrollComponent={props => <InvertibleScrollView {...props} inverted />}
                         ref={LISTVIEW_REF}
-                        initialListSize={20}
+                        initialListSize={10}
                         dataSource={this.state.dataSource}
                         renderRow={this._row.bind(this) }/>
 
@@ -184,12 +194,14 @@ export class NewMic extends Component {
                     ip: username,
                     time: back.time
                 };
-                Add(roomname, back.name, back.time, username);
-                console.log("singleton.getRoomName", singleton.getRoomName + "!==" + roomname);
-                if (singleton.getRoomName() !== roomname)
-                    return;
-                data = [...data, title];
-                self._refush(data);
+                Add(roomname, back.name, back.time, username, (callback) => {
+                    if (callback === 0)
+                        return;
+                    if (singleton.getRoomName() !== roomname)
+                        return;
+                    data = [...data, title];
+                    self._refush(data);
+                });
             }
         });
     }
@@ -199,14 +211,12 @@ export class NewMic extends Component {
         EventListener.on("RecordStop").then(this.stopRecordAll.bind(this));
         EventListener.on("PlayState").then(this.PlayState.bind(this));
         EventListener.on("RoomMessage").then(this.roomMessagexx.bind(this));
-        EventListener.on("SelectByRoomName").then(this.SelectByRoomName.bind(this));
 
     }
     componentWillUnmount() {
         EventListener.off("RecordStop");
         EventListener.off("PlayState");
         EventListener.off("RoomMessage");
-        EventListener.off("SelectByRoomName");
     }
     PlayState(bool) {
         if (bool === false) {
@@ -294,8 +304,8 @@ export class NewMic extends Component {
     SelectByRoomName(item) {
         if (item.length === 0)
             return;
-        console.log("收到新消息", item);
         data = [...item];
+        console.log("收到新消息", data);
         this._refush(data);
     }
 }
