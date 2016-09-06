@@ -30,6 +30,7 @@ import {ActivityList} from "../../pages/activitylist"
 import {EventInfo} from "../../pages/eventInfo"
 import {Initialization, LoginNow} from "../../utils/SupportLogin";
 import Singleton from '../../utils/Singleton';
+
 let singleton = new Singleton();
 singleton.setTitle("Crazy May Fest 2016");
 
@@ -45,6 +46,7 @@ export class DrawerMe extends Component {
      * 接收消息，并监听
      */
     componentDidMount(props) {
+        
         EventListener.on("Drawer").then(this.OpenCloseDrawer.bind(this));
         EventListener.on("DrawerOpenPage").then(this.OpenPage.bind(this));
         Initialization();//连接聊天服务器

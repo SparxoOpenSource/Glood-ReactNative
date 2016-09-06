@@ -52,4 +52,10 @@ export class RecordAudio extends Component {
     recordMsg(msg) {
         Recorder.recordMsg(msg);
     }
+
+    getNotification(callback) {
+        Recorder.getNotification((args) => {
+            callback && callback(args);
+        });
+    }
 }

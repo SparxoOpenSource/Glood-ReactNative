@@ -349,6 +349,16 @@ RCT_EXPORT_METHOD(accessFileName:(RCTResponseSenderBlock)callback) {
   callback(@[resultsDict]);
 }
 
+#pragma mark =======通知状态=======
+RCT_EXPORT_METHOD(getNotification:(RCTResponseSenderBlock)callback)
+{
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//  NSLog(@"defaults -222------%@",[defaults objectForKey:@"NOTFICATION"]);
+//  UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"appdelegate" message:[[[[defaults objectForKey:@"NOTFICATION"] objectForKey:@"aps"] objectForKey:@"alert"] objectForKey:@"title"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+//  [alertView show];
+  callback(@[[defaults objectForKey:@"NOTFICATION"]]);
+}
+
 #pragma mark ======= 获取当前设备ip地址 ======
 #define MOBILE_PHONE_UUID_FAKE @"mobile_phone_uuid_fake"
 RCT_EXPORT_METHOD(getAndroidIpAddress:(RCTResponseSenderBlock)callback)

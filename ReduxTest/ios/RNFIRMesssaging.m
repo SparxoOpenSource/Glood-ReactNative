@@ -27,13 +27,13 @@ RCT_EXPORT_MODULE()
 - (NSDictionary<NSString *, id> *)constantsToExport
 {
   NSDictionary<NSString *, id> *initialNotification = [_bridge.launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey] copy];
-  dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-    NSDictionary* remoteNotification = [_bridge.launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey] copy];
-    if ([remoteNotification count] != 0) {
-      
-      [[NSNotificationCenter defaultCenter] postNotificationName:FCMNotificationReceived object:self userInfo:remoteNotification];
-    }
-  });
+//  dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//    NSDictionary* remoteNotification = [_bridge.launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey] copy];
+//    if ([remoteNotification count] != 0) {
+//      
+//      [[NSNotificationCenter defaultCenter] postNotificationName:FCMNotificationReceived object:self userInfo:remoteNotification];
+//    }
+//  });
   
   return @{@"initialData": RCTNullIfNil(initialNotification)};
 }

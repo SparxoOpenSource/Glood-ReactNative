@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import { AppRegistry, StyleSheet, View, Text, ListView, Alert, Navigator, Image, TouchableOpacity, BackAndroid,
     Platform, Dimensions, PropTypes, DeviceEventEmitter, NativeModules, NativeAppEventEmitter}  from 'react-native';
+import {RecordAudio} from "../app/utils/RecordAudio";
 import {Home} from "../app/pages/home";
 import {Mic} from "../app/pages/mic";
 import {Cameraq} from "../app/pages/camera";
@@ -26,8 +27,7 @@ import Singleton from '../app/utils/Singleton';
 let singleton = new Singleton();
 import FCM from 'react-native-fcm';
 import {sendNotification} from "../app/utils/PushNotifications";
-import {TabbleIsExist, CreatTable} from "../app/utils/DBUtil"
-
+import {TabbleIsExist, CreatTable} from "../app/utils/DBUtil";
 
 const propTypes = {
     title: PropTypes.string
@@ -86,11 +86,13 @@ export class Root extends Component {
 
 
     componentDidMount() {
-        
+       
         CreatTable();
         if (isAndroid()) {
             BackAndroid.addEventListener('hardwareBackPress', this.onBackAndroid.bind(this));
         }
+
+         
 
         FCM.requestPermissions(); // for iOS
         FCM.getFCMToken().then(token => {
@@ -123,14 +125,13 @@ export class Root extends Component {
             singleton.getNav().push({
                     name: info.aps.alert.title
                 });
-        //  Alert.alert(info.aps.alert.title);
             console.log("FCMNotificationReceived------", info.alert);
         });
-        // setTimeout(() => {
-        //     singleton.getNav().replace({
-        //         name: "DrawerMe"
-        //     });
-        // }, 5000)
+        RecordAudio.prototype.getNotification((callback) => {
+            singleton.getNav().push({
+                    name: callback.aps.alert.title
+                });
+        })
 
     }
     componentWillUnmount() {

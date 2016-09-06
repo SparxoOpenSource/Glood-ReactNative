@@ -82,7 +82,12 @@
     UIRemoteNotificationType myTypes = UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeSound;
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:myTypes];
   }
-  
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  [defaults setObject:@"" forKey:@"NOTFICATION"];
+  NSDictionary* remoteNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+  if ([remoteNotification count] != 0) {
+    [defaults setObject:remoteNotification forKey:@"NOTFICATION"];
+  }
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
                                                       moduleName:@"ReduxTest"
                                                initialProperties:nil
