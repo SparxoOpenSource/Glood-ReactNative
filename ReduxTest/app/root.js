@@ -113,21 +113,19 @@ export class Root extends Component {
 
         FCM.subscribeToTopic('/topics/foo-bar');
         FCM.unsubscribeFromTopic('/topics/foo-bar');
-        // setTimeout(() => {
-            RecordAudio.prototype.getNotification((callback) => {
-                singleton.setTitle("Crazy May Fest 2017");
-                singleton.setRoute("DrawerMe");
-                if (isAndroid()) {
-                    singleton.getNav().push({
-                        name: callback.action
-                    });
-                } else {
-                    singleton.getNav().push({
-                        name: callback.aps.alert.title
-                    });
-                }
-            })
-        // },7000);
+        RecordAudio.prototype.getNotification((callback) => {
+            singleton.setTitle("Crazy May Fest 2017");
+            singleton.setRoute("DrawerMe");
+            if (isAndroid()) {
+                singleton.getNav().push({
+                    name: callback.action
+                });
+            } else {
+                singleton.getNav().push({
+                    name: callback.aps.alert.title
+                });
+            }
+        })
     }
     componentWillUnmount() {
         if (isAndroid()) {

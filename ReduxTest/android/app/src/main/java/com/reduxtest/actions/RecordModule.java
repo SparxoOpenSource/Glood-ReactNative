@@ -422,7 +422,8 @@ public class RecordModule extends ReactContextBaseJavaModule {
             Toast.makeText(getReactApplicationContext(), sharedPreferences.getString("action", null), Toast.LENGTH_SHORT).show();
             WritableMap params = Arguments.createMap();
             params.putString("action", sharedPreferences.getString("action", null));
-            callback.invoke(params);
+//            callback.invoke(params);
+            sendEvent("FCMNotificationReceived", params);
         }
         sharedPreferences.edit().clear().commit();
     }
