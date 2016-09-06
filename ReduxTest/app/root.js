@@ -102,7 +102,7 @@ export class Root extends Component {
             singleton.setRoute("DrawerMe");
             if (isAndroid()) {
                 singleton.getNav().push({
-                    name: notif.body
+                    name: notif.action
                 });
             } else {
                 singleton.getNav().push({
@@ -113,19 +113,21 @@ export class Root extends Component {
 
         FCM.subscribeToTopic('/topics/foo-bar');
         FCM.unsubscribeFromTopic('/topics/foo-bar');
-        RecordAudio.prototype.getNotification((callback) => {
-            singleton.setTitle("Crazy May Fest 2017");
-            singleton.setRoute("DrawerMe");
-            if (isAndroid()) {
-                singleton.getNav().push({
-                    name: callback.body
-                });
-            } else {
-                singleton.getNav().push({
-                    name: callback.aps.alert.title
-                });
-            }
-        })
+        // setTimeout(() => {
+            RecordAudio.prototype.getNotification((callback) => {
+                singleton.setTitle("Crazy May Fest 2017");
+                singleton.setRoute("DrawerMe");
+                if (isAndroid()) {
+                    singleton.getNav().push({
+                        name: callback.action
+                    });
+                } else {
+                    singleton.getNav().push({
+                        name: callback.aps.alert.title
+                    });
+                }
+            })
+        // },7000);
     }
     componentWillUnmount() {
         if (isAndroid()) {

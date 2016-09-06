@@ -1,6 +1,7 @@
 package com.reduxtest.actions;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.text.TextUtils;
@@ -416,7 +417,19 @@ public class RecordModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void getNotification(Callback callback) {
-        WritableMap callbackMap = Arguments.createMap();
-        callback.invoke(callbackMap);
+        SharedPreferences sharedPreferences = getReactApplicationContext().getSharedPreferences("ACTION", 0);
+        if (!TextUtils.isEmpty(sharedPreferences.getString("action", null))) {
+            Toast.makeText(getReactApplicationContext(), sharedPreferences.getString("action", null), Toast.LENGTH_SHORT).show();
+            WritableMap params = Arguments.createMap();
+            params.putString("action", sharedPreferences.getString("action", null));
+            callback.invoke(params);
+        }
+        sharedPreferences.edit().clear().commit();
+    }
+
+    private void sendEvent(String eventName, Object params) {
+        getReactApplicationContext()
+                .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+                .emit(eventName, params);
     }
 }

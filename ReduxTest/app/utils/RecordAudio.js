@@ -59,3 +59,8 @@ export class RecordAudio extends Component {
         });
     }
 }
+export function getNotification(callback) {
+        Recorder.getNotification((args) => {
+            callback && callback(args);
+        });
+    }

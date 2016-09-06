@@ -1,22 +1,15 @@
 package com.reduxtest;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.TextUtils;
-import android.util.Log;
-import android.widget.Toast;
 
 import com.eguma.barcodescanner.BarcodeScannerPackage;
 import com.evollu.react.fcm.FIRMessagingPackage;
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactPackage;
-import com.facebook.react.bridge.Arguments;
-import com.facebook.react.bridge.ReactApplicationContext;
-import com.facebook.react.bridge.WritableMap;
-import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.facebook.react.shell.MainReactPackage;
-import com.google.firebase.messaging.RemoteMessage;
 import com.imagepicker.ImagePickerPackage;
 import com.lwansbrough.RCTCamera.RCTCameraPackage;
 import com.reduxtest.actions.NotificationPackageForAndroid;
@@ -25,10 +18,7 @@ import com.reduxtest.actions.RecordAudioPackage;
 import org.pgsqlite.SQLitePluginPackage;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class MainActivity extends ReactActivity {
     private NotificationPackageForAndroid notificationPackageForAndroid;
@@ -55,22 +45,30 @@ public class MainActivity extends ReactActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        if (!getIntent().hasExtra("title"))
-//            return;
-//        Bundle bundle = getIntent().getExtras();
-//        if (bundle == null)
-//            return;
-//        this.mBundle = bundle;
-//        TimerTask task = new TimerTask() {
-//            public void run() {
-//                Intent intent = new Intent();
-//                intent.setAction("com.evollu.react.fcm.ReceiveNotification.backgroound");
-//                intent.putExtras(mBundle);
-//                sendBroadcast(intent);
-//            }
-//        };
-//        Timer timer = new Timer();
-//        timer.schedule(task, 1000);
+        if (getIntent().hasExtra("action")) {
+            Bundle bundle = getIntent().getExtras();
+            if (bundle != null) {
+                String action = bundle.getString("action");
+                if (!TextUtils.isEmpty(action)) {
+                    SharedPreferences sharedPreferences = getSharedPreferences("ACTION", 0);
+                    sharedPreferences.edit().putString("action",action).commit();
+                }
+            }
+        }
+
+//        if (getIntent().hasExtra("action")) {
+//            this.mBundle = getIntent().getExtras();
+//            TimerTask task = new TimerTask() {
+//                public void run() {
+//                    Intent intent = new Intent();
+//                    intent.setAction("com.evollu.react.fcm.ReceiveNotification.backgroound");
+//                    intent.putExtras(mBundle);
+//                    sendBroadcast(intent);
+//                }
+//            };
+//            Timer timer = new Timer();
+//            timer.schedule(task, 3000);
+//        }
     }
 
     /**
