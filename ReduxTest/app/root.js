@@ -1,12 +1,13 @@
 import React, {Component} from "react";
 import { AppRegistry, StyleSheet, View, Text, ListView, Alert, Navigator, Image, TouchableOpacity, BackAndroid,
-    Platform, Dimensions, PropTypes, DeviceEventEmitter, NativeModules}  from 'react-native';
+    Platform, Dimensions, PropTypes, DeviceEventEmitter, NativeModules, NativeAppEventEmitter}  from 'react-native';
+import {RecordAudio} from "../app/utils/RecordAudio";
 import {Home} from "../app/pages/home";
 import {Mic} from "../app/pages/mic";
 import {Cameraq} from "../app/pages/camera";
 import {PhototWall} from "../app/pages/photoWall"
 import {NewCamera} from "../app/pages/newcamera"
-import {NewMic} from "../app/pages/newMic.1"
+import {NewMic} from "../app/pages/newMic"
 import {Try} from "../app/pages/try"
 import {Tickets} from "../app/pages/tickets"
 import {Setting} from "../app/pages/setting"
@@ -26,8 +27,7 @@ import Singleton from '../app/utils/Singleton';
 let singleton = new Singleton();
 import FCM from 'react-native-fcm';
 import {sendNotification} from "../app/utils/PushNotifications";
-import {TabbleIsExist, CreatTable} from "../app/utils/DBUtil"
-
+import {TabbleIsExist, CreatTable} from "../app/utils/DBUtil";
 
 const propTypes = {
     title: PropTypes.string
@@ -81,12 +81,16 @@ export class Root extends Component {
                 return (<Authorize/>);
         }
     }
+
+
+
+
     componentDidMount() {
+
         CreatTable();
         if (isAndroid()) {
             BackAndroid.addEventListener('hardwareBackPress', this.onBackAndroid.bind(this));
         }
-
         FCM.requestPermissions(); // for iOS
         FCM.getFCMToken().then(token => {
             console.log('----------***** 1111*', token)
@@ -94,35 +98,34 @@ export class Root extends Component {
         });
         this.notificationUnsubscribe = FCM.on('notification', (notif) => {
             // there are two parts of notif. notif.notification contains the notification payload, notif.data contains data payload
-            //点击事件
-            console.log("--------------notif", notif.body);
-            // clickNotification(notif);
-            // Alert.alert(notif.title);
             singleton.setTitle("Crazy May Fest 2017");
             singleton.setRoute("DrawerMe");
-            singleton.getNav().push({
-                name: notif.body
-            });
-        });
-        this.refreshUnsubscribe = FCM.on('refreshToken', (token) => {
-            console.log('----------******', token)
-            // fcm token may not be available on first load, catch it here
+            if (isAndroid()) {
+                singleton.getNav().push({
+                    name: notif.body
+                });
+            } else {
+                singleton.getNav().push({
+                    name: notif.aps.alert.title
+                });
+            }
         });
 
         FCM.subscribeToTopic('/topics/foo-bar');
         FCM.unsubscribeFromTopic('/topics/foo-bar');
-
-        // DeviceEventEmitter.addListener("FCMNotificationReceived", info => {
-        //     console.log("收到消息", info.title);
-        //     singleton.setTitle("Crazy May Fest 2017");
-        //     singleton.setRoute("DrawerMe");
-        //     singleton.getNav().push({
-        //         name: "SETTING"
-        //     });
-        // });
-        // setTimeout(() => {
-        //     console.log("*--------------","In Here");
-        // }, 25000)
+        RecordAudio.prototype.getNotification((callback) => {
+            singleton.setTitle("Crazy May Fest 2017");
+            singleton.setRoute("DrawerMe");
+            if (isAndroid()) {
+                singleton.getNav().push({
+                    name: callback.body
+                });
+            } else {
+                singleton.getNav().push({
+                    name: callback.aps.alert.title
+                });
+            }
+        })
     }
     componentWillUnmount() {
         if (isAndroid()) {

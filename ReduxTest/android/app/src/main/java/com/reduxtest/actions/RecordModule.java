@@ -401,6 +401,7 @@ public class RecordModule extends ReactContextBaseJavaModule {
                 .emit(TestEventName, params);
 
     }
+
     /**
      * 此方法是为了解决返回键退出程序后,ToastAndroid不会消失的bug
      */
@@ -411,5 +412,11 @@ public class RecordModule extends ReactContextBaseJavaModule {
         setIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         getCurrentActivity().startActivity(setIntent);
 
+    }
+
+    @ReactMethod
+    public void getNotification(Callback callback) {
+        WritableMap callbackMap = Arguments.createMap();
+        callback.invoke(callbackMap);
     }
 }
