@@ -353,9 +353,6 @@ RCT_EXPORT_METHOD(accessFileName:(RCTResponseSenderBlock)callback) {
 RCT_EXPORT_METHOD(getNotification:(RCTResponseSenderBlock)callback)
 {
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//  NSLog(@"defaults -222------%@",[defaults objectForKey:@"NOTFICATION"]);
-//  UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"appdelegate" message:[[[[defaults objectForKey:@"NOTFICATION"] objectForKey:@"aps"] objectForKey:@"alert"] objectForKey:@"title"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-//  [alertView show];
   callback(@[[defaults objectForKey:@"NOTFICATION"]]);
 }
 
