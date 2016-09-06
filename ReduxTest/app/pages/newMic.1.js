@@ -29,6 +29,7 @@ import {sendMessageInRoom} from '../utils/CommonUtils';
 import {Add, SelectByRoomName, DeleteMin, Drop, Update, SelectAll, SelectByRoomNameCount, SelectLastByRoomName, SelectByRoomNamePage} from "../utils/DBUtil"
 let singleton = new Singleton();
 import {HardwareUtils} from "../utils/HardwareUtils";
+import {Chatter} from "../components/chatter";
 var userNamexx;
 HardwareUtils.prototype.getAddressIp((call) => {
     userNamexx = call.IP;
@@ -93,7 +94,7 @@ export class NewMic extends Component {
     render() {
         return (
             <Image style={style.container} source={require('../img/background3.png') }>
-                <Common ground="fw_1.png"  rightType="Down"/>
+                <Common ground="fw_1.png"  rightType="Down"/>0
                 <View style={style.content}>
                     <ListView
                         enableEmptySections={true}

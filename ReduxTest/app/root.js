@@ -95,12 +95,14 @@ export class Root extends Component {
         this.notificationUnsubscribe = FCM.on('notification', (notif) => {
             // there are two parts of notif. notif.notification contains the notification payload, notif.data contains data payload
             //点击事件
-            console.log("--------------notif", notif)
+            console.log("--------------notif", notif.body);
             // clickNotification(notif);
             // Alert.alert(notif.title);
             singleton.setTitle("Crazy May Fest 2017");
             singleton.setRoute("DrawerMe");
-            console.log("singleton—------1", singleton.getRoute());
+            singleton.getNav().push({
+                name: notif.body
+            });
         });
         this.refreshUnsubscribe = FCM.on('refreshToken', (token) => {
             console.log('----------******', token)
@@ -110,15 +112,17 @@ export class Root extends Component {
         FCM.subscribeToTopic('/topics/foo-bar');
         FCM.unsubscribeFromTopic('/topics/foo-bar');
 
-        DeviceEventEmitter.addListener("ReadableMap", info => {
-            Alert.alert(info.title);
-            // console.log("ReadableMap", info.body);
-        });
-        // setTimeout(() => {
-        //     singleton.getNav().replace({
-        //         name: "DrawerMe"
+        // DeviceEventEmitter.addListener("FCMNotificationReceived", info => {
+        //     console.log("收到消息", info.title);
+        //     singleton.setTitle("Crazy May Fest 2017");
+        //     singleton.setRoute("DrawerMe");
+        //     singleton.getNav().push({
+        //         name: "SETTING"
         //     });
-        // }, 5000)
+        // });
+        // setTimeout(() => {
+        //     console.log("*--------------","In Here");
+        // }, 25000)
     }
     componentWillUnmount() {
         if (isAndroid()) {
