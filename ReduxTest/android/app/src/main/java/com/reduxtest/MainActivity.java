@@ -12,6 +12,7 @@ import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.imagepicker.ImagePickerPackage;
 import com.lwansbrough.RCTCamera.RCTCameraPackage;
+import com.reactnativecomponent.swiperefreshlayout.RCTSwipeRefreshLayoutPackage;
 import com.reduxtest.actions.NotificationPackageForAndroid;
 import com.reduxtest.actions.RecordAudioPackage;
 
@@ -85,7 +86,8 @@ public class MainActivity extends ReactActivity {
                 new BarcodeScannerPackage(),
                 new FIRMessagingPackage(),
                 new NotificationPackageForAndroid(),
-                new SQLitePluginPackage()
+                new SQLitePluginPackage(),
+                new RCTSwipeRefreshLayoutPackage()
         );
     }
 

@@ -13,12 +13,17 @@ import { AppRegistry,
     PropTypes,
     Animated,
     Dimensions,
+    ActivityIndicator,
+    ProgressBarAndroid,
+    ActivityIndicatorIOS,
     DeviceEventEmitter }  from 'react-native';
 import {Common} from "./common";
 import {RecordAudio} from "../utils/RecordAudio";
 import {NewMicItem} from "./newMic_item.1";
 import isAndroid from '../utils/isAndroid.js';
 import RefreshableListView from "react-native-refreshable-listview";
+import TimerEnhance from 'react-native-smart-timer-enhance'
+import PullToRefreshListView from 'react-native-smart-pull-to-refresh-listview'
 // import ExtraDimensions from 'react-native-extra-dimensions-android';
 import {EventListener} from "../listener/EventListener";
 import {fontSizeAndroid} from "../utils/CommonUtils.js";
@@ -30,6 +35,7 @@ import {Add, SelectByRoomName, DeleteMin, Drop, Update, SelectAll, SelectByRoomN
 let singleton = new Singleton();
 import {HardwareUtils} from "../utils/HardwareUtils";
 import {Chatter} from "../components/chatter";
+import GiftedSpinner from 'react-native-gifted-spinner';
 var userNamexx;
 HardwareUtils.prototype.getAddressIp((call) => {
     userNamexx = call.IP;
@@ -91,20 +97,26 @@ export class NewMic extends Component {
             });
         });
     }
+
     render() {
         return (
             <Image style={style.container} source={require('../img/background3.png') }>
-                <Common ground="fw_1.png"  rightType="Down"/>0
+                <Common ground="fw_1.png"  rightType="Down"/>
                 <View style={style.content}>
-                    <ListView
+                    <PullToRefreshListView
                         enableEmptySections={true}
                         renderScrollComponent={props => <InvertibleScrollView {...props} inverted />}
-                        ref={LISTVIEW_REF}
+                        ref={ (component) => { return this._pullToRefreshListView = component } }
+                        viewType={PullToRefreshListView.constants.viewType.listView}
+                        contentContainerStyle={{ backgroundColor: '#00000000', }}
                         initialListSize={10}
                         dataSource={this.state.dataSource}
-                        renderRow={this._row.bind(this) }/>
-
-                    <Image source={require('../img/fw_2.png') } style={style.background} />
+                        pageSize={10}
+                        renderRow={this._row.bind(this) }
+                        renderHeader={this._renderHeader.bind(this) }
+                        //renderSeparator={(sectionID, rowID) => <View style={styles.separator} />}
+                        onRefresh={this._onRefresh.bind(this) }
+                        />
                 </View>
                 <View style={style.footer}>
                     <View style={{ flexDirection: 'row' }}>
@@ -127,11 +139,90 @@ export class NewMic extends Component {
         );
     }
 
+
+    componentDidMount(props) {
+        this._pullToRefreshListView.beginRefresh();
+        this.scrollResponder = this._pullToRefreshListView.getScrollResponder();
+        EventListener.on("RecordStop").then(this.stopRecordAll.bind(this));
+        EventListener.on("PlayState").then(this.PlayState.bind(this));
+        EventListener.on("RoomMessage").then(this.roomMessagexx.bind(this));
+    }
+    componentWillUnmount() {
+        EventListener.off("RecordStop");
+        EventListener.off("PlayState");
+        EventListener.off("RoomMessage");
+    }
+
     _row(rowData, sectionID, rowID) {
         let item = <NewMicItem title={rowData} auto={auto} rowID={parseInt(rowID) } dateLength={data.length}/>;
         return item;
     }
+    /**
+     * 下啦加载更多
+     */
+    _renderHeader(viewState) {
+        let {pullState, pullDistancePercent} = viewState
+        let {refresh_none, refresh_idle, will_refresh, refreshing, } = PullToRefreshListView.constants.viewState
+        pullDistancePercent = Math.round(pullDistancePercent * 100)
+        switch (pullState) {
+            // case refresh_none:
+            //     return (
+            //         <View style={{ height: 35, justifyContent: 'center', alignItems: 'center', backgroundColor: '#00000000', }}>
+            //             <Text>下拉可以刷新</Text>
+            //         </View>
+            //     )
+            case refresh_idle:
+                return (
+                    <View style={{ height: 35, justifyContent: 'center', alignItems: 'center', backgroundColor: '#00000000', }}>
+                        <Text>历史记录{pullDistancePercent}%</Text>
+                    </View>
+                )
+            case will_refresh:
+                return (
+                    <View style={{ height: 35, justifyContent: 'center', alignItems: 'center', backgroundColor: '#00000000', }}>
+                        <Text>立即加载{pullDistancePercent > 100 ? 100 : pullDistancePercent}%</Text>
+                    </View>
+                )
+            case refreshing:
+                return (
+                    <View style={{ flexDirection: 'row', height: 35, justifyContent: 'center', alignItems: 'center', backgroundColor: '#00000000', }}>
+                        {this._renderActivityIndicator() }<Text>正在加载</Text>
+                    </View>
+                )
+        }
+    }
+    _onRefresh() {
+        if (data.length === 0)
+            return
+        var item = data[data.length - 1];
+        console.log("加载历史", item);
+        SelectByRoomNamePage(singleton.getRoomName(), singleton.getPageSize(), item.id, (back) => {
+            console.log("-------------_onRefresh---------------", back);
+            this.SelectByRoomNamePage(back);
+        });
+    }
+    _renderActivityIndicator() {
+        return ActivityIndicator ? (
+            <ActivityIndicator
+                style={{ marginRight: 10, }}
+                animating={true}
+                color={'#ff0000'}
+                size={'small'}/>
+        ) : isAndroid() ?
+                (
+                    <ProgressBarAndroid
+                        style={{ marginRight: 10, }}
+                        color={'#ff0000'}
+                        styleAttr={'Small'}/>
 
+                ) : (
+                    <ActivityIndicatorIOS
+                        style={{ marginRight: 10, }}
+                        animating={true}
+                        color={'#ff0000'}
+                        size={'small'}/>
+                )
+    }
     /**
      * 开始录音
      */
@@ -173,6 +264,7 @@ export class NewMic extends Component {
                 animated: true,
             });
         }, 200);
+        this._pullToRefreshListView.endRefresh();
     }
     /**
      * 读取保存在磁盘中的录音文件
@@ -205,19 +297,6 @@ export class NewMic extends Component {
                 });
             }
         });
-    }
-
-    componentDidMount(props) {
-        this.scrollResponder = this.refs.listView.getScrollResponder();
-        EventListener.on("RecordStop").then(this.stopRecordAll.bind(this));
-        EventListener.on("PlayState").then(this.PlayState.bind(this));
-        EventListener.on("RoomMessage").then(this.roomMessagexx.bind(this));
-
-    }
-    componentWillUnmount() {
-        EventListener.off("RecordStop");
-        EventListener.off("PlayState");
-        EventListener.off("RoomMessage");
     }
     PlayState(bool) {
         if (bool === false) {
@@ -306,6 +385,15 @@ export class NewMic extends Component {
         if (item.length === 0)
             return;
         data = [...item];
+        console.log("收到新消息", data);
+        this._refush(data);
+    }
+    SelectByRoomNamePage(item) {
+        if (item.length === 0) {
+            this._pullToRefreshListView.endRefresh();
+            return;
+        }
+        data = [...data, ...item];
         console.log("收到新消息", data);
         this._refush(data);
     }

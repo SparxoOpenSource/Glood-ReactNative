@@ -29,13 +29,13 @@ export function CreatTable() {
 /**
  * 新增数据
  */
-export function Add(roomName, fileName, time, userName,callback) {
+export function Add(roomName, fileName, time, userName, callback) {
     db.transaction((tx) => {
         var sql = "INSERT INTO GloodRecord (RoomName, FileName ,Time ,UserName,Date) VALUES (?,?,?,?,?)";
         tx.executeSql(sql, [roomName, fileName, time, userName, moment().format("YYYY-MM-DD HH:mm:ss")], (tx, rs) => {
             //插入数据成功，受影响的行数
             console.log("插入数据成功，受影响的行数" + rs.rows.item.length);
-            callback&&callback(rs.rows.item.length);
+            callback && callback(rs.rows.item.length);
         });
         // Select(tx);
     }, (e) => { console.log(e) });
@@ -87,9 +87,9 @@ export function SelectByRoomName(value, callback) {
 /**
  * 查询最后一条数据
  */
-export function SelectLastByRoomName(roomName,callback){
+export function SelectLastByRoomName(roomName, callback) {
     db.transaction((tx) => {
-        var sql ="select * from GloodRecord WHERE RoomName=? order by Date desc limit 1"
+        var sql = "select * from GloodRecord WHERE RoomName=? order by Date desc limit 1"
         tx.executeSql(sql, [roomName], (tx, results) => {
             var len = results.rows.length, i;
             item = [];
@@ -135,14 +135,12 @@ export function SelectByRoomNamePage(roomName, pageSize, lastId, callback) {
                 };
                 item = [...item, value];
             }
-            if (item.length > 0) {
-                callback && callback(item);
-            }
+            callback && callback(item);
         }, null);
     }, (e) => {
         console.log(e);
     });
- }
+}
 /**
  * 查询所有数据
  */
