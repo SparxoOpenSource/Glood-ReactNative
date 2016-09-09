@@ -89,17 +89,6 @@ export class NewMic extends Component {
         // SelectByRoomNameCount(singleton.getRoomName(), (callback) => {
 
         // });
-        SelectLastByRoomName(singleton.getRoomName(), (callback) => {
-            if(callback.length===0){
-                this._pullToRefreshListView.endRefresh();
-                return;
-            }
-            console.log("-------------SelectLastByRoomName---------------", callback);
-            SelectByRoomNamePage(singleton.getRoomName(), singleton.getPageSize(), callback.id, (back) => {
-                console.log("-------------SelectByRoomNamePage---------------", back);
-                this.SelectByRoomName(back);
-            });
-        });
     }
 
     render() {
@@ -196,14 +185,30 @@ export class NewMic extends Component {
         }
     }
     _onRefresh() {
-        if (data.length === 0)
-            return
-        var item = data[data.length - 1];
-        console.log("加载历史", item);
-        SelectByRoomNamePage(singleton.getRoomName(), singleton.getPageSize(), item.id, (back) => {
-            console.log("-------------_onRefresh---------------", back);
-            this.SelectByRoomNamePage(back);
-        });
+        if (data.length === 0) {
+            SelectLastByRoomName(singleton.getRoomName(), (callback) => {
+                if (callback.length === 0) {
+                    this._pullToRefreshListView.endRefresh();
+                    return;
+                }
+                console.log("-------------SelectLastByRoomName---------------", callback);
+                SelectByRoomNamePage(singleton.getRoomName(), singleton.getPageSize(), callback[0].id, true, (back) => {
+                    console.log("-------------SelectByRoomNamePage---------------", back);
+                    this.SelectByRoomName(back);
+                });
+            });
+        } else {
+            if (data.length <= 1) {
+                this._pullToRefreshListView.endRefresh();
+                return
+            }
+            var item = data[data.length - 1];
+            console.log("加载历史", item);
+            SelectByRoomNamePage(singleton.getRoomName(), singleton.getPageSize(), item.id, false, (back) => {
+                console.log("-------------_onRefresh---------------", back);
+                this.SelectByRoomNamePage(back);
+            });
+        }
     }
     _renderActivityIndicator() {
         return ActivityIndicator ? (
