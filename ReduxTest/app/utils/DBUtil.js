@@ -106,9 +106,7 @@ export function SelectLastByRoomName(roomName, callback) {
                 };
                 item = [...item, value];
             }
-            if (item.length > 0) {
-                callback && callback(item);
-            }
+            callback && callback(item);
         }, null);
     }, (e) => {
         console.log(e);
@@ -117,9 +115,14 @@ export function SelectLastByRoomName(roomName, callback) {
 /**
  * 分页数据查询
  */
-export function SelectByRoomNamePage(roomName, pageSize, lastId, callback) {
+export function SelectByRoomNamePage(roomName, pageSize, lastId, first, callback) {
     db.transaction((tx) => {
-        tx.executeSql('SELECT * FROM GloodRecord WHERE RoomName=? AND Id < ? ORDER BY Date DESC limit ?', [roomName, lastId, pageSize], (tx, results) => {
+        if (first) {
+            var sql = "SELECT * FROM GloodRecord WHERE RoomName=? AND Id <= ? ORDER BY Date DESC limit ?";
+        } else {
+            var sql = "SELECT * FROM GloodRecord WHERE RoomName=? AND Id < ? ORDER BY Date DESC limit ?";
+        }
+        tx.executeSql(sql, [roomName, lastId, pageSize], (tx, results) => {
             var len = results.rows.length, i;
             item = [];
             for (i = 0; i < len; i++) {
