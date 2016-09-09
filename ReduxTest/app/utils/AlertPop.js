@@ -6,6 +6,6 @@ import {
 } from 'react-native';
 import isAndroid from '../utils/isAndroid';
 import {RecordAudio} from "../utils/RecordAudio";
-export function Pop(params) {
+export function Pop(params) { 
     RecordAudio.prototype.recordMsg(params);
 }
