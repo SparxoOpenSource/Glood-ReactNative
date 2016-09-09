@@ -356,6 +356,14 @@ RCT_EXPORT_METHOD(getNotification:(RCTResponseSenderBlock)callback)
   callback(@[[defaults objectForKey:@"NOTFICATION"]]);
 }
 
+#pragma  mark =======badg数字======
+RCT_EXPORT_METHOD(readyNotification:(RCTResponseSenderBlock)back)
+{
+  NSString *strBadg = [NSString stringWithFormat:@"%d",2];
+  NSDictionary *resultDic = @{@"badg":strBadg};
+  back(@[resultDic]);
+}
+
 #pragma mark ======= 获取当前设备ip地址 ======
 #define MOBILE_PHONE_UUID_FAKE @"mobile_phone_uuid_fake"
 RCT_EXPORT_METHOD(getAndroidIpAddress:(RCTResponseSenderBlock)callback)

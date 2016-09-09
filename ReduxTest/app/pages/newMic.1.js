@@ -90,6 +90,10 @@ export class NewMic extends Component {
 
         // });
         SelectLastByRoomName(singleton.getRoomName(), (callback) => {
+            if(callback.length===0){
+                this._pullToRefreshListView.endRefresh();
+                return;
+            }
             console.log("-------------SelectLastByRoomName---------------", callback);
             SelectByRoomNamePage(singleton.getRoomName(), singleton.getPageSize(), callback.id, (back) => {
                 console.log("-------------SelectByRoomNamePage---------------", back);
@@ -142,7 +146,7 @@ export class NewMic extends Component {
 
     componentDidMount(props) {
         this._pullToRefreshListView.beginRefresh();
-        this.scrollResponder = this._pullToRefreshListView.getScrollResponder();
+        // this.scrollResponder = this._pullToRefreshListView.getScrollResponder();
         EventListener.on("RecordStop").then(this.stopRecordAll.bind(this));
         EventListener.on("PlayState").then(this.PlayState.bind(this));
         EventListener.on("RoomMessage").then(this.roomMessagexx.bind(this));
@@ -257,13 +261,13 @@ export class NewMic extends Component {
         this.setState({
             dataSource: this.state.dataSource.cloneWithRows(rows, rowIds),
         });
-        setTimeout(() => {
-            this.scrollResponder.scrollTo({
-                y: 0,
-                x: 0,
-                animated: true,
-            });
-        }, 200);
+        // setTimeout(() => {
+        //     this.scrollResponder.scrollTo({
+        //         y: 0,
+        //         x: 0,
+        //         animated: true,
+        //     });
+        // }, 200);
         this._pullToRefreshListView.endRefresh();
     }
     /**
@@ -382,8 +386,10 @@ export class NewMic extends Component {
         }
     }
     SelectByRoomName(item) {
-        if (item.length === 0)
+        if (item.length === 0) {
+            this._pullToRefreshListView.endRefresh();
             return;
+        }
         data = [...item];
         console.log("收到新消息", data);
         this._refush(data);

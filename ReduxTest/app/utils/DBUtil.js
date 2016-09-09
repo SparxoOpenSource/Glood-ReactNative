@@ -76,9 +76,10 @@ export function SelectByRoomName(value, callback) {
                 };
                 item = [...item, value];
             }
-            if (item.length > 0) {
-                callback && callback(item);
-            }
+            callback && callback(item);
+            // if (item.length > 0) {
+            //     callback && callback(item);
+            // }
         }, null);
     }, (e) => {
         console.log(e);
@@ -106,12 +107,9 @@ export function SelectLastByRoomName(roomName, callback) {
                 };
                 item = [...item, value];
             }
-            if (item.length > 0) {
-                callback && callback(item);
-            }
+            callback && callback(item);
         }, null);
     }, (e) => {
-        console.log(e);
     });
 }
 /**
