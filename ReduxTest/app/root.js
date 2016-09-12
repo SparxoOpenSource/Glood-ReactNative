@@ -28,6 +28,7 @@ let singleton = new Singleton();
 import FCM from 'react-native-fcm';
 import {sendNotification} from "../app/utils/PushNotifications";
 import {TabbleIsExist, CreatTable} from "../app/utils/DBUtil";
+import * as launchImage from 'react-native-launch-image';
 
 const propTypes = {
     title: PropTypes.string
@@ -86,7 +87,7 @@ export class Root extends Component {
 
 
     componentDidMount() {
-
+        launchImage.hide();
         CreatTable();
         if (isAndroid()) {
             BackAndroid.addEventListener('hardwareBackPress', this.onBackAndroid.bind(this));

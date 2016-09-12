@@ -17,6 +17,7 @@
 
 #import "Firebase.h"
 #import "RNFIRMessaging.h"
+#import "RNLaunchImage.h"
 
 @implementation AppDelegate
 
@@ -99,7 +100,7 @@
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
   [Bugly startWithAppId:@"900035998"];
-  
+  [RNLaunchImage wait]; 
   
   return YES;
 }
