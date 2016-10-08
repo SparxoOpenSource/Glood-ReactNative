@@ -45,6 +45,7 @@ export function start() {
       }
     },
     newUserJoinedEventChatRoom: function (roomName, username) {
+      console.log("sdfsdf-------55555")
       if (username != userNamexx) {
         Pop(username + "   进入   " + roomName + '    聊天室');
       }
@@ -60,7 +61,7 @@ export function start() {
 
   Pop("connection server ...");
   signalr.connection.start().done(() => {
-    Pop("login ...");
+    console.log("----*-*----",userNamexx);
     signalr.logOn((userNamexx)).done(() => {
       isLoginSuccess = 'yes';
       // DeviceEventEmitter.addListener("FCMNotificationReceived", info => {

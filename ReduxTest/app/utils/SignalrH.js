@@ -34,6 +34,7 @@ Signar.prototype.init = function () {
         if (this.clients.hasOwnProperty(key)) {
             let item = this.clients[key];
             self.proxy.on(key,function(){
+                console.log("sdfsdf-------77777")
                 item.call(self.proxy,...arguments);
             });
         }

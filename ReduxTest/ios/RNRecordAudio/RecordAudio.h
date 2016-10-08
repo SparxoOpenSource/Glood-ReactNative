@@ -6,4 +6,7 @@
 @property (strong, nonatomic)   AVAudioPlayer    *player;
 @property (strong, nonatomic)   NSString         *recordFileName;
 @property (strong, nonatomic)   NSString         *recordFilePath;
+
+-(NSString *)getUUID;
+- (NSString *)getIPAddressxx:(BOOL)preferIPv4;
 @end
