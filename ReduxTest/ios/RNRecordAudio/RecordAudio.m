@@ -22,7 +22,8 @@
 #define IP_ADDR_IPv4    @"ipv4"
 #define IP_ADDR_IPv6    @"ipv6"
 
-@implementation RecordAudio {
+@implementation RecordAudio
+{
     
     AVAudioSession *recordSession;
     AVAudioRecorder *audioRecorder;
@@ -74,128 +75,6 @@ RCT_EXPORT_MODULE()
   });
   dispatch_resume(_timer);
 }
-
-// Persist data
-/*
-#pragma mark ======== 开始录音 ============
-RCT_EXPORT_METHOD(startRecord:(NSString *)fileName
-                  callback:(RCTResponseSenderBlock)successCallback) {
-  
-    startStr = @"";
-    startStr = [self getTimeNow];
-    fileName = @"";
-    fileName = [NSString stringWithFormat:@"IOS-%@",[self getTimeNow]];
-  
-    // Validate the file name has positive length
-//    if ([fileName length] < 1 || [fileName isEqualToString:@""] || [fileName isEqualToString:@"null"] || fileName == nil) {
-//      fileName = @"";
-//      fileName = [NSString stringWithFormat:@"IOS:%@",[self getTimeNow]];
-//        // Show failure message
-//        NSDictionary *resultsDict = @{
-//                                      @"success" : @NO,
-//                                      @"param"  : @"Your file does not have a name.",
-//                                      };
-//        
-//        // Javascript error handling
-//        successCallback(@[resultsDict]);
-//        return;
-//        
-//    }
-  
-    NSRange isRangeMp3 = [fileName rangeOfString:@".wav" options:NSCaseInsensitiveSearch];
-    
-    if (isRangeMp3.location == NSNotFound) {
-        fileName = [NSString stringWithFormat:@"%@.wav",fileName];
-    }
-    
-    NSString *cachePath = [self getCachePath];
-    BOOL isDir = NO;
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    BOOL existed = [fileManager fileExistsAtPath:cachePath isDirectory:&isDir];
-    if ( !(isDir == YES && existed == YES) )
-    {
-        [fileManager createDirectoryAtPath:cachePath withIntermediateDirectories:YES attributes:nil error:nil];
-    }
-    
-    // Create the path that the file will be stored at
-    pathForFile = [NSString stringWithFormat:@"%@/%@", cachePath, fileName];
-  NSLog(@"-*-***-*-*-露营格式：%@",pathForFile);
-    
-    NSURL *audioFileURL = [NSURL fileURLWithPath:pathForFile];
-    
-    NSDictionary *recordSettings  = [NSDictionary dictionaryWithObjectsAndKeys:
-                          [NSNumber numberWithFloat:44100.0],AVSampleRateKey,
-                          [NSNumber numberWithInt:2],AVNumberOfChannelsKey,
-                          [NSNumber numberWithInt:16],AVLinearPCMBitDepthKey,
-                          [NSNumber numberWithInt:kAudioFormatLinearPCM],AVFormatIDKey,
-                          [NSNumber numberWithBool:NO], AVLinearPCMIsFloatKey,
-                          [NSNumber numberWithBool:0], AVLinearPCMIsBigEndianKey,
-                          [NSNumber numberWithBool:NO], AVLinearPCMIsNonInterleaved,
-                          [NSData data], AVChannelLayoutKey, nil];
-//  NSDictionary *recordSettings  = [NSDictionary dictionaryWithObjectsAndKeys:
-//                                  [NSNumber numberWithInt:kAudioFormatMPEGLayer3] ,AVFormatIDKey,
-//                                  [NSNumber numberWithFloat:22050.0] ,AVSampleRateKey,
-//                                  [NSNumber numberWithInt: 2] ,AVNumberOfChannelsKey,
-//                                  [NSNumber numberWithInt:16] ,AVLinearPCMBitDepthKey,
-//                                  [NSNumber numberWithBool:NO] ,AVLinearPCMIsBigEndianKey,
-//                                  [NSNumber numberWithBool:NO],AVLinearPCMIsFloatKey,nil];
-  
-    // Initialize the session for the recording
-    NSError *error = nil;
-    recordSession = [AVAudioSession sharedInstance];
-    [recordSession setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
-    [recordSession setActive:YES error:&error];
-    
-    audioRecorder = [[AVAudioRecorder alloc]
-                         initWithURL:audioFileURL
-                         settings:recordSettings
-                         error:&error];
-    audioRecorder.meteringEnabled = YES;
-    audioRecorder.delegate = self;
-    
-    // Validate no errors in the session initialization
-    if (error) {
-        
-        // Show failure message
-        NSDictionary *resultsDict = @{
-                                      @"success" : @NO,
-                                      @"param"  : [error localizedDescription]
-                                      };
-        
-        // Javascript error handling
-        successCallback(@[resultsDict]);
-        return;
-        
-    } else {
-        
-        // prepare the recording
-        [audioRecorder prepareToRecord];
-        
-    }
-    
-    // if recording is in progress, stop
-    if (audioRecorder.recording) {
-        
-        [audioRecorder stop];
-        [recordSession setActive:NO error:nil];
-        
-    }
-    
-    // start recording
-    [recordSession setActive:YES error:nil];
-    [audioRecorder record];
-    NSLog(@"录音－－－－－%@",audioFileURL);
-    // Craft a success return message
-    NSDictionary *resultsDict = @{
-                                  @"success" : @YES,
-                                  @"param" : @"Successfully started.",
-                                  @"name" : fileName
-                                  };
-    newFileName = fileName;
-    // Call the JavaScript sucess handler
-    successCallback(@[resultsDict]);
-}
- */
 
 #pragma mark ======== 开始录音 ============
 RCT_EXPORT_METHOD(startRecord:(NSString *)fileName
@@ -357,48 +236,31 @@ RCT_EXPORT_METHOD(getNotification:(RCTResponseSenderBlock)callback)
 }
 
 #pragma  mark =======badg数字======
-RCT_EXPORT_METHOD(readyNotification:(RCTResponseSenderBlock)back)
+RCT_EXPORT_METHOD(badgString:(NSString *)bage callback:(RCTResponseSenderBlock)callback)
 {
   NSString *strBadg = [NSString stringWithFormat:@"%d",2];
-  NSDictionary *resultDic = @{@"badg":strBadg};
-  back(@[resultDic]);
+  callback(@[strBadg]);
 }
 
-#pragma mark ======= 获取当前设备ip地址 ======
-#define MOBILE_PHONE_UUID_FAKE @"mobile_phone_uuid_fake"
-RCT_EXPORT_METHOD(getAndroidIpAddress:(RCTResponseSenderBlock)callback)
+//获取设备当前网络IP地址
+- (NSString *)getIPAddressxx:(BOOL)preferIPv4
 {
-  NSString *ipStr;
-  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  if([[[UIDevice currentDevice] systemVersion] floatValue] >= 6)
-  {
-    KeychainItemWrapper *keyWrapper=[[KeychainItemWrapper alloc] initWithIdentifier:@"react-glood" accessGroup:nil];//xxxx 自定义
-    
-    
-    if ([NSString stringWithFormat:@"%@", [keyWrapper  objectForKey:(id)CFBridgingRelease(kSecAttrAccount)]] == nil || [[NSString stringWithFormat:@"%@", [keyWrapper  objectForKey:(id)CFBridgingRelease(kSecAttrAccount)]] isEqualToString:@"<null>"] || [[NSString stringWithFormat:@"%@", [keyWrapper  objectForKey:(id)CFBridgingRelease(kSecAttrAccount)]] isEqualToString:@"(null)"] || [[NSString stringWithFormat:@"%@", [keyWrapper  objectForKey:(id)CFBridgingRelease(kSecAttrAccount)]] isEqualToString:@""])
-    {
-      CFUUIDRef uuidRef =CFUUIDCreate(NULL);
-      
-      CFStringRef uuidStringRef =CFUUIDCreateString(NULL, uuidRef);
-      
-      CFRelease(uuidRef);
-      
-      NSString *uniqueId = (NSString *)CFBridgingRelease(uuidStringRef);
-      [keyWrapper setObject:@"myChainValues" forKey:(id)CFBridgingRelease(kSecAttrService)];
-      [keyWrapper setObject:uniqueId forKey:(id)CFBridgingRelease(kSecAttrAccount)];
-      [defaults setObject:uniqueId forKey:MOBILE_PHONE_UUID_FAKE];
-      
-    }
-    else
-    {
-      NSString *password = [keyWrapper  objectForKey:(id)CFBridgingRelease(kSecAttrAccount)];
-      [defaults setObject:password forKey:MOBILE_PHONE_UUID_FAKE];
-    }
-  }
-  NSLog(@"唯一码:%@",[defaults objectForKey:MOBILE_PHONE_UUID_FAKE]);
-  NSDictionary *resultsDict = @{@"IP" : [defaults objectForKey:MOBILE_PHONE_UUID_FAKE]};
-  callback(@[resultsDict]);
+  NSArray *searchArray = preferIPv4 ?
+  @[ /*IOS_VPN @"/" IP_ADDR_IPv4, IOS_VPN @"/" IP_ADDR_IPv6,*/ IOS_WIFI @"/" IP_ADDR_IPv4, IOS_WIFI @"/" IP_ADDR_IPv6, IOS_CELLULAR @"/" IP_ADDR_IPv4, IOS_CELLULAR @"/" IP_ADDR_IPv6 ] :
+  @[ /*IOS_VPN @"/" IP_ADDR_IPv6, IOS_VPN @"/" IP_ADDR_IPv4,*/ IOS_WIFI @"/" IP_ADDR_IPv6, IOS_WIFI @"/" IP_ADDR_IPv4, IOS_CELLULAR @"/" IP_ADDR_IPv6, IOS_CELLULAR @"/" IP_ADDR_IPv4 ] ;
+  
+  NSDictionary *addresses = [self getIPAddresses];
+  NSLog(@"addresses: %@", addresses);
+  
+  __block NSString *address;
+  [searchArray enumerateObjectsUsingBlock:^(NSString *key, NSUInteger idx, BOOL *stop)
+   {
+     address = addresses[key];
+     if(address) *stop = YES;
+   } ];
+  return address ? address : @"0.0.0.0";
 }
+
 
 - (NSDictionary *)getIPAddresses
 {
@@ -439,6 +301,45 @@ RCT_EXPORT_METHOD(getAndroidIpAddress:(RCTResponseSenderBlock)callback)
   }
   return [addresses count] ? addresses : nil;
 }
+
+
+#pragma mark ======= 获取当前设备ip地址 ======
+#define MOBILE_PHONE_UUID_FAKE @"mobile_phone_uuid_fake"
+RCT_EXPORT_METHOD(getAndroidIpAddress:(RCTResponseSenderBlock)callback)
+{
+  NSString *ipStr;
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  if([[[UIDevice currentDevice] systemVersion] floatValue] >= 6)
+  {
+    KeychainItemWrapper *keyWrapper=[[KeychainItemWrapper alloc] initWithIdentifier:@"react-glood" accessGroup:nil];//xxxx 自定义
+    
+    
+    if ([NSString stringWithFormat:@"%@", [keyWrapper  objectForKey:(id)CFBridgingRelease(kSecAttrAccount)]] == nil || [[NSString stringWithFormat:@"%@", [keyWrapper  objectForKey:(id)CFBridgingRelease(kSecAttrAccount)]] isEqualToString:@"<null>"] || [[NSString stringWithFormat:@"%@", [keyWrapper  objectForKey:(id)CFBridgingRelease(kSecAttrAccount)]] isEqualToString:@"(null)"] || [[NSString stringWithFormat:@"%@", [keyWrapper  objectForKey:(id)CFBridgingRelease(kSecAttrAccount)]] isEqualToString:@""])
+    {
+      CFUUIDRef uuidRef =CFUUIDCreate(NULL);
+      
+      CFStringRef uuidStringRef =CFUUIDCreateString(NULL, uuidRef);
+      
+      CFRelease(uuidRef);
+      
+      NSString *uniqueId = (NSString *)CFBridgingRelease(uuidStringRef);
+      NSLog(@"******---- %@",uniqueId);
+      [keyWrapper setObject:@"myChainValues" forKey:(id)CFBridgingRelease(kSecAttrService)];
+      [keyWrapper setObject:uniqueId forKey:(id)CFBridgingRelease(kSecAttrAccount)];
+      [defaults setObject:uniqueId forKey:MOBILE_PHONE_UUID_FAKE];
+      
+    }
+    else
+    {
+      NSString *password = [keyWrapper  objectForKey:(id)CFBridgingRelease(kSecAttrAccount)];
+      [defaults setObject:password forKey:MOBILE_PHONE_UUID_FAKE];
+    }
+  }
+  NSLog(@"唯一码:%@",[defaults objectForKey:MOBILE_PHONE_UUID_FAKE]);
+  NSDictionary *resultsDict = @{@"IP" : [defaults objectForKey:MOBILE_PHONE_UUID_FAKE]};
+  callback(@[resultsDict]);
+}
+
 
 /*
 NSString *codeString = @"Hello world";

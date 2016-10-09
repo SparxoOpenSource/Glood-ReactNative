@@ -87,7 +87,7 @@ export class NewMic extends Component {
                     <RefreshableListView
                         enableEmptySections = {true}
                         ref={LISTVIEW_REF}
-                        dataSource={this.state.dataSource}
+                        dataSource={this.state.dataSource} 
                         renderRow={this._row.bind(this) }
                         loadData={this._accessFileName.bind(this) }
                         refreshPrompt="Pull down to refresh"/>
@@ -210,6 +210,7 @@ export class NewMic extends Component {
      * 接收消息，并监听
      */
     roomMessagexx(roomname, username, roommessage) {
+        console.log('-------------******---*-*-*');
         var self = this;
         if (!inTher)
             return;
@@ -222,6 +223,8 @@ export class NewMic extends Component {
                     time: back.time
                 };
                 Add(roomname, back.name, back.time, username, (callback) => {
+
+                    console.log("sdfsd--------",callback);
                     if (callback === 0)
                         return;
                     if (singleton.getRoomName() !== roomname)
