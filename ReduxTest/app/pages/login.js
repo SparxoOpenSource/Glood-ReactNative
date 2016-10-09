@@ -152,7 +152,8 @@ export class Login extends Component {
                                 <Image style={{ width: widthh * (300 / 414), height: heightt * (60 / 736) }} source={require('../img/facebook_sign_in.png') }/>
                             </TouchableOpacity>
                         </View>
-                        <TouchableOpacity style={{ flexDirection: 'row', backgroundColor: '#53aeee', width: widthh, height: heightt * (70 / 736), marginTop: isAndroid()?heightt * (73 / 736):heightt * (83 / 736) }}
+                        <TouchableOpacity 
+                            style={{ flexDirection: 'row', backgroundColor: '#53aeee', width: widthh, height: heightt * (70 / 736), marginTop: isAndroid()?heightt * (73 / 736):heightt * (83 / 736) }}
                             onPress={this._handerClick.bind(this) }>
                             <Text style={{
                                 backgroundColor: '#00000000',
