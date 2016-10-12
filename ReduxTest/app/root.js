@@ -3,12 +3,6 @@ import { AppRegistry, StyleSheet, View, Text, ListView, Alert, Navigator, Image,
     Platform, Dimensions, PropTypes, DeviceEventEmitter, NativeModules, NativeAppEventEmitter}  from 'react-native';
 import {RecordAudio} from "../app/utils/RecordAudio";
 import {Home} from "../app/pages/home";
-import {Mic} from "../app/pages/mic";
-import {Cameraq} from "../app/pages/camera";
-import {PhototWall} from "../app/pages/photoWall"
-import {NewCamera} from "../app/pages/newcamera"
-import {NewMic} from "../app/pages/newMic.1"
-import {Try} from "../app/pages/try"
 import {Tickets} from "../app/pages/tickets"
 import {Setting} from "../app/pages/setting"
 import {Feedback} from "../app/pages/feedback"
@@ -23,6 +17,7 @@ import isAndroid from '../app/utils/isAndroid.js';
 import {NaviGoBack} from '../app/utils/CommonUtils';
 import {EventListener} from "../app/listener/EventListener";
 import {QrcodeReader} from "../app/pages/qrcode.reader";
+import {NewMic} from "../app/pages/newMic"
 import Singleton from '../app/utils/Singleton';
 let singleton = new Singleton();
 import FCM from 'react-native-fcm';
@@ -58,18 +53,8 @@ export class Root extends Component {
                 return (<Feedback/>);
             case "EVENTINFO":
                 return (<EventInfo/>);
-            case "MIC":
-                return (<Mic/>);
             case "NEWMIC":
                 return (<NewMic/>);
-            case "CAMERA":
-                return (<Cameraqxx/>);
-            case "PHOTOWALL":
-                return (<PhototWall/>);
-            case "NEWCAMERA":
-                return (<NewCamera/>);
-            case "TRY":
-                return (<Try/>);
             case "DrawerMe":
                 return (<DrawerMe/>);
             case "Home":
