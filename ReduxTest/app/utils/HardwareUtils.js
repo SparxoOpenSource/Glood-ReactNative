@@ -1,5 +1,5 @@
-import {NativeModules} from 'react-native';
-import React, {Component} from "react";
+import { NativeModules } from 'react-native';
+import React, { Component } from "react";
 
 const Recorder = NativeModules.RecordAudio;
 

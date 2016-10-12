@@ -1,5 +1,6 @@
-import React, {Component} from "react";
-import { AppRegistry,
+import React, { Component } from "react";
+import { 
+    ppRegistry,
     StyleSheet,
     View,
     Text,
@@ -14,19 +15,17 @@ import { AppRegistry,
     Animated,
     Dimensions,
     DeviceEventEmitter,
-    NativeModules}  from 'react-native';
-import {Common} from "./common";
+    NativeModules
+}  from 'react-native';
+import { Common } from "./common";
+import { fontSizeAndroid } from "../utils/CommonUtils.js";
+import { RecordAudio } from "../utils/RecordAudio";
+import { QRCodeScreen } from './QRCodeScreen';
+import { EventListener } from "../listener/EventListener";
+import { LoadingView } from "../components/LoadingView";
 import isAndroid from '../utils/isAndroid.js';
-import {fontSizeAndroid} from "../utils/CommonUtils.js";
-import {RecordAudio} from "../utils/RecordAudio";
-
-import {QRCodeScreen} from './QRCodeScreen';
 import BarcodeScanner from 'react-native-barcodescanner';
-import {EventListener} from "../listener/EventListener";
-import {LoadingView} from "../components/LoadingView";
-
 const Camera = NativeModules.RNBarcodeScannerView;
-
 var {height, width} = Dimensions.get('window');
 var temp = <LoadingView/>;
 

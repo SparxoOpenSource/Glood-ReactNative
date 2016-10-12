@@ -1,16 +1,26 @@
-import React, {Component} from "react";
-import { AppRegistry, StyleSheet, View, Text, ListView, Alert, Navigator, Image, TouchableOpacity, PropTypes, AsyncStorage }  from 'react-native';
-import {Common} from "./common";
-var data = ["TICKETS", "SETTING", "FEEDBACK", "MIC", "NEWMIC", "EVENTINFO", "NEWCAMERA"];
-var ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
-
+import React, { Component } from "react";
+import { 
+    AppRegistry, 
+    StyleSheet, 
+    View, 
+    Text, 
+    ListView, 
+    Alert, 
+    Navigator, 
+    Image, 
+    TouchableOpacity, 
+    PropTypes, 
+    AsyncStorage 
+}  from 'react-native';
+import { Common } from "./common";
+import { HardwareUtils } from "../utils/HardwareUtils";
 import feathers from 'feathers/client'
 import hooks from 'feathers-hooks';
 import socketio from 'feathers-socketio/client'
 import authentication from 'feathers-authentication/client';
 var Actions = require('react-native-router-flux').Actions;
-import {HardwareUtils} from "../utils/HardwareUtils";
-
+var data = ["TICKETS", "SETTING", "FEEDBACK", "MIC", "NEWMIC", "EVENTINFO", "NEWCAMERA"];
+var ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
 // This is required for socket.io-client due to a bug in React Native debugger
 if (window.navigator && Object.keys(window.navigator).length == 0) {
     window = Object.assign(window, { navigator: { userAgent: 'ReactNative' } });

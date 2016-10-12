@@ -1,5 +1,6 @@
-import React, {Component} from "react";
-import { AppRegistry,
+import React, { Component } from "react";
+import { 
+    AppRegistry,
     StyleSheet,
     View,
     Text,
@@ -18,7 +19,7 @@ import { AppRegistry,
     TextInput,
     Platform,
 }  from 'react-native';
-import {Common} from "./common";
+import { Common } from "./common";
 import isAndroid from '../utils/isAndroid.js';
 var widthh = Dimensions.get('window').width
 var STATUS_BAR_HEIGHT = Navigator.NavigationBar.Styles.General.StatusBarHeight;
@@ -52,6 +53,8 @@ export class Feedback extends Component {
                             backgroundColor: 'white', height: heightt * (245 / 736), width: widthh * (340 / 414),
                             marginTop: heightt * (2.5 / 736), marginLeft: widthh * (3 / 414), fontSize: 17
                         }}
+                            returnKeyType = "done"
+                            placeholder= "提意见，你怕了吗？"
                             multiline={true}
                             onSubmitEditing={() => this._onSubmitEditing('feedback') }
                             onFocus={() => this._onFocus('feedback') }

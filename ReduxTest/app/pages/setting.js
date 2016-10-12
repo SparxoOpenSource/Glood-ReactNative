@@ -1,5 +1,6 @@
-import React, {Component} from "react";
-import { AppRegistry,
+import React, { Component } from "react";
+import {
+    AppRegistry,
     StyleSheet,
     View,
     Text,
@@ -16,11 +17,10 @@ import { AppRegistry,
     UIManager,
     Easing
 }  from 'react-native';
-import {Common} from "./common";
+import { Common } from './common';
 import isAndroid from '../utils/isAndroid.js';
 import Singleton from '../utils/Singleton';
-let singleton = new Singleton();
-
+var singleton = new Singleton();
 var Switch = require('react-native-material-switch');
 var {height, width} = Dimensions.get('window');
 var widthh = width;

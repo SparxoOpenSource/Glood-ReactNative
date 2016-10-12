@@ -76,6 +76,7 @@ export class Authorize extends Component {
                     }}>
                         <TextInput
                             {...this.props}
+                            returnKeyType = "done"
                             style={{ backgroundColor: '#00000000', height: heightt * (45 / 736), fontSize: widthh * (30 / 736) }}
                             onSubmitEditing={() => this._onSubmitEditing('email') }
                             onFocus={() => this._onFocus('email') }
@@ -96,6 +97,7 @@ export class Authorize extends Component {
                     }}>
                         <TextInput
                             {...this.props}
+                            returnKeyType = "done"
                             style={{ backgroundColor: '#00000000', height: heightt * (45 / 736), fontSize: widthh * (30 / 736) }}
                             onSubmitEditing={() => this._onSubmitEditing('password') }
                             onFocus={() => this._onFocus('password') }

@@ -3,7 +3,7 @@
 ///////
 
 
-import React, {Component, PropTypes} from "react";
+import React, { Component, PropTypes } from "react";
 import {
     AppRegistry,
     StyleSheet,
@@ -18,19 +18,16 @@ import {
     Platform,
     ScrollView,
 }  from 'react-native';
-import {Common} from "./common";
-
+import { Common } from "./common";
+import Camera from '@remobile/react-native-camera';
+import Button from '@remobile/react-native-simple-button';
 var photo_pathData = [];
-
+var ImagePickerManager = NativeModules.ImagePickerManager;
+var { width, height } = Dimensions.get('window');
 export function getNewPhotos() {
     return photo_pathData;
 }
 
-// import Camera from 'react-native-camera';
-import Camera from '@remobile/react-native-camera';
-import Button from '@remobile/react-native-simple-button';
-var ImagePickerManager = NativeModules.ImagePickerManager;
-var {width, height} = Dimensions.get('window');
 
 const propTypes = {
     title: PropTypes.string,

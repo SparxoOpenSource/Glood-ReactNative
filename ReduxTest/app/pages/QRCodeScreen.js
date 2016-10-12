@@ -1,7 +1,6 @@
 'use strict';
 
-import React, {Component} from "react";
-
+import React, { Component } from "react";
 import {
   StyleSheet,
   View,
@@ -11,11 +10,9 @@ import {
   Dimensions
 } from "react-native";
 
+import { RecordAudio } from "../utils/RecordAudio";
 import Camera from 'react-native-camera';
-import {RecordAudio} from "../utils/RecordAudio";
-
 var {height, width} = Dimensions.get('window');
-
 const propTypes = {
   cancelButtonVisible: React.PropTypes.bool,
   cancelButtonTitle: React.PropTypes.string,

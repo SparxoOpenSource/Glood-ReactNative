@@ -1,5 +1,6 @@
-import React, {Component} from "react";
-import { AppRegistry,
+import React, { Component } from "react";
+import { 
+    AppRegistry,
     StyleSheet,
     View,
     Text,
@@ -16,13 +17,13 @@ import { AppRegistry,
     Animated,
     Easing,
 }  from 'react-native';
-import {Common} from "./common";
-import isAndroid from '../utils/isAndroid.js';
-import {EventListener} from "../listener/EventListener";
-import {Pop} from "../utils/AlertPop";
+import { Common } from "./common";
+import { EventListener } from "../listener/EventListener";
+import { Pop } from "../utils/AlertPop";
 import Singleton from '../utils/Singleton';
+import isAndroid from '../utils/isAndroid.js';
 
-var {height, width} = Dimensions.get('window');
+var { height, width } = Dimensions.get('window');
 var STATUS_BAR_HEIGHT = Navigator.NavigationBar.Styles.General.StatusBarHeight;
 var maxSize = isAndroid() ? 30 : 35;
 var deviceWidth = Dimensions.get('window').width;

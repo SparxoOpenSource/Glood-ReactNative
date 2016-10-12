@@ -1,5 +1,6 @@
-import React, {Component} from "react";
-import { AppRegistry,
+import React, { Component } from "react";
+import {
+    AppRegistry,
     StyleSheet,
     View,
     Text,
@@ -15,11 +16,13 @@ import { AppRegistry,
     Dimensions,
     DeviceEventEmitter,
     ToastAndroid,
-    AlertIOS, }  from 'react-native';
-import isAndroid from '../utils/isAndroid.js';
-var {height, width} = Dimensions.get('window');
-import {fontSizeAndroid} from "../utils/CommonUtils.js";
+    AlertIOS
+}  from 'react-native';
+
+var { height, width } = Dimensions.get('window');
+import { fontSizeAndroid } from "../utils/CommonUtils.js";
 import Singleton from '../utils/Singleton';
+import isAndroid from '../utils/isAndroid.js';
 let singleton = new Singleton();
 
 const propTypes = {

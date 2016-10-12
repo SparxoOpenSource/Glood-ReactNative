@@ -1,29 +1,42 @@
-import React, {Component} from "react";
-import { AppRegistry, StyleSheet, View, Text, ListView, Alert, Navigator, Image, TouchableOpacity, BackAndroid,
-    Platform, Dimensions, PropTypes, DeviceEventEmitter, NativeModules, NativeAppEventEmitter}  from 'react-native';
-import {RecordAudio} from "../app/utils/RecordAudio";
-import {Home} from "../app/pages/home";
-import {Tickets} from "../app/pages/tickets"
-import {Setting} from "../app/pages/setting"
-import {Feedback} from "../app/pages/feedback"
-import {Authorize} from "../app/pages/authorize"
-import {Login} from "../app/pages/login"
-import {DrawerMe} from '../app/pages/drawer/drawer';
-import {Introduce} from "../app/pages/introduce"
-import {ActivityList} from "../app/pages/activitylist"
-import {EventInfo} from "../app/pages/eventInfo"
-var {height, width} = Dimensions.get('window');
-import isAndroid from '../app/utils/isAndroid.js';
-import {NaviGoBack} from '../app/utils/CommonUtils';
-import {EventListener} from "../app/listener/EventListener";
-import {QrcodeReader} from "../app/pages/qrcode.reader";
-import {NewMic} from "../app/pages/newMic"
-import Singleton from '../app/utils/Singleton';
-let singleton = new Singleton();
-import FCM from 'react-native-fcm';
-import {sendNotification} from "../app/utils/PushNotifications";
-import {TabbleIsExist, CreatTable} from "../app/utils/DBUtil";
+import React, { Component, PropTypes} from "react";
+import { 
+    AppRegistry, 
+    StyleSheet, 
+    View,
+    Text, 
+    ListView, 
+    Alert, 
+    Navigator, 
+    Image, 
+    TouchableOpacity, 
+    BackAndroid,
+    Platform, 
+    Dimensions, 
+    DeviceEventEmitter, 
+    NativeModules
+}  from 'react-native';
+import { RecordAudio } from "../app/utils/RecordAudio";
+import { Tickets } from "../app/pages/tickets"
+import { Setting } from "../app/pages/setting"
+import { Feedback } from "../app/pages/feedback"
+import { Authorize } from "../app/pages/authorize"
+import { Login } from "../app/pages/login"
+import { DrawerMe } from '../app/pages/drawer/drawer';
+import { Introduce } from "../app/pages/introduce"
+import { ActivityList } from "../app/pages/activitylist"
+import { EventInfo } from "../app/pages/eventInfo"
+import { NaviGoBack } from '../app/utils/CommonUtils';
+import { EventListener } from "../app/listener/EventListener";
+import { QrcodeReader } from "../app/pages/qrcode.reader";
+import { NewMic } from "../app/pages/newMic"
+import { sendNotification } from "../app/utils/PushNotifications";
+import { TabbleIsExist, CreatTable } from "../app/utils/DBUtil";
 import * as launchImage from 'react-native-launch-image';
+import isAndroid from '../app/utils/isAndroid.js';
+import Singleton from '../app/utils/Singleton';
+import FCM from 'react-native-fcm';
+var singleton = new Singleton();
+var {height, width} = Dimensions.get('window');
 
 const propTypes = {
     title: PropTypes.string
@@ -57,8 +70,6 @@ export class Root extends Component {
                 return (<NewMic/>);
             case "DrawerMe":
                 return (<DrawerMe/>);
-            case "Home":
-                return (<Home/>);
             case "ActivityList":
                 return (<ActivityList/>);
             case "QrcodeReader":

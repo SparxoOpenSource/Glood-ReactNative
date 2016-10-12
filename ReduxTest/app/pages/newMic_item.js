@@ -1,5 +1,6 @@
-import React, {Component} from "react";
-import { AppRegistry,
+import React, { Component } from "react";
+import {
+    AppRegistry,
     StyleSheet,
     View,
     Text,
@@ -17,19 +18,14 @@ import { AppRegistry,
     Easing,
 }  from 'react-native';
 
-import {RecordAudio} from "../utils/RecordAudio";
+import { RecordAudio } from "../utils/RecordAudio";
+import { EventListener } from "../listener/EventListener";
 import isAndroid from '../utils/isAndroid.js';
-var deviceWidth = Dimensions.get('window').width;
-var {height, width} = Dimensions.get('window');
 import EventEmitter from "EventEmitter";
 import Subscribable  from "Subscribable";
-import {EventListener} from "../listener/EventListener";
-
-var {height, width} = Dimensions.get('window');
+var deviceWidth = Dimensions.get('window').width;
+var { height, width } = Dimensions.get('window');
 var STATUS_BAR_HEIGHT = Navigator.NavigationBar.Styles.General.StatusBarHeight;
-// if (isAndroid()) {
-//     var STATUS_BAR_HEIGHT = ExtraDimensions.get('STATUS_BAR_HEIGHT');
-// }
 var maxHeight = height - Navigator.NavigationBar.Styles.General.NavBarHeight - STATUS_BAR_HEIGHT - 64;
 var maxSize = isAndroid() ? 30 : 35;
 var cha = width - 60;
@@ -97,7 +93,6 @@ export class NewMicItem extends Component {
         this._setTime(props.title.time);
     }
     componentDidMount() {
-        // EventListener.on("AutoPlayAllRecord").then(this.playFunction.bind(this));
         EventListener.on("AutoPlayState").then(this.changeState.bind(this));
         EventListener.on("firstTop").then(this.firstTopMargin.bind(this));
         if (isAndroid()) {

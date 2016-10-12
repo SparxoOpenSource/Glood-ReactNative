@@ -1,12 +1,25 @@
-import React, {Component} from "react";
-import { AppRegistry, StyleSheet, View, Text, ListView, Alert, ScrollView, TouchableOpacity, Image, NativeModules, PropTypes, Platform, Dimensions }  from 'react-native';
-import isAndroid from '../utils/isAndroid.js';
-import {EventListener} from "../listener/EventListener";
-import {fontSizeAndroid} from "../utils/CommonUtils.js";
-var {height, width} = Dimensions.get('window');
+import React, { Component } from "react";
+import { 
+    AppRegistry, 
+    StyleSheet, 
+    View, 
+    Text, 
+    ListView, 
+    Alert, 
+    ScrollView, 
+    TouchableOpacity, 
+    Image, 
+    NativeModules, 
+    PropTypes, 
+    Platform,
+    Dimensions 
+}  from 'react-native';
+import { EventListener } from "../listener/EventListener";
+import { fontSizeAndroid } from "../utils/CommonUtils.js";
+var { height, width } = Dimensions.get('window');
 import Singleton from '../utils/Singleton';
-let singleton = new Singleton();
-
+import isAndroid from '../utils/isAndroid.js';
+var singleton = new Singleton();
 const propTypes = {
     page: PropTypes.string,
     rightType: PropTypes.string

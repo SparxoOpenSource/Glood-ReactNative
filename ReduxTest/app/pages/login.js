@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import {
     AppRegistry,
     StyleSheet,
@@ -17,11 +17,10 @@ import {
     Alert,
     Platform,
 }  from 'react-native';
-import {Common} from "./common";
+import { Common } from "./common";
 import isAndroid from '../utils/isAndroid.js';
 import Singleton from '../utils/Singleton';
-let singleton = new Singleton();
-
+var singleton = new Singleton();
 var widthh = Dimensions.get('window').width
 var heightt = Dimensions.get('window').height
 
@@ -92,6 +91,7 @@ export class Login extends Component {
                             <View style={{ borderBottomWidth: 1, borderBottomColor: '#60606050', height: heightt * (45 / 736) }}>
                                 <TextInput
                                     {...this.props}
+                                    returnKeyType = "done"
                                     style={{ backgroundColor: '#00000000', height: heightt * (45 / 736) }}
                                     onFocus={() => this._onFocus('signupCreatName') }
                                     onBlur={() => this._onBlur('signupCreatName') }
@@ -104,6 +104,7 @@ export class Login extends Component {
                             <View style={{ borderBottomWidth: 1, borderBottomColor: '#60606050', height: heightt * (45 / 736) }}>
                                 <TextInput
                                     {...this.props}
+                                    returnKeyType = "done"
                                     style={{ backgroundColor: '#00000000', height: heightt * (45 / 736) }}
                                     onFocus={() => this._onFocus('signupCreatEmail') }
                                     onBlur={() => this._onBlur('signupCreatEmail') }
@@ -116,6 +117,7 @@ export class Login extends Component {
                             <View style={{ borderBottomWidth: 1, borderBottomColor: '#60606050', height: heightt * (45 / 736) }}>
                                 <TextInput
                                     {...this.props}
+                                    returnKeyType = "done"
                                     style={{ backgroundColor: '#00000000', height: heightt * (45 / 736) }}
                                     onFocus={() => this._onFocus('signupCreatPassword') }
                                     onBlur={() => this._onBlur('signupCreatPassword') }
@@ -132,7 +134,9 @@ export class Login extends Component {
                                 marginLeft: widthh * (5 / 414)
                             }}>email</Text>
                             <View style={{ borderBottomWidth: 1, borderBottomColor: '#60606050', height: heightt * (45 / 736) }}>
-                                <TextInput style={{ backgroundColor: '#00000000', height: heightt * (45 / 736) }}></TextInput>
+                                <TextInput 
+                                returnKeyType = "done"
+                                style={{ backgroundColor: '#00000000', height: heightt * (45 / 736) }}></TextInput>
                             </View>
                             <Text style={{
                                 backgroundColor: '#00000000',
@@ -141,6 +145,7 @@ export class Login extends Component {
                             }}>password</Text>
                             <View style={{ borderBottomWidth: 1, borderBottomColor: '#60606050', height: heightt * (45 / 736) }}>
                                 <TextInput style={{ backgroundColor: '#00000000', height: heightt * (45 / 736) }}
+                                    returnKeyType = "done"
                                     secureTextEntry={true}></TextInput>
                             </View>
                             <Text style={{

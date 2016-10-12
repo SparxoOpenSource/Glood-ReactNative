@@ -1,5 +1,6 @@
 import React, {Component} from "react";
-import { AppRegistry,
+import { 
+    AppRegistry,
     StyleSheet,
     View,
     Text,
@@ -13,16 +14,16 @@ import { AppRegistry,
     PropTypes,
     Animated,
     Dimensions,
-    DeviceEventEmitter }  from 'react-native';
-import {Common} from "./common";
-import {ActivityListItem} from "./activityListItem";
-import isAndroid from '../utils/isAndroid.js';
-import RefreshableListView from "react-native-refreshable-listview";
-import {fontSizeAndroid} from "../utils/CommonUtils.js";
+    DeviceEventEmitter 
+}  from 'react-native';
+import { Common } from "./common";
+import { ActivityListItem } from "./activityListItem";
+import { fontSizeAndroid } from "../utils/CommonUtils.js";
 import Singleton from '../utils/Singleton';
 import moment from "moment";
-let singleton = new Singleton();
-
+import isAndroid from '../utils/isAndroid.js';
+import RefreshableListView from "react-native-refreshable-listview";
+var singleton = new Singleton();
 var {height, width} = Dimensions.get('window');
 
 var event = [

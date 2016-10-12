@@ -1,5 +1,6 @@
-import React, {Component} from "react";
-import { AppRegistry,
+import React, { Component } from "react";
+import {
+    AppRegistry,
     StyleSheet,
     View,
     Text,
@@ -16,14 +17,15 @@ import { AppRegistry,
     UIManager,
     ScrollView,
     Platform,
-    DeviceEventEmitter }  from 'react-native';
-import {Common} from "./common";
-import isAndroid from '../utils/isAndroid.js';
-import ScrollableTabView, { DefaultTabBar, } from 'react-native-scrollable-tab-view';
+    DeviceEventEmitter 
+}  from 'react-native';
+import { Common } from "./common";
 import { CoverFlow } from 'react-native-pan-controller';
-import {EventListener} from "../listener/EventListener";
-import {fontSizeAndroid} from "../utils/CommonUtils.js";
-import {LoadingView} from "../components/LoadingView";
+import { EventListener } from "../listener/EventListener";
+import { fontSizeAndroid } from "../utils/CommonUtils.js";
+import { LoadingView } from "../components/LoadingView";
+import isAndroid from '../utils/isAndroid.js';
+import ScrollableTabView, { DefaultTabBar} from 'react-native-scrollable-tab-view';
 
 var QRCode = require('react-native-qrcode');
 var image_margin_left;

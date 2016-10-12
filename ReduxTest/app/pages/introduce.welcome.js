@@ -1,5 +1,6 @@
-import React, {Component} from "react";
-import { AppRegistry,
+import React, { Component } from "react";
+import {
+    AppRegistry,
     StyleSheet,
     View,
     Text,
@@ -15,10 +16,11 @@ import { AppRegistry,
     Dimensions,
     DeviceEventEmitter,
     ToastAndroid,
-    AlertIOS, }  from 'react-native';
+    AlertIOS
+}  from 'react-native';
+import { fontSizeAndroid } from "../utils/CommonUtils.js";
 import isAndroid from '../utils/isAndroid.js';
-var {height, width} = Dimensions.get('window');
-import {fontSizeAndroid} from "../utils/CommonUtils.js";
+var { height, width } = Dimensions.get('window');
 
 const propTypes = {
     content: PropTypes.string

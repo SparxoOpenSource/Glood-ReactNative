@@ -1,5 +1,6 @@
-import React, {Component} from "react";
-import { AppRegistry,
+import React, { Component } from "react";
+import {
+    AppRegistry,
     StyleSheet,
     View,
     Text,
@@ -13,28 +14,27 @@ import { AppRegistry,
     PropTypes,
     Animated,
     Dimensions,
-    DeviceEventEmitter }  from 'react-native';
-import {Common} from "./common";
-import {RecordAudio} from "../utils/RecordAudio";
-import {NewMicItem} from "./newMic_item";
+    DeviceEventEmitter 
+}  from 'react-native';
+import { Common } from "./common";
+import { RecordAudio } from "../utils/RecordAudio";
+import { NewMicItem } from "./newMic_item";
+import { EventListener } from "../listener/EventListener";
+import { fontSizeAndroid } from "../utils/CommonUtils.js";
+import { LoadingView } from "../components/LoadingView";
+import { sendMessageInRoom } from '../utils/CommonUtils';
+import { Add, SelectByRoomName, DeleteMin, Drop, Update, SelectAll } from "../utils/DBUtil"
+import { HardwareUtils } from "../utils/HardwareUtils";
 import isAndroid from '../utils/isAndroid.js';
 import RefreshableListView from "react-native-refreshable-listview";
-// import ExtraDimensions from 'react-native-extra-dimensions-android';
-import {EventListener} from "../listener/EventListener";
-import {fontSizeAndroid} from "../utils/CommonUtils.js";
-import {LoadingView} from "../components/LoadingView";
 import Singleton from '../utils/Singleton';
-import {sendMessageInRoom} from '../utils/CommonUtils';
-import {Add, SelectByRoomName, DeleteMin, Drop, Update, SelectAll} from "../utils/DBUtil"
-let singleton = new Singleton();
-import {HardwareUtils} from "../utils/HardwareUtils";
+var singleton = new Singleton();
 var userNamexx;
+
 HardwareUtils.prototype.getAddressIp((call) => {
     userNamexx = call.IP;
 });
 var SQLite = require('react-native-sqlite-storage');
-// import SQLite from "react_native_sqlite";
-// var database = SQLite.open('mic.sqlite');
 
 var data = new Array();
 var ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
@@ -47,9 +47,6 @@ var everyOnexxx = isAndroid() ? 95 : 95;
 var index = 0;
 var {deviceHeight, deviceWidth} = Dimensions.get('window');
 var STATUS_BAR_HEIGHT = Navigator.NavigationBar.Styles.General.StatusBarHeight;
-// if (isAndroid()) {
-//     var STATUS_BAR_HEIGHT = ExtraDimensions.get('STATUS_BAR_HEIGHT');
-// }
 var maxHeight = Dimensions.get('window').height - Navigator.NavigationBar.Styles.General.NavBarHeight - STATUS_BAR_HEIGHT - 64;
 var scorll = false;
 var auto = false;
@@ -199,12 +196,6 @@ export class NewMic extends Component {
         setTimeout(() => {
             EventListener.trigger("firstTop", value.length);
         }, 1);
-    }
-    /**
-     * 读取保存在磁盘中的录音文件
-     */
-    _accessFileName() {
-        // SelectByRoomName(singleton.getRoomName());
     }
     /**
      * 接收消息，并监听
@@ -419,11 +410,6 @@ const style = StyleSheet.create({
         borderWidth: 0,
         borderRadius: 35,
     },
-    // ShieldingLayer: {
-    //     width: deviceWidth,
-    //     height: everyOne,
-    //     backgroundColor: 'red',
-    // }
     background: {
         position: 'absolute',
         width: width,

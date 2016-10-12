@@ -1,5 +1,6 @@
-import React, {Component} from "react";
-import { AppRegistry,
+import React, { Component } from "react";
+import { 
+    AppRegistry,
     StyleSheet,
     View,
     Text,
@@ -13,13 +14,13 @@ import { AppRegistry,
     PropTypes,
     Animated,
     Dimensions,
-    DeviceEventEmitter }  from 'react-native';
-import {Common} from "./common";
+    DeviceEventEmitter 
+}  from 'react-native';
+import { Common } from "./common";
+import { fontSizeAndroid } from "../utils/CommonUtils.js";
+import { joinEventChatRoom } from '../utils/CommonUtils';
 import isAndroid from '../utils/isAndroid.js';
-import {fontSizeAndroid} from "../utils/CommonUtils.js";
-import {joinEventChatRoom} from '../utils/CommonUtils';
-
-var {height, width} = Dimensions.get('window');
+var { height, width } = Dimensions.get('window');
 
 const propTypes = {
     date: React.PropTypes.shape({
