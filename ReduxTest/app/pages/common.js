@@ -1,19 +1,19 @@
 import React, { Component } from "react";
-import { 
-    AppRegistry, 
-    StyleSheet, 
-    View, 
-    Text, 
-    ListView, 
-    Alert, 
-    ScrollView, 
-    TouchableOpacity, 
-    Image, 
-    NativeModules, 
-    PropTypes, 
+import {
+    AppRegistry,
+    StyleSheet,
+    View,
+    Text,
+    ListView,
+    Alert,
+    ScrollView,
+    TouchableOpacity,
+    Image,
+    NativeModules,
+    PropTypes,
     Platform,
-    Dimensions 
-}  from 'react-native';
+    Dimensions
+} from 'react-native';
 import { EventListener } from "../listener/EventListener";
 import { fontSizeAndroid } from "../utils/CommonUtils.js";
 var { height, width } = Dimensions.get('window');
@@ -36,26 +36,26 @@ export class Common extends Component {
     renderBackImage() {
         if (this.props.page === "Main") {
             return (
-                <Image source={require('../img/menu.png') } style={{
+                <Image source={require('../img/menu.png')} style={{
                     width: 26,
                     height: 28,
                     marginLeft: 15
-                }}  />
+                }} />
             );
         } else {
             return (
-                <Image source={require('../img/back.png') } style={{
+                <Image source={require('../img/back.png')} style={{
                     width: 26,
                     height: 23,
                     marginLeft: 15
-                }}  />
+                }} />
             );
         }
     }
     renderRightIMG() {
         switch (this.props.rightType) {
             case "Up":
-                return <Image source={require('../img/up.png') } style={styles.ImagStyle}  />
+                return <Image source={require('../img/up.png')} style={styles.ImagStyle} />
             case "Down":
                 return (
                     <View style={{
@@ -64,10 +64,10 @@ export class Common extends Component {
                         marginTop: 4,
                         marginRight: 15
                     }}>
-                        <Image source={require('../img/down_1.png') } style={{
+                        <Image source={require('../img/down_1.png')} style={{
                             width: 18, height: 8,
                             marginTop: 5
-                        }}  />
+                        }} />
                         <View style={{
                             alignItems: 'center',
                             justifyContent: 'center',
@@ -86,28 +86,28 @@ export class Common extends Component {
                         </View>
                     </View>);
             case "Share":
-                return <Image source={require('../img/share.png') } style={styles.ImagStyle}  />
+                return <Image source={require('../img/share.png')} style={styles.ImagStyle} />
             default:
-                return <Image source={require('../img/none.png') } style={styles.ImagStyle}  />
+                return <Image source={require('../img/none.png')} style={styles.ImagStyle} />
         }
     }
     //监听手机自带返回按钮
     render() {
         return (
             <View>
-                <View style = {styles.view}>
+                <View style={styles.view}>
                     <TouchableOpacity style={{
                         justifyContent: 'center', width: 70, height: 54
-                    }} onPress={this._onBack.bind(this) }>
-                        {this.renderBackImage() }
+                    }} onPress={this._onBack.bind(this)}>
+                        {this.renderBackImage()}
                     </TouchableOpacity>
                     <View style={styles.TextStyle2}>
-                        <Text style={styles.TextStyle} numberOfLines={1}>{singleton.getTitle() }</Text>
+                        <Text style={styles.TextStyle} numberOfLines={1}>{singleton.getTitle()}</Text>
                     </View>
-                    <TouchableOpacity onPress={this.UpAndDown.bind(this) } style={{
+                    <TouchableOpacity onPress={this.UpAndDown.bind(this)} style={{
                         alignItems: 'center', width: 70, height: 54, justifyContent: 'center'
                     }} >
-                        {this.renderRightIMG() }
+                        {this.renderRightIMG()}
                     </TouchableOpacity>
                 </View>
             </View>

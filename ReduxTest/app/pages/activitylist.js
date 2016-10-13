@@ -1,5 +1,5 @@
-import React, {Component} from "react";
-import { 
+import React, { Component } from "react";
+import {
     AppRegistry,
     StyleSheet,
     View,
@@ -14,8 +14,8 @@ import {
     PropTypes,
     Animated,
     Dimensions,
-    DeviceEventEmitter 
-}  from 'react-native';
+    DeviceEventEmitter
+} from 'react-native';
 import { Common } from "./common";
 import { ActivityListItem } from "./activityListItem";
 import { fontSizeAndroid } from "../utils/CommonUtils.js";
@@ -54,17 +54,17 @@ export class ActivityList extends Component {
     }
     render() {
         return (
-            <Image style={style.container} source={require('../img/background3.png') }>
-                <Common page="Main" rightType="Up"/>
+            <Image style={style.container} source={require('../img/background3.png')}>
+                <Common page="Main" rightType="Up" />
                 <View style={style.content}>
                     <RefreshableListView
-                        enableEmptySections = {true}
+                        enableEmptySections={true}
                         dataSource={this.state.dataSource}
-                        renderRow={this._row.bind(this) }
-                        loadData={this._access.bind(this) }
+                        renderRow={this._row.bind(this)}
+                        loadData={this._access.bind(this)}
                         refreshPrompt="Pull down to refresh"
                         backgroundColor="#00000000"
-                        renderHeader ={this.renderSectionHeader.bind(this) }/>
+                        renderHeader={this.renderSectionHeader.bind(this)} />
                 </View>
             </Image>
         );
@@ -79,10 +79,10 @@ export class ActivityList extends Component {
                 borderBottomWidth: 1,
                 borderBottomColor: '#00000010',
             }}
-                onPress={this.QR.bind(this) }>
+                onPress={this.QR.bind(this)}>
                 <Image
                     style={{ width: 20, height: 20 }}
-                    source={require("../img/add.png") }/>
+                    source={require("../img/add.png")} />
                 <Text style={{
                     fontSize: fontSizeAndroid(20),
                     color: "#000000",
@@ -93,7 +93,7 @@ export class ActivityList extends Component {
         );
     }
     _row(rowData, sectionID, rowID) {
-        let item = <ActivityListItem date={rowData} rowID={parseInt(rowID) }/>;
+        let item = <ActivityListItem date={rowData} rowID={parseInt(rowID)} />;
         return item;
     }
     _access() {
@@ -118,6 +118,6 @@ const style = StyleSheet.create({
     content: {
         backgroundColor: "#00000000",
         width: width,
-        height: height-60
+        height: height - 60
     }
 });

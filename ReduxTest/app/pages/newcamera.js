@@ -17,7 +17,7 @@ import {
     NativeModules,
     Platform,
     ScrollView,
-}  from 'react-native';
+} from 'react-native';
 import { Common } from "./common";
 import Camera from '@remobile/react-native-camera';
 import Button from '@remobile/react-native-simple-button';
@@ -83,9 +83,9 @@ export class NewCamera extends Component {
     render() {
         return (
             <View style={style.container}>
-                <Common navigator={this.props.navigator} title={this.props.title}/>
+                <Common navigator={this.props.navigator} title={this.props.title} />
 
-                <Button style={style.captureButton} onPress={this.newShown.bind(this) }>
+                <Button style={style.captureButton} onPress={this.newShown.bind(this)}>
                     Camera
                 </Button>
             </View>

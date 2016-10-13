@@ -1,20 +1,20 @@
-import React, { Component, PropTypes} from "react";
-import { 
-    AppRegistry, 
-    StyleSheet, 
+import React, { Component, PropTypes } from "react";
+import {
+    AppRegistry,
+    StyleSheet,
     View,
-    Text, 
-    ListView, 
-    Alert, 
-    Navigator, 
-    Image, 
-    TouchableOpacity, 
+    Text,
+    ListView,
+    Alert,
+    Navigator,
+    Image,
+    TouchableOpacity,
     BackAndroid,
-    Platform, 
-    Dimensions, 
-    DeviceEventEmitter, 
+    Platform,
+    Dimensions,
+    DeviceEventEmitter,
     NativeModules
-}  from 'react-native';
+} from 'react-native';
 import { RecordAudio } from "../app/utils/RecordAudio";
 import { Tickets } from "../app/pages/tickets"
 import { Setting } from "../app/pages/setting"
@@ -55,27 +55,27 @@ export class Root extends Component {
         singleton.setNav(navigator);
         switch (router.name) {
             case "Introduce":
-                return (<Introduce/>);
+                return (<Introduce />);
             case "Login":
-                return (<Login/>);
+                return (<Login />);
             case "TICKETS":
-                return (<Tickets/>);
+                return (<Tickets />);
             case "SETTING":
-                return (<Setting/>);
+                return (<Setting />);
             case "FEEDBACK":
-                return (<Feedback/>);
+                return (<Feedback />);
             case "EVENTINFO":
-                return (<EventInfo/>);
+                return (<EventInfo />);
             case "NEWMIC":
-                return (<NewMic/>);
+                return (<NewMic />);
             case "DrawerMe":
-                return (<DrawerMe/>);
+                return (<DrawerMe />);
             case "ActivityList":
-                return (<ActivityList/>);
+                return (<ActivityList />);
             case "QrcodeReader":
-                return (<QrcodeReader/>);
+                return (<QrcodeReader />);
             case "Authorize":
-                return (<Authorize/>);
+                return (<Authorize />);
         }
     }
 
@@ -143,7 +143,7 @@ export class Root extends Component {
                     renderScene={this.renderScene}
                     configureScene={(route) => {
                         return CustomPushFromRightWithoutGestures;
-                    } }/>
+                    } } />
             </View>
         );
     }

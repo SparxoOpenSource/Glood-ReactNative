@@ -17,7 +17,7 @@ import {
     DeviceEventEmitter,
     ToastAndroid,
     AlertIOS
-}  from 'react-native';
+} from 'react-native';
 import { fontSizeAndroid } from "../utils/CommonUtils.js";
 import isAndroid from '../utils/isAndroid.js';
 var { height, width } = Dimensions.get('window');
@@ -31,7 +31,7 @@ const propTypes = {
 export class IntroduceWelcome extends Component {
     render() {
         return (
-            <Image style={styles.container} source={require('../img/background3.png') }>
+            <Image style={styles.container} source={require('../img/background3.png')}>
                 <View>
                     <Text style={styles.slide}>{this.props.content}</Text>
                 </View>

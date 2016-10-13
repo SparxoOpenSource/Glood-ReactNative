@@ -14,8 +14,8 @@ import {
     PropTypes,
     Animated,
     Dimensions,
-    DeviceEventEmitter 
-}  from 'react-native';
+    DeviceEventEmitter
+} from 'react-native';
 import { Common } from "./common";
 import { RecordAudio } from "../utils/RecordAudio";
 import { NewMicItem } from "./newMic_item";
@@ -78,34 +78,34 @@ export class NewMic extends Component {
     }
     render() {
         return (
-            <Image style={style.container} source={require('../img/background3.png') }>
-                <Common ground="fw_1.png"  rightType="Down"/>
+            <Image style={style.container} source={require('../img/background3.png')}>
+                <Common ground="fw_1.png" rightType="Down" />
                 <View style={style.content}>
                     <RefreshableListView
-                        enableEmptySections = {true}
+                        enableEmptySections={true}
                         ref={LISTVIEW_REF}
-                        dataSource={this.state.dataSource} 
-                        renderRow={this._row.bind(this) }
-                        loadData={this._accessFileName.bind(this) }
-                        refreshPrompt="Pull down to refresh"/>
+                        dataSource={this.state.dataSource}
+                        renderRow={this._row.bind(this)}
+                        loadData={this._accessFileName.bind(this)}
+                        refreshPrompt="Pull down to refresh" />
 
-                    <Image source={require('../img/fw_2.png') } style={style.background} />
+                    <Image source={require('../img/fw_2.png')} style={style.background} />
                 </View>
                 <View style={style.footer}>
                     <View style={{ flexDirection: 'row' }}>
-                        <Image source={this.state.autoImage } style={style.ImagStyle}/>
-                        <TouchableOpacity style={style.ImagStyle2} onPress={this.like.bind(this) }>
-                            <Image source={this.state.like} style={{ width: 25, height: 20 }}/>
+                        <Image source={this.state.autoImage} style={style.ImagStyle} />
+                        <TouchableOpacity style={style.ImagStyle2} onPress={this.like.bind(this)}>
+                            <Image source={this.state.like} style={{ width: 25, height: 20 }} />
                         </TouchableOpacity>
                         <Text style={{ backgroundColor: '#00000000', marginTop: 32, marginLeft: 4, fontSize: fontSizeAndroid(16), color: '#FFFFFF00', fontFamily: "ProximaNova-Light" }}>{this.state.likeSum}</Text>
                     </View>
-                    <TouchableWithoutFeedback onPressOut={this._stop.bind(this) } onPressIn={this._startVoice.bind(this) }>
-                        <Image style={{ width: 70, height: 70 }}  source={this.state.voiceImage }/>
+                    <TouchableWithoutFeedback onPressOut={this._stop.bind(this)} onPressIn={this._startVoice.bind(this)}>
+                        <Image style={{ width: 70, height: 70 }} source={this.state.voiceImage} />
                     </TouchableWithoutFeedback>
                     <TouchableOpacity style={{ flexDirection: 'row' }}>
                         <Text style={{ backgroundColor: '#00000000', marginTop: 32, fontSize: fontSizeAndroid(16), color: '#00000000', fontFamily: "ProximaNova-Light" }}>auto</Text>
                         <Text style={{ backgroundColor: '#00000000', marginTop: 32, fontSize: fontSizeAndroid(16), color: '#00000000', fontFamily: "ProximaNova-Light" }}>auto</Text>
-                        <Image source={require('../img/people.png') } style={style.ImagStyle3}  />
+                        <Image source={require('../img/people.png')} style={style.ImagStyle3} />
                     </TouchableOpacity>
                 </View>
             </Image>
@@ -113,7 +113,7 @@ export class NewMic extends Component {
     }
 
     _row(rowData, sectionID, rowID) {
-        let item = <NewMicItem title={rowData} auto={auto} rowID={parseInt(rowID) } dateLength={data.length}/>;
+        let item = <NewMicItem title={rowData} auto={auto} rowID={parseInt(rowID)} dateLength={data.length} />;
         return item;
     }
     /**
@@ -198,6 +198,12 @@ export class NewMic extends Component {
         }, 1);
     }
     /**
+     * 读取保存在磁盘中的录音文件
+     */
+    _accessFileName() {
+         SelectByRoomName(singleton.getRoomName());
+    }
+    /**
      * 接收消息，并监听
      */
     roomMessagexx(roomname, username, roommessage) {
@@ -215,7 +221,7 @@ export class NewMic extends Component {
                 };
                 Add(roomname, back.name, back.time, username, (callback) => {
 
-                    console.log("sdfsd--------",callback);
+                    console.log("sdfsd--------", callback);
                     if (callback === 0)
                         return;
                     if (singleton.getRoomName() !== roomname)
@@ -260,15 +266,15 @@ export class NewMic extends Component {
     /**
      * 消息类型转换
      */
-    formatMessage(message) {
-        return {
-            id: message._id,
-            name: message.sentBy.email,
-            text: message.text,
-            userid: message.sentBy._id,
-            date: new Date(message.createdAt)
-        };
-    }
+    // formatMessage(message) {
+    //     return {
+    //         id: message._id,
+    //         name: message.sentBy.email,
+    //         text: message.text,
+    //         userid: message.sentBy._id,
+    //         date: new Date(message.createdAt)
+    //     };
+    // }
     /**
      * 发送消息
      */

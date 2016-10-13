@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { 
+import {
     AppRegistry,
     StyleSheet,
     View,
@@ -16,7 +16,7 @@ import {
     Dimensions,
     Animated,
     Easing,
-}  from 'react-native';
+} from 'react-native';
 import { Common } from "./common";
 import { EventListener } from "../listener/EventListener";
 import { Pop } from "../utils/AlertPop";
@@ -112,15 +112,15 @@ export class EventInfo extends Component {
 
     render() {
         return (
-            <Image source={require('../img/background3.png') } style={styles.background} >
-                <Common  title={singleton.getRoomName()} page='Main' rightType="Down"/>
-                <Image style={{ width: widthh, height: heightt * (200 / 736), marginTop: heightt * (13 / 736) }} source={require('../img/event_background.jpg') }/>
+            <Image source={require('../img/background3.png')} style={styles.background} >
+                <Common title={singleton.getRoomName()} page='Main' rightType="Down" />
+                <Image style={{ width: widthh, height: heightt * (200 / 736), marginTop: heightt * (13 / 736) }} source={require('../img/event_background.jpg')} />
                 <Text style={{
                     backgroundColor: '#00000000', color: 'black', fontSize: heightt * (23 / 736), width: widthh * (250 / 414),
                     fontFamily: 'ProximaNova-Semibold', marginLeft: (widthh - (widthh * (240 / 414))) / 2, marginTop: heightt * (17 / 736),
                     lineHeight: 25
                 }}>{"Can't wait to see you at \n      Crazy May 2016!"}</Text>
-                <View style={ { justifyContent: 'center', alignItems: 'center' }}>
+                <View style={{ justifyContent: 'center', alignItems: 'center' }}>
                     <View style={{
                         height: 90 + maxSize,
                         width: width,
@@ -139,7 +139,7 @@ export class EventInfo extends Component {
                             marginTop: this.state.viewTop_1,
                             position: "absolute",
                             transform: [{ scale: this.state.bounceValue_1 }]
-                        }}/>
+                        }} />
                         <Animated.View style={{
                             width: this.state.viewWidth_2,
                             height: this.state.viewHeight_2,
@@ -153,7 +153,7 @@ export class EventInfo extends Component {
                             marginLeft: this.state.viewLeft_2,
                             marginTop: this.state.viewTop_2,
                             transform: [{ scale: this.state.bounceValue_2 }]
-                        }}/>
+                        }} />
                         <TouchableOpacity style={{
                             width: 90, height: 90,
                             borderWidth: 0,
@@ -164,13 +164,13 @@ export class EventInfo extends Component {
                             marginLeft: this.state.imageLeft,
                             marginTop: this.state.imageTop,
                             transform: [{ scale: this.state.bounceValue_3 }]
-                        }} onPress={this._onPress.bind(this) } ref="view">
-                            <Animated.Image source={require('../img/171604419.jpg') } style={{
+                        }} onPress={this._onPress.bind(this)} ref="view">
+                            <Animated.Image source={require('../img/171604419.jpg')} style={{
                                 width: 90,
                                 height: 90,
                                 borderWidth: 0,
                                 borderRadius: 45
-                            }}  />
+                            }} />
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -183,7 +183,7 @@ export class EventInfo extends Component {
                     fontFamily: 'ProximaNova-Regular', marginLeft: (widthh - (widthh * (180 / 414))) / 2, marginTop: heightt * (5 / 736)
                 }}>Founder of Crazy Fest</Text>
                 <View style={{ width: widthh, height: 25, marginTop: height * (55 / 736), backgroundColor: '#00000030' }}>
-                    <Image source={require('../img/event_background_bottom.png') } style={{ width: this.state.bottom_view_image_width, height: 25 }}/>
+                    <Image source={require('../img/event_background_bottom.png')} style={{ width: this.state.bottom_view_image_width, height: 25 }} />
                 </View>
             </Image>
         );

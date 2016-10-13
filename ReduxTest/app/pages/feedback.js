@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { 
+import {
     AppRegistry,
     StyleSheet,
     View,
@@ -18,7 +18,7 @@ import {
     Easing,
     TextInput,
     Platform,
-}  from 'react-native';
+} from 'react-native';
 import { Common } from "./common";
 import isAndroid from '../utils/isAndroid.js';
 var widthh = Dimensions.get('window').width
@@ -37,10 +37,10 @@ export class Feedback extends Component {
     }
     render() {
         return (
-            <Animated.Image style={[style.container, { transform: this.state.backViewTrans.getTranslateTransform() }]} source={require('../img/background3.png') }>
-                <Common/>
+            <Animated.Image style={[style.container, { transform: this.state.backViewTrans.getTranslateTransform() }]} source={require('../img/background3.png')}>
+                <Common />
                 <View style={style.feedbackView}>
-                    <Image style={{ width: 93, height: 113, marginLeft: (widthh - 93) / 2, }} source={require('../img/feedbackeys.png') } />
+                    <Image style={{ width: 93, height: 113, marginLeft: (widthh - 93) / 2, }} source={require('../img/feedbackeys.png')} />
                     <Text style={{
                         backgroundColor: '#00000000', color: 'black', fontSize: widthh * (23 / 414), fontFamily: 'ProximaNova-Regular',
                         marginTop: heightt * (45 / 736), marginLeft: widthh * (35 / 414), lineHeight: 25,
@@ -53,22 +53,22 @@ export class Feedback extends Component {
                             backgroundColor: 'white', height: heightt * (245 / 736), width: widthh * (340 / 414),
                             marginTop: heightt * (2.5 / 736), marginLeft: widthh * (3 / 414), fontSize: 17
                         }}
-                            returnKeyType = "done"
-                            placeholder= "提意见，你怕了吗？"
+                            returnKeyType="done"
+                            placeholder="提意见，你怕了吗？"
                             multiline={true}
-                            onSubmitEditing={() => this._onSubmitEditing('feedback') }
-                            onFocus={() => this._onFocus('feedback') }
-                            onBlur={() => this._onBlur('feedback') }
+                            onSubmitEditing={() => this._onSubmitEditing('feedback')}
+                            onFocus={() => this._onFocus('feedback')}
+                            onBlur={() => this._onBlur('feedback')}
                             onChange={(event) => this.updateText(
                                 event.nativeEvent.text
-                            ) }
+                            )}
                             blurOnSubmit={true}></TextInput>
                     </View>
                     <TouchableOpacity style={{
                         flexDirection: 'row', backgroundColor: '#53aeee', width: widthh, height: heightt * (70 / 736),
                         marginTop: isAndroid() ? heightt * (85 / 736) : heightt * (37 / 736)
                     }}
-                        onPress={this._send.bind(this) }>
+                        onPress={this._send.bind(this)}>
                         <Text style={{
                             backgroundColor: '#00000000',
                             color: 'white', fontSize: heightt * (33 / 736), width: widthh * (90 / 414), fontFamily: 'ProximaNova-Bold', marginTop: heightt * ((85 - 50) / 736) / 2,
@@ -79,7 +79,7 @@ export class Feedback extends Component {
             </Animated.Image>
         );
     }
-    updateText(){
+    updateText() {
 
     }
     _send() {

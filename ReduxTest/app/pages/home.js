@@ -1,17 +1,17 @@
 import React, { Component } from "react";
-import { 
-    AppRegistry, 
-    StyleSheet, 
-    View, 
-    Text, 
-    ListView, 
-    Alert, 
-    Navigator, 
-    Image, 
-    TouchableOpacity, 
-    PropTypes, 
-    AsyncStorage 
-}  from 'react-native';
+import {
+    AppRegistry,
+    StyleSheet,
+    View,
+    Text,
+    ListView,
+    Alert,
+    Navigator,
+    Image,
+    TouchableOpacity,
+    PropTypes,
+    AsyncStorage
+} from 'react-native';
 import { Common } from "./common";
 import { HardwareUtils } from "../utils/HardwareUtils";
 import feathers from 'feathers/client'
@@ -138,11 +138,11 @@ export class Home extends Component {
     render() {
         return (
             <View style={style.container}>
-                <Common navigator={this.props.navigator} title={this.props.title}/>
+                <Common navigator={this.props.navigator} title={this.props.title} />
                 <View style={style.content}>
                     <ListView style={style.list}
                         dataSource={this.state.dataSource}
-                        renderRow={this._row.bind(this) }/>
+                        renderRow={this._row.bind(this)} />
                 </View>
             </View>
         );
@@ -150,7 +150,7 @@ export class Home extends Component {
     _row(value) {
         return (
             <View>
-                <TouchableOpacity style={style.touch} onPress={this._handerClick.bind(this, value, this.props.navigator) }>
+                <TouchableOpacity style={style.touch} onPress={this._handerClick.bind(this, value, this.props.navigator)}>
                     <Text style={style.text} >{value}</Text>
                 </TouchableOpacity>
             </View>

@@ -1,6 +1,6 @@
 
 import SQLite from 'react-native-sqlite-storage';
-import { Alert }  from 'react-native';
+import { Alert } from 'react-native';
 import moment from "moment";
 var db = SQLite.openDatabase({ name: "Glood.db" });
 var item = [];

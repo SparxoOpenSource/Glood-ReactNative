@@ -1,5 +1,6 @@
-import React, {Component} from "react";
-import { AppRegistry,
+import React, { Component } from "react";
+import {
+    AppRegistry,
     StyleSheet,
     View,
     Text,
@@ -17,8 +18,8 @@ import { AppRegistry,
     Easing,
     TextInput,
     Platform,
-}  from 'react-native';
-import {Common} from "./common";
+} from 'react-native';
+import { Common } from "./common";
 import isAndroid from '../utils/isAndroid.js';
 
 var widthh = Dimensions.get('window').width
@@ -49,11 +50,11 @@ export class Authorize extends Component {
     }
     render() {
         return (
-            <Image style={style.container} source={require('../img/background3.png') }>
-                <Common/>
+            <Image style={style.container} source={require('../img/background3.png')}>
+                <Common />
                 <Animated.View style={[style.feedbackView, { transform: this.state.backViewTrans.getTranslateTransform() }]}>
                     <Image style={{ width: widthh * (100 / 414), height: heightt * (110 / 736), marginLeft: (widthh - (widthh * (100 / 414))) / 2, marginTop: heightt * (41 / 736) }}
-                        source={require('../img/logo2.png') }/>
+                        source={require('../img/logo2.png')} />
                     <Text style={{
                         backgroundColor: '#00000000', color: "#606060", fontSize: widthh * (23 / 414), fontFamily: 'ProximaNova-Regular',
                         marginTop: heightt * (45 / 736), marginLeft: widthh * (60 / 414), lineHeight: 22,
@@ -76,14 +77,14 @@ export class Authorize extends Component {
                     }}>
                         <TextInput
                             {...this.props}
-                            returnKeyType = "done"
+                            returnKeyType="done"
                             style={{ backgroundColor: '#00000000', height: heightt * (45 / 736), fontSize: widthh * (30 / 736) }}
-                            onSubmitEditing={() => this._onSubmitEditing('email') }
-                            onFocus={() => this._onFocus('email') }
-                            onBlur={() => this._onBlur('email') }
+                            onSubmitEditing={() => this._onSubmitEditing('email')}
+                            onFocus={() => this._onFocus('email')}
+                            onBlur={() => this._onBlur('email')}
                             onChange={(event) => this.updateEmailText(
                                 event.nativeEvent.text
-                            ) }
+                            )}
                             blurOnSubmit={true}></TextInput>
                     </View>
                     <Animated.Text style={[{
@@ -97,14 +98,14 @@ export class Authorize extends Component {
                     }}>
                         <TextInput
                             {...this.props}
-                            returnKeyType = "done"
+                            returnKeyType="done"
                             style={{ backgroundColor: '#00000000', height: heightt * (45 / 736), fontSize: widthh * (30 / 736) }}
-                            onSubmitEditing={() => this._onSubmitEditing('password') }
-                            onFocus={() => this._onFocus('password') }
-                            onBlur={() => this._onBlur('password') }
+                            onSubmitEditing={() => this._onSubmitEditing('password')}
+                            onFocus={() => this._onFocus('password')}
+                            onBlur={() => this._onBlur('password')}
                             onChange={(event) => this.updatePasswordText(
                                 event.nativeEvent.text
-                            ) }
+                            )}
                             blurOnSubmit={true}
                             secureTextEntry={true}></TextInput>
                     </View>
@@ -117,7 +118,7 @@ export class Authorize extends Component {
                         flexDirection: 'row', backgroundColor: '#53aeee', width: widthh, height: heightt * (80 / 736),
                         marginTop: isAndroid() ? heightt * ((736 - 70 - 25 - 60 - 40 - 60 - 400) / 736) : heightt * ((736 - 70 - 40 - 60 - 40 - 60 - 400) / 736)
                     }}
-                        onPress={this._authorize.bind(this) }>
+                        onPress={this._authorize.bind(this)}>
                         <Text style={{
                             backgroundColor: '#00000000',
                             color: 'white', fontSize: heightt * (33 / 736), width: widthh * (150 / 414), fontFamily: 'ProximaNova-Bold', marginTop: heightt * ((80 - 50) / 736) / 2,
@@ -144,27 +145,27 @@ export class Authorize extends Component {
         }
         //获得焦点
         switch (label) {
-                case "email":
-                    Animated.timing(this.state.emailTrans, {
-                        toValue: {
-                            x: 0,
-                            y: -heightt * (25 / 736)
-                        },
-                        duration: 200,
-                        delay: 200
-                    }).start();
-                    break;
-                case "password":
-                    Animated.timing(this.state.passwordTrans, {
-                        toValue: {
-                            x: 0,
-                            y: -heightt * (25 / 736)
-                        },
-                        duration: 200,
-                        delay: 200
-                    }).start();
-                    break;
-            }
+            case "email":
+                Animated.timing(this.state.emailTrans, {
+                    toValue: {
+                        x: 0,
+                        y: -heightt * (25 / 736)
+                    },
+                    duration: 200,
+                    delay: 200
+                }).start();
+                break;
+            case "password":
+                Animated.timing(this.state.passwordTrans, {
+                    toValue: {
+                        x: 0,
+                        y: -heightt * (25 / 736)
+                    },
+                    duration: 200,
+                    delay: 200
+                }).start();
+                break;
+        }
     }
     _onSubmitEditing(label) {
         //输入结束，按return

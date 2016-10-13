@@ -1,5 +1,5 @@
 'use strict';
-import { Dimensions, Alert }  from 'react-native';
+import { Dimensions, Alert } from 'react-native';
 import { EventListener } from "../listener/EventListener";
 import { HardwareUtils } from "./HardwareUtils";
 import { Pop } from "./AlertPop";
@@ -61,7 +61,7 @@ export function start() {
 
   Pop("connection server ...");
   signalr.connection.start().done(() => {
-    console.log("----*-*----",userNamexx);
+    console.log("----*-*----", userNamexx);
     signalr.logOn((userNamexx)).done(() => {
       isLoginSuccess = 'yes';
       Pop("connection server Success");

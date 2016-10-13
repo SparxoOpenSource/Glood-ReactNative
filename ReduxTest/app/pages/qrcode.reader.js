@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { 
+import {
     ppRegistry,
     StyleSheet,
     View,
@@ -16,7 +16,7 @@ import {
     Dimensions,
     DeviceEventEmitter,
     NativeModules
-}  from 'react-native';
+} from 'react-native';
 import { Common } from "./common";
 import { fontSizeAndroid } from "../utils/CommonUtils.js";
 import { RecordAudio } from "../utils/RecordAudio";
@@ -27,7 +27,7 @@ import isAndroid from '../utils/isAndroid.js';
 import BarcodeScanner from 'react-native-barcodescanner';
 const Camera = NativeModules.RNBarcodeScannerView;
 var {height, width} = Dimensions.get('window');
-var temp = <LoadingView/>;
+var temp = <LoadingView />;
 
 export class QrcodeReader extends Component {
     constructor() {
@@ -42,8 +42,8 @@ export class QrcodeReader extends Component {
     }
     render() {
         return (
-            <Image style={{ width: width, height: height, flexDirection: "column", }} source={require('../img/background3.png') }>
-                <Common page="NoMain"/>
+            <Image style={{ width: width, height: height, flexDirection: "column", }} source={require('../img/background3.png')}>
+                <Common page="NoMain" />
                 <View style={{
                     flexDirection: "column",
                 }}>
@@ -97,9 +97,9 @@ export class QrcodeReader extends Component {
                         width: width - 80,
                         height: width - 80,
                     }}
-                        onBarCodeRead={this.onBarCodeRead.bind(this) }
+                        onBarCodeRead={this.onBarCodeRead.bind(this)}
                         torchMode={this.state.torchMode}
-                        cameraType={this.state.cameraType}/>
+                        cameraType={this.state.cameraType} />
                 this.setState(
                     { view: View }
                 );
@@ -110,9 +110,9 @@ export class QrcodeReader extends Component {
                         width: width - 80,
                         height: width - 80,
                     }}
-                        onBarCodeRead={this.onBarCodeRead.bind(this) }
+                        onBarCodeRead={this.onBarCodeRead.bind(this)}
                         torchMode={this.state.torchMode}
-                        cameraType={this.state.cameraType}/>
+                        cameraType={this.state.cameraType} />
                 this.setState(
                     { view: View }
                 );

@@ -17,7 +17,7 @@ import {
     DeviceEventEmitter,
     ToastAndroid,
     AlertIOS
-}  from 'react-native';
+} from 'react-native';
 
 var { height, width } = Dimensions.get('window');
 import { fontSizeAndroid } from "../utils/CommonUtils.js";
@@ -34,7 +34,7 @@ const propTypes = {
 export class IntroduceWelcomeButton extends Component {
     render() {
         return (
-            <Image style={styles.container} source={require('../img/background3.png') }>
+            <Image style={styles.container} source={require('../img/background3.png')}>
                 <View style={{ flex: 5 }}>
                     <Text style={styles.slide}>{this.props.content}</Text>
                 </View>
@@ -42,7 +42,7 @@ export class IntroduceWelcomeButton extends Component {
                     flexDirection: 'row', flex: 1,
                     alignItems: 'center',
                 }}
-                    onPress={this.go.bind(this) }>
+                    onPress={this.go.bind(this)}>
                     <Text style={{
                         backgroundColor: 'transparent',
                         fontSize: fontSizeAndroid(40),
@@ -52,13 +52,13 @@ export class IntroduceWelcomeButton extends Component {
                         marginLeft: 36,
                         alignItems: 'center',
                     }}>get started</Text>
-                    <Image source={require("../img/go.png") }
+                    <Image source={require("../img/go.png")}
                         style={{
                             alignItems: 'center',
                             width: 57,
                             height: 35,
                             marginLeft: 30,
-                        }}/>
+                        }} />
                 </TouchableOpacity>
             </Image>
         );
