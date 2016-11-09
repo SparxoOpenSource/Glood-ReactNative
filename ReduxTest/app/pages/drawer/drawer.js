@@ -52,7 +52,7 @@ export class DrawerMe extends Component {
         setTimeout(() => {
             //连接聊天服务器，用户进行登录操作，系统分配用户名，ID和记录登录时间
             start();
-        }, 1500);
+        }, 0);
     }
     componentWillUnmount() {
         EventListener.off("Drawer");
