@@ -1,34 +1,42 @@
-import React, {Component} from "react";
-import { AppRegistry, StyleSheet, View, Text, ListView, Alert, Navigator, Image, TouchableOpacity, BackAndroid,
-    Platform, Dimensions, PropTypes, DeviceEventEmitter, NativeModules, NativeAppEventEmitter}  from 'react-native';
-import {RecordAudio} from "../app/utils/RecordAudio";
-import {Home} from "../app/pages/home";
-import {Mic} from "../app/pages/mic";
-import {Cameraq} from "../app/pages/camera";
-import {PhototWall} from "../app/pages/photoWall"
-import {NewCamera} from "../app/pages/newcamera"
-import {NewMic} from "../app/pages/newMic.1"
-import {Try} from "../app/pages/try"
-import {Tickets} from "../app/pages/tickets"
-import {Setting} from "../app/pages/setting"
-import {Feedback} from "../app/pages/feedback"
-import {Authorize} from "../app/pages/authorize"
-import {Login} from "../app/pages/login"
-import {DrawerMe} from '../app/pages/drawer/drawer';
-import {Introduce} from "../app/pages/introduce"
-import {ActivityList} from "../app/pages/activitylist"
-import {EventInfo} from "../app/pages/eventInfo"
-var {height, width} = Dimensions.get('window');
-import isAndroid from '../app/utils/isAndroid.js';
-import {NaviGoBack} from '../app/utils/CommonUtils';
-import {EventListener} from "../app/listener/EventListener";
-import {QrcodeReader} from "../app/pages/qrcode.reader";
-import Singleton from '../app/utils/Singleton';
-let singleton = new Singleton();
-import FCM from 'react-native-fcm';
-import {sendNotification} from "../app/utils/PushNotifications";
-import {TabbleIsExist, CreatTable} from "../app/utils/DBUtil";
+import React, { Component, PropTypes } from "react";
+import {
+    AppRegistry,
+    StyleSheet,
+    View,
+    Text,
+    ListView,
+    Alert,
+    Navigator,
+    Image,
+    TouchableOpacity,
+    BackAndroid,
+    Platform,
+    Dimensions,
+    DeviceEventEmitter,
+    NativeModules
+} from 'react-native';
+import { RecordAudio } from "../app/utils/RecordAudio";
+import { Tickets } from "../app/pages/tickets"
+import { Setting } from "../app/pages/setting"
+import { Feedback } from "../app/pages/feedback"
+import { Authorize } from "../app/pages/authorize"
+import { Login } from "../app/pages/login"
+import { DrawerMe } from '../app/pages/drawer/drawer';
+import { Introduce } from "../app/pages/introduce"
+import { ActivityList } from "../app/pages/activitylist"
+import { EventInfo } from "../app/pages/eventInfo"
+import { NaviGoBack } from '../app/utils/CommonUtils';
+import { EventListener } from "../app/listener/EventListener";
+import { QrcodeReader } from "../app/pages/qrcode.reader";
+import { NewMic } from "../app/pages/newMic"
+import { sendNotification } from "../app/utils/PushNotifications";
+import { TabbleIsExist, CreatTable } from "../app/utils/DBUtil";
 import * as launchImage from 'react-native-launch-image';
+import isAndroid from '../app/utils/isAndroid.js';
+import Singleton from '../app/utils/Singleton';
+import FCM from 'react-native-fcm';
+var singleton = new Singleton();
+var {height, width} = Dimensions.get('window');
 
 const propTypes = {
     title: PropTypes.string
@@ -48,39 +56,27 @@ export class Root extends Component {
         console.log("router.name-------- ", router.name);
         switch (router.name) {
             case "Introduce":
-                return (<Introduce/>);
+                return (<Introduce />);
             case "Login":
-                return (<Login/>);
+                return (<Login />);
             case "TICKETS":
-                return (<Tickets/>);
+                return (<Tickets />);
             case "SETTING":
-                return (<Setting/>);
+                return (<Setting />);
             case "FEEDBACK":
-                return (<Feedback/>);
+                return (<Feedback />);
             case "EVENTINFO":
-                return (<EventInfo/>);
-            case "MIC":
-                return (<Mic/>);
+                return (<EventInfo />);
             case "NEWMIC":
-                return (<NewMic/>);
-            case "CAMERA":
-                return (<Cameraqxx/>);
-            case "PHOTOWALL":
-                return (<PhototWall/>);
-            case "NEWCAMERA":
-                return (<NewCamera/>);
-            case "TRY":
-                return (<Try/>);
+                return (<NewMic />);
             case "DrawerMe":
-                return (<DrawerMe/>);
-            case "Home":
-                return (<Home/>);
+                return (<DrawerMe />);
             case "ActivityList":
-                return (<ActivityList/>);
+                return (<ActivityList />);
             case "QrcodeReader":
-                return (<QrcodeReader/>);
+                return (<QrcodeReader />);
             case "Authorize":
-                return (<Authorize/>);
+                return (<Authorize />);
         }
     }
 
@@ -145,7 +141,7 @@ export class Root extends Component {
                     renderScene={this.renderScene}
                     configureScene={(route) => {
                         return CustomPushFromRightWithoutGestures;
-                    } }/>
+                    } } />
             </View>
         );
     }

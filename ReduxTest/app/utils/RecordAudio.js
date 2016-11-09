@@ -1,6 +1,6 @@
 'use strict';
-import React, {Component} from 'react';
-import {NativeModules} from 'react-native';
+import React, { Component } from 'react';
+import { NativeModules } from 'react-native';
 
 const Recorder = NativeModules.RecordAudio;
 
@@ -60,7 +60,7 @@ export class RecordAudio extends Component {
     }
 }
 export function getNotification(callback) {
-        Recorder.getNotification((args) => {
-            callback && callback(args);
-        });
-    }
+    Recorder.getNotification((args) => {
+        callback && callback(args);
+    });
+}

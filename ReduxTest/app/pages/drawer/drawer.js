@@ -1,5 +1,6 @@
-import React, {Component} from "react";
-import { AppRegistry,
+import React, { Component } from "react";
+import {
+    AppRegistry,
     StyleSheet,
     View,
     Text,
@@ -16,22 +17,21 @@ import { AppRegistry,
     TouchableHighlight,
     Switch,
     TextInput,
-    DeviceEventEmitter }  from 'react-native';
-import {Common} from ".././common";
+    DeviceEventEmitter
+} from 'react-native';
+import { Common } from ".././common";
 import isAndroid from '../../utils/isAndroid.js';
-import {EventListener} from "../../listener/EventListener";
+import { EventListener } from "../../listener/EventListener";
 import DrawerLayout from 'react-native-drawer-layout';
-import {DrawerView} from "./drawerView";
-var {height, width} = Dimensions.get('window');
-import {Root} from "../../../app/root";
-
-import {Tickets} from "../../pages/tickets"
-import {ActivityList} from "../../pages/activitylist"
-import {EventInfo} from "../../pages/eventInfo"
-import {Initialization, LoginNow} from "../../utils/SupportLogin";
+import { DrawerView } from "./drawerView";
+import { Root } from "../../../app/root";
+import { Tickets } from "../../pages/tickets"
+import { ActivityList } from "../../pages/activitylist"
+import { EventInfo } from "../../pages/eventInfo"
+import { start } from "../../utils/CommonUtils";
 import Singleton from '../../utils/Singleton';
-
-let singleton = new Singleton();
+var {height, width} = Dimensions.get('window');
+var singleton = new Singleton();
 singleton.setTitle("Crazy May Fest 2016");
 
 export class DrawerMe extends Component {
@@ -39,21 +39,20 @@ export class DrawerMe extends Component {
         super(props);
         this.state = {
             drawerLockMode: 'unlocked',
-            indexView: <ActivityList/>
+            indexView: <ActivityList />
         }
     }
     /**
      * 接收消息，并监听
      */
     componentDidMount(props) {
-        
+
         EventListener.on("Drawer").then(this.OpenCloseDrawer.bind(this));
         EventListener.on("DrawerOpenPage").then(this.OpenPage.bind(this));
-        Initialization();//连接聊天服务器
         setTimeout(() => {
             //连接聊天服务器，用户进行登录操作，系统分配用户名，ID和记录登录时间
-            LoginNow();
-        }, 1500);
+            start();
+        }, 0);
     }
     componentWillUnmount() {
         EventListener.off("Drawer");
@@ -65,13 +64,13 @@ export class DrawerMe extends Component {
         // } = this.state;
 
         const navigationView = (
-            <DrawerView/>
+            <DrawerView />
         );
 
         return (
             <DrawerLayout
-                onDrawerSlide={(e) => this.setState({ drawerSlideOutput: JSON.stringify(e.nativeEvent) }) }
-                onDrawerStateChanged={(e) => this.setState({ drawerStateChangedOutput: JSON.stringify(e) }) }
+                onDrawerSlide={(e) => this.setState({ drawerSlideOutput: JSON.stringify(e.nativeEvent) })}
+                onDrawerStateChanged={(e) => this.setState({ drawerStateChangedOutput: JSON.stringify(e) })}
                 drawerWidth={width - 80}
                 drawerLockMode={this.state.drawerLockMode}
                 ref={(drawer) => { return this.drawer = drawer } }
@@ -98,14 +97,14 @@ export class DrawerMe extends Component {
         switch (name) {
             case "Mingle":
                 singleton.setTitle("Crazy May Fest 2016");
-                sr = <ActivityList/>;
+                sr = <ActivityList />;
                 this.setState({
                     indexView: sr
                 });
                 break;
             case "Tickets":
                 singleton.setTitle("Tickets");
-                sr = <Tickets/>;
+                sr = <Tickets />;
                 this.setState({
                     indexView: sr
                 });
@@ -124,7 +123,7 @@ export class DrawerMe extends Component {
                 break;
             case "EventInfo":
                 singleton.setTitle("Crazy May Fest 2017");
-                sr = <EventInfo/>;
+                sr = <EventInfo />;
                 this.setState({
                     indexView: sr
                 });

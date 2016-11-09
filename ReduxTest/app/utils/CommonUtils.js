@@ -1,14 +1,14 @@
 'use strict';
-import {Dimensions, Alert}  from 'react-native';
-var {height, width} = Dimensions.get('window');
+import { Dimensions, Alert } from 'react-native';
+import { EventListener } from "../listener/EventListener";
+import { HardwareUtils } from "./HardwareUtils";
+import { Pop } from "./AlertPop";
 import isAndroid from './isAndroid.js';
-import {EventListener} from "../listener/EventListener";
 import SignalrH from './SignalrH';
-import {Pop} from "./AlertPop";
-var serSignalr;
 import Singleton from './Singleton';
-let singleton = new Singleton();
-import {HardwareUtils} from "./HardwareUtils";
+var { height, width } = Dimensions.get('window');
+var serSignalr;
+var singleton = new Singleton()
 if (window.navigator && Object.keys(window.navigator).length == 0) {
   window = Object.assign(window, { navigator: { userAgent: 'ReactNative' } });
 }
@@ -61,16 +61,9 @@ export function start() {
 
   Pop("connection server ...");
   signalr.connection.start().done(() => {
-    console.log("----*-*----",userNamexx);
+    console.log("----*-*----", userNamexx);
     signalr.logOn((userNamexx)).done(() => {
       isLoginSuccess = 'yes';
-      // DeviceEventEmitter.addListener("FCMNotificationReceived", info => {
-      //       singleton.getNav().push({
-      //               name: info.aps.alert.title
-      //           });
-      //    Alert.alert(info.aps.alert.title);
-      //       console.log("FCMNotificationReceived------", info.alert);
-      //   });
       Pop("connection server Success");
       signalr.loadEventChatRooms().done((room) => {
         console.log('------***', room);

@@ -1,5 +1,6 @@
-import React, {Component} from "react";
-import { AppRegistry,
+import React, { Component } from "react";
+import {
+    AppRegistry,
     StyleSheet,
     View,
     Text,
@@ -16,14 +17,15 @@ import { AppRegistry,
     UIManager,
     ScrollView,
     Platform,
-    DeviceEventEmitter }  from 'react-native';
-import {Common} from "./common";
-import isAndroid from '../utils/isAndroid.js';
-import ScrollableTabView, { DefaultTabBar, } from 'react-native-scrollable-tab-view';
+    DeviceEventEmitter
+} from 'react-native';
+import { Common } from "./common";
 import { CoverFlow } from 'react-native-pan-controller';
-import {EventListener} from "../listener/EventListener";
-import {fontSizeAndroid} from "../utils/CommonUtils.js";
-import {LoadingView} from "../components/LoadingView";
+import { EventListener } from "../listener/EventListener";
+import { fontSizeAndroid } from "../utils/CommonUtils.js";
+import { LoadingView } from "../components/LoadingView";
+import isAndroid from '../utils/isAndroid.js';
+import ScrollableTabView, { DefaultTabBar } from 'react-native-scrollable-tab-view';
 
 var QRCode = require('react-native-qrcode');
 var image_margin_left;
@@ -39,7 +41,7 @@ var temp = <View style={{
     alignItems: 'center',
     justifyContent: 'center',
 }}>
-    <LoadingView/>
+    <LoadingView />
 </View>;
 
 export class Tickets extends Component {
@@ -56,17 +58,17 @@ export class Tickets extends Component {
 
     }
     async getUsersFromApi() {
-  try {
-    var images = await this.reupdateRender();r
-    return images;
-  } catch(error) {
-    throw error;
-  }
-}
+        try {
+            var images = await this.reupdateRender(); r
+            return images;
+        } catch (error) {
+            throw error;
+        }
+    }
 
     componentDidMount() {
-            console.log('999999999999999999999')
-            this.getUsersFromApi();
+        console.log('999999999999999999999')
+        this.getUsersFromApi();
         this.returnView();
         // EventListener.on("scrollOffset").then(this.scrollOffsetxxx.bind(this));
     }
@@ -114,9 +116,9 @@ export class Tickets extends Component {
             image_margin_top = heightt * (80 / 736);
         }
         return (
-            <Image style={style.container} source={require('../img/background3.png') }>
-                <Common page='Main' rightType='Share'/>
-                {this.state.viewCoverFlow }
+            <Image style={style.container} source={require('../img/background3.png')}>
+                <Common page='Main' rightType='Share' />
+                {this.state.viewCoverFlow}
             </Image>
 
         );
@@ -130,7 +132,7 @@ export class Tickets extends Component {
                 }}>
                     <Image style={{
                         width: widthh * (250 / 414), height: heightt * (390 / 736), borderRadius: 5, marginTop: image_margin_top,
-                    }} key={i} source={{ uri: src.headImageIcon }} resizeMode="cover"/>
+                    }} key={i} source={{ uri: src.headImageIcon }} resizeMode="cover" />
                     <View style={{ backgroundColor: 'white', width: widthh * (250 / 414), height: heightt * (210 / 736), marginTop: heightt * (80 / 736) - heightt * (370 / 736) }}>
                         <View style={{ backgroundColor: '#00000000', width: widthh * (250 / 414), height: heightt * (70 / 736) }}>
                             <Text style={{
@@ -150,7 +152,7 @@ export class Tickets extends Component {
                             <Image style={{
                                 width: widthh * (17 / 414), height: heightt * (17 / 736), marginLeft: widthh * (17 / 414),
                                 marginTop: heightt * (15 / 736)
-                            }} key={i} source={require('../img/timeicon.png') }/>
+                            }} key={i} source={require('../img/timeicon.png')} />
                             <Text style={{
                                 backgroundColor: '#00000000', color: 'black', fontSize: widthh * (16 / 414), fontFamily: 'ProximaNova-Regular',
                                 marginTop: heightt * (-18 / 736), marginLeft: widthh * (45 / 414)
@@ -160,7 +162,7 @@ export class Tickets extends Component {
                             <Image style={{
                                 width: widthh * (17 / 414), height: heightt * (28 / 736), marginLeft: widthh * (17 / 414),
                                 marginTop: heightt * (0 / 736)
-                            }} key={i} source={require('../img/addressicon.png') }/>
+                            }} key={i} source={require('../img/addressicon.png')} />
                             <Text style={{
                                 backgroundColor: '#00000000', color: 'black', fontSize: widthh * (16 / 414), fontFamily: 'ProximaNova-Regular',
                                 marginTop: heightt * (-30 / 736), marginLeft: widthh * (45 / 414), lineHeight: 15
@@ -183,9 +185,9 @@ export class Tickets extends Component {
                     }}>
                         <QRCode style={{ width: widthh * (110 / 414), height: heightt * (110 / 736), marginLeft: widthh * (10 / 414) }}
                             value='12D2A'
-                            size={widthh * (110 / 414) }
+                            size={widthh * (110 / 414)}
                             bgColor='#20676B'
-                            fgColor='#35CED6'/>
+                            fgColor='#35CED6' />
                         <View style={{ backgroundColor: '#00000000', marginLeft: widthh * (125 / 414), width: widthh * (120 / 414), height: heightt * (130 / 736), marginTop: heightt * (-125 / 736) }}>
                             <Text style={{ backgroundColor: '#00000000', color: 'black', fontSize: heightt * (16 / 736), fontFamily: 'ProximaNova-Regular' }}>Ticket Status: </Text>
                             <Text style={{ backgroundColor: '#00000000', color: 'black', fontSize: heightt * (16 / 736), fontFamily: 'ProximaNova-Semibold', marginTop: heightt * (6 / 736) }}>       Valid</Text>
@@ -196,7 +198,7 @@ export class Tickets extends Component {
                         </View>
                     </View>
                 </View>
-            ) }
+            )}
         </CoverFlow>
         this.setState({
             viewCoverFlow: view

@@ -1,6 +1,7 @@
 
-import React, {Component} from "react";
-import { AppRegistry,
+import React, { Component } from "react";
+import {
+    AppRegistry,
     StyleSheet,
     View,
     Text,
@@ -14,17 +15,19 @@ import { AppRegistry,
     PropTypes,
     Animated,
     Dimensions,
-    DeviceEventEmitter }  from 'react-native';
+    DeviceEventEmitter
+} from 'react-native';
 import isAndroid from '../../utils/isAndroid.js';
-import {EventListener} from "../../listener/EventListener";
-import {fontSizeAndroid} from "../../utils/CommonUtils.js";
+import { EventListener } from "../../listener/EventListener";
+import { fontSizeAndroid } from "../../utils/CommonUtils.js";
+import { AlertTop } from '../../utils/AlertPop.js'
 
 var {height, width} = Dimensions.get('window');
 
 export class DrawerView extends Component {
     render() {
         return (
-            <Image source={require('../../img/background3.png') } style={{
+            <Image source={require('../../img/background3.png')} style={{
                 flex: 6,
                 width: width - 80,
                 height: height,
@@ -40,11 +43,11 @@ export class DrawerView extends Component {
                         marginLeft: 30,
                         alignItems: 'center',
                     }}
-                        onPress={this.operation.bind(this, "Mingle") }>
-                        <Image source={require("../../img/mingle.png") } style={{
+                        onPress={this.operation.bind(this, "Mingle")}>
+                        <Image source={require("../../img/mingle.png")} style={{
                             width: 26,
                             height: 31
-                        }}/>
+                        }} />
                         <Text style={{
                             fontSize: fontSizeAndroid(18),
                             color: "#333333",
@@ -59,11 +62,11 @@ export class DrawerView extends Component {
                         marginLeft: 30,
                         alignItems: 'center',
                     }}
-                        onPress={this.operation.bind(this, "Tickets") }>
-                        <Image source={require("../../img/tickets.png") } style={{
+                        onPress={this.operation.bind(this, "Tickets")}>
+                        <Image source={require("../../img/tickets.png")} style={{
                             width: 26,
                             height: 26
-                        }}/>
+                        }} />
                         <Text style={{
                             fontSize: fontSizeAndroid(18),
                             color: "#333333",
@@ -78,11 +81,11 @@ export class DrawerView extends Component {
                         marginLeft: 30,
                         alignItems: 'center',
                     }}
-                        onPress={this.operation.bind(this, "Setting") }>
-                        <Image source={require("../../img/setting.png") } style={{
+                        onPress={this.operation.bind(this, "Setting")}>
+                        <Image source={require("../../img/setting.png")} style={{
                             width: 26,
                             height: 26
-                        }}/>
+                        }} />
                         <Text style={{
                             fontSize: fontSizeAndroid(18),
                             color: "#333333",
@@ -98,11 +101,11 @@ export class DrawerView extends Component {
                         marginLeft: 30,
                         alignItems: 'center',
                     }}
-                        onPress={this.operation.bind(this, "FeedBack") }>
-                        <Image source={require("../../img/feedback.png") } style={{
+                        onPress={this.operation.bind(this, "FeedBack")}>
+                        <Image source={require("../../img/feedback.png")} style={{
                             width: 26,
                             height: 24
-                        }}/>
+                        }} />
                         <Text style={{
                             fontSize: fontSizeAndroid(18),
                             color: "#333333",
@@ -116,14 +119,14 @@ export class DrawerView extends Component {
                     flex: 1,
                     flexDirection: 'column',
                 }}
-                    onPress={this.closeDrawer.bind(this) }>
+                    onPress={this.closeDrawer.bind(this)}>
                     <Image style={{
                         width: 7,
                         height: 30,
                         position: 'absolute',
                         marginLeft: 16,
                         marginTop: 10
-                    }} source={require("../../img/yuan.png") }/>
+                    }} source={require("../../img/yuan.png")} />
                 </TouchableOpacity>
             </Image>
         )

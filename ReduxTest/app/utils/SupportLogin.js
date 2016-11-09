@@ -1,16 +1,15 @@
+import { HardwareUtils } from "./HardwareUtils";
+import { EventListener } from "../listener/EventListener";
+import { Pop } from "./AlertPop";
+import { AsyncStorage }  from 'react-native';
+import { start } from './CommonUtils';
 import feathers from 'feathers/client'
 import hooks from 'feathers-hooks';
 import socketio from 'feathers-socketio/client'
 import authentication from 'feathers-authentication/client';
-var Actions = require('react-native-router-flux').Actions;
-import {HardwareUtils} from "./HardwareUtils";
-import {EventListener} from "../listener/EventListener";
-import {Pop} from "./AlertPop";
-import {AsyncStorage}  from 'react-native';
 import Singleton from './Singleton';
-import {start} from './CommonUtils';
-let singleton = new Singleton();
-// This is required for socket.io-client due to a bug in React Native debugger
+var Actions = require('react-native-router-flux').Actions;
+var singleton = new Singleton();
 if (window.navigator && Object.keys(window.navigator).length == 0) {
     window = Object.assign(window, { navigator: { userAgent: 'ReactNative' } });
 }

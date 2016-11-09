@@ -1,5 +1,6 @@
-import React, {Component} from "react";
-import { AppRegistry,
+import React, { Component } from "react";
+import {
+    AppRegistry,
     StyleSheet,
     View,
     Text,
@@ -16,13 +17,14 @@ import { AppRegistry,
     DeviceEventEmitter,
     ToastAndroid,
     AlertIOS,
-    UIManager}  from 'react-native';
-import {Common} from "./common";
+    UIManager
+} from 'react-native';
+import { Common } from "./common";
+import { IntroduceWelcome } from "./introduce.welcome"
+import { IntroduceWelcomeButton } from "./introduce.welcome.1"
 import isAndroid from '../utils/isAndroid.js';
 import Swiper from "react-native-swiper";
-import {IntroduceWelcome} from "./introduce.welcome"
-import {IntroduceWelcomeButton} from "./introduce.welcome.1"
-var {height, width} = Dimensions.get('window');
+var { height, width } = Dimensions.get('window');
 var index = 0;
 
 /**
@@ -47,18 +49,18 @@ export class Introduce extends Component {
                         bottom: 46,
                     }}
                     loop={false}
-                    onMomentumScrollEnd={this._onMomentumScrollEnd.bind(this) }>
+                    onMomentumScrollEnd={this._onMomentumScrollEnd.bind(this)}>
                     <View style={styles.slide}>
-                        <IntroduceWelcome style={styles.image} content={"Welcome\nto your\ncommunity"}/>
+                        <IntroduceWelcome style={styles.image} content={"Welcome\nto your\ncommunity"} />
                     </View>
                     <View style={styles.slide}>
-                        <IntroduceWelcome style={styles.image} content={"Talk to\nothers\nbefore &\nafter\nthe ebents"}/>
+                        <IntroduceWelcome style={styles.image} content={"Talk to\nothers\nbefore &\nafter\nthe ebents"} />
                     </View>
                     <View style={styles.slide}>
-                        <IntroduceWelcome style={styles.image} content={"Connect\nwith enemt\norganizers!"}/>
+                        <IntroduceWelcome style={styles.image} content={"Connect\nwith enemt\norganizers!"} />
                     </View>
                     <View style={styles.slide}>
-                        <IntroduceWelcomeButton style={styles.image}  content={"All your\ntickets in\none place!"}/>
+                        <IntroduceWelcomeButton style={styles.image} content={"All your\ntickets in\none place!"} />
                     </View>
                 </Swiper>
             </View>

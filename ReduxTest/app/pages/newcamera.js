@@ -3,7 +3,7 @@
 ///////
 
 
-import React, {Component, PropTypes} from "react";
+import React, { Component, PropTypes } from "react";
 import {
     AppRegistry,
     StyleSheet,
@@ -17,20 +17,17 @@ import {
     NativeModules,
     Platform,
     ScrollView,
-}  from 'react-native';
-import {Common} from "./common";
-
+} from 'react-native';
+import { Common } from "./common";
+import Camera from '@remobile/react-native-camera';
+import Button from '@remobile/react-native-simple-button';
 var photo_pathData = [];
-
+var ImagePickerManager = NativeModules.ImagePickerManager;
+var { width, height } = Dimensions.get('window');
 export function getNewPhotos() {
     return photo_pathData;
 }
 
-// import Camera from 'react-native-camera';
-import Camera from '@remobile/react-native-camera';
-import Button from '@remobile/react-native-simple-button';
-var ImagePickerManager = NativeModules.ImagePickerManager;
-var {width, height} = Dimensions.get('window');
 
 const propTypes = {
     title: PropTypes.string,
@@ -86,9 +83,9 @@ export class NewCamera extends Component {
     render() {
         return (
             <View style={style.container}>
-                <Common navigator={this.props.navigator} title={this.props.title}/>
+                <Common navigator={this.props.navigator} title={this.props.title} />
 
-                <Button style={style.captureButton} onPress={this.newShown.bind(this) }>
+                <Button style={style.captureButton} onPress={this.newShown.bind(this)}>
                     Camera
                 </Button>
             </View>

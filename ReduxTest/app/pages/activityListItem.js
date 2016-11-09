@@ -1,5 +1,6 @@
-import React, {Component} from "react";
-import { AppRegistry,
+import React, { Component } from "react";
+import {
+    AppRegistry,
     StyleSheet,
     View,
     Text,
@@ -13,13 +14,13 @@ import { AppRegistry,
     PropTypes,
     Animated,
     Dimensions,
-    DeviceEventEmitter }  from 'react-native';
-import {Common} from "./common";
+    DeviceEventEmitter
+} from 'react-native';
+import { Common } from "./common";
+import { fontSizeAndroid } from "../utils/CommonUtils.js";
+import { joinEventChatRoom } from '../utils/CommonUtils';
 import isAndroid from '../utils/isAndroid.js';
-import {fontSizeAndroid} from "../utils/CommonUtils.js";
-import {joinEventChatRoom} from '../utils/CommonUtils';
-
-var {height, width} = Dimensions.get('window');
+var { height, width } = Dimensions.get('window');
 
 const propTypes = {
     date: React.PropTypes.shape({
@@ -51,7 +52,7 @@ export class ActivityListItem extends Component {
                 borderBottomWidth: 1,
                 borderBottomColor: '#00000010'
             }}
-                onPress={this._handerClick.bind(this, this.props.date.eventName, this.props.navigator) }>
+                onPress={this._handerClick.bind(this, this.props.date.eventName, this.props.navigator)}>
                 <View style={{
                     flex: 6,
                     flexDirection: 'row',
@@ -62,7 +63,7 @@ export class ActivityListItem extends Component {
                         width: 120,
                         marginBottom: 1,
                     }} source={this.state.IMG}
-                        resizeMode="cover"/>
+                        resizeMode="cover" />
                     <Text style={{
                         fontSize: fontSizeAndroid(18),
                         color: "#070909",

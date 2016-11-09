@@ -1,5 +1,6 @@
-import React, {Component} from "react";
-import { AppRegistry,
+import React, { Component } from "react";
+import {
+    AppRegistry,
     StyleSheet,
     View,
     Text,
@@ -15,12 +16,11 @@ import { AppRegistry,
     Dimensions,
     UIManager,
     Easing
-}  from 'react-native';
-import {Common} from "./common";
+} from 'react-native';
+import { Common } from './common';
 import isAndroid from '../utils/isAndroid.js';
 import Singleton from '../utils/Singleton';
-let singleton = new Singleton();
-
+var singleton = new Singleton();
 var Switch = require('react-native-material-switch');
 var {height, width} = Dimensions.get('window');
 var widthh = width;
@@ -35,8 +35,8 @@ export class Setting extends Component {
     }
     render() {
         return (
-            <Image style={style.container} source={require('../img/background3.png') }>
-                <Common/>
+            <Image style={style.container} source={require('../img/background3.png')}>
+                <Common />
                 <View style={{ width: widthh, height: heightt, backgroundColor: '#00000000', marginTop: heightt * (36 / 736), overflow: 'visible' }}>
                     <Text style={{
                         color: 'black', fontSize: heightt * (29 / 736), width: widthh * (300 / 414), fontFamily: 'ProximaNova-Regular',
@@ -49,7 +49,7 @@ export class Setting extends Component {
                             inactiveBackgroundColor='rgba(172, 172, 172, 0.70)'
                             activeButtonColor='rgba(12, 212, 196, 1)'
                             inactiveButtonPressedColor='rgba(254, 255, 255, 1)'
-                            onChangeState={(state) => alert('change state ' + state) }/>
+                            onChangeState={(state) => alert('change state ' + state)} />
                     </View>
                     <Text style={{
                         color: 'black', fontSize: heightt * (29 / 736), width: widthh * (300 / 414), fontFamily: 'ProximaNova-Regular',
@@ -64,13 +64,13 @@ export class Setting extends Component {
                             inactiveBackgroundColor='rgba(172, 172, 172, 0.70)'
                             activeButtonColor='rgba(12, 212, 196, 1)'
                             inactiveButtonPressedColor='rgba(254, 255, 255, 1)'
-                            onChangeState={(state) => this._eventOran(state) }/>
+                            onChangeState={(state) => this._eventOran(state)} />
                     </View>
                     <TouchableOpacity style={{
                         flexDirection: 'row', backgroundColor: '#53aeee', width: widthh, height: heightt * (70 / 736),
                         marginTop: isAndroid() ? heightt * ((736 - 70 - 29 - 60 - 20 - 35) / 736) : heightt * ((736 - 70 - 29 - 60 - 30 - 35) / 736)
                     }}
-                        onPress={this._logout.bind(this) }>
+                        onPress={this._logout.bind(this)}>
                         <Text style={{
                             backgroundColor: '#00000000',
                             color: 'white', fontSize: heightt * (35 / 736), width: widthh * (110 / 414), fontFamily: 'ProximaNova-Bold', marginTop: heightt * ((75 - 50) / 736) / 2,

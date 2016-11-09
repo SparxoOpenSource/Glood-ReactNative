@@ -1,5 +1,6 @@
-import React, {Component} from "react";
-import { AppRegistry,
+import React, { Component } from "react";
+import {
+    ppRegistry,
     StyleSheet,
     View,
     Text,
@@ -14,21 +15,19 @@ import { AppRegistry,
     Animated,
     Dimensions,
     DeviceEventEmitter,
-    NativeModules}  from 'react-native';
-import {Common} from "./common";
+    NativeModules
+} from 'react-native';
+import { Common } from "./common";
+import { fontSizeAndroid } from "../utils/CommonUtils.js";
+import { RecordAudio } from "../utils/RecordAudio";
+import { QRCodeScreen } from './QRCodeScreen';
+import { EventListener } from "../listener/EventListener";
+import { LoadingView } from "../components/LoadingView";
 import isAndroid from '../utils/isAndroid.js';
-import {fontSizeAndroid} from "../utils/CommonUtils.js";
-import {RecordAudio} from "../utils/RecordAudio";
-
-import {QRCodeScreen} from './QRCodeScreen';
 import BarcodeScanner from 'react-native-barcodescanner';
-import {EventListener} from "../listener/EventListener";
-import {LoadingView} from "../components/LoadingView";
-
 const Camera = NativeModules.RNBarcodeScannerView;
-
 var {height, width} = Dimensions.get('window');
-var temp = <LoadingView/>;
+var temp = <LoadingView />;
 
 export class QrcodeReader extends Component {
     constructor() {
@@ -43,8 +42,8 @@ export class QrcodeReader extends Component {
     }
     render() {
         return (
-            <Image style={{ width: width, height: height, flexDirection: "column", }} source={require('../img/background3.png') }>
-                <Common page="NoMain"/>
+            <Image style={{ width: width, height: height, flexDirection: "column", }} source={require('../img/background3.png')}>
+                <Common page="NoMain" />
                 <View style={{
                     flexDirection: "column",
                 }}>
@@ -98,9 +97,9 @@ export class QrcodeReader extends Component {
                         width: width - 80,
                         height: width - 80,
                     }}
-                        onBarCodeRead={this.onBarCodeRead.bind(this) }
+                        onBarCodeRead={this.onBarCodeRead.bind(this)}
                         torchMode={this.state.torchMode}
-                        cameraType={this.state.cameraType}/>
+                        cameraType={this.state.cameraType} />
                 this.setState(
                     { view: View }
                 );
@@ -111,9 +110,9 @@ export class QrcodeReader extends Component {
                         width: width - 80,
                         height: width - 80,
                     }}
-                        onBarCodeRead={this.onBarCodeRead.bind(this) }
+                        onBarCodeRead={this.onBarCodeRead.bind(this)}
                         torchMode={this.state.torchMode}
-                        cameraType={this.state.cameraType}/>
+                        cameraType={this.state.cameraType} />
                 this.setState(
                     { view: View }
                 );

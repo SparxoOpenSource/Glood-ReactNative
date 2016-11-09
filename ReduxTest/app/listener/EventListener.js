@@ -1,9 +1,9 @@
 export class Subscription {
-   
+
     constructor(owner, events) {
-        this.owner=owner;
-        this.events=events;
-    } 
+        this.owner = owner;
+        this.events = events;
+    }
     owner;
     events;
     callback;
@@ -122,8 +122,8 @@ export class Events {
     }
 }
 
- class EventListen extends Events{
-    
-    
+class EventListen extends Events {
+
+
 }
-export var EventListener=new EventListen();
+export var EventListener = new EventListen();

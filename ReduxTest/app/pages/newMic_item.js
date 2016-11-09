@@ -1,5 +1,6 @@
-import React, {Component} from "react";
-import { AppRegistry,
+import React, { Component } from "react";
+import {
+    AppRegistry,
     StyleSheet,
     View,
     Text,
@@ -15,21 +16,16 @@ import { AppRegistry,
     Dimensions,
     Animated,
     Easing,
-}  from 'react-native';
+} from 'react-native';
 
-import {RecordAudio} from "../utils/RecordAudio";
+import { RecordAudio } from "../utils/RecordAudio";
+import { EventListener } from "../listener/EventListener";
 import isAndroid from '../utils/isAndroid.js';
-var deviceWidth = Dimensions.get('window').width;
-var {height, width} = Dimensions.get('window');
 import EventEmitter from "EventEmitter";
-import Subscribable  from "Subscribable";
-import {EventListener} from "../listener/EventListener";
-
-var {height, width} = Dimensions.get('window');
+import Subscribable from "Subscribable";
+var deviceWidth = Dimensions.get('window').width;
+var { height, width } = Dimensions.get('window');
 var STATUS_BAR_HEIGHT = Navigator.NavigationBar.Styles.General.StatusBarHeight;
-// if (isAndroid()) {
-//     var STATUS_BAR_HEIGHT = ExtraDimensions.get('STATUS_BAR_HEIGHT');
-// }
 var maxHeight = height - Navigator.NavigationBar.Styles.General.NavBarHeight - STATUS_BAR_HEIGHT - 64;
 var maxSize = isAndroid() ? 30 : 35;
 var cha = width - 60;
@@ -97,7 +93,6 @@ export class NewMicItem extends Component {
         this._setTime(props.title.time);
     }
     componentDidMount() {
-        // EventListener.on("AutoPlayAllRecord").then(this.playFunction.bind(this));
         EventListener.on("AutoPlayState").then(this.changeState.bind(this));
         EventListener.on("firstTop").then(this.firstTopMargin.bind(this));
         if (isAndroid()) {
@@ -133,7 +128,7 @@ export class NewMicItem extends Component {
     }
     render() {
         return (
-            <View style={ { justifyContent: 'center', alignItems: 'center' }}>
+            <View style={{ justifyContent: 'center', alignItems: 'center' }}>
                 <View style={{
                     height: 60 + maxSize,
                     width: width,
@@ -156,7 +151,7 @@ export class NewMicItem extends Component {
                         marginTop: this.state.viewTop_1,
                         position: "absolute",
                         transform: [{ scale: this.state.bounceValue_1 }]
-                    }}/>
+                    }} />
                     <Animated.View style={{
                         width: this.state.viewWidth_2,
                         height: this.state.viewHeight_2,
@@ -170,7 +165,7 @@ export class NewMicItem extends Component {
                         marginLeft: this.state.viewLeft_2,
                         marginTop: this.state.viewTop_2,
                         transform: [{ scale: this.state.bounceValue_2 }]
-                    }}/>
+                    }} />
                     <TouchableOpacity style={{
                         width: 60, height: 60,
                         borderWidth: 0,
@@ -181,13 +176,13 @@ export class NewMicItem extends Component {
                         marginLeft: this.state.imageLeft,
                         marginTop: this.state.imageTop,
                         transform: [{ scale: this.state.bounceValue_3 }]
-                    }} onPress={this._onPress.bind(this, this.props.title, this.props.rowID, 0) } ref="view">
-                        <Animated.Image source={require('../img/171604419.jpg') } style={{
+                    }} onPress={this._onPress.bind(this, this.props.title, this.props.rowID, 0)} ref="view">
+                        <Animated.Image source={require('../img/171604419.jpg')} style={{
                             width: 60,
                             height: 60,
                             borderWidth: 0,
                             borderRadius: 30
-                        }}  />
+                        }} />
                     </TouchableOpacity>
                 </View>
             </View>

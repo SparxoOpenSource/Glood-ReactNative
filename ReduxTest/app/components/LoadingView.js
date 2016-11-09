@@ -1,6 +1,13 @@
-import React, {Component} from 'react';
-import {ProgressBarAndroid, ActivityIndicatorIOS, Platform, Text, StyleSheet, View} from "react-native";
-import {fontSizeAndroid} from "../utils/CommonUtils.js";
+import React, { Component } from 'react';
+import {
+    ProgressBarAndroid, 
+    ActivityIndicatorIOS, 
+    Platform, 
+    Text, 
+    StyleSheet, 
+    View
+} from "react-native";
+import { fontSizeAndroid } from "../utils/CommonUtils.js";
 
 export class LoadingView extends Component {
     render() {
