@@ -45,6 +45,7 @@ export class Root extends Component {
         var component = null;
         EventListener.trigger("Drawer", "Close");
         singleton.setNav(navigator);
+        console.log("router.name-------- ", router.name);
         switch (router.name) {
             case "Introduce":
                 return (<Introduce/>);
@@ -82,9 +83,6 @@ export class Root extends Component {
                 return (<Authorize/>);
         }
     }
-
-
-
 
     componentDidMount() {
         launchImage.hide();
