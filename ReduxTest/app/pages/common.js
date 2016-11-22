@@ -107,7 +107,7 @@ export class Common extends Component {
             <View>
                 <View style={styles.view}>
                     <TouchableOpacity style={{
-                        justifyContent: 'center', width: 70, height: 54
+                        justifyContent: 'center', width: 70, height: 64
                     }} onPress={this._onBack.bind(this)}>
                         {this.renderBackImage()}
                     </TouchableOpacity>
@@ -115,7 +115,7 @@ export class Common extends Component {
                         <Text style={styles.TextStyle} numberOfLines={1}>{singleton.getTitle()}</Text>
                     </View>
                     <TouchableOpacity onPress={this.UpAndDown.bind(this)} style={{
-                        alignItems: 'center', width: 70, height: 54, justifyContent: 'center'
+                        alignItems: 'center', width: 70, height: 64, justifyContent: 'center'
                     }} >
                         {this.renderRightIMG()}
                     </TouchableOpacity>
@@ -139,7 +139,7 @@ Common.PropTypes = propTypes;
 const styles = StyleSheet.create({
     view: {
         backgroundColor: '#00000000',
-        height: 54,
+        height: 64,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center'

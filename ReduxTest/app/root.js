@@ -26,6 +26,7 @@ import { DrawerMe } from '../app/pages/drawer/drawer';
 import { Introduce } from "../app/pages/introduce"
 import { ActivityList } from "../app/pages/activitylist"
 import { EventInfo } from "../app/pages/merchantsEventInfo"
+import { UserEventInfo } from "../app/pages/userEventInfo"
 import { NaviGoBack } from '../app/utils/CommonUtils';
 import { EventListener } from "../app/listener/EventListener";
 import { QrcodeReader } from "../app/pages/qrcode.reader";
@@ -69,6 +70,8 @@ export class Root extends Component {
                 return (<Feedback />);
             case "EVENTINFO":
                 return (<EventInfo />);
+            case "USEREVENTINFO":
+                return (<UserEventInfo />);
             case "NEWMIC":
                 return (<NewMic />);
             case "DrawerMe":
@@ -141,7 +144,7 @@ export class Root extends Component {
                 <Navigator
                     ref={(navigator) => { return this.navigator = navigator } }
                     sceneStyle={styles.container}
-                    initialRoute={{ name: singleton.getRoute() == null ? 'Introduce' : singleton.getRoute() }}
+                    initialRoute={{ name: singleton.getRoute() == null ? 'USEREVENTINFO' : singleton.getRoute() }}
                     renderScene={this.renderScene}
                     configureScene={(route) => {
                         return CustomPushFromRightWithoutGestures;

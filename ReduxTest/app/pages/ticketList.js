@@ -18,7 +18,6 @@ import { TicketListItem } from "./ticketListItem";
 import RefreshableListView from "react-native-refreshable-listview";
 
 var {height, width} = Dimensions.get('window');
-var {height, width} = Dimensions.get('window');
 var singleton = new Singleton();
 
 var event = [
