@@ -52,6 +52,15 @@ export class Common extends Component {
                 }} />
             );
         }
+        else if(this.props.page === "noPage"){
+            return (
+                <Image style={{
+                    width: 26,
+                    height: 23,
+                    marginLeft: 15
+                }} />
+            );
+        }
         else {
             return (
                 <Image source={require('../img/back.png')} style={{

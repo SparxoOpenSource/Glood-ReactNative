@@ -24,6 +24,7 @@ import { Authorize } from "../app/pages/authorize"
 import { Login } from "../app/pages/login"
 import { DrawerMe } from '../app/pages/drawer/drawer';
 import { Introduce } from "../app/pages/introduce"
+import { AddTicket } from "../app/pages/addTicket"
 import { ActivityList } from "../app/pages/activitylist"
 import { EventInfo } from "../app/pages/merchantsEventInfo"
 import { UserEventInfo } from "../app/pages/userEventInfo"
@@ -58,6 +59,8 @@ export class Root extends Component {
         switch (router.name) {
             case "Introduce":
                 return (<Introduce />);
+            case "AddTicket":
+                return (<AddTicket />);
             case "Login":
                 return (<Login />);
             case "TICKETS":
@@ -144,7 +147,7 @@ export class Root extends Component {
                 <Navigator
                     ref={(navigator) => { return this.navigator = navigator } }
                     sceneStyle={styles.container}
-                    initialRoute={{ name: singleton.getRoute() == null ? 'USEREVENTINFO' : singleton.getRoute() }}
+                    initialRoute={{ name: singleton.getRoute() == null ? 'AddTicket' : singleton.getRoute() }}
                     renderScene={this.renderScene}
                     configureScene={(route) => {
                         return CustomPushFromRightWithoutGestures;
