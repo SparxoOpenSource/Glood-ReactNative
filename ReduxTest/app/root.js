@@ -17,6 +17,7 @@ import {
 } from 'react-native';
 import { RecordAudio } from "../app/utils/RecordAudio";
 import { Tickets } from "../app/pages/tickets"
+import { Communities } from "../app/pages/communities"
 import { TicketList } from "../app/pages/ticketList"
 import { Setting } from "../app/pages/setting"
 import { Feedback } from "../app/pages/feedback"
@@ -65,6 +66,8 @@ export class Root extends Component {
                 return (<Login />);
             case "TICKETS":
                 return (<Tickets />);
+            case "COMMUNITIES":
+                return (<Communities />);
             case "TICKETLIST":
                 return (<TicketList />);
             case "SETTING":
@@ -147,7 +150,7 @@ export class Root extends Component {
                 <Navigator
                     ref={(navigator) => { return this.navigator = navigator } }
                     sceneStyle={styles.container}
-                    initialRoute={{ name: singleton.getRoute() == null ? 'AddTicket' : singleton.getRoute() }}
+                    initialRoute={{ name: singleton.getRoute() == null ? 'COMMUNITIES' : singleton.getRoute() }}
                     renderScene={this.renderScene}
                     configureScene={(route) => {
                         return CustomPushFromRightWithoutGestures;

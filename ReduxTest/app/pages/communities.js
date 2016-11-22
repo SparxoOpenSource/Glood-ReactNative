@@ -1,0 +1,194 @@
+import React, { Component } from "react";
+import {
+    AppRegistry,
+    StyleSheet,
+    View,
+    Text,
+    ListView,
+    Alert,
+    Navigator,
+    Image,
+    TouchableOpacity,
+    TouchableWithoutFeedback,
+    LayoutAnimation,
+    PropTypes,
+    Animated,
+    Dimensions,
+    UIManager,
+    ScrollView,
+    Platform,
+    DeviceEventEmitter
+} from 'react-native';
+import { Common } from "./common";
+import { CoverFlow } from 'react-native-pan-controller';
+import { EventListener } from "../listener/EventListener";
+import { fontSizeAndroid } from "../utils/CommonUtils.js";
+import { LoadingView } from "../components/LoadingView";
+import isAndroid from '../utils/isAndroid.js';
+import ScrollableTabView, { DefaultTabBar } from 'react-native-scrollable-tab-view';
+
+var QRCode = require('react-native-qrcode');
+var qr_view_opacity = 1;
+var widthh = Dimensions.get('window').width
+var STATUS_BAR_HEIGHT = Navigator.NavigationBar.Styles.General.StatusBarHeight;
+var heightt = Dimensions.get('window').height - Navigator.NavigationBar.Styles.General.NavBarHeight - 20
+var {height, width} = Dimensions.get('window');
+import Singleton from '../utils/Singleton';
+var singleton = new Singleton();
+var temp = <View style={{
+    width: widthh, height: heightt,
+    backgroundColor: "#3E767300",
+    alignItems: 'center',
+    justifyContent: 'center',
+}}>
+    <LoadingView />
+</View>;
+
+export class Communities extends Component {
+    constructor() {
+        super();
+        singleton.setTitle("Communities");
+        this.state = {
+            images: [
+                { headImageIcon: 'http://i1.s2.dpfile.com/pc/170955571fdcb7b3bab5df4f69f156e7%28700x700%29/thumb.jpg', eventName: 'Sierra at Tahoe Ski Club', month: 'MAY', day: '01', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias' },
+                { headImageIcon: "http://i2.s2.dpfile.com/pc/638089fd18888ca0e0a45f1635659b7b%28700x700%29/thumb.jpg", eventName: 'Sierra at Tahoe Ski Club', month: 'MAY', day: '02', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias' },
+                { headImageIcon: "http://i1.s2.dpfile.com/pc/d23976621b193f9c821756bd4f79aaec%28700x700%29/thumb.jpg", eventName: 'Sierra at Tahoe Ski Club', month: 'MAY', day: '03', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias' },
+                { headImageIcon: "http://www.shandongqingdian.com/uploads/allimg/150714/142R32033-4.jpg", eventName: 'Sierra at Tahoe Ski Club', month: 'MAY', day: '04', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias' },
+                { headImageIcon: "http://www.mimvm.com/uploads/allimg/photo/20140531165328867.jpg", eventName: '2015 Sparxo Grand Opening(SF ...', month: 'MAY', day: '05', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias' },
+                { headImageIcon: "http://img3.xgo-img.com.cn/dealer_article/203_500x375/deBcjvv5hBHU.jpg", eventName: '2015 Sparxo Grand Opening(SF ...', month: 'MAY', day: '06', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias' },
+                { headImageIcon: "http://img.izaojiao.com/upload/month_1412/201412110930465369.jpg", eventName: '2015 Sparxo Grand Opening(SF ...', month: 'MAY', day: '07', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias' },
+                { headImageIcon: "http://i2.s1.dpfile.com/pc/8e91cfcf85c30b051adfac7506776d11%28700x700%29/thumb.jpg", eventName: '2015 Sparxo Grand Opening(SF ...', month: 'MAY', day: '08', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias' },
+                { headImageIcon: "http://img3.douban.com/view/note/large/public/p223383491-7.jpg", eventName: '2015 Sparxo Grand Opening(SF ...', month: 'MAY', day: '09', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias' },
+                { headImageIcon: "http://i2.s2.dpfile.com/pc/f00d272c22c7c0f4cad29ae0b5c477cd%28700x700%29/thumb.jpg", eventName: '2015 Sparxo Grand Opening(SF ...', month: 'MAY', day: '10', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias' },
+                { headImageIcon: "http://neimenggu.sinaimg.cn/cr/2015/1207/4032417934.png", eventName: '2015 Sparxo Grand Opening(SF ...', month: 'MAY', day: '11', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias' },
+                { headImageIcon: "http://n.sinaimg.cn/transform/20150702/OCWi-fxesssr5385926.jpg", eventName: '2015 Sparxo Grand Opening(SF ...', month: 'MAY', day: '12', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias' },
+                { headImageIcon: "http://i1.s2.dpfile.com/pc/79cc79a44aaeb3d4c566eb8b2de04382%28740x2048%29/thumb.jpg", eventName: '2015 Sparxo Grand Opening(SF ...', month: 'MAY', day: '13', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias' },
+            ],
+            viewCoverFlow: temp,
+        }
+
+    }
+    async getUsersFromApi() {
+        try {
+            var images = await this.reupdateRender(); r
+            return images;
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    componentDidMount() {
+        console.log('999999999999999999999')
+        this.getUsersFromApi();
+        this.returnView();
+        // EventListener.on("scrollOffset").then(this.scrollOffsetxxx.bind(this));
+    }
+    reupdateRender() {
+        this.returnView();
+    }
+    scrollOffsetxxx(offset) {
+        console.log('xxxxxxxxxxxxxx---', offset);
+        // var currentPage = offset / (heightt * (390 / 736));
+        // if (currentPage > 2) {
+        //     this.setState({
+        //         qr_view_opacity: 0
+        //     })
+        // }
+        // else {
+        //     this.setState({
+        //         qr_view_opacity: 1
+        //     })
+        // }－
+    }
+    render() {
+        return (
+            <Image style={style.container} source={require('../img/background3.png')}>
+                <Common page='Main' rightType='Down' />
+                <View style={{ width: width, height: 20, backgroundColor: '#00000000' }} />
+                {this.state.viewCoverFlow}
+            </Image>
+
+        );
+    }
+    returnView() {
+        var view = <CoverFlow>
+            {this.state.images.map((src, i) =>
+                <View style={{ backgroundColor: 'white', width: widthh * (270 / 414), height: heightt * (600 / 736), marginTop: heightt * (64 / 736), borderRadius: 5 }}>
+                    <Image style={{
+                        width: widthh * (266 / 414), height: heightt * (113 / 736), borderRadius: 5, marginLeft: widthh * (2 / 414), marginTop: 1
+                    }} key={i} source={{ uri: src.headImageIcon }} resizeMode="cover" />
+                    <View style={{ width: widthh * (270 / 414), height: heightt * (10 / 736), marginTop: -5, backgroundColor: 'white' }}>
+                    </View>
+                    <View style={{ backgroundColor: '#00000000', width: widthh * (270 / 414), height: heightt * (70 / 736), marginTop: -5 }}>
+                        <Text style={{
+                            backgroundColor: '#00000000', color: 'black', fontSize: widthh * (14 / 414), fontFamily: 'ProximaNova-Semibold',
+                            marginTop: heightt * (20 / 736), marginLeft: widthh * (10 / 414)
+                        }}>{src.month}</Text>
+                        <Text style={{
+                            backgroundColor: '#00000000', color: 'black', fontSize: widthh * (27 / 414), fontFamily: 'ProximaNova-Semibold',
+                            marginLeft: widthh * (10 / 414)
+                        }}>{src.day}</Text>
+                        <Text style={{
+                            backgroundColor: '#00000000', color: 'black', fontSize: widthh * (18 / 414), fontFamily: 'ProximaNova-Bold',
+                            marginTop: isAndroid() ? heightt * (-58 / 736) : heightt * (-48 / 736), marginLeft: widthh * (45 / 414)
+                        }}>{src.eventName}</Text>
+                    </View>
+                    <TouchableOpacity style={{
+                        flex: 0, alignItems: 'center', justifyContent: 'center', backgroundColor: 'white', width: widthh * (95 / 414),
+                        height: heightt * (30 / 736), marginLeft: widthh * (20 / 414), borderRadius: widthh * (30 / 414) / 2,
+                        borderWidth: 1, borderColor: '#008FFF'
+                    }} onPress={this.InfoXX.bind(this)}>
+                        <Text style={{ backgroundColor: '#00000000', color: '#008FFF', fontSize: widthh * (16 / 414), fontFamily: 'ProximaNova-Regular', }}>
+                            info
+                            </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={{
+                        flex: 0, alignItems: 'center', justifyContent: 'center', backgroundColor: '#008FFF', width: widthh * (120 / 414),
+                        height: heightt * (30 / 736), marginLeft: widthh * ((20 + 95 + 10) / 414), borderRadius: widthh * (30 / 414) / 2,
+                        borderWidth: 1, borderColor: '#008FFF', marginTop: -heightt * (30 / 736)
+                    }} onPress={this.CheckIn.bind(this)}>
+                        <Text style={{ backgroundColor: '#00000000', color: 'white', fontSize: widthh * (16 / 414), fontFamily: 'ProximaNova-Regular', }}>
+                            check-in
+                            </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={{
+                        backgroundColor: 'red', width: widthh * (250 / 414), height: heightt * (310 / 736),
+                        marginLeft: widthh * (10 / 414), marginTop: heightt * (30 / 736)
+                    }}>
+
+                    </TouchableOpacity>
+                    <TouchableOpacity style={{backgroundColor:'green'}}>
+                        <Image style={{ width: 70, height: 70 }} source={require('../img/voice.png')} />
+                    </TouchableOpacity>
+                </View>
+                
+            )}
+            
+        </CoverFlow>
+        this.setState({
+            viewCoverFlow: view
+        });
+    }
+    InfoXX() {
+        singleton.setTitle("");
+        singleton.getNav().push({
+            name: "USEREVENTINFO",
+        });
+    }
+    CheckIn() {
+        singleton.setTitle("");
+        singleton.getNav().push({
+            name: "TICKETLIST",
+        });
+    }
+}
+
+const style = StyleSheet.create({
+    container: {
+        flex: 7,
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        width: width,
+        height: height
+    }
+});

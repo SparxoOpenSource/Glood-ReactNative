@@ -42,8 +42,8 @@ export class UserEventInfo extends Component {
                                 03
                             </Text>
                             <View style={{ flex: 4}}>
-                                <Image style={{ flex: 0, height: 15, width: 15, marginLeft: 60, marginTop: 0 }} source={require('../img/like2.png')} />
-                                <Image style={{ flex: 0, height: 15, width: 15, marginLeft: 60, marginTop: 15 }} source={require('../img/like.png')} />
+                                <Image style={{ flex: 0, height: 16, width: 16, marginLeft: 59, marginTop: 0 }} source={require('../img/timeicon.png')} />
+                                <Image style={{ flex: 0, height:24, width: 17, marginLeft: 58, marginTop: 15 }} source={require('../img/addressicon.png')} />
                             </View>
                         </View>
                         <View style={{ flex: 7, flexDirection: 'column'}}>
