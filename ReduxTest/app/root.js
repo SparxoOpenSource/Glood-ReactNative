@@ -80,7 +80,7 @@ export class Root extends Component {
             case "USEREVENTINFO":
                 return (<UserEventInfo />);
             case "NEWMIC":
-                return (<NewMic />);
+                return (<NewMic />);//聊天界面
             case "DrawerMe":
                 return (<DrawerMe />);
             case "ActivityList":
