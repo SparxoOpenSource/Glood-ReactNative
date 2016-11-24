@@ -42,8 +42,8 @@ export class Common extends Component {
                     marginLeft: 15
                 }} />
             );
-        } 
-        else if(this.props.page === "Delete"){
+        }
+        else if (this.props.page === "Delete") {
             return (
                 <Image source={require('../img/back.png')} style={{
                     width: 26,
@@ -52,7 +52,7 @@ export class Common extends Component {
                 }} />
             );
         }
-        else if(this.props.page === "noPage"){
+        else if (this.props.page === "noPage") {
             return (
                 <Image style={{
                     width: 26,
@@ -78,31 +78,13 @@ export class Common extends Component {
             case "Down":
                 return (
                     <TouchableOpacity style={{
-                        flexDirection: 'row', width: 36,
+                        width: 36,
                         height: 23,
-                        marginTop: 4,
-                        marginRight: 15
                     }} onPress={this.ActivityList.bind(this)}>
                         <Image source={require('../img/down_1.png')} style={{
                             width: 18, height: 8,
                             marginTop: 5
-                        }}/>
-                        <View style={{
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            width: 16, height: 16,
-                            borderRadius: 8,
-                            backgroundColor: "red",
-                            marginTop: -3,
-                            marginLeft: 2
-                        }}>
-                            <Text style={{
-                                fontSize: fontSizeAndroid(10),
-                                color: 'white',
-                                fontFamily: 'ProximaNova-Regular',
-                                backgroundColor: '#00000000'
-                            }}>16</Text>
-                        </View>
+                        }} />
                     </TouchableOpacity>);
             case "Share":
                 return <Image source={require('../img/share.png')} style={styles.ImagStyle} />

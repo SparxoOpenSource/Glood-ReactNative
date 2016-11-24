@@ -122,7 +122,7 @@ export class Communities extends Component {
     returnView() {
         var view = <CoverFlow>
             {this.state.images.map((src, i) =>
-                <View style={{ backgroundColor: 'white', width: widthh * (270 / 414), height: heightt * (600 / 736), marginTop: heightt * (64 / 736), borderRadius: 5 }}>
+                <View style={{ backgroundColor: 'white', width: widthh * (270 / 414), height: heightt * (600 / 736), marginTop: heightt * (14 / 736), borderRadius: 5 }}>
                     <Image style={{
                         width: widthh * (266 / 414), height: heightt * (113 / 736), borderRadius: 5, marginLeft: widthh * (2 / 414), marginTop: 1
                     }} key={i} source={{ uri: src.headImageIcon }} resizeMode="cover" />
