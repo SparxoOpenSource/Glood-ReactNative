@@ -77,16 +77,16 @@ export class Common extends Component {
                 return <Image source={require('../img/up.png')} style={styles.ImagStyle} />
             case "Down":
                 return (
-                    <View style={{
+                    <TouchableOpacity style={{
                         flexDirection: 'row', width: 36,
                         height: 23,
                         marginTop: 4,
                         marginRight: 15
-                    }}>
+                    }} onPress={this.ActivityList.bind(this)}>
                         <Image source={require('../img/down_1.png')} style={{
                             width: 18, height: 8,
                             marginTop: 5
-                        }} />
+                        }}/>
                         <View style={{
                             alignItems: 'center',
                             justifyContent: 'center',
@@ -103,7 +103,7 @@ export class Common extends Component {
                                 backgroundColor: '#00000000'
                             }}>16</Text>
                         </View>
-                    </View>);
+                    </TouchableOpacity>);
             case "Share":
                 return <Image source={require('../img/share.png')} style={styles.ImagStyle} />
             default:
@@ -141,7 +141,13 @@ export class Common extends Component {
         }
     }
     UpAndDown() {
-
+        singleton.getNav().pop();
+    }
+    ActivityList() {
+        singleton.setTitle("");
+        singleton.getNav().push({
+            name: "ActivityList",
+        });
     }
 }
 Common.PropTypes = propTypes;

@@ -26,8 +26,8 @@ import DrawerLayout from 'react-native-drawer-layout';
 import { DrawerView } from "./drawerView";
 import { Root } from "../../../app/root";
 import { Tickets } from "../../pages/tickets"
-import { ActivityList } from "../../pages/activitylist"
-import { EventInfo } from "../../pages/merchantsEventInfo"
+// import { Communities } from "../../pages/activitylist"
+import { Communities } from "../../pages/communities"
 import { start } from "../../utils/CommonUtils";
 import Singleton from '../../utils/Singleton';
 var {height, width} = Dimensions.get('window');
@@ -39,7 +39,7 @@ export class DrawerMe extends Component {
         super(props);
         this.state = {
             drawerLockMode: 'unlocked',
-            indexView: <ActivityList />
+            indexView: <Communities />
         }
     }
     /**
@@ -97,14 +97,7 @@ export class DrawerMe extends Component {
         switch (name) {
             case "Mingle":
                 singleton.setTitle("Crazy May Fest 2016");
-                sr = <ActivityList />;
-                this.setState({
-                    indexView: sr
-                });
-                break;
-            case "Tickets":
-                singleton.setTitle("Tickets");
-                sr = <Tickets />;
+                sr = <Communities />;
                 this.setState({
                     indexView: sr
                 });

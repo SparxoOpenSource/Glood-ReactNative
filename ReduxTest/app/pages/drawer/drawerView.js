@@ -62,25 +62,6 @@ export class DrawerView extends Component {
                         marginLeft: 30,
                         alignItems: 'center',
                     }}
-                        onPress={this.operation.bind(this, "Tickets")}>
-                        <Image source={require("../../img/tickets.png")} style={{
-                            width: 26,
-                            height: 26
-                        }} />
-                        <Text style={{
-                            fontSize: fontSizeAndroid(18),
-                            color: "#333333",
-                            marginLeft: 20,
-                            backgroundColor: '#00000000',
-                            fontFamily: "ProximaNova-Regular",
-                        }}>Tickets</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={{
-                        flexDirection: 'row',
-                        marginTop: 30,
-                        marginLeft: 30,
-                        alignItems: 'center',
-                    }}
                         onPress={this.operation.bind(this, "Setting")}>
                         <Image source={require("../../img/setting.png")} style={{
                             width: 26,

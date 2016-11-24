@@ -20,13 +20,18 @@ import {
     DeviceEventEmitter
 } from 'react-native';
 import { Common } from "./common";
+import { NewMicItem } from "./newMic_item";
 import { CoverFlow } from 'react-native-pan-controller';
 import { EventListener } from "../listener/EventListener";
 import { fontSizeAndroid } from "../utils/CommonUtils.js";
 import { LoadingView } from "../components/LoadingView";
 import isAndroid from '../utils/isAndroid.js';
 import ScrollableTabView, { DefaultTabBar } from 'react-native-scrollable-tab-view';
+import RefreshableListView from "react-native-refreshable-listview";
 
+var data = new Array();
+var ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
+const LISTVIEW_REF = 'listView'
 var QRCode = require('react-native-qrcode');
 var qr_view_opacity = 1;
 var widthh = Dimensions.get('window').width
@@ -65,6 +70,7 @@ export class Communities extends Component {
                 { headImageIcon: "http://i1.s2.dpfile.com/pc/79cc79a44aaeb3d4c566eb8b2de04382%28740x2048%29/thumb.jpg", eventName: '2015 Sparxo Grand Opening(SF ...', month: 'MAY', day: '13', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias' },
             ],
             viewCoverFlow: temp,
+            dataSource: ds.cloneWithRows(data),
         }
 
     }
@@ -106,6 +112,9 @@ export class Communities extends Component {
                 <Common page='Main' rightType='Down' />
                 <View style={{ width: width, height: 20, backgroundColor: '#00000000' }} />
                 {this.state.viewCoverFlow}
+                <TouchableOpacity style={{ flex: 0, alignItems: 'center' }} onPress={this.NewMic.bind(this)}>
+                    <Image style={{ width: 70, height: 70, marginTop: -heightt * (110 / 736) }} source={require('../img/voice.png')} />
+                </TouchableOpacity>
             </Image>
 
         );
@@ -152,22 +161,27 @@ export class Communities extends Component {
                             </Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={{
-                        backgroundColor: 'red', width: widthh * (250 / 414), height: heightt * (310 / 736),
+                        width: widthh * (250 / 414), height: heightt * (310 / 736),
                         marginLeft: widthh * (10 / 414), marginTop: heightt * (30 / 736)
                     }}>
 
                     </TouchableOpacity>
-                    <TouchableOpacity style={{backgroundColor:'green'}}>
-                        <Image style={{ width: 70, height: 70 }} source={require('../img/voice.png')} />
-                    </TouchableOpacity>
+
                 </View>
-                
+
             )}
-            
+
         </CoverFlow>
         this.setState({
             viewCoverFlow: view
         });
+    }
+    _row(rowData, sectionID, rowID) {
+        let item = <NewMicItem title={rowData} auto={auto} rowID={parseInt(rowID)} dateLength={data.length} />;
+        return item;
+    }
+    _accessFileName() {
+        SelectByRoomName(singleton.getRoomName());
     }
     InfoXX() {
         singleton.setTitle("");
@@ -179,6 +193,12 @@ export class Communities extends Component {
         singleton.setTitle("");
         singleton.getNav().push({
             name: "TICKETLIST",
+        });
+    }
+    NewMic() {
+        singleton.setTitle("");
+        singleton.getNav().push({
+            name: "NEWMIC",
         });
     }
 }
