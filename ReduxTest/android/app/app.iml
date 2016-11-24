@@ -67,7 +67,7 @@
       <excludeFolder url="file://C:/tmp/ReduxTest/app/intermediates/exploded-aar/com.google.firebase/firebase-common/9.6.1/jars" />
       <excludeFolder url="file://C:/tmp/ReduxTest/app/intermediates/exploded-aar/com.google.firebase/firebase-core/9.6.1/jars" />
       <excludeFolder url="file://C:/tmp/ReduxTest/app/intermediates/exploded-aar/com.google.firebase/firebase-iid/9.6.1/jars" />
-      <excludeFolder url="file://C:/tmp/ReduxTest/app/intermediates/exploded-aar/com.tencent.bugly/crashreport/2.3.0/jars" />
+      <excludeFolder url="file://C:/tmp/ReduxTest/app/intermediates/exploded-aar/com.tencent.bugly/crashreport/2.3.1/jars" />
       <excludeFolder url="file://C:/tmp/ReduxTest/app/intermediates/exploded-aar/com.tencent.bugly/nativecrashreport/3.0/jars" />
       <excludeFolder url="file://C:/tmp/ReduxTest/app/intermediates/exploded-aar/org.webkit/android-jsc/r174650/jars" />
       <excludeFolder url="file://C:/tmp/ReduxTest/app/intermediates/incremental" />
@@ -130,8 +130,8 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="okhttp-ws-2.5.0" level="project" />
     <orderEntry type="library" exported="" name="okio-1.6.0" level="project" />
-    <orderEntry type="library" exported="" name="crashreport-2.3.0" level="project" />
     <orderEntry type="library" exported="" name="okhttp-2.5.0" level="project" />
+    <orderEntry type="library" exported="" name="crashreport-2.3.1" level="project" />
     <orderEntry type="library" exported="" name="jsr305-3.0.0" level="project" />
     <orderEntry type="library" exported="" name="stetho-1.2.0" level="project" />
     <orderEntry type="library" exported="" name="firebase-analytics-impl-9.6.1" level="project" />
