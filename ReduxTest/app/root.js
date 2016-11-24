@@ -17,14 +17,18 @@ import {
 } from 'react-native';
 import { RecordAudio } from "../app/utils/RecordAudio";
 import { Tickets } from "../app/pages/tickets"
+import { Communities } from "../app/pages/communities"
+import { TicketList } from "../app/pages/ticketList"
 import { Setting } from "../app/pages/setting"
 import { Feedback } from "../app/pages/feedback"
 import { Authorize } from "../app/pages/authorize"
 import { Login } from "../app/pages/login"
 import { DrawerMe } from '../app/pages/drawer/drawer';
 import { Introduce } from "../app/pages/introduce"
+import { AddTicket } from "../app/pages/addTicket"
 import { ActivityList } from "../app/pages/activitylist"
-import { EventInfo } from "../app/pages/eventInfo"
+import { EventInfo } from "../app/pages/merchantsEventInfo"
+import { UserEventInfo } from "../app/pages/userEventInfo"
 import { NaviGoBack } from '../app/utils/CommonUtils';
 import { EventListener } from "../app/listener/EventListener";
 import { QrcodeReader } from "../app/pages/qrcode.reader";
@@ -57,16 +61,24 @@ export class Root extends Component {
         switch (router.name) {
             case "Introduce":
                 return (<Introduce />);
+            case "AddTicket":
+                return (<AddTicket />);
             case "Login":
                 return (<Login />);
             case "TICKETS":
                 return (<Tickets />);
+            case "COMMUNITIES":
+                return (<Communities />);
+            case "TICKETLIST":
+                return (<TicketList />);
             case "SETTING":
                 return (<Setting />);
             case "FEEDBACK":
                 return (<Feedback />);
             case "EVENTINFO":
                 return (<EventInfo />);
+            case "USEREVENTINFO":
+                return (<UserEventInfo />);
             case "NEWMIC":
                 return (<NewMic />);
             case "DrawerMe":
@@ -131,13 +143,12 @@ export class Root extends Component {
         this.notificationUnsubscribe();
     }
     render() {
-        console.log("singleton-------- 2", singleton.getRoute());
         return (
             <View style={styles.navigatorContainer}>
                 <Navigator
                     ref={(navigator) => { return this.navigator = navigator } }
                     sceneStyle={styles.container}
-                    initialRoute={{ name: singleton.getRoute() == null ? 'Introduce' : singleton.getRoute() }}
+                    initialRoute={{ name: singleton.getRoute() == null ? 'COMMUNITIES' : singleton.getRoute() }}
                     renderScene={this.renderScene}
                     configureScene={(route) => {
                         return CustomPushFromRightWithoutGestures;

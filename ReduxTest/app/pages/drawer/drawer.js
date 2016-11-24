@@ -27,7 +27,7 @@ import { DrawerView } from "./drawerView";
 import { Root } from "../../../app/root";
 import { Tickets } from "../../pages/tickets"
 import { ActivityList } from "../../pages/activitylist"
-import { EventInfo } from "../../pages/eventInfo"
+import { EventInfo } from "../../pages/merchantsEventInfo"
 import { start } from "../../utils/CommonUtils";
 import Singleton from '../../utils/Singleton';
 var {height, width} = Dimensions.get('window');
