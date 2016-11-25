@@ -83,7 +83,11 @@ export function joinEventChatRoom(eventName) {
     singleton.setRoomName(eventName);
     serSignalr.joinEventChatRoom((eventName)).done(() => {
       // Pop('joinEventChatRoom success');
-      EventListener.trigger("DrawerOpenPage", "EventInfo");
+      // EventListener.trigger("DrawerOpenPage", "EventInfo");
+      singleton.setTitle("Crazy May Fest 2016");
+        singleton.getNav().push({
+            name: 'NEWMIC'
+        });
       console.log('sdfsdf-------', eventName);
     }).fail(() => {
       Pop('joinEventChatRoom ERROR');

@@ -28,6 +28,8 @@ import { LoadingView } from "../components/LoadingView";
 import isAndroid from '../utils/isAndroid.js';
 import ScrollableTabView, { DefaultTabBar } from 'react-native-scrollable-tab-view';
 import RefreshableListView from "react-native-refreshable-listview";
+import { Add, SelectByRoomName, DeleteMin, Drop, Update, SelectAll } from "../utils/DBUtil"
+import { joinEventChatRoom } from '../utils/CommonUtils';
 
 var data = new Array();
 var ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
@@ -55,46 +57,63 @@ export class Communities extends Component {
         singleton.setTitle("Communities");
         this.state = {
             images: [
-                { headImageIcon: 'http://i1.s2.dpfile.com/pc/170955571fdcb7b3bab5df4f69f156e7%28700x700%29/thumb.jpg', eventName: 'Sierra at Tahoe Ski Club', month: 'MAY', day: '01', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias' },
-                { headImageIcon: "http://i2.s2.dpfile.com/pc/638089fd18888ca0e0a45f1635659b7b%28700x700%29/thumb.jpg", eventName: 'Sierra at Tahoe Ski Club', month: 'MAY', day: '02', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias' },
-                { headImageIcon: "http://i1.s2.dpfile.com/pc/d23976621b193f9c821756bd4f79aaec%28700x700%29/thumb.jpg", eventName: 'Sierra at Tahoe Ski Club', month: 'MAY', day: '03', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias' },
-                { headImageIcon: "http://www.shandongqingdian.com/uploads/allimg/150714/142R32033-4.jpg", eventName: 'Sierra at Tahoe Ski Club', month: 'MAY', day: '04', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias' },
-                { headImageIcon: "http://www.mimvm.com/uploads/allimg/photo/20140531165328867.jpg", eventName: '2015 Sparxo Grand Opening(SF ...', month: 'MAY', day: '05', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias' },
+                { headImageIcon: 'http://i1.s2.dpfile.com/pc/170955571fdcb7b3bab5df4f69f156e7%28700x700%29/thumb.jpg', eventName: '1', month: 'MAY', day: '01', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias' },
+                { headImageIcon: "http://i2.s2.dpfile.com/pc/638089fd18888ca0e0a45f1635659b7b%28700x700%29/thumb.jpg", eventName: '2', month: 'MAY', day: '02', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias' },
+                { headImageIcon: "http://i1.s2.dpfile.com/pc/d23976621b193f9c821756bd4f79aaec%28700x700%29/thumb.jpg", eventName: '3', month: 'MAY', day: '03', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias' },
+                { headImageIcon: "http://www.shandongqingdian.com/uploads/allimg/150714/142R32033-4.jpg", eventName: '4', month: 'MAY', day: '04', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias' },
+                { headImageIcon: "http://www.mimvm.com/uploads/allimg/photo/20140531165328867.jpg", eventName: '5', month: 'MAY', day: '05', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias' },
                 { headImageIcon: "http://img3.xgo-img.com.cn/dealer_article/203_500x375/deBcjvv5hBHU.jpg", eventName: '2015 Sparxo Grand Opening(SF ...', month: 'MAY', day: '06', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias' },
-                { headImageIcon: "http://img.izaojiao.com/upload/month_1412/201412110930465369.jpg", eventName: '2015 Sparxo Grand Opening(SF ...', month: 'MAY', day: '07', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias' },
+                { headImageIcon: "http://img.izaojiao.com/upload/month_1412/201412110930465369.jpg", eventName: 'Sierra at Tahoe Ski Club', month: 'MAY', day: '07', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias' },
                 { headImageIcon: "http://i2.s1.dpfile.com/pc/8e91cfcf85c30b051adfac7506776d11%28700x700%29/thumb.jpg", eventName: '2015 Sparxo Grand Opening(SF ...', month: 'MAY', day: '08', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias' },
-                { headImageIcon: "http://img3.douban.com/view/note/large/public/p223383491-7.jpg", eventName: '2015 Sparxo Grand Opening(SF ...', month: 'MAY', day: '09', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias' },
-                { headImageIcon: "http://i2.s2.dpfile.com/pc/f00d272c22c7c0f4cad29ae0b5c477cd%28700x700%29/thumb.jpg", eventName: '2015 Sparxo Grand Opening(SF ...', month: 'MAY', day: '10', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias' },
-                { headImageIcon: "http://neimenggu.sinaimg.cn/cr/2015/1207/4032417934.png", eventName: '2015 Sparxo Grand Opening(SF ...', month: 'MAY', day: '11', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias' },
+                { headImageIcon: "http://img3.douban.com/view/note/large/public/p223383491-7.jpg", eventName: 'Sierra at Tahoe Ski Club', month: 'MAY', day: '09', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias' },
+                { headImageIcon: "http://i2.s2.dpfile.com/pc/f00d272c22c7c0f4cad29ae0b5c477cd%28700x700%29/thumb.jpg", eventName: 'Sierra at Tahoe Ski Club', month: 'MAY', day: '10', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias' },
+                { headImageIcon: "http://neimenggu.sinaimg.cn/cr/2015/1207/4032417934.png", eventName: 'Sierra at Tahoe Ski Club', month: 'MAY', day: '11', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias' },
                 { headImageIcon: "http://n.sinaimg.cn/transform/20150702/OCWi-fxesssr5385926.jpg", eventName: '2015 Sparxo Grand Opening(SF ...', month: 'MAY', day: '12', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias' },
                 { headImageIcon: "http://i1.s2.dpfile.com/pc/79cc79a44aaeb3d4c566eb8b2de04382%28740x2048%29/thumb.jpg", eventName: '2015 Sparxo Grand Opening(SF ...', month: 'MAY', day: '13', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias' },
             ],
             viewCoverFlow: temp,
             dataSource: ds.cloneWithRows(data),
         }
+        
+       
 
+    }
+    _refush(value) {
+        console.log('xxsdfsdfsdfsdfxxxxxx2222---------',value);
+        this.setState({
+            dataSource: this.state.dataSource.cloneWithRows(value)
+        })
     }
     async getUsersFromApi() {
         try {
-            var images = await this.reupdateRender(); r
+            var images = await this.reupdateRender();
             return images;
         } catch (error) {
             throw error;
         }
     }
-
     componentDidMount() {
+        console.log('xxsdfsdfsdfsdfxxxxxx1111---------');
+        SelectByRoomName('1', (callback) => {
+            console.log("收到新消息", callback);
+            data = [...callback];
+            this._refush(data);
+            console.log('xxsdfsdfsdfsdfxxxxxx233333---------',data);
+        });
+
         console.log('999999999999999999999')
         this.getUsersFromApi();
         this.returnView();
-        // EventListener.on("scrollOffset").then(this.scrollOffsetxxx.bind(this));
+        EventListener.on("scrollOffset").then(this.scrollOffsetxxx.bind(this));
     }
     reupdateRender() {
         this.returnView();
     }
     scrollOffsetxxx(offset) {
         console.log('xxxxxxxxxxxxxx---', offset);
-        // var currentPage = offset / (heightt * (390 / 736));
+        // var currentPage = offset / widthh;
+        // console.log('sdfsdfsdfsfsd-*-*-',currentPage);
+        // currentEventName = currentPage;
         // if (currentPage > 2) {
         //     this.setState({
         //         qr_view_opacity: 0
@@ -112,8 +131,8 @@ export class Communities extends Component {
                 <Common page='Main' rightType='Down' />
                 <View style={{ width: width, height: 20, backgroundColor: '#00000000' }} />
                 {this.state.viewCoverFlow}
-                <TouchableOpacity style={{ flex: 0, alignItems: 'center' }} onPress={this.NewMic.bind(this)}>
-                    <Image style={{ width: 70, height: 70, marginTop: -heightt * (110 / 736) }} source={require('../img/voice.png')} />
+                <TouchableOpacity style={{ flex: 0, alignItems: 'center', marginBottom: heightt * (10 / 736) }} onPress={this.NewMic.bind(this,'1'  )}>
+                    <Image style={{ width: 70, height: 70 }} source={require('../img/voice.png')} />
                 </TouchableOpacity>
             </Image>
 
@@ -162,9 +181,13 @@ export class Communities extends Component {
                     </TouchableOpacity>
                     <TouchableOpacity style={{
                         width: widthh * (250 / 414), height: heightt * (310 / 736),
-                        marginLeft: widthh * (10 / 414), marginTop: heightt * (30 / 736)
+                        marginLeft: widthh * (10 / 414), marginTop: heightt * (30 / 736), flex: 4
                     }}>
-
+                        <RefreshableListView
+                            enableEmptySections={true}
+                            dataSource={this.state.dataSource}
+                            renderRow={this._row.bind(this)}
+                            loadData={this._accessFileName.bind(this)}/>
                     </TouchableOpacity>
 
                 </View>
@@ -176,12 +199,13 @@ export class Communities extends Component {
             viewCoverFlow: view
         });
     }
+    
     _row(rowData, sectionID, rowID) {
         let item = <NewMicItem title={rowData} auto={auto} rowID={parseInt(rowID)} dateLength={data.length} />;
         return item;
     }
     _accessFileName() {
-        SelectByRoomName(singleton.getRoomName());
+         SelectByRoomName('1');
     }
     InfoXX() {
         singleton.setTitle("");
@@ -195,11 +219,9 @@ export class Communities extends Component {
             name: "TICKETLIST",
         });
     }
-    NewMic() {
-        singleton.setTitle("");
-        singleton.getNav().push({
-            name: "NEWMIC",
-        });
+    NewMic(value) {
+        console.log("-=-==-=-=-=-=-=-=",value);
+        joinEventChatRoom(value);
     }
 }
 

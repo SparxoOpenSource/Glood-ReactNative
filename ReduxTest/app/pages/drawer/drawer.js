@@ -26,7 +26,7 @@ import DrawerLayout from 'react-native-drawer-layout';
 import { DrawerView } from "./drawerView";
 import { Root } from "../../../app/root";
 import { Tickets } from "../../pages/tickets"
-// import { Communities } from "../../pages/activitylist"
+import { ActivityList } from "../../pages/activitylist"
 import { Communities } from "../../pages/communities"
 import { start } from "../../utils/CommonUtils";
 import Singleton from '../../utils/Singleton';
