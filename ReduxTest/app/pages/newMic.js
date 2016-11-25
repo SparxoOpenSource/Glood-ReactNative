@@ -190,6 +190,7 @@ export class NewMic extends Component {
      * 更新数据到UI
      */
     _refush(value) {
+        console.log('xxsdfsdfsdfsdfxxxxxx2222dfsdfsd---------',value);
         this.setState({
             dataSource: this.state.dataSource.cloneWithRows(value)
         })

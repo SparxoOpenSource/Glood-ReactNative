@@ -57,6 +57,7 @@ export function SelectByRoomNameCount(value, callback) {
  * 根据房间查询该房间下的所有数据
  */
 export function SelectByRoomName(value, callback) {
+    console.log('dfsdf=----------',value);
     db.transaction((tx) => {
         // var sql = "SELECT * FROM GloodRecord WHERE RoomName=? ORDER BY Date DESC";
         var sql = "SELECT * FROM GloodRecord WHERE RoomName=? ORDER BY Date ASC";
