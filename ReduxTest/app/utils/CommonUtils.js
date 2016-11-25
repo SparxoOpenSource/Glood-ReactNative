@@ -82,9 +82,9 @@ export function joinEventChatRoom(eventName) {
     eventNamexx = eventName;
     singleton.setRoomName(eventName);
     serSignalr.joinEventChatRoom((eventName)).done(() => {
-      // Pop('joinEventChatRoom success');
-      EventListener.trigger("DrawerOpenPage", "EventInfo");
-      console.log('sdfsdf-------', eventName);
+      Pop('joinEventChatRoom success');
+      EventListener.trigger("DrawerOpenPage", "EventInfo");//调用这个监听
+      console.log('joinEventChatRoom success -------', eventName);
     }).fail(() => {
       Pop('joinEventChatRoom ERROR');
     })
@@ -98,6 +98,5 @@ export function sendMessageInRoom(message) {
   }).fail(() => {
     Pop('sendMessageInRoom ERROR');
   })
-
 }
 

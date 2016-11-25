@@ -114,6 +114,7 @@ export class Events {
         return this;
 
     }
+    
     proxy(events) {
         var that = this;
         return (function (arg) {

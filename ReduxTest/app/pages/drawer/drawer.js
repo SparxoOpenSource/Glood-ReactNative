@@ -23,8 +23,10 @@ import { Common } from ".././common";
 import isAndroid from '../../utils/isAndroid.js';
 import { EventListener } from "../../listener/EventListener";
 import DrawerLayout from 'react-native-drawer-layout';
+import { EventInfo } from "../merchantsEventInfo"
 import { DrawerView } from "./drawerView";
 import { Root } from "../../../app/root";
+import { Pop } from "../../utils/AlertPop";
 import { Tickets } from "../../pages/tickets"
 // import { Communities } from "../../pages/activitylist"
 import { Communities } from "../../pages/communities"
@@ -46,7 +48,7 @@ export class DrawerMe extends Component {
      * 接收消息，并监听
      */
     componentDidMount(props) {
-
+        //这里给eventListener设置监听
         EventListener.on("Drawer").then(this.OpenCloseDrawer.bind(this));
         EventListener.on("DrawerOpenPage").then(this.OpenPage.bind(this));
         setTimeout(() => {
@@ -55,6 +57,7 @@ export class DrawerMe extends Component {
         }, 0);
     }
     componentWillUnmount() {
+        console.log('Drawer------componentWillUnmount ');
         EventListener.off("Drawer");
         EventListener.off("DrawerOpenPage");
     }
@@ -62,7 +65,6 @@ export class DrawerMe extends Component {
         // const {
         //     drawerLockMode,
         // } = this.state;
-
         const navigationView = (
             <DrawerView />
         );
@@ -81,6 +83,7 @@ export class DrawerMe extends Component {
         );
     }
     OpenCloseDrawer(name) {
+        console.log('Drawer------OpenCloseDrawer -------name', name, 'this.drawer:', this.drawer != null);
         switch (name) {
             case "Open":
                 if (this.drawer != null)
@@ -102,6 +105,13 @@ export class DrawerMe extends Component {
                     indexView: sr
                 });
                 break;
+            case "Mingle":
+                singleton.setTitle("Crazy May Fest 2016");
+                sr = <Communities />;
+                this.setState({
+                    indexView: sr
+                });
+                break;
             case "Setting":
                 singleton.setTitle("SETTING");
                 singleton.getNav().push({
@@ -115,6 +125,7 @@ export class DrawerMe extends Component {
                 });
                 break;
             case "EventInfo":
+                Pop('joinEventChatRoom success EventInfo');
                 singleton.setTitle("Crazy May Fest 2017");
                 sr = <EventInfo />;
                 this.setState({

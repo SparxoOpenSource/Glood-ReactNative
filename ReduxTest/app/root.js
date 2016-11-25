@@ -39,6 +39,7 @@ import * as launchImage from 'react-native-launch-image';
 import isAndroid from '../app/utils/isAndroid.js';
 import Singleton from '../app/utils/Singleton';
 import FCM from 'react-native-fcm';
+import { start } from "./utils/CommonUtils";
 var singleton = new Singleton();
 var {height, width} = Dimensions.get('window');
 
@@ -53,9 +54,13 @@ const CustomPushFromRightWithoutGestures = Object.assign(
 );
 
 export class Root extends Component {
+    /**
+     * 调到一个界面
+     */
     renderScene(router, navigator) {
         var component = null;
         EventListener.trigger("Drawer", "Close");
+        //将navigator放入 singleton
         singleton.setNav(navigator);
         console.log("router.name-------- ", router.name);
         switch (router.name) {
@@ -64,7 +69,7 @@ export class Root extends Component {
             case "AddTicket":
                 return (<AddTicket />);
             case "Login":
-                return (<Login />);
+                return (<Login/>);
             case "TICKETS":
                 return (<Tickets />);
             case "COMMUNITIES":
@@ -82,7 +87,7 @@ export class Root extends Component {
             case "NEWMIC":
                 return (<NewMic />);//聊天界面
             case "DrawerMe":
-                return (<DrawerMe />);
+                return (<DrawerMe />);//DrawerMe 从登录界面到 其他界面
             case "ActivityList":
                 return (<ActivityList />);
             case "QrcodeReader":
@@ -93,6 +98,10 @@ export class Root extends Component {
     }
 
     componentDidMount() {
+        // setTimeout(() => {
+        //     //连接聊天服务器，用户进行登录操作，系统分配用户名，ID和记录登录时间
+        //     start();
+        // }, 0);
         launchImage.hide();
         CreatTable();
         if (isAndroid()) {
@@ -148,7 +157,7 @@ export class Root extends Component {
                 <Navigator
                     ref={(navigator) => { return this.navigator = navigator } }
                     sceneStyle={styles.container}
-                    initialRoute={{ name: singleton.getRoute() == null ? 'COMMUNITIES' : singleton.getRoute() }}
+                    initialRoute={{ name: singleton.getRoute() == null ? 'Introduce' : singleton.getRoute() }}
                     renderScene={this.renderScene}
                     configureScene={(route) => {
                         return CustomPushFromRightWithoutGestures;

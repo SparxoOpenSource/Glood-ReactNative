@@ -35,13 +35,16 @@ export class Common extends Component {
     }
     renderBackImage() {
         if (this.props.page === "Main") {
-            return (
-                <Image source={require('../img/menu.png')} style={{
-                    width: 26,
-                    height: 28,
-                    marginLeft: 15
-                }} />
-            );
+            if (this.props.rightType != "Up") {
+                return (
+                    <Image source={require('../img/menu.png')} style={{
+                        width: 26,
+                        height: 28,
+                        marginLeft: 15
+                    }} />
+                );
+            }
+
         }
         else if (this.props.page === "Delete") {
             return (
@@ -62,6 +65,7 @@ export class Common extends Component {
             );
         }
         else {
+
             return (
                 <Image source={require('../img/back.png')} style={{
                     width: 26,
@@ -69,6 +73,7 @@ export class Common extends Component {
                     marginLeft: 15
                 }} />
             );
+
         }
     }
     renderRightIMG() {
@@ -97,11 +102,13 @@ export class Common extends Component {
         return (
             <View>
                 <View style={styles.view}>
+
                     <TouchableOpacity style={{
                         justifyContent: 'center', width: 70, height: 64
                     }} onPress={this._onBack.bind(this)}>
                         {this.renderBackImage()}
                     </TouchableOpacity>
+
                     <View style={styles.TextStyle2}>
                         <Text style={styles.TextStyle} numberOfLines={1}>{singleton.getTitle()}</Text>
                     </View>

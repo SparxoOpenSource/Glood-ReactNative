@@ -33,7 +33,7 @@ const propTypes = {
     rowID: PropTypes.number
 };
 /**
- * 活动列表
+ * 活动列表 item
  */
 export class ActivityListItem extends Component {
     constructor(props) {
@@ -91,6 +91,7 @@ export class ActivityListItem extends Component {
         );
     }
     _handerClick(value, navigator) {
+          console.log("_handerClick--------value ", value);
         //加入聊天房间，在加入成功后进行跳转界面
         joinEventChatRoom(value);
     }

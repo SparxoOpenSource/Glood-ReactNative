@@ -28,7 +28,7 @@ var { height, width } = Dimensions.get('window');
 var index = 0;
 
 /**
- * 介绍
+ * 介绍 三部曲
  */
 export class Introduce extends Component {
     constructor() {
