@@ -19,7 +19,7 @@ import {
 } from 'react-native';
 
 import { RecordAudio } from "../utils/RecordAudio";
-import { Dialog } from "../utils/Dialog";
+
 import { EventListener } from "../listener/EventListener";
 import isAndroid from '../utils/isAndroid.js';
 import EventEmitter from "EventEmitter";
@@ -195,17 +195,15 @@ export class NewMicItem extends Component {
             </View>
         );
     }
-    _dialogCallback() {
-
-    }
+  
     _onPress(value, rowId, bool) {
         if (bool === 1 && this.state.isCisClick)
             return;
         //处于屏蔽人员状态，需要屏蔽该对话的人员
         console.log("_onPress,this.props.isWillFilterPeople:", this.props.isWillFilterPeople);
         if (this.props.isWillFilterPeople) {
-          
-            this.refs.dialog.show("确定要取消订单吗");
+            this.props.dialog.show();
+            // this.refs.dialog.show("确定要取消订单吗");
             return;
         }
         var title = value.name;
