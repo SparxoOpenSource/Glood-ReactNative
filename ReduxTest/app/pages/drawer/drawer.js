@@ -124,15 +124,6 @@ export class DrawerMe extends Component {
                     name: "FEEDBACK"
                 });
                 break;
-            case "EventInfo":
-                Pop('joinEventChatRoom success EventInfo');
-                singleton.setTitle("Crazy May Fest 2017");
-                sr = <EventInfo />;
-                this.setState({
-                    indexView: sr
-                });
-                break;
-
         }
         if (this.drawer != null)
             this.drawer.closeDrawer();

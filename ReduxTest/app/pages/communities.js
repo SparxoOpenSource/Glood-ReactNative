@@ -40,6 +40,7 @@ var widthh = Dimensions.get('window').width
 var STATUS_BAR_HEIGHT = Navigator.NavigationBar.Styles.General.StatusBarHeight;
 var heightt = Dimensions.get('window').height - Navigator.NavigationBar.Styles.General.NavBarHeight - 20
 var {height, width} = Dimensions.get('window');
+var micBackgroundImageWidth;
 import Singleton from '../utils/Singleton';
 var singleton = new Singleton();
 var temp = <View style={{
@@ -71,7 +72,40 @@ export class Communities extends Component {
                 { headImageIcon: "http://n.sinaimg.cn/transform/20150702/OCWi-fxesssr5385926.jpg", eventName: '2015 Sparxo Grand Opening(SF ...', month: 'MAY', day: '12', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias' },
                 { headImageIcon: "http://i1.s2.dpfile.com/pc/79cc79a44aaeb3d4c566eb8b2de04382%28740x2048%29/thumb.jpg", eventName: '2015 Sparxo Grand Opening(SF ...', month: 'MAY', day: '13', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias' },
             ],
+            mic:[ { RoomName: '1',
+    FileName: '20161125110424.wav',
+    Time: 1.3,
+    name: '20161125110424.wav',
+    ip: '83C9A2EB-4B08-4596-956D-73BF67B0599B',
+    time: 1.3,
+    date: '2016-11-25 11:04:24',
+    id: 1 },
+  { RoomName: '1',
+    FileName: '20161125110434.wav',
+    Time: 4.5,
+    name: '20161125110434.wav',
+    ip: '83C9A2EB-4B08-4596-956D-73BF67B0599B',
+    time: 4.5,
+    date: '2016-11-25 11:04:34',
+    id: 2 },
+  { RoomName: '1',
+    FileName: '20161125111155.wav',
+    Time: 2.4,
+    name: '20161125111155.wav',
+    ip: '83C9A2EB-4B08-4596-956D-73BF67B0599B',
+    time: 2.4,
+    date: '2016-11-25 11:11:55',
+    id: 3 },
+  { RoomName: '1',
+    FileName: '20161125124038.wav',
+    Time: 2.2,
+    name: '20161125124038.wav',
+    ip: '83C9A2EB-4B08-4596-956D-73BF67B0599B',
+    time: 2.2,
+    date: '2016-11-25 12:40:38',
+    id: 4 }],
             viewCoverFlow: temp,
+            micBackgroundImageWidth:0,
             dataSource: ds.cloneWithRows(data),
         }
         
@@ -181,13 +215,22 @@ export class Communities extends Component {
                     </TouchableOpacity>
                     <TouchableOpacity style={{
                         width: widthh * (250 / 414), height: heightt * (310 / 736),
-                        marginLeft: widthh * (10 / 414), marginTop: heightt * (30 / 736), flex: 4
-                    }}>
-                        <RefreshableListView
-                            enableEmptySections={true}
-                            dataSource={this.state.dataSource}
-                            renderRow={this._row.bind(this)}
-                            loadData={this._accessFileName.bind(this)}/>
+                        marginLeft: widthh * (10 / 414), marginTop: heightt * (45 / 736), flex: 4,flexDirection:'column',
+                    }} onPress={this.NewMic.bind(this,'1'  )}>
+                        {this.state.mic.map((xxx, i) =>
+                            <View style={{ flex: 1}}>
+                                <Image style={{ flex: 0, justifyContent: 'center',alignItems:'center', borderRadius: heightt * (23 / 736), width: micBackgroundImageWidth, height: heightt * (46 / 736) }}
+                                    key={i} source={require('../img/background.png')} >
+                                    <Image style={{ width: heightt * (46 / 736), height: heightt * (46 / 736), borderRadius: heightt * (23 / 736) }}
+                                        key={i} source={require('../img/171604419.jpg')}>
+                                    </Image>
+                                </Image>
+                            </View>
+                            
+
+                     )}
+                     <View style={{flex:0.25}}>
+                            </View>
                     </TouchableOpacity>
 
                 </View>
