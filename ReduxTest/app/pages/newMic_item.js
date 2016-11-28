@@ -19,6 +19,7 @@ import {
 } from 'react-native';
 
 import { RecordAudio } from "../utils/RecordAudio";
+import { Dialog } from "../utils/Dialog";
 import { EventListener } from "../listener/EventListener";
 import isAndroid from '../utils/isAndroid.js';
 import EventEmitter from "EventEmitter";
@@ -53,9 +54,15 @@ const propTypes = {
  * 2表示收到消息自动播放，1表示顺序自动播放，0表示点击播放
  */
 export class NewMicItem extends Component {
-
+    /**
+     * 声明props属性
+     */
+    static propTypes = {
+        isWillFilterPeople: React.PropTypes.bool.isRequired,
+    }
     constructor(props) {
         super(props);
+
         currentTime = 0;
         currentTime1 = 0;
         viewOpacity_1 = new Animated.Value(0.3);
@@ -166,6 +173,7 @@ export class NewMicItem extends Component {
                         marginTop: this.state.viewTop_2,
                         transform: [{ scale: this.state.bounceValue_2 }]
                     }} />
+                    <Dialog ref="dialog" callback={() => this._dialogCallback()} />
                     <TouchableOpacity style={{
                         width: 60, height: 60,
                         borderWidth: 0,
@@ -188,10 +196,18 @@ export class NewMicItem extends Component {
             </View>
         );
     }
+    _dialogCallback() {
 
+    }
     _onPress(value, rowId, bool) {
         if (bool === 1 && this.state.isCisClick)
-            return
+            return;
+        //处于屏蔽人员状态，需要屏蔽该对话的人员
+        console.log("_onPress,this.props.isWillFilterPeople:", this.props.isWillFilterPeople);
+        if (this.props.isWillFilterPeople) {
+            this.refs.dialog.show("确定要取消订单吗");
+            return;
+        }
         var title = value.name;
         var time = value.time;
         if (time <= 0) {

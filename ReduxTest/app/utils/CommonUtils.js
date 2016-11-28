@@ -99,7 +99,6 @@ export function joinEventChatRoom(eventName) {
       Pop('joinEventChatRoom ERROR');
     })
   }
-
 }
 
 export function sendMessageInRoom(message) {
