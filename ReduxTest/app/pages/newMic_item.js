@@ -173,7 +173,6 @@ export class NewMicItem extends Component {
                         marginTop: this.state.viewTop_2,
                         transform: [{ scale: this.state.bounceValue_2 }]
                     }} />
-                    <Dialog ref="dialog" callback={() => this._dialogCallback()} />
                     <TouchableOpacity style={{
                         width: 60, height: 60,
                         borderWidth: 0,
@@ -205,6 +204,7 @@ export class NewMicItem extends Component {
         //处于屏蔽人员状态，需要屏蔽该对话的人员
         console.log("_onPress,this.props.isWillFilterPeople:", this.props.isWillFilterPeople);
         if (this.props.isWillFilterPeople) {
+          
             this.refs.dialog.show("确定要取消订单吗");
             return;
         }

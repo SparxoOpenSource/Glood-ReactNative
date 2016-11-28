@@ -1,4 +1,4 @@
-'use strict';  
+// 'use strict'; 有可能报出不知位置的错误  
 import React, { Component } from 'react';  
 import {  
   StyleSheet,  
@@ -25,9 +25,11 @@ const [middleLeft, middleTop] = [(width - aWidth) / 2, (height - aHeight) / 2 - 
 * 调用show方法，调起组件   this.refs.dialog.show("确定删除吗"); 
 */  
   
-export default class Dialog extends Component {  
+export  class Dialog extends Component {  
   mixins = [TimerMixin];  
   parent ={};  
+  
+  
   constructor(props) {  
     super(props);  
     this.state = {  
@@ -162,7 +164,7 @@ export default class Dialog extends Component {
   * 弹出控件 
   * titile: 标题 
   */  
-  show(title:string) {  
+  show(title) {  
     if(this.state.hide){  
       this.setState({title: title, hide: false}, this.in);  
     }  

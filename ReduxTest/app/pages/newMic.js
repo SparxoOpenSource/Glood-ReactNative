@@ -105,6 +105,7 @@ export class NewMic extends Component {
 
                     <Image source={require('../img/fw_2.png')} style={style.background} />
                 </View>
+                <Dialog ref="dialog" mcallback={()=>this._dialogCallback()} />   
                 <View style={style.footer}>
                     <View style={{ flexDirection: 'row' }}>
                         <Image source={this.state.autoImage} style={style.ImagStyle} />

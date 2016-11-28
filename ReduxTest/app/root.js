@@ -75,7 +75,7 @@ export class Root extends Component {
             case "COMMUNITIES":
                 return (<Communities />);
             case "TICKETLIST":
-                return (<TicketList />);//
+                return (<TicketList />);
             case "SETTING":
                 return (<Setting />);
             case "FEEDBACK":
@@ -157,7 +157,7 @@ export class Root extends Component {
                 <Navigator
                     ref={(navigator) => { return this.navigator = navigator } }
                     sceneStyle={styles.container}
-                    initialRoute={{ name: singleton.getRoute() == null ? 'ActivityList' : singleton.getRoute() }}
+                    initialRoute={{ name: singleton.getRoute() == null ? 'Login' : singleton.getRoute() }}
                     renderScene={this.renderScene}
                     configureScene={(route) => {
                         return CustomPushFromRightWithoutGestures;
