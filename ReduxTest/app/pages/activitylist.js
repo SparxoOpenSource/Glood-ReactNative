@@ -55,7 +55,7 @@ export class ActivityList extends Component {
     render() {
         return (
             <Image style={style.container} source={require('../img/background3.png')}>
-                <Common page="Main" rightType="Up" />
+                <Common page="noPage" rightType="Up" />
                 <View style={style.content}>
                     <RefreshableListView
                         enableEmptySections={true}

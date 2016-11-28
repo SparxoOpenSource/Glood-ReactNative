@@ -35,15 +35,13 @@ export class Common extends Component {
     }
     renderBackImage() {
         if (this.props.page === "Main") {
-            if (this.props.rightType != "Up") {
-                return (
-                    <Image source={require('../img/menu.png')} style={{
-                        width: 26,
-                        height: 28,
-                        marginLeft: 15
-                    }} />
-                );
-            }
+            return (
+                <Image source={require('../img/menu.png')} style={{
+                    width: 26,
+                    height: 28,
+                    marginLeft: 15
+                }} />
+            );
 
         }
         else if (this.props.page === "Delete") {
