@@ -47,12 +47,6 @@ const propTypes = {
     title: PropTypes.string
 };
 
-const CustomPushFromRightWithoutGestures = Object.assign(
-    {},
-    Navigator.SceneConfigs.FloatFromRight,
-    { gestures: {} }
-);
-
 export class Root extends Component {
     /**
      * 调到一个界面
@@ -159,9 +153,7 @@ export class Root extends Component {
                     sceneStyle={styles.container}
                     initialRoute={{ name: singleton.getRoute() == null ? 'Introduce' : singleton.getRoute() }}
                     renderScene={this.renderScene}
-                    configureScene={(route) => {
-                        return CustomPushFromRightWithoutGestures;
-                    } } />
+                    configureScene={this.configureScene} />
             </View>
         );
     }
@@ -170,6 +162,19 @@ export class Root extends Component {
         EventListener.trigger("RecordStop");
         return NaviGoBack(nav);
     }
+
+    configureScene(route, routeStack) {
+    if (route.name == 'ActivityList') {
+      return Navigator.SceneConfigs.VerticalDownSwipeJump; 
+    }
+    else if (route.name == 'USEREVENTINFO') {
+      return Navigator.SceneConfigs.FloatFromLeft; 
+    }
+    else{
+        return Navigator.SceneConfigs.FloatFromRight;
+    }
+
+  }
 
 }
 var styles = StyleSheet.create({

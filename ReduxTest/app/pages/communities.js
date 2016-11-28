@@ -165,9 +165,12 @@ export class Communities extends Component {
                 <Common page='Main' rightType='Down' />
                 <View style={{ width: width, height: 20, backgroundColor: '#00000000' }} />
                 {this.state.viewCoverFlow}
-                <TouchableOpacity style={{ flex: 0, alignItems: 'center', marginBottom: heightt * (10 / 736) }} onPress={this.NewMic.bind(this,'1'  )}>
-                    <Image style={{ width: 70, height: 70 }} source={require('../img/voice.png')} />
-                </TouchableOpacity>
+                <View style={{ flex: 0, alignItems: 'center', marginBottom: heightt * (10 / 736) }} >
+                    <Image style={{ width: 70, height: 70 }} source={require('../img/voice.png')}>
+                        <TouchableOpacity style={{ width: 70, height: 70 ,borderRadius:35}} source={require('../img/voice.png')} onPress={this.NewMic.bind(this, '1')} />
+                    </Image>
+                    
+                </View>
             </Image>
 
         );
@@ -213,25 +216,26 @@ export class Communities extends Component {
                             check-in
                             </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={{
+                    <View style={{
                         width: widthh * (250 / 414), height: heightt * (310 / 736),
                         marginLeft: widthh * (10 / 414), marginTop: heightt * (45 / 736), flex: 4,flexDirection:'column',
-                    }} onPress={this.NewMic.bind(this,'1'  )}>
+                    }} >
                         {this.state.mic.map((xxx, i) =>
                             <View style={{ flex: 1}}>
-                                <Image style={{ flex: 0, justifyContent: 'center',alignItems:'center', borderRadius: heightt * (23 / 736), width: micBackgroundImageWidth, height: heightt * (46 / 736) }}
+                                <Image style={{ flex: 0, justifyContent: 'center', alignItems: 'center', borderRadius: heightt * (23 / 736), width: micBackgroundImageWidth, height: heightt * (46 / 736) }}
                                     key={i} source={require('../img/background.png')} >
                                     <Image style={{ width: heightt * (46 / 736), height: heightt * (46 / 736), borderRadius: heightt * (23 / 736) }}
                                         key={i} source={require('../img/171604419.jpg')}>
+                                        <TouchableOpacity style={{ width: heightt * (46 / 736), height: heightt * (46 / 736), borderRadius: heightt * (23 / 736) }}
+                                         onPress={this.NewMic.bind(this, '1')}>
+                                        </TouchableOpacity>
                                     </Image>
                                 </Image>
                             </View>
-                            
-
                      )}
                      <View style={{flex:0.25}}>
                             </View>
-                    </TouchableOpacity>
+                    </View>
 
                 </View>
 
