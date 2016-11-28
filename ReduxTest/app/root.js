@@ -164,8 +164,12 @@ export class Root extends Component {
     }
 
     configureScene(route, routeStack) {
+        console.log('sdfsdfsd---------',route.name);
     if (route.name == 'ActivityList') {
       return Navigator.SceneConfigs.VerticalDownSwipeJump; 
+    }
+    else if (route.name == 'NEWMIC') {
+      return Navigator.SceneConfigs.FadeAndroid; 
     }
     else if (route.name == 'USEREVENTINFO') {
       return Navigator.SceneConfigs.FloatFromLeft; 
