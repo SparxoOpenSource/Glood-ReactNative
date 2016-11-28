@@ -83,7 +83,7 @@ export class Root extends Component {
             case "DrawerMe":
                 return (<DrawerMe />);//DrawerMe 从登录界面到 其他界面
             case "ActivityList":
-                return (<ActivityList />);
+                return (<ActivityList />);//普通活动列表
             case "QrcodeReader":
                 return (<QrcodeReader />);
             case "Authorize":
@@ -151,7 +151,7 @@ export class Root extends Component {
                 <Navigator
                     ref={(navigator) => { return this.navigator = navigator } }
                     sceneStyle={styles.container}
-                    initialRoute={{ name: singleton.getRoute() == null ? 'Introduce' : singleton.getRoute() }}
+                    initialRoute={{ name: singleton.getRoute() == null ? 'Login' : singleton.getRoute() }}
                     renderScene={this.renderScene}
                     configureScene={this.configureScene} />
             </View>

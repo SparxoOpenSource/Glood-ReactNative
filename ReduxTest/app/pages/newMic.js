@@ -65,16 +65,30 @@ export class NewMic extends Component {
         index = 0;
         scorll = false;
         inTher = true;
+       
         this.state = {
+            isPeoplePressed:false,
             dataSource: ds.cloneWithRows(data),
             autoImage: myImg,
             voiceImage: voiceImg,
             like: (likeMe ? require('../img/like2.png') : require('../img/like.png')),
+            people: (require('../img/like.png')),
             likeSum: 16
         }
+
+        this.state.people=(this.state.isPeoplePressed ? require('../img/like.png') : require('../img/people.png'));
         SelectByRoomName(singleton.getRoomName(), (callback) => {
             this.SelectByRoomName(callback);
         });
+    //    var test=()=>{
+
+    //    }
+    //    const xxx=function(){
+
+    //    }
+    //    function tests(){
+
+    //    }
     }
     render() {
         return (
@@ -91,6 +105,7 @@ export class NewMic extends Component {
 
                     <Image source={require('../img/fw_2.png')} style={style.background} />
                 </View>
+                <Dialog ref="dialog" mcallback={()=>this._dialogCallback()} />   
                 <View style={style.footer}>
                     <View style={{ flexDirection: 'row' }}>
                         <Image source={this.state.autoImage} style={style.ImagStyle} />
@@ -102,10 +117,10 @@ export class NewMic extends Component {
                     <TouchableWithoutFeedback onPressOut={this._stop.bind(this)} onPressIn={this._startVoice.bind(this)}>
                         <Image style={{ width: 70, height: 70 }} source={this.state.voiceImage} />
                     </TouchableWithoutFeedback>
-                    <TouchableOpacity style={{ flexDirection: 'row' }}>
+                    <TouchableOpacity style={{ flexDirection: 'row' }}  onPress={()=>this._people()}>
                         <Text style={{ backgroundColor: '#00000000', marginTop: 32, fontSize: fontSizeAndroid(16), color: '#00000000', fontFamily: "ProximaNova-Light" }}>auto</Text>
                         <Text style={{ backgroundColor: '#00000000', marginTop: 32, fontSize: fontSizeAndroid(16), color: '#00000000', fontFamily: "ProximaNova-Light" }}>auto</Text>
-                        <Image source={require('../img/people.png')} style={style.ImagStyle3} />
+                        <Image source={this.state.people} style={style.ImagStyle3} />
                     </TouchableOpacity>
                 </View>
             </Image>
@@ -113,8 +128,16 @@ export class NewMic extends Component {
     }
 
     _row(rowData, sectionID, rowID) {
-        let item = <NewMicItem title={rowData} auto={auto} rowID={parseInt(rowID)} dateLength={data.length} />;
+        let item = <NewMicItem isWillFilterPeople={this.state.isPeoplePressed} title={rowData} auto={auto} rowID={parseInt(rowID)} dateLength={data.length}  />;
         return item;
+    }
+    _people() {
+         this.setState({
+           isPeoplePressed:(!this.state.isPeoplePressed),
+       });
+         this.setState({
+           people:(this.state.isPeoplePressed ? require('../img/like.png') : require('../img/people.png'))
+       });
     }
     /**
      * 新消息进来时进行滚动

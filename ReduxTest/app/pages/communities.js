@@ -176,7 +176,7 @@ export class Communities extends Component {
         );
     }
     returnView() {
-        var view = <CoverFlow>
+        var view = <CoverFlow key="">
             {this.state.images.map((src, i) =>
                 <View style={{ backgroundColor: 'white', width: widthh * (270 / 414), height: heightt * (600 / 736), marginTop: heightt * (14 / 736), borderRadius: 5 }}>
                     <Image style={{
