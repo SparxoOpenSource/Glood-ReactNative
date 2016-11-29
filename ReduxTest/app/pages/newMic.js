@@ -28,6 +28,7 @@ import { HardwareUtils } from "../utils/HardwareUtils";
 import isAndroid from '../utils/isAndroid.js';
 import RefreshableListView from "react-native-refreshable-listview";
 import Singleton from '../utils/Singleton';
+import { Dialog } from "../utils/Dialog";
 var singleton = new Singleton();
 var userNamexx;
 
@@ -68,6 +69,8 @@ export class NewMic extends Component {
        
         this.state = {
             isPeoplePressed:false,
+            dialog:null,
+            mCallback:null,
             dataSource: ds.cloneWithRows(data),
             autoImage: myImg,
             voiceImage: voiceImg,
@@ -80,15 +83,6 @@ export class NewMic extends Component {
         SelectByRoomName(singleton.getRoomName(), (callback) => {
             this.SelectByRoomName(callback);
         });
-    //    var test=()=>{
-
-    //    }
-    //    const xxx=function(){
-
-    //    }
-    //    function tests(){
-
-    //    }
     }
     render() {
         return (
@@ -102,7 +96,6 @@ export class NewMic extends Component {
                         renderRow={this._row.bind(this)}
                         loadData={this._accessFileName.bind(this)}
                         refreshPrompt="Pull down to refresh" />
-
                     <Image source={require('../img/fw_2.png')} style={style.background} />
                 </View>
                 <View style={style.footer}>
@@ -122,15 +115,19 @@ export class NewMic extends Component {
                         <Image source={this.state.people} style={style.ImagStyle3} />
                     </TouchableOpacity>
                 </View>
+                     <Dialog ref="dialog" />   
             </Image>
         );
     }
 
     _row(rowData, sectionID, rowID) {
-        let item = <NewMicItem isWillFilterPeople={this.state.isPeoplePressed} title={rowData} auto={auto} rowID={parseInt(rowID)} dateLength={data.length}  />;
+        let item = <NewMicItem dialog={this.state.dialog}  isWillFilterPeople={this.state.isPeoplePressed} title={rowData} auto={auto} rowID={parseInt(rowID)} dateLength={data.length}  />;
         return item;
     }
     _people() {
+          this.setState({
+           dialog: this.refs.dialog,
+       });
          this.setState({
            isPeoplePressed:(!this.state.isPeoplePressed),
        });
@@ -139,12 +136,6 @@ export class NewMic extends Component {
        });
     }
 
-    /**
-     * dialog点击确定
-     */
-      _dialogCallback() {
-                 console.log('xxxxxxx****-------_dialogCallback');
-        }
     /**
      * 新消息进来时进行滚动
      */
@@ -250,7 +241,6 @@ export class NewMic extends Component {
                     time: back.time
                 };
                 Add(roomname, back.name, back.time, username, (callback) => {
-
                     console.log("sdfsd--------", callback);
                     if (callback === 0)
                         return;
@@ -273,7 +263,6 @@ export class NewMic extends Component {
         EventListener.on("RecordStop").then(this.stopRecordAll.bind(this));
         EventListener.on("PlayState").then(this.PlayState.bind(this));
         EventListener.on("RoomMessage").then(this.roomMessagexx.bind(this));
-
     }
     componentWillUnmount() {
         EventListener.off("RecordStop");
