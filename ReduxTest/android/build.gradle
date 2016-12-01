@@ -18,15 +18,17 @@ allprojects {
         mavenLocal()
         maven {
             // All of React Native (JS, Android binaries) is installed from npm
-            url "$projectDir/node_modules/react-native/android"
+//            url "$projectDir/node_modules/react-native/android"
+//            url "$projectDir/../node_modules/react-native/android"
+            url "$rootDir/../node_modules/react-native/android"
         }
     }
     buildDir = "C:/tmp/${rootProject.name}/${project.name}"
 }
-subprojects {
-    configurations.all {
-        resolutionStrategy { // https://github.com/facebook/react-native/issues/6152
-            force 'com.android.support:support-v4:23.0.1'
-        }
-    }
-}
+//subprojects {
+//    configurations.all {
+//        resolutionStrategy { // https://github.com/facebook/react-native/issues/6152
+//            force 'com.android.support:support-v4:23.0.1'
+//        }
+//    }
+//}

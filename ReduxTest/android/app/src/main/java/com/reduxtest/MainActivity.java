@@ -10,7 +10,6 @@ import com.evollu.react.fcm.FIRMessagingPackage;
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
-import com.imagepicker.ImagePickerPackage;
 import com.lwansbrough.RCTCamera.RCTCameraPackage;
 import com.reactnativecomponent.swiperefreshlayout.RCTSwipeRefreshLayoutPackage;
 import com.reduxtest.actions.NotificationPackageForAndroid;
@@ -81,7 +80,7 @@ public class MainActivity extends ReactActivity {
         return Arrays.<ReactPackage>asList(
                 new MainReactPackage(),
                 new RecordAudioPackage(),
-                new ImagePickerPackage(),
+//                new ImagePickerPackage(),
                 new RCTCameraPackage(),
                 new BarcodeScannerPackage(),
                 new FIRMessagingPackage(),

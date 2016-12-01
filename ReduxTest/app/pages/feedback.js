@@ -58,7 +58,6 @@ export class Feedback extends Component {
                             multiline={true}
                             onSubmitEditing={() => this._onSubmitEditing('feedback')}
                             onFocus={() => this._onFocus('feedback')}
-                            onBlur={() => this._onBlur('feedback')}
                             onChange={(event) => this.updateText(
                                 event.nativeEvent.text
                             )}

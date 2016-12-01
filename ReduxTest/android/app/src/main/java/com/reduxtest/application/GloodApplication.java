@@ -15,5 +15,4 @@ public class GloodApplication extends Application{
 //        UncaughtException crashHandler = UncaughtException.getInstance();
 //        crashHandler.init(getApplicationContext());
     }
-
 }

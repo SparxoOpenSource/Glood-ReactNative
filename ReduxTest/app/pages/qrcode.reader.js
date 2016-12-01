@@ -86,7 +86,8 @@ export class QrcodeReader extends Component {
         }
     }
     stopCamera() {
-        Camera.stopCamera();
+        if (Camera && Camera.stopCamera)
+            Camera.stopCamera();
     }
     returnView() {
         setTimeout(() => {
