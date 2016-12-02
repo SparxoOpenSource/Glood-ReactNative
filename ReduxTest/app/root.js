@@ -29,6 +29,7 @@ import { AddTicket } from "../app/pages/addTicket"
 import { ActivityList } from "../app/pages/activitylist"
 import { EventInfo } from "../app/pages/merchantsEventInfo"
 import { UserEventInfo } from "../app/pages/userEventInfo"
+import { FbLoginAuthen } from "../app/pages/fbLoginAuthen"
 import { NaviGoBack } from '../app/utils/CommonUtils';
 import { EventListener } from "../app/listener/EventListener";
 import { QrcodeReader } from "../app/pages/qrcode.reader";
@@ -37,12 +38,11 @@ import { sendNotification } from "../app/utils/PushNotifications";
 import { TabbleIsExist, CreatTable } from "../app/utils/DBUtil";
 import * as launchImage from 'react-native-launch-image';
 import isAndroid from '../app/utils/isAndroid.js';
-import Singleton from '../app/utils/Singleton';
 import FCM from 'react-native-fcm';
 import { start } from "./utils/CommonUtils";
+import Singleton from '../app/utils/Singleton';
 var singleton = new Singleton();
 var {height, width} = Dimensions.get('window');
-
 const propTypes = {
     title: PropTypes.string
 };
@@ -88,6 +88,8 @@ export class Root extends Component {
                 return (<QrcodeReader />);
             case "Authorize":
                 return (<Authorize />);
+            case "FbLoginAuthen":
+                return (<FbLoginAuthen />);
         }
     }
 
@@ -120,7 +122,6 @@ export class Root extends Component {
                 });
             }
         });
-
         FCM.subscribeToTopic('/topics/foo-bar');
         FCM.unsubscribeFromTopic('/topics/foo-bar');
         RecordAudio.prototype.getNotification((callback) => {

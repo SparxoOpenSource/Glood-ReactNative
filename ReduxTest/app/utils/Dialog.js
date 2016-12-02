@@ -45,13 +45,29 @@ const styles = StyleSheet.create({
     left: left,
     top: top,
   },
-  tip: {
+  tipOutter: {
     width: aWidth,
     height: aHeight,
     left: middleLeft,
     backgroundColor: "#fff",
     alignItems: "center",
+    flexDirection: "column"
+  },
+  tipPhoto: {
+    width: 60,
+    height: 60,
+    alignItems: "center",//水平居中
+    flex: 1,
+  },
+  tipInner: {
+    width: aWidth,
+    height: aHeight - 30,
+    left: middleLeft,
+    backgroundColor: "#fff",
+    alignItems: "center",
     justifyContent: "space-between",
+    flex: 1,
+    flexDirection: "column"
   },
   tipTitleView: {
     width: aWidth,
@@ -60,6 +76,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderBottomWidth: 1 / 2,
     borderColor: '#f0f0f0',
+    flex: 1,
   },
   tipTitleText: {
     color: "#333333",
@@ -73,6 +90,7 @@ const styles = StyleSheet.create({
   btnView: {
     flexDirection: 'row',
     height: 44,
+    flex: 1,
   },
   cancelBtnView: {
     width: aWidth / 2,
@@ -101,7 +119,7 @@ const styles = StyleSheet.create({
     color: "#ffffff",
     textAlign: "center",
   },
-});  
+});
 export class Dialog extends Component {
   mixins = [TimerMixin];
   parent = {};
@@ -129,7 +147,7 @@ export class Dialog extends Component {
           <Animated.View style={styles.mask} >
           </Animated.View>
 
-          <Animated.View style={[styles.tip, {
+          <Animated.View style={[styles.tipOutter, {
             transform: [{
               translateY: this.state.offset.interpolate({
                 inputRange: [0, 1, 2],
@@ -138,18 +156,21 @@ export class Dialog extends Component {
             }]
           }]}>
 
-            <View style={styles.tipTitleView}>
-              <Text style={styles.tipTitleText}>{this.state.title}</Text>
+            <View style={styles.tipInner}>
+              <View style={styles.tipTitleView}>
+                <Text style={styles.tipTitleText}>{this.state.title}</Text>
+              </View>
+              <View style={styles.btnView}>
+                <TouchableHighlight style={styles.cancelBtnView} underlayColor='#f0f0f0' onPress={this.cancelBtn.bind(this)}>
+                  <Text style={styles.cancelBtnText}>No</Text>
+                </TouchableHighlight>
+                <TouchableHighlight style={styles.okBtnView} underlayColor='#f0f0f0' onPress={this.okBtn.bind(this)}>
+                  <Text style={styles.okBtnText}>Yes</Text>
+                </TouchableHighlight>
+              </View>
             </View>
 
-            <View style={styles.btnView}>
-              <TouchableHighlight style={styles.cancelBtnView} underlayColor='#f0f0f0' onPress={this.cancelBtn.bind(this)}>
-                <Text style={styles.cancelBtnText}>No</Text>
-              </TouchableHighlight>
-              <TouchableHighlight style={styles.okBtnView} underlayColor='#f0f0f0' onPress={this.okBtn.bind(this)}>
-                <Text style={styles.okBtnText}>Yes</Text>
-              </TouchableHighlight>
-            </View>
+             <Image source={require('../img/like.png')} style={styles.tipPhoto} />
           </Animated.View>
         </View>
       );

@@ -223,7 +223,6 @@ export function DoTest() {
                     console.log("res.rows.item(0).cnt: " + res.rows.item(0).cnt + " -- should be 1");
                 });
             });
-
         }, (e) => {
             console.log("ERROR: " + e.message);
         });

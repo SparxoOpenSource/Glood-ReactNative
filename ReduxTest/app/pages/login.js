@@ -153,7 +153,8 @@ export class Login extends Component {
                                 color: '#7e7e7e', fontSize: heightt * (18 / 736), fontFamily: 'ProximaNova-Regular', marginTop: heightt * (25 / 736),
                                 marginLeft: widthh * (160 / 414)
                             }}>forgot password?</Text>
-                            <TouchableOpacity style={{ width: widthh * (300 / 414), height: heightt * (60 / 736), marginTop: heightt * (65 / 736), marginLeft: widthh * (5 / 414) }}>
+                            <TouchableOpacity style={{ width: widthh * (300 / 414), height: heightt * (60 / 736), marginTop: heightt * (65 / 736), marginLeft: widthh * (5 / 414) }}
+                             onPress={this._fbLogin.bind(this)}>
                                 <Image style={{ width: widthh * (300 / 414), height: heightt * (60 / 736) }} source={require('../img/facebook_sign_in.png')} />
                             </TouchableOpacity>
                         </View>
@@ -171,7 +172,16 @@ export class Login extends Component {
             </Image>
         );
     }
-    //获得焦点
+    _fbLogin(){
+         let access_token = singleton.getAccessToken();
+         console.log("access_token",access_token);
+         if(access_token){
+             this._handerClick();
+         }else{
+             this._goFbLogin();
+         }
+    }
+    //获得焦点`
     _onFocus(label) {
         if (Platform.OS === 'ios') {
             Animated.timing(this.state.bigDogeTrans, {
@@ -224,6 +234,12 @@ export class Login extends Component {
         singleton.setTitle("Crazy May Fest 2017");
         singleton.getNav().replace({
             name: "DrawerMe"
+        });
+    }
+      _goFbLogin() {
+        singleton.setTitle("Obtain FaceBook Auth");
+        singleton.getNav().replace({
+            name: "FbLoginAuthen"
         });
     }
     componentDidMount() {

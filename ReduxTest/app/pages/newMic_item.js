@@ -17,9 +17,7 @@ import {
     Animated,
     Easing,
 } from 'react-native';
-
 import { RecordAudio } from "../utils/RecordAudio";
-
 import { EventListener } from "../listener/EventListener";
 import isAndroid from '../utils/isAndroid.js';
 import EventEmitter from "EventEmitter";
