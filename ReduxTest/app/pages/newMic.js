@@ -160,16 +160,6 @@ export class NewMic extends Component {
         return (
             <Image style={style.container} source={require('../img/background3.png')}>
                 <View style={{ width: width, height: height }}>
-                <Common ground="fw_1.png" rightType="Down" />
-                <View style={style.content}>
-                    <RefreshableListView
-                        enableEmptySections={true}
-                        ref={LISTVIEW_REF}
-                        dataSource={this.state.dataSource}
-                        renderRow={this._row.bind(this)}
-                        loadData={this._accessFileName.bind(this)}
-                        refreshPrompt="Pull down to refresh" />
-                    <Image source={require('../img/fw_2.png')} style={style.background} />
                 </View>
                 <Animated.View style={{width: this.state.ticketViewWidth, height: this.state.ticketViewHeight, 
                 marginTop: -this.state.ticketViewHeight }}>
@@ -255,23 +245,14 @@ export class NewMic extends Component {
                             <TouchableOpacity style={{ width: 70, height: 70, borderRadius: 35 }} source={require('../img/voice.png')} 
                             onPress={this.NewMic.bind(this, '1')} />
                         </Image>
-
                     </View>
                 </Animated.View>
-                    <TouchableWithoutFeedback onPressOut={this._stop.bind(this)} onPressIn={this._startVoice.bind(this)}>
-                        <Image style={{ width: 70, height: 70 }} source={this.state.voiceImage} />
-                    </TouchableWithoutFeedback>
-                    <TouchableOpacity style={{ flexDirection: 'row' }}  onPress={()=>this._people()}>
-                        <Text style={{ backgroundColor: '#00000000', marginTop: 32, fontSize: fontSizeAndroid(16), color: '#00000000', fontFamily: "ProximaNova-Light" }}>auto</Text>
-                        <Text style={{ backgroundColor: '#00000000', marginTop: 32, fontSize: fontSizeAndroid(16), color: '#00000000', fontFamily: "ProximaNova-Light" }}>auto</Text>
-                        <Image source={this.state.people} style={style.ImagStyle3} />
-                    </TouchableOpacity>
-                </View>
-                     <Dialog ref="dialog" />   
+                 <Dialog ref="dialog" />   
             </Image>
         );
     }
     InfoXX() {
+        Alert.alert('xxxxx')
         singleton.setTitle("");
         singleton.getNav().push({
             name: "USEREVENTINFO",
@@ -345,25 +326,29 @@ export class NewMic extends Component {
             }
         });
 
-        backgroundView1 = 'backgroundView' + (value - 2);
-        this.refs[backgroundView1].setNativeProps({
-            style: {
-                marginTop: this.state.ticketViewHeight * (1400 / 736),
-            }
-        });
+        if ((value - 2) > 0) {
+            backgroundView1 = 'backgroundView' + (value - 2);
+            this.refs[backgroundView1].setNativeProps({
+                style: {
+                    marginTop: this.state.ticketViewHeight * (1400 / 736),
+                }
+            });
 
-        backgroundimage1 = 'backgroundimage' + (value - 2);
-        this.refs[backgroundimage1].setNativeProps({
-            style: {
-                marginTop: this.state.ticketViewHeight * (1400 / 736),
-            }
-        });
+            backgroundimage1 = 'backgroundimage' + (value - 2);
+            this.refs[backgroundimage1].setNativeProps({
+                style: {
+                    marginTop: this.state.ticketViewHeight * (1400 / 736),
+                }
+            });
+        }
+
 
         
         // console.log('*-*-*-*-------',this.refs[listview]);
         // this.scrollResponder = this.refs[listview].getScrollResponder();
         // joinEventChatRoom(value);
     }
+
     _row(rowData, sectionID, rowID) {
         console.log('*-*-/-*-*-*---------rowData:',rowData);
         let item = <NewMicItem isWillFilterPeople={this.state.isPeoplePressed} title={rowData} auto={auto}  dateLength={data.length}  />;
@@ -430,6 +415,7 @@ export class NewMic extends Component {
      * 开始录音
      */
     _startVoice() {
+        this._people();
         this.voiceStatus(true);
         RecordAudio.prototype.startRecord(userNamexx, (back) => {
             // RecordAudio.prototype.recordMsg("开始录音");
@@ -515,8 +501,8 @@ export class NewMic extends Component {
         // console.log('xxxxxxxxxxxxxx---', page);
         this.refs[backView].setNativeProps({
             style: {
-                width: width * (270 / 414),
-                height: heightt * (600 / 736),
+                width: width * (0 / 414),
+                height: heightt * (0 / 736),
                 opacity: 0, 
                 position: 'absolute', 
                 borderRadius:5,
@@ -579,8 +565,8 @@ export class NewMic extends Component {
         // this.returnView();
         this.refs.backView0.setNativeProps({
             style: {
-                width: width * (270 / 414),
-                height: heightt * (600 / 736),
+                width: width * (0 / 414),
+                height: heightt * (0 / 736),
                 opacity: 0, 
                 position: 'absolute', 
                 borderRadius:5,

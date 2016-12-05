@@ -21,12 +21,9 @@ import { Common } from "./common";
 import isAndroid from '../utils/isAndroid.js';
 import { UserTableHelper } from "../../app/utils/DBUtil";
 import Singleton from '../utils/Singleton';
-<<<<<<< HEAD
 import { Global } from '../utils/GlobalUtil';
 // import {Global,Singleton} from '../utils/Singleton';//这样有问题
-=======
 import { start } from '../utils/CommonUtils';
->>>>>>> 1fe80fc0776816eabcb4dc9c8f9a4daa67bbfe2e
 var singleton = new Singleton();
 var widthh = Dimensions.get('window').width;
 var heightt = Dimensions.get('window').height;
@@ -244,12 +241,6 @@ export class Login extends Component {
         });
     }
     _handerClick() {
-        console.log("_handerClick ");
-        singleton.setTitle("Crazy May Fest 2017");
-        singleton.getNav().replace({
-            name: "DrawerMe"
-        });
-
         setTimeout(() => {
             //连接聊天服务器，用户进行登录操作，系统分配用户名，ID和记录登录时间
             start();
