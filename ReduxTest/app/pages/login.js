@@ -20,6 +20,7 @@ import {
 import { Common } from "./common";
 import isAndroid from '../utils/isAndroid.js';
 import Singleton from '../utils/Singleton';
+import { start } from '../utils/CommonUtils';
 var singleton = new Singleton();
 var widthh = Dimensions.get('window').width;
 var heightt = Dimensions.get('window').height;
@@ -221,10 +222,16 @@ export class Login extends Component {
         });
     }
     _handerClick() {
-        singleton.setTitle("Crazy May Fest 2017");
-        singleton.getNav().replace({
-            name: "DrawerMe"
-        });
+
+        setTimeout(() => {
+            //连接聊天服务器，用户进行登录操作，系统分配用户名，ID和记录登录时间
+            start();
+        }, 0);
+
+        // singleton.setTitle("Crazy May Fest 2017");
+        // singleton.getNav().replace({
+        //     name: "DrawerMe"
+        // });
     }
     componentDidMount() {
         Animated.timing(this.state.bigDogeTrans, {

@@ -28,9 +28,10 @@ var deviceWidth = Dimensions.get('window').width;
 var { height, width } = Dimensions.get('window');
 var STATUS_BAR_HEIGHT = Navigator.NavigationBar.Styles.General.StatusBarHeight;
 var maxHeight = height - Navigator.NavigationBar.Styles.General.NavBarHeight - STATUS_BAR_HEIGHT - 64;
-var maxSize = isAndroid() ? 30 : 35;
-var cha = width - 60;
-var leftEvery = 60 / 2 - 60 / 2 + cha / 2;
+var maxSize = isAndroid() ? 20 : 25;
+var defaultSize = 50;
+var cha = width - defaultSize;
+var leftEvery = defaultSize / 2 - defaultSize / 2 + cha / 2;
 var currentTime = 0;
 var currentTime1 = 0;
 var _animateHandler;
@@ -70,21 +71,21 @@ export class NewMicItem extends Component {
         runBool_1 = false;
         runBool_2 = false;
         this.state = {
-            w: 60,
-            h: 60,
+            w: defaultSize,
+            h: defaultSize,
             left: cha / 2,
             imageTop: maxSize / 2,
             imageLeft: leftEvery,
-            viewWidth_1: 60,
-            viewHeight_1: 60,
+            viewWidth_1:defaultSize,
+            viewHeight_1: defaultSize,
             viewTop_1: maxSize / 2,
             viewLeft_1: leftEvery,
-            viewRadius_1: 30,
-            viewWidth_2: 60,
-            viewHeight_2: 60,
+            viewRadius_1: defaultSize/2,
+            viewWidth_2: defaultSize,
+            viewHeight_2: defaultSize,
             viewTop_2: maxSize / 2,
             viewLeft_2: leftEvery,
-            viewRadius_2: 30,
+            viewRadius_2: defaultSize/2,
             viewOpacity_1: viewOpacity_1,
             viewOpacity_2: viewOpacity_2,
             bounceValue_1: new Animated.Value(1),
@@ -95,7 +96,7 @@ export class NewMicItem extends Component {
             auto: props.auto,
             imgIsBig: false,
             background_imagex: require('../img/background.png'),
-            firstTop: props.rowID === 0 ? ((props.dateLength * (60 + maxSize)) > maxHeight ? 0 : (maxHeight - 60 - maxSize)) : 0
+            firstTop: props.rowID === 0 ? ((props.dateLength * (defaultSize + maxSize)) > maxHeight ? 0 : (maxHeight - defaultSize - maxSize)) : 0
         }
         this._setTime(props.title.time);
     }
@@ -109,7 +110,7 @@ export class NewMicItem extends Component {
     }
     firstTopMargin(number) {
         if (this.props.rowID === 0) {
-            var temp = number * (60 + maxSize);
+            var temp = number * (defaultSize + maxSize);
             if (maxHeight > temp) {
                 this.setState({
                     firstTop: maxHeight - temp
@@ -137,12 +138,12 @@ export class NewMicItem extends Component {
         return (
             <View style={{ justifyContent: 'center', alignItems: 'center' }}>
                 <View style={{
-                    height: 60 + maxSize,
+                    height: defaultSize + maxSize,
                     width: width,
                     marginTop: this.state.firstTop
                 }}>
                     <Image source={this.state.background_imagex} style={{
-                        width: this.state.w, height: this.state.h, borderWidth: 0, borderRadius: 30,
+                        width: this.state.w, height: this.state.h, borderWidth: 0, borderRadius: defaultSize/2,
                         position: "absolute", marginLeft: this.state.left, marginTop: maxSize / 2
                     }} />
                     <Animated.View style={{
@@ -174,9 +175,9 @@ export class NewMicItem extends Component {
                         transform: [{ scale: this.state.bounceValue_2 }]
                     }} />
                     <TouchableOpacity style={{
-                        width: 60, height: 60,
+                        width: defaultSize, height: defaultSize,
                         borderWidth: 0,
-                        borderRadius: 30,
+                        borderRadius: defaultSize/2,
                         alignItems: 'center',
                         justifyContent: 'center',
                         position: "absolute",
@@ -185,10 +186,10 @@ export class NewMicItem extends Component {
                         transform: [{ scale: this.state.bounceValue_3 }]
                     }} onPress={this._onPress.bind(this, this.props.title, this.props.rowID, 0)} ref="view">
                         <Animated.Image source={require('../img/171604419.jpg')} style={{
-                            width: 60,
-                            height: 60,
+                            width: defaultSize,
+                            height: defaultSize,
                             borderWidth: 0,
-                            borderRadius: 30
+                            borderRadius: defaultSize/2
                         }} />
                     </TouchableOpacity>
                 </View>
@@ -240,8 +241,8 @@ export class NewMicItem extends Component {
         setTimeout(() => {
             this._playAnim(value);
             this.setState({
-                headImage_margin_left: (-60 - this.state.w) / 2,
-                headImage_margin_left1: (-60 - this.state.w) / 2,
+                headImage_margin_left: (-defaultSize - this.state.w) / 2,
+                headImage_margin_left1: (-defaultSize - this.state.w) / 2,
             })
         }, 100);
     }
@@ -250,14 +251,14 @@ export class NewMicItem extends Component {
      */
     _playAnim(time) {
         var show_width = 0;
-        var wid = deviceWidth - 20 - 60;
+        var wid = deviceWidth - 20 - defaultSize;
         if (time >= 20) {
-            show_width = wid - 30;
+            show_width = wid - defaultSize/2;
         } else {
-            show_width = (wid - 60) / 20 * time + 60;
+            show_width = (wid - defaultSize) / 20 * time + defaultSize;
         }
         var cha = width - this.state.w - show_width;
-        var leftEvery = (this.state.w + show_width) / 2 - 60 / 2 + cha / 2;
+        var leftEvery = (this.state.w + show_width) / 2 - defaultSize / 2 + cha / 2;
         this.setState({
             w: this.state.w + show_width,
             h: this.state.h,
@@ -302,8 +303,8 @@ export class NewMicItem extends Component {
             }
             if (callback.value === 0) {
                 this.setState({
-                    viewWidth_1: 60,
-                    viewHeight_1: 60,
+                    viewWidth_1: defaultSize,
+                    viewHeight_1: defaultSize,
                     viewTop_1: maxSize / 2,
                     viewLeft_1: leftEvery,
                     viewRadius_1: this.state.viewHeight_1,
@@ -348,8 +349,8 @@ export class NewMicItem extends Component {
             }
             if (callback.value === 0) {
                 this.setState({
-                    viewWidth_2: 60,
-                    viewHeight_2: 60,
+                    viewWidth_2: defaultSize,
+                    viewHeight_2: defaultSize,
                     viewTop_2: maxSize / 2,
                     viewLeft_2: leftEvery,
                     viewRadius_2: this.state.viewHeight_1,
@@ -419,37 +420,37 @@ const style = StyleSheet.create({
         marginTop: 6,
         width: 320,
         flexDirection: "row",
-        borderRadius: 30,
+        borderRadius: defaultSize/2,
         backgroundColor: "#99999900",
         justifyContent: 'center',
         alignItems: 'center'
     },
     touch2: {
-        width: 60,
-        height: 60,
-        borderRadius: 30,
+        width: defaultSize,
+        height: defaultSize,
+        borderRadius: defaultSize/2,
         backgroundColor: "#99999950",
         justifyContent: 'center',
         alignItems: 'center'
     },
     img: {
-        width: 60,
-        height: 60,
+        width: defaultSize,
+        height: defaultSize,
         borderWidth: 0,
-        borderRadius: 30,
+        borderRadius: defaultSize/2,
         position: "absolute",
         alignItems: 'center'
     },
     img3: {
         borderWidth: 0,
-        borderRadius: 30,
+        borderRadius: defaultSize/2,
         position: "absolute",
         alignItems: 'center',
         backgroundColor: "green"
     },
     img2: {
         borderWidth: 0,
-        borderRadius: 30,
+        borderRadius: defaultSize/2,
         justifyContent: 'center',
         alignItems: 'center'
     },

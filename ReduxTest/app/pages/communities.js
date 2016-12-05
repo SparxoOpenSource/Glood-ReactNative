@@ -26,7 +26,6 @@ import { EventListener } from "../listener/EventListener";
 import { fontSizeAndroid } from "../utils/CommonUtils.js";
 import { LoadingView } from "../components/LoadingView";
 import isAndroid from '../utils/isAndroid.js';
-import ScrollableTabView, { DefaultTabBar } from 'react-native-scrollable-tab-view';
 import RefreshableListView from "react-native-refreshable-listview";
 import { Add, SelectByRoomName, DeleteMin, Drop, Update, SelectAll } from "../utils/DBUtil"
 import { joinEventChatRoom } from '../utils/CommonUtils';
@@ -176,7 +175,7 @@ export class Communities extends Component {
         );
     }
     returnView() {
-        var view = <CoverFlow key="">
+        var view = <CoverFlow>
             {this.state.images.map((src, i) =>
                 <View style={{ backgroundColor: 'white', width: widthh * (270 / 414), height: heightt * (600 / 736), marginTop: heightt * (14 / 736), borderRadius: 5 }}>
                     <Image style={{

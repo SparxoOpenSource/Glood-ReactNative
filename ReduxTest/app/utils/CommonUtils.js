@@ -67,6 +67,7 @@ export function start() {
       Pop("connection server Success");
       signalr.loadEventChatRooms().done((room) => {
         console.log('------***', room);
+        joinEventChatRoom('1');
       }).fail(() => {
         Pop('loadRooms ERROR');
       })
@@ -86,13 +87,17 @@ export function joinEventChatRoom(eventName) {
       Pop('joinEventChatRoom success');
       EventListener.trigger("DrawerOpenPage", "EventInfo");//调用这个监听
       console.log('joinEventChatRoom success -------', eventName);
+      singleton.setTitle("Crazy May Fest 2017");
+        singleton.getNav().replace({
+            name: "DrawerMe"
+        });
 
       // Pop('joinEventChatRoom success');
       // EventListener.trigger("DrawerOpenPage", "EventInfo");
-      singleton.setTitle("Crazy May Fest 2016");
-        singleton.getNav().push({
-            name: 'NEWMIC'
-        });
+      // singleton.setTitle("Crazy May Fest 2016");
+      //   singleton.getNav().push({
+      //       name: 'NEWMIC'
+      //   });
       console.log('sdfsdf-------', eventName);
 
     }).fail(() => {

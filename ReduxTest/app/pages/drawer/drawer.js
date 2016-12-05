@@ -30,6 +30,7 @@ import { Pop } from "../../utils/AlertPop";
 import { Tickets } from "../../pages/tickets"
 import { ActivityList } from "../../pages/activitylist"
 import { Communities } from "../../pages/communities"
+import { NewMic } from "../../pages/newMic"
 import { start } from "../../utils/CommonUtils";
 import Singleton from '../../utils/Singleton';
 var {height, width} = Dimensions.get('window');
@@ -41,7 +42,7 @@ export class DrawerMe extends Component {
         super(props);
         this.state = {
             drawerLockMode: 'unlocked',
-            indexView: <Communities />
+            indexView: <NewMic />
         }
     }
     /**
@@ -51,10 +52,10 @@ export class DrawerMe extends Component {
         //这里给eventListener设置监听
         EventListener.on("Drawer").then(this.OpenCloseDrawer.bind(this));
         EventListener.on("DrawerOpenPage").then(this.OpenPage.bind(this));
-        setTimeout(() => {
-            //连接聊天服务器，用户进行登录操作，系统分配用户名，ID和记录登录时间
-            start();
-        }, 0);
+        // setTimeout(() => {
+        //     //连接聊天服务器，用户进行登录操作，系统分配用户名，ID和记录登录时间
+        //     start();
+        // }, 0);
     }
     componentWillUnmount() {
         console.log('Drawer------componentWillUnmount ');
@@ -100,14 +101,7 @@ export class DrawerMe extends Component {
         switch (name) {
             case "Mingle":
                 singleton.setTitle("Crazy May Fest 2016");
-                sr = <Communities />;
-                this.setState({
-                    indexView: sr
-                });
-                break;
-            case "Mingle":
-                singleton.setTitle("Crazy May Fest 2016");
-                sr = <Communities />;
+                sr = <NewMic />;
                 this.setState({
                     indexView: sr
                 });

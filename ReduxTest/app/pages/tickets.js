@@ -25,7 +25,6 @@ import { EventListener } from "../listener/EventListener";
 import { fontSizeAndroid } from "../utils/CommonUtils.js";
 import { LoadingView } from "../components/LoadingView";
 import isAndroid from '../utils/isAndroid.js';
-import ScrollableTabView, { DefaultTabBar } from 'react-native-scrollable-tab-view';
 
 var QRCode = require('react-native-qrcode');
 var image_margin_left;
