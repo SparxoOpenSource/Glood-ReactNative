@@ -166,7 +166,6 @@ export class NewMic extends Component {
                     <Common page='Main' rightType='Down' />
                     <View style={{ width: this.state.ticketViewWidth, height: 20, backgroundColor: '#00000000' }} />
                     <CoverFlow>
-
                         {this.state.images.map((src, i) =>
                             <View ref={'backgroundView' + i} style={{
                                 backgroundColor: 'white', width: this.state.ticketViewWidth * (270 / 414), height: (this.state.ticketViewHeight - Navigator.NavigationBar.Styles.General.NavBarHeight - 20) * (600 / 736),
@@ -239,7 +238,7 @@ export class NewMic extends Component {
                             </View>
                         )}
                     </CoverFlow>
-                    <View style={{ flex: 1, alignItems: 'center',justifyContent:'center', flexDirection: 'row', marginTop: heightt * (500 / 736) }}>
+                    <View style={{ flex: 1, alignItems: 'center',justifyContent:'center', flexDirection: 'row', }}>
                     <View style={{flex:2}}/>
                         <Image ref={'autoimage'} source={this.state.autoImage} style={{ flex: 1, width: 0, height: 0 }} />
                         <View style={{ flex: 20, alignItems: 'center',justifyContent:'center' }} >
@@ -370,9 +369,6 @@ export class NewMic extends Component {
                 }
             });
         }
-
-
-        
         // console.log('*-*-*-*-------',this.refs[listview]);
         // this.scrollResponder = this.refs[listview].getScrollResponder();
         // joinEventChatRoom(value);
@@ -380,7 +376,7 @@ export class NewMic extends Component {
 
     _row(rowData, sectionID, rowID) {
         console.log('*-*-/-*-*-*---------rowData:',rowData);
-        let item = <NewMicItem isWillFilterPeople={this.state.isPeoplePressed} title={rowData} auto={auto}  dateLength={data.length}  />;
+        let item = <NewMicItem  dialog={this.refs.dialog} isWillFilterPeople={this.state.isPeoplePressed} title={rowData} auto={auto}  dateLength={data.length}  />;
         return item;
     }
     _people() {

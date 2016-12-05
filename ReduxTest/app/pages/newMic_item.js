@@ -200,7 +200,7 @@ export class NewMicItem extends Component {
             return;
         var title = value.name;
         var time = value.time;
-
+  console.log("_onPress,this.props.isWillFilterPeople:", this.props.isWillFilterPeople, this.props.dialog);
         //处于屏蔽人员状态，需要屏蔽该对话的人员
         if (this.props.isWillFilterPeople) {
             let ndialog = this.props.dialog;
