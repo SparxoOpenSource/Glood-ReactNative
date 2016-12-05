@@ -26,7 +26,6 @@ import { EventListener } from "../listener/EventListener";
 import { fontSizeAndroid } from "../utils/CommonUtils.js";
 import { LoadingView } from "../components/LoadingView";
 import isAndroid from '../utils/isAndroid.js';
-import ScrollableTabView, { DefaultTabBar } from 'react-native-scrollable-tab-view';
 import RefreshableListView from "react-native-refreshable-listview";
 import { Add, SelectByRoomName, DeleteMin, Drop, Update, SelectAll } from "../utils/DBUtil"
 import { joinEventChatRoom } from '../utils/CommonUtils';
