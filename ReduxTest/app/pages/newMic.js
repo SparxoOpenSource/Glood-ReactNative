@@ -223,8 +223,7 @@ export class NewMic extends Component {
                                     style={{ position: 'absolute',marginLeft:-60,height:200}}
                                         enableEmptySections={true}
                                         dataSource={this.state.dataSource}
-                                        renderRow={this._row.bind(this)}
-                                        refreshPrompt="Pull down to refresh"/>
+                                        renderRow={this._row.bind(this)}/>
                                     <Animated.View ref={'backView' + i} style={{
                                         width: width * (270 / 414),
                                         height: heightt * (600 / 736),
@@ -244,12 +243,15 @@ export class NewMic extends Component {
                     <View style={{flex:2}}/>
                         <Image ref={'autoimage'} source={this.state.autoImage} style={{ flex: 1, width: 0, height: 0 }} />
                         <View style={{ flex: 20, alignItems: 'center',justifyContent:'center' }} >
-                            <Image style={{ width: 70, height: 70 }} source={require('../img/voice.png')}>
-                                <TouchableOpacity style={{ width: 70, height: 70, borderRadius: 35 }} source={require('../img/voice.png')}
+                        <TouchableWithoutFeedback onPressOut={this._stop.bind(this)} onPressIn={this._startVoice.bind(this)}>
+                                <Image ref={'voiceImageyy'} style={{ width: 0, height: 0 }} source={this.state.voiceImage} />
+                            </TouchableWithoutFeedback>
+                            <Image ref={'voiceImagexx'}  style={{ width: 70, height: 70 }} source={require('../img/voice.png')}>
+                                <TouchableOpacity style={{ width: 70, height: 70, borderRadius: 35 }}
                                     onPress={this.NewMic.bind(this, '1')} />
                             </Image>
                         </View>
-                        <TouchableOpacity  style={{flex: 1, width: 23, height: 29, alignItems: 'center',justifyContent:'center' }} onPress={() => this._people()}>
+                        <TouchableOpacity style={{flex: 1, width: 23, height: 29, alignItems: 'center',justifyContent:'center' }} onPress={() => this._people()}>
                             <Image ref={'peopleimage'} source={this.state.people} style={style.ImagStyle3} />
                         </TouchableOpacity>
                         <View style={{ flex: 2 }} />
@@ -295,6 +297,16 @@ export class NewMic extends Component {
         // this._playAnimOne();
 
         EventListener.trigger("setEnScroll");
+        this.refs.voiceImagexx.setNativeProps({
+            style: {
+                width: 0, height: 0
+            }
+        });
+        this.refs.voiceImageyy.setNativeProps({
+            style: {
+                width: 70, height: 70
+            }
+        });
         this.refs.autoimage.setNativeProps({
             style: {
                 width: 16, height: 25

@@ -1,6 +1,8 @@
 var signalr = require("react-native-signalr");
 var url = 'http://e-chat.sparxo.com/';
 var hubName = 'eventHub';
+// var url = 'https://event-chat.sparxo.com/';
+// var hubName = 'chat';
 
 function Signar(clients) {
     this.connection = signalr.hubConnection(url);
