@@ -6,7 +6,6 @@ var Nav;
 var title;
 var name;
 var route;
-var accessToken;//access_token
 
 export default class Singleton {
     constructor() {
@@ -23,14 +22,6 @@ export default class Singleton {
     getIP() {
         return this.IPAddress;
     }
-    setAccessToken(token) {
-        this.accessToken = token;
-    }
-
-    getAccessToken() {
-        return this.accessToken;
-    }
-
     setMicFunction(func) {
         this.MicFunction = func;
     }

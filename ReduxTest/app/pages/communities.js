@@ -30,6 +30,9 @@ import ScrollableTabView, { DefaultTabBar } from 'react-native-scrollable-tab-vi
 import RefreshableListView from "react-native-refreshable-listview";
 import { Add, SelectByRoomName, DeleteMin, Drop, Update, SelectAll } from "../utils/DBUtil"
 import { joinEventChatRoom } from '../utils/CommonUtils';
+import { getJsonEvents_url } from '../utils/NetUtil';
+import Singleton from '../utils/Singleton';
+import {Global} from '../utils/GlobalUtil';
 
 var data = new Array();
 var ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
@@ -41,7 +44,6 @@ var STATUS_BAR_HEIGHT = Navigator.NavigationBar.Styles.General.StatusBarHeight;
 var heightt = Dimensions.get('window').height - Navigator.NavigationBar.Styles.General.NavBarHeight - 20
 var {height, width} = Dimensions.get('window');
 var micBackgroundImageWidth;
-import Singleton from '../utils/Singleton';
 var singleton = new Singleton();
 var temp = <View style={{
     width: widthh, height: heightt,
@@ -51,14 +53,17 @@ var temp = <View style={{
 }}>
     <LoadingView />
 </View>;
-
+var access_token = "gDNX0dnW-N6rQttsEqEZGjYNmdOk2xyJHTXNW7diAjWxUO247Zpy5dUk8iPSLSOEJzm3ZCi2t-9ymcKNPNgP06Fe8__wfw6csuLKT5OFYv8bBk7oDu-b-EfcgNnHAzel-paxgve58EU-dWCo5SbwYu_8ZkaIAHG4Hip_R2cwigsMoUGjuErU9F1_CXLtKpDv7tJmEzMq9s1xiWpSz4Z7hnupwsync3z2T4HF_c4hHi-tP4HIYZcImpqyCQEgplkT-QGelxx9hg6Uf2w22Zq_29eiT24CszF8UxKE8D0LLA0ETxLZqDzTTl3bVJK09DQqm7D_tR5atWcjNYfecSbK69KCwN6EwYV4iUFlUPQQG11sOGDADj7R1-Ebm1ZvKt4W5WpWHBGmknmXYQaEF5T9sXWxy7U7XPB4zB9GpVsCDe4y2atRntBmOAPCrTRZnnTtXxCQbOfBiLQ9x37AkFAAGDCiaSGl4gRfNVC5ORDfTywUQV9XwuGYVfUOfGImjU_MAfCzHkjg1XkDHCk9mko48ncIsPo";
 export class Communities extends Component {
     constructor() {
         super();
         singleton.setTitle("Communities");
         this.state = {
             images: [
-                { headImageIcon: 'http://i1.s2.dpfile.com/pc/170955571fdcb7b3bab5df4f69f156e7%28700x700%29/thumb.jpg', eventName: '1', month: 'MAY', day: '01', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias' },
+                {
+                    headImageIcon: 'http://i1.s2.dpfile.com/pc/170955571fdcb7b3bab5df4f69f156e7%28700x700%29/thumb.jpg',
+                    eventName: '1', month: 'MAY', day: '01', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias'
+                },
                 { headImageIcon: "http://i2.s2.dpfile.com/pc/638089fd18888ca0e0a45f1635659b7b%28700x700%29/thumb.jpg", eventName: '2', month: 'MAY', day: '02', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias' },
                 { headImageIcon: "http://i1.s2.dpfile.com/pc/d23976621b193f9c821756bd4f79aaec%28700x700%29/thumb.jpg", eventName: '3', month: 'MAY', day: '03', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias' },
                 { headImageIcon: "http://www.shandongqingdian.com/uploads/allimg/150714/142R32033-4.jpg", eventName: '4', month: 'MAY', day: '04', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias' },
@@ -72,48 +77,53 @@ export class Communities extends Component {
                 { headImageIcon: "http://n.sinaimg.cn/transform/20150702/OCWi-fxesssr5385926.jpg", eventName: '2015 Sparxo Grand Opening(SF ...', month: 'MAY', day: '12', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias' },
                 { headImageIcon: "http://i1.s2.dpfile.com/pc/79cc79a44aaeb3d4c566eb8b2de04382%28740x2048%29/thumb.jpg", eventName: '2015 Sparxo Grand Opening(SF ...', month: 'MAY', day: '13', time: '9:00 pm - 12:30 am', address: '530 Brannan Street, San Francisco', name: 'Jess Cobarrusvias' },
             ],
-            mic:[ { RoomName: '1',
-    FileName: '20161125110424.wav',
-    Time: 1.3,
-    name: '20161125110424.wav',
-    ip: '83C9A2EB-4B08-4596-956D-73BF67B0599B',
-    time: 1.3,
-    date: '2016-11-25 11:04:24',
-    id: 1 },
-  { RoomName: '1',
-    FileName: '20161125110434.wav',
-    Time: 4.5,
-    name: '20161125110434.wav',
-    ip: '83C9A2EB-4B08-4596-956D-73BF67B0599B',
-    time: 4.5,
-    date: '2016-11-25 11:04:34',
-    id: 2 },
-  { RoomName: '1',
-    FileName: '20161125111155.wav',
-    Time: 2.4,
-    name: '20161125111155.wav',
-    ip: '83C9A2EB-4B08-4596-956D-73BF67B0599B',
-    time: 2.4,
-    date: '2016-11-25 11:11:55',
-    id: 3 },
-  { RoomName: '1',
-    FileName: '20161125124038.wav',
-    Time: 2.2,
-    name: '20161125124038.wav',
-    ip: '83C9A2EB-4B08-4596-956D-73BF67B0599B',
-    time: 2.2,
-    date: '2016-11-25 12:40:38',
-    id: 4 }],
+            mic: [{
+                RoomName: '1',
+                FileName: '20161125110424.wav',
+                Time: 1.3,
+                name: '20161125110424.wav',
+                ip: '83C9A2EB-4B08-4596-956D-73BF67B0599B',
+                time: 1.3,
+                date: '2016-11-25 11:04:24',
+                id: 1
+            },
+            {
+                RoomName: '1',
+                FileName: '20161125110434.wav',
+                Time: 4.5,
+                name: '20161125110434.wav',
+                ip: '83C9A2EB-4B08-4596-956D-73BF67B0599B',
+                time: 4.5,
+                date: '2016-11-25 11:04:34',
+                id: 2
+            },
+            {
+                RoomName: '1',
+                FileName: '20161125111155.wav',
+                Time: 2.4,
+                name: '20161125111155.wav',
+                ip: '83C9A2EB-4B08-4596-956D-73BF67B0599B',
+                time: 2.4,
+                date: '2016-11-25 11:11:55',
+                id: 3
+            },
+            {
+                RoomName: '1',
+                FileName: '20161125124038.wav',
+                Time: 2.2,
+                name: '20161125124038.wav',
+                ip: '83C9A2EB-4B08-4596-956D-73BF67B0599B',
+                time: 2.2,
+                date: '2016-11-25 12:40:38',
+                id: 4
+            }],
             viewCoverFlow: temp,
-            micBackgroundImageWidth:0,
+            micBackgroundImageWidth: 0,
             dataSource: ds.cloneWithRows(data),
         }
-        
-       
-
     }
     _refush(value) {
-        console.log('xxsdfsdfsdfsdfxxxxxx2222---------',value);
+        console.log('xxsdfsdfsdfsdfxxxxxx2222---------', value);
         this.setState({
             dataSource: this.state.dataSource.cloneWithRows(value)
         })
@@ -126,15 +136,22 @@ export class Communities extends Component {
             throw error;
         }
     }
+    componentWillMount() {
+        let header = {};
+        header.authorization = 'Bearer '+access_token;
+        header.Accept = "application/json";
+        header['Content-Type'] = "application/json";
+        getJsonEvents_url(null, header, (sData) => { console.log("getJsonEvents_url sData", sData); }, (eData) => { console.log("getJsonEvents_url eData", eData); });
+    }
     componentDidMount() {
-         let access_token = singleton.getAccessToken();
-         console.log("access_token",access_token);
+        let access_token = Global.accessToken;
+        console.log("access_token", access_token);
         console.log('xxsdfsdfsdfsdfxxxxxx1111---------');
         SelectByRoomName('1', (callback) => {
             console.log("收到新消息", callback);
             data = [...callback];
             this._refush(data);
-            console.log('xxsdfsdfsdfsdfxxxxxx233333---------',data);
+            console.log('xxsdfsdfsdfsdfxxxxxx233333---------', data);
         });
 
         console.log('999999999999999999999')
@@ -169,16 +186,16 @@ export class Communities extends Component {
                 {this.state.viewCoverFlow}
                 <View style={{ flex: 0, alignItems: 'center', marginBottom: heightt * (10 / 736) }} >
                     <Image style={{ width: 70, height: 70 }} source={require('../img/voice.png')}>
-                        <TouchableOpacity style={{ width: 70, height: 70 ,borderRadius:35}} source={require('../img/voice.png')} onPress={this.NewMic.bind(this, '1')} />
+                        <TouchableOpacity style={{ width: 70, height: 70, borderRadius: 35 }} source={require('../img/voice.png')} onPress={this.NewMic.bind(this, '1')} />
                     </Image>
-                    
+
                 </View>
             </Image>
 
         );
     }
     returnView() {
-        var view = <CoverFlow key="">
+        var view = <CoverFlow>
             {this.state.images.map((src, i) =>
                 <View style={{ backgroundColor: 'white', width: widthh * (270 / 414), height: heightt * (600 / 736), marginTop: heightt * (14 / 736), borderRadius: 5 }}>
                     <Image style={{
@@ -220,23 +237,23 @@ export class Communities extends Component {
                     </TouchableOpacity>
                     <View style={{
                         width: widthh * (250 / 414), height: heightt * (310 / 736),
-                        marginLeft: widthh * (10 / 414), marginTop: heightt * (45 / 736), flex: 4,flexDirection:'column',
+                        marginLeft: widthh * (10 / 414), marginTop: heightt * (45 / 736), flex: 4, flexDirection: 'column',
                     }} >
                         {this.state.mic.map((xxx, i) =>
-                            <View style={{ flex: 1}}>
+                            <View style={{ flex: 1 }}>
                                 <Image style={{ flex: 0, justifyContent: 'center', alignItems: 'center', borderRadius: heightt * (23 / 736), width: micBackgroundImageWidth, height: heightt * (46 / 736) }}
                                     key={i} source={require('../img/background.png')} >
                                     <Image style={{ width: heightt * (46 / 736), height: heightt * (46 / 736), borderRadius: heightt * (23 / 736) }}
                                         key={i} source={require('../img/171604419.jpg')}>
                                         <TouchableOpacity style={{ width: heightt * (46 / 736), height: heightt * (46 / 736), borderRadius: heightt * (23 / 736) }}
-                                         onPress={this.NewMic.bind(this, '1')}>
+                                            onPress={this.NewMic.bind(this, '1')}>
                                         </TouchableOpacity>
                                     </Image>
                                 </Image>
                             </View>
-                     )}
-                     <View style={{flex:0.25}}>
-                            </View>
+                        )}
+                        <View style={{ flex: 0.25 }}>
+                        </View>
                     </View>
 
                 </View>
@@ -248,13 +265,13 @@ export class Communities extends Component {
             viewCoverFlow: view
         });
     }
-    
+
     _row(rowData, sectionID, rowID) {
         let item = <NewMicItem title={rowData} auto={auto} rowID={parseInt(rowID)} dateLength={data.length} />;
         return item;
     }
     _accessFileName() {
-         SelectByRoomName('1');
+        SelectByRoomName('1');
     }
     InfoXX() {
         singleton.setTitle("");
@@ -269,7 +286,7 @@ export class Communities extends Component {
         });
     }
     NewMic(value) {
-        console.log("-=-==-=-=-=-=-=-=",value);
+        console.log("-=-==-=-=-=-=-=-=", value);
         joinEventChatRoom(value);
     }
 }

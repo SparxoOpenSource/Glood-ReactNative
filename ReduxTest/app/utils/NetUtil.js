@@ -1,9 +1,10 @@
 let baseUrl = 'https://a.sparxo.com/1/';///merchants/signup_external
 let signup_external_url = baseUrl + 'members/signup_external';///
 let events_url = baseUrl + 'members/current/events';///
-let obtain_local_access_token_url ='https://identity.sparxo.com/oauth2/obtain_local_access_token';//// oauth2/obtain_local_access_token
+let ticket_subs_url = baseUrl + 'members/current/events/{eventId}/ticket_subs';///
+let obtain_local_access_token_url = 'https://identity.sparxo.com/oauth2/obtain_local_access_token';//// oauth2/obtain_local_access_token
 
- var postFrom = function (url, params, sCallback, eCallback) {
+var postFrom = function (url, params, sCallback, eCallback) {
   console.log('postFrom url', url);
   console.log('postFrom params', params);
   console.log('postFrom JSON params', JSON.stringify(params));
@@ -28,7 +29,7 @@ let obtain_local_access_token_url ='https://identity.sparxo.com/oauth2/obtain_lo
 *data:参数(Json对象)
 *callback:回调函数
 */
- var postJson = function (url, params, sCallback, eCallback) {
+var postJson = function (url, params, sCallback, eCallback) {
   console.log('postJson url', url);
   console.log('postJson params', params);
   console.log('postJson JSON params', JSON.stringify(params));
@@ -55,7 +56,7 @@ let obtain_local_access_token_url ='https://identity.sparxo.com/oauth2/obtain_lo
 *url :请求地址
 *callback:回调函数
 */
- var get = function (url, sCallback, eCallback) {
+var get = function (url, sCallback, eCallback) {
   console.log('get url', url);
   fetch(url)
     .then((response) => response.text())
@@ -70,13 +71,12 @@ let obtain_local_access_token_url ='https://identity.sparxo.com/oauth2/obtain_lo
 *url :请求地址
 *callback:回调函数
 */
- var get2 = function (url, headers, sCallback, eCallback) {
+var get2 = function (url, headers, sCallback, eCallback) {
   console.log('get2 url', url);
   console.log('get2 headers', headers);
   var fetchOptions = {
     method: 'GET',
-    headers: headers,
-    body: JSON.stringify(data)
+    headers: headers
   };
   fetch(url, fetchOptions)
     .then((response) => response.text())
@@ -87,11 +87,58 @@ let obtain_local_access_token_url ='https://identity.sparxo.com/oauth2/obtain_lo
     }).done();
 }
 /**
- *  events_url
+ *events_url
 *url :请求地址
 *callback:回调函数
+ headers: {
+      'authorization':'access_token',
+      'Accept': 'application/json',
+      //json形式
+      'Content-Type': 'application/json'
+    }
+  ** result:{
+  "result": [
+    {
+      "begin_time_utc": "2016-10-11T09:01:00Z",
+      "end_time_utc": "2017-01-28T10:01:00Z",
+      "image_crop_info": {
+        "x1": 0,
+        "x2": 1728,
+        "y1": 232,
+        "y2": 882
+      },
+      "image_url": "https://image-cache.sparxo.com/sparxo.app.ticketing/41447869118423040/aba70e518d264e4c93590a506cbc4700.jpg",
+      "location": "San Francisco, CA, United States",
+      "long_description": "<p><span style=\"line-height: 1.42857; background-color: initial;\">Welcome to the latest League Podcast, a series in which we take you behind-the-scenes with the people who help make League possible. Expect new guests and new stories every couple of weeks or so, and make sure to hit us with those comments and ratings so we can keep striving toward a Challenger-tier podcast.</span><br></p><p><br></p><p>This week, Rick “Mr. Piddlesworth” Ernst and Chris “Cades” Cantrell stop by to talk about Riot’s first board game, Mechs vs Minions.</p><p><br></p>",
+      "merchant_id": "41447869118423040",
+      "name": "<script>alert(1)</script>",
+      "need_collect_phone_number": true,
+      "need_collect_zip_code": true,
+      "region": "",
+      "short_description": "",
+      "show_event_date": true,
+      "skip_event_landing_page": false,
+      "status": 1,
+      "time_zone_id": "Pacific Standard Time",
+      "type": 1,
+      "url_name": "zmgtest",
+      "schedules": [
+        {
+          "begin_time_local": "2016-10-11T02:01:00Z",
+          "begin_time_utc": "2016-10-11T09:01:00Z",
+          "end_time_local": "2017-01-28T02:01:00Z",
+          "end_time_utc": "2017-01-28T10:01:00Z",
+          "event_id": "41451413846368256",
+          "id": "41451413846368257"
+        }
+      ],
+      "id": "41451413846368256"
+    }]
 */
- function getJsonEvents_url(params, headers, sCallback, eCallback) {
+function getJsonEvents_url(params, headers, sCallback, eCallback) {
+  get2(params ? events_url + '?' + params : events_url, headers, sCallback, eCallback);
+}
+function getJsonTicket_subs_url(params, headers, sCallback, eCallback) {
   get2(params ? events_url + '?' + params : events_url, headers, sCallback, eCallback);
 }
 /**
@@ -99,7 +146,7 @@ let obtain_local_access_token_url ='https://identity.sparxo.com/oauth2/obtain_lo
 *url :请求地址
 *callback:回调函数
 */
- function postJsonSignup_external(params, sCallback, eCallback) {
+function postJsonSignup_external(params, sCallback, eCallback) {
   postJson(signup_external_url, params, sCallback, eCallback);
 }
 /**
@@ -107,11 +154,11 @@ let obtain_local_access_token_url ='https://identity.sparxo.com/oauth2/obtain_lo
 *url :请求地址
 *callback:回调函数
 */
- function getObtain_local_access_token(params, sCallback, eCallback) {
+function getObtain_local_access_token(params, sCallback, eCallback) {
   get(params ? obtain_local_access_token_url + '?' + params : obtain_local_access_token_url, sCallback, eCallback);
 }
 
- function getQueryString(url) {
+function getQueryString(url) {
   if (!url) { return {}; }
   // 从url(可选)或window对象获取查询字符串
   var queryString = url.split('#')[1];
@@ -167,4 +214,4 @@ let obtain_local_access_token_url ='https://identity.sparxo.com/oauth2/obtain_lo
   }
   return obj;
 }
-module.exports = {getObtain_local_access_token, postJsonSignup_external,getJsonEvents_url,getQueryString};
+module.exports = { getObtain_local_access_token, postJsonSignup_external, getJsonEvents_url, getQueryString };

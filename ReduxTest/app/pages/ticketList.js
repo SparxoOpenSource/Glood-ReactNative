@@ -16,10 +16,11 @@ import { Common } from "./common";
 import Singleton from '../utils/Singleton';
 import { TicketListItem } from "./ticketListItem";
 import RefreshableListView from "react-native-refreshable-listview";
+import { getJsonTicket_subs_url } from '../utils/NetUtil';
 
 var {height, width} = Dimensions.get('window');
 var singleton = new Singleton();
-
+let eventId="41387822048878592";
 var event = [
     { barcode: '11D2A', lastName: 'Christina', fristName: 'Angela', ticketName: 'VIP Lounge Gold Tier', image: "http://att.bbs.duowan.com/forum/201508/17/184055uzl9qq6ly9xqhhl8.jpg" },
     { barcode: '12D2A', lastName: 'Christina', fristName: 'Angela', ticketName: 'VIP Lounge Gold Tier', image: "http://att.bbs.duowan.com/forum/201508/17/184055uzl9qq6ly9xqhhl8.jpg" },
@@ -67,7 +68,13 @@ export class TicketList extends Component {
     }
 
     componentWillmount() {
-        console.log('xxxxxxxx---------');
+        console.log(' componentWillmount---------');
+         let header = {};
+        header.authorization = 'Bearer '+access_token;
+        header.Accept = "application/json";
+        header['Content-Type'] = "application/json";
+        let params="eventId="+eventId;
+        getJsonTicket_subs_url(params, header, (sData) => { console.log("getJsonTicket_subs_url sData", sData); }, (eData) => { console.log("getJsonTicket_subs_url eData", eData); });
     }
 }
 

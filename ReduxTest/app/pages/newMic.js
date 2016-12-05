@@ -119,7 +119,6 @@ export class NewMic extends Component {
             </Image>
         );
     }
-
     _row(rowData, sectionID, rowID) {
         let item = <NewMicItem dialog={this.state.dialog}  isWillFilterPeople={this.state.isPeoplePressed} title={rowData} auto={auto} rowID={parseInt(rowID)} dateLength={data.length}  />;
         return item;

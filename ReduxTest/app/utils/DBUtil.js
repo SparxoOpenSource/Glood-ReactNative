@@ -2,8 +2,61 @@
 import SQLite from 'react-native-sqlite-storage';
 import { Alert } from 'react-native';
 import moment from "moment";
-var db = SQLite.openDatabase({ name: "Glood.db" });
+
+function errorCB(err) {
+    console.log("SQL Error: " + err);
+}
+
+function successCB() {
+    console.log("SQL executed fine");
+}
+
+function openCB() {
+    console.log("Database OPENED");
+}
+var db = SQLite.openDatabase({ name: "Glood.db" }, openCB, errorCB);
 var item = [];
+export var UserTableHelper = {};
+
+UserTableHelper.checkTable = function () {
+    db.transaction((tx) => {
+        tx.executeSql('CREATE TABLE IF NOT EXISTS GloodUser (Id integer PRIMARY KEY autoincrement,token varchar(225), name varchar(100))');
+    }, (e) => { console.log(e) });
+}
+
+/**
+ * 添加一个用户信息
+ * userEntity
+ *  userEntity.token
+ *  userEntity.name
+ * callback  //插入成功的回调
+ */
+UserTableHelper.add = function (userEntity, callback) {
+    db.transaction((tx) => {
+        var sql = "INSERT INTO GloodUser(token,name)  VALUES(?,?)";
+        tx.executeSql(sql, [userEntity.token, userEntity.name], (tx, rs) => {
+            //插入数据成功，受影响的行数
+            console.log("插入GloodUser 数据成功，受影响的行数" + rs.rows.item.length);
+            callback && callback(rs.rows.item.length);
+        });
+    });
+}
+/**
+ * 获取当前表的第一条记录
+ */
+UserTableHelper.selectFirst = function (callback) {
+    console.log("selectFirst callback:" + callback);
+    db.transaction((tx) => {
+        var sql = "SELECT * FROM GloodUser";
+        tx.executeSql(sql, [], (tx, results) => {
+            console.log("查询GloodUser 数据成功，受影响的行数" + results.rows.length);
+            // callback(results.rows[0]);
+            callback(results.rows.item(0));
+        })
+    });
+}
+
+
 /**
  * 查询数据是否存在
  */
@@ -18,14 +71,19 @@ export function TabbleIsExist(tableName) {
         });
     }, (e) => { console.log(e) });
 }
+
 /**
  * 创建数据表
  */
 export function CreatTable() {
+    //用户表
+    UserTableHelper.checkTable();
+    //聊天记录表
     db.transaction((tx) => {
         tx.executeSql('CREATE TABLE IF NOT EXISTS GloodRecord (Id integer PRIMARY KEY autoincrement,RoomName varchar(100), FileName varchar(100), Time double, UserName varchar(100),Date timestring)');
     }, (e) => { console.log(e) });
 }
+
 /**
  * 新增数据
  */
@@ -57,7 +115,7 @@ export function SelectByRoomNameCount(value, callback) {
  * 根据房间查询该房间下的所有数据
  */
 export function SelectByRoomName(value, callback) {
-    console.log('dfsdf=----------',value);
+    console.log('dfsdf=----------', value);
     db.transaction((tx) => {
         // var sql = "SELECT * FROM GloodRecord WHERE RoomName=? ORDER BY Date DESC";
         var sql = "SELECT * FROM GloodRecord WHERE RoomName=? ORDER BY Date ASC";

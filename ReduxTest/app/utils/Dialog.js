@@ -15,9 +15,10 @@ import TimerMixin from 'react-timer-mixin';
 import isAndroid from './isAndroid.js';
 const {width, height} = Dimensions.get('window');
 const navigatorH = 64; // navigator height  
-const [aWidth, aHeight] = [270, 108];
+const [aWidth, aHeight] = [270, 210];
 const [left, top] = [0, 0];
 const [middleLeft, middleTop] = [(width - aWidth) / 2, (height - aHeight) / 2 - navigatorH];
+const middleLeft2 = width / 2 - middleLeft - 30;//头像的left
 var maxSize = isAndroid() ? 30 : 35;
 var cha = width - 60;
 /** 
@@ -33,7 +34,7 @@ const styles = StyleSheet.create({
     height: height,
     left: left,
     top: top,
-    borderRadius: 30
+    borderRadius: 30,
   },
   mask: {
     justifyContent: "center",
@@ -49,74 +50,78 @@ const styles = StyleSheet.create({
     width: aWidth,
     height: aHeight,
     left: middleLeft,
-    backgroundColor: "#fff",
+    opacity: 0.8,
     alignItems: "center",
-    flexDirection: "column"
+    flexDirection: "column",
+
   },
   tipPhoto: {
+    position: "absolute",
+    left: middleLeft2,
+    top: 0,
     width: 60,
     height: 60,
+    borderWidth: 0,
+    borderRadius: 30,
     alignItems: "center",//水平居中
-    flex: 1,
   },
   tipInner: {
+    top: 20,
     width: aWidth,
     height: aHeight - 30,
-    left: middleLeft,
-    backgroundColor: "#fff",
+    backgroundColor: "white",
     alignItems: "center",
-    justifyContent: "space-between",
-    flex: 1,
-    flexDirection: "column"
+    flexDirection: "column",
+    borderWidth: 0,
+    borderRadius: 10,
   },
   tipTitleView: {
     width: aWidth,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
     borderBottomWidth: 1 / 2,
+    top: 20,
+    height: aHeight - 20 - 30 - 40,
     borderColor: '#f0f0f0',
-    flex: 1,
   },
   tipTitleText: {
     color: "#333333",
-    fontSize: 17,
-    marginTop: 28,
-    marginBottom: 19,
+    fontSize: 20,
     textAlignVertical: 'center',
     textAlign: 'center',
+    height: aHeight - 20 - 30 - 40,
   },
 
   btnView: {
+    top: 20,
     flexDirection: 'row',
-    height: 44,
-    flex: 1,
+    height: 40,
+    borderWidth: 0,
+    borderRadius: 10,
   },
   cancelBtnView: {
     width: aWidth / 2,
-    height: 44,
+    height: 40,
     backgroundColor: '#0099FF',
     alignItems: 'center',
     justifyContent: 'center',
-    borderRightWidth: 1 / 2,
+    borderRightWidth: 1,
     borderColor: '#ffffff',
   },
   cancelBtnText: {
-    fontSize: 17,
-    color: "#ffffff",
+    fontSize: 20,
+    color: "white",
     textAlign: "center",
     fontWeight: 'bold',
   },
   okBtnView: {
     width: aWidth / 2,
-    height: 44,
+    height: 40,
     backgroundColor: '#0099FF',
     alignItems: 'center',
     justifyContent: 'center',
   },
   okBtnText: {
-    fontSize: 17,
-    color: "#ffffff",
+    fontSize: 20,
+    color: "white",
     textAlign: "center",
   },
 });
@@ -170,7 +175,7 @@ export class Dialog extends Component {
               </View>
             </View>
 
-             <Image source={require('../img/like.png')} style={styles.tipPhoto} />
+            <Image source={require('../img/like2.png')} style={styles.tipPhoto} />
           </Animated.View>
         </View>
       );
