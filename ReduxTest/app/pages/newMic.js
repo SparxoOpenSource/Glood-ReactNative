@@ -241,15 +241,15 @@ export class NewMic extends Component {
                     </CoverFlow>
                     <View style={{ flex: 1, alignItems: 'center',justifyContent:'center', flexDirection: 'row', }}>
                     <View style={{flex:2}}/>
-                        <Image source={this.state.autoImage} style={{ flex: 1, width: 16, height: 25 }} />
+                        <Image ref={'autoimage'} source={this.state.autoImage} style={{ flex: 1, width: 0, height: 0 }} />
                         <View style={{ flex: 20, alignItems: 'center',justifyContent:'center' }} >
                             <Image style={{ width: 70, height: 70 }} source={require('../img/voice.png')}>
                                 <TouchableOpacity style={{ width: 70, height: 70, borderRadius: 35 }} source={require('../img/voice.png')}
                                     onPress={this.NewMic.bind(this, '1')} />
                             </Image>
                         </View>
-                        <TouchableOpacity style={{flex: 1, width: 23, height: 29, alignItems: 'center',justifyContent:'center' }} onPress={() => this._people()}>
-                            <Image source={this.state.people} style={style.ImagStyle3} />
+                        <TouchableOpacity  style={{flex: 1, width: 23, height: 29, alignItems: 'center',justifyContent:'center' }} onPress={() => this._people()}>
+                            <Image ref={'peopleimage'} source={this.state.people} style={style.ImagStyle3} />
                         </TouchableOpacity>
                         <View style={{ flex: 2 }} />
                     </View>
@@ -294,9 +294,19 @@ export class NewMic extends Component {
         // this._playAnimOne();
 
         EventListener.trigger("setEnScroll");
+        this.refs.autoimage.setNativeProps({
+            style: {
+                width: 16, height: 25
+            }
+        });
+
+        this.refs.peopleimage.setNativeProps({
+            style: {
+                width: 23, height: 29
+            }
+        });
+        
         var mask = 'mask' + (value - 1);
-        
-        
         this.refs[mask].setNativeProps({
             style: {
                 width: width * (414 / 414),
@@ -494,7 +504,7 @@ export class NewMic extends Component {
     scrollOffsetxxx(offset) {
         console.log('9999-----',offset);
         console.log('xxxxxxxxxxxxxx---', offset/(width * (310 / 414)));
-        var offsetxx = ''+((offset/(width * (310 / 414)))+0.45);
+        var offsetxx = ''+((offset/(width * (310 / 414)))+0.55);
         var arr = offsetxx.split(".");
         
         var page =  (parseInt(arr[0]));
@@ -726,9 +736,9 @@ const style = StyleSheet.create({
         marginLeft: 20
     },
     ImagStyle3: {
-        marginTop: 26,
-        width: 23,
-        height: 29,
+        marginTop: 20,
+        width: 0,
+        height: 0,
     },
     welcomeText: {
         marginLeft: 10,
