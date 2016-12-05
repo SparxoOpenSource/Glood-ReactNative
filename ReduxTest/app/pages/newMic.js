@@ -240,19 +240,26 @@ export class NewMic extends Component {
                             </View>
                         )}
                     </CoverFlow>
-                    <View style={{ flex: 0, alignItems: 'center', marginBottom: heightt * (10 / 736) }} >
-                        <Image style={{ width: 70, height: 70 }} source={require('../img/voice.png')}>
-                            <TouchableOpacity style={{ width: 70, height: 70, borderRadius: 35 }} source={require('../img/voice.png')} 
-                            onPress={this.NewMic.bind(this, '1')} />
-                        </Image>
+                    <View style={{ flex: 1, alignItems: 'center',justifyContent:'center', flexDirection: 'row', marginTop: heightt * (500 / 736) }}>
+                    <View style={{flex:2}}/>
+                        <Image source={this.state.autoImage} style={{ flex: 1, width: 16, height: 25 }} />
+                        <View style={{ flex: 20, alignItems: 'center',justifyContent:'center' }} >
+                            <Image style={{ width: 70, height: 70 }} source={require('../img/voice.png')}>
+                                <TouchableOpacity style={{ width: 70, height: 70, borderRadius: 35 }} source={require('../img/voice.png')}
+                                    onPress={this.NewMic.bind(this, '1')} />
+                            </Image>
+                        </View>
+                        <TouchableOpacity style={{flex: 1, width: 23, height: 29, alignItems: 'center',justifyContent:'center' }} onPress={() => this._people()}>
+                            <Image source={this.state.people} style={style.ImagStyle3} />
+                        </TouchableOpacity>
+                        <View style={{ flex: 2 }} />
                     </View>
                 </Animated.View>
-                 <Dialog ref="dialog" />   
+                <Dialog ref="dialog" />
             </Image>
         );
     }
     InfoXX() {
-        Alert.alert('xxxxx')
         singleton.setTitle("");
         singleton.getNav().push({
             name: "USEREVENTINFO",
@@ -415,7 +422,6 @@ export class NewMic extends Component {
      * 开始录音
      */
     _startVoice() {
-        this._people();
         this.voiceStatus(true);
         RecordAudio.prototype.startRecord(userNamexx, (back) => {
             // RecordAudio.prototype.recordMsg("开始录音");
@@ -710,7 +716,7 @@ const style = StyleSheet.create({
         alignItems: 'center',
         paddingLeft: 20,
         paddingRight: 20,
-        marginBottom: 3
+        marginTop: height*(465/736)
     },
     ImagStyle: {
         marginTop: 30,
@@ -718,7 +724,7 @@ const style = StyleSheet.create({
         height: 25,
     },
     ImagStyle2: {
-        marginTop: 35,
+        marginTop: 30,
         width: 25,
         height: 20,
         marginLeft: 20
