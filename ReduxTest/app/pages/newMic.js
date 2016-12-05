@@ -239,7 +239,7 @@ export class NewMic extends Component {
                             </View>
                         )}
                     </CoverFlow>
-                    <View style={{ flex: 1, alignItems: 'center',justifyContent:'center', flexDirection: 'row', marginTop: heightt * (500 / 736) }}>
+                    <View style={{ flex: 1, alignItems: 'center',justifyContent:'center', flexDirection: 'row', }}>
                     <View style={{flex:2}}/>
                         <Image source={this.state.autoImage} style={{ flex: 1, width: 16, height: 25 }} />
                         <View style={{ flex: 20, alignItems: 'center',justifyContent:'center' }} >
@@ -354,7 +354,7 @@ export class NewMic extends Component {
 
     _row(rowData, sectionID, rowID) {
         console.log('*-*-/-*-*-*---------rowData:',rowData);
-        let item = <NewMicItem isWillFilterPeople={this.state.isPeoplePressed} title={rowData} auto={auto}  dateLength={data.length}  />;
+        let item = <NewMicItem  dialog={this.refs.dialog} isWillFilterPeople={this.state.isPeoplePressed} title={rowData} auto={auto}  dateLength={data.length}  />;
         return item;
     }
     _people() {
