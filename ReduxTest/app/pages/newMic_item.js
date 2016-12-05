@@ -17,9 +17,7 @@ import {
     Animated,
     Easing,
 } from 'react-native';
-
 import { RecordAudio } from "../utils/RecordAudio";
-
 import { EventListener } from "../listener/EventListener";
 import isAndroid from '../utils/isAndroid.js';
 import EventEmitter from "EventEmitter";
@@ -196,29 +194,35 @@ export class NewMicItem extends Component {
             </View>
         );
     }
-  
+
     _onPress(value, rowId, bool) {
         if (bool === 1 && this.state.isCisClick)
             return;
-        //处于屏蔽人员状态，需要屏蔽该对话的人员
-        console.log("_onPress,this.props.isWillFilterPeople:", this.props.isWillFilterPeople);
-        if (this.props.isWillFilterPeople) {
-            this.props.dialog.show();
-            // this.refs.dialog.show("确定要取消订单吗");
-            return;
-        }
         var title = value.name;
         var time = value.time;
-        if (time <= 0) {
-            RecordAudio.prototype.recordMsg("播放失败");
-            // EventListener.trigger("AutoPlayAllRecord", value, rowId, 1);
+
+        //处于屏蔽人员状态，需要屏蔽该对话的人员
+        if (this.props.isWillFilterPeople) {
+            let ndialog = this.props.dialog;
+            ndialog.show("Are you sure you want to block" ).then(() => {
+                Alert.alert('callback'+title);
+            }).catch(() => {
+                Alert.alert("fail"+time)
+            });
+            console.log("_onPress,this.props.isWillFilterPeople:", this.props.isWillFilterPeople, ndialog.props.mCallback);
             return;
+        } else {//播放voice
+            if (time <= 0) {
+                RecordAudio.prototype.recordMsg("播放失败");
+                // EventListener.trigger("AutoPlayAllRecord", value, rowId, 1);
+                return;
+            }
+            this._playAnimOne(time);
+            if (this.state.isCisClick == false) {
+                // this._playAnim(time);
+            }
+            this._play(value, rowId, bool);
         }
-        this._playAnimOne(time);
-        if (this.state.isCisClick == false) {
-            // this._playAnim(time);
-        }
-        this._play(value, rowId, bool);
     }
 
     /**

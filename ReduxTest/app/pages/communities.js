@@ -126,6 +126,8 @@ export class Communities extends Component {
         }
     }
     componentDidMount() {
+         let access_token = singleton.getAccessToken();
+         console.log("access_token",access_token);
         console.log('xxsdfsdfsdfsdfxxxxxx1111---------');
         SelectByRoomName('1', (callback) => {
             console.log("收到新消息", callback);
