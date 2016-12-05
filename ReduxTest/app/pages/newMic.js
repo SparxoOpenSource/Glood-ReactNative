@@ -245,9 +245,9 @@ export class NewMic extends Component {
                             <TouchableOpacity style={{ width: 70, height: 70, borderRadius: 35 }} source={require('../img/voice.png')} 
                             onPress={this.NewMic.bind(this, '1')} />
                         </Image>
-
                     </View>
                 </Animated.View>
+                 <Dialog ref="dialog" />   
             </Image>
         );
     }
@@ -326,25 +326,29 @@ export class NewMic extends Component {
             }
         });
 
-        backgroundView1 = 'backgroundView' + (value - 2);
-        this.refs[backgroundView1].setNativeProps({
-            style: {
-                marginTop: this.state.ticketViewHeight * (1400 / 736),
-            }
-        });
+        if ((value - 2) > 0) {
+            backgroundView1 = 'backgroundView' + (value - 2);
+            this.refs[backgroundView1].setNativeProps({
+                style: {
+                    marginTop: this.state.ticketViewHeight * (1400 / 736),
+                }
+            });
 
-        backgroundimage1 = 'backgroundimage' + (value - 2);
-        this.refs[backgroundimage1].setNativeProps({
-            style: {
-                marginTop: this.state.ticketViewHeight * (1400 / 736),
-            }
-        });
+            backgroundimage1 = 'backgroundimage' + (value - 2);
+            this.refs[backgroundimage1].setNativeProps({
+                style: {
+                    marginTop: this.state.ticketViewHeight * (1400 / 736),
+                }
+            });
+        }
+
 
         
         // console.log('*-*-*-*-------',this.refs[listview]);
         // this.scrollResponder = this.refs[listview].getScrollResponder();
         // joinEventChatRoom(value);
     }
+
     _row(rowData, sectionID, rowID) {
         console.log('*-*-/-*-*-*---------rowData:',rowData);
         let item = <NewMicItem isWillFilterPeople={this.state.isPeoplePressed} title={rowData} auto={auto}  dateLength={data.length}  />;
@@ -411,6 +415,7 @@ export class NewMic extends Component {
      * 开始录音
      */
     _startVoice() {
+        this._people();
         this.voiceStatus(true);
         RecordAudio.prototype.startRecord(userNamexx, (back) => {
             // RecordAudio.prototype.recordMsg("开始录音");

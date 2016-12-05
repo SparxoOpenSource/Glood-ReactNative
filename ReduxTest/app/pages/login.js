@@ -19,12 +19,14 @@ import {
 } from 'react-native';
 import { Common } from "./common";
 import isAndroid from '../utils/isAndroid.js';
+import { UserTableHelper } from "../../app/utils/DBUtil";
 import Singleton from '../utils/Singleton';
+import { Global } from '../utils/GlobalUtil';
+// import {Global,Singleton} from '../utils/Singleton';//这样有问题
 import { start } from '../utils/CommonUtils';
 var singleton = new Singleton();
 var widthh = Dimensions.get('window').width;
 var heightt = Dimensions.get('window').height;
-
 export class Login extends Component {
     constructor(props) {
         super(props);
@@ -155,7 +157,7 @@ export class Login extends Component {
                                 marginLeft: widthh * (160 / 414)
                             }}>forgot password?</Text>
                             <TouchableOpacity style={{ width: widthh * (300 / 414), height: heightt * (60 / 736), marginTop: heightt * (65 / 736), marginLeft: widthh * (5 / 414) }}
-                             onPress={this._fbLogin.bind(this)}>
+                                onPress={this._fbLogin.bind(this)}>
                                 <Image style={{ width: widthh * (300 / 414), height: heightt * (60 / 736) }} source={require('../img/facebook_sign_in.png')} />
                             </TouchableOpacity>
                         </View>
@@ -173,14 +175,21 @@ export class Login extends Component {
             </Image>
         );
     }
-    _fbLogin(){
-         let access_token = singleton.getAccessToken();
-         console.log("access_token",access_token);
-         if(access_token){
-             this._handerClick();
-         }else{
-             this._goFbLogin();
-         }
+    _fbLogin() {
+        UserTableHelper.selectFirst((userEntity) => {
+            console.log("from database userEntity", userEntity);
+            if (userEntity) {
+                 Global.accessToken = userEntity.token;
+                console.log("_fbLogin  Global.accessToken",  Global.accessToken);
+                if ( Global.accessToken) {
+                    this._handerClick();
+                } else {
+                    this._goFbLogin();
+                }
+            } else {
+                this._goFbLogin();
+            }
+        });
     }
     //获得焦点`
     _onFocus(label) {
@@ -193,9 +202,9 @@ export class Login extends Component {
                 duration: 200,
                 delay: 200
             }).start();
-        }  
+        }
     }
-    
+
     //失去焦点
     _onBlur(label) {
         if (Platform.OS === 'ios') {
@@ -232,7 +241,6 @@ export class Login extends Component {
         });
     }
     _handerClick() {
-
         setTimeout(() => {
             //连接聊天服务器，用户进行登录操作，系统分配用户名，ID和记录登录时间
             start();
@@ -243,7 +251,7 @@ export class Login extends Component {
         //     name: "DrawerMe"
         // });
     }
-      _goFbLogin() {
+    _goFbLogin() {
         singleton.setTitle("Obtain FaceBook Auth");
         singleton.getNav().replace({
             name: "FbLoginAuthen"
