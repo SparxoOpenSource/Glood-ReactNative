@@ -97,10 +97,10 @@ export function joinEventChatRoom(eventName) {
       //   singleton.getNav().push({
       //       name: 'NEWMIC'
       //   });
-      singleton.setTitle("Crazy May Fest 2016");
-      singleton.getNav().push({
-        name: 'NEWMIC'
-      });
+      // singleton.setTitle("Crazy May Fest 2016");
+      // singleton.getNav().push({
+      //   name: 'NEWMIC'
+      // });
       console.log('sdfsdf-------', eventName);
 
     }).fail(() => {

@@ -138,10 +138,8 @@ export class NewMic extends Component {
     ]),
             viewCoverFlow: temp,
             isPeoplePressed:false,
-
             dialog:null,
             mCallback:null,
-            dataSource: ds.cloneWithRows(data),
             autoImage: myImg,
             voiceImage: voiceImg,
             like: (likeMe ? require('../img/like2.png') : require('../img/like.png')),
@@ -162,16 +160,6 @@ export class NewMic extends Component {
         return (
             <Image style={style.container} source={require('../img/background3.png')}>
                 <View style={{ width: width, height: height }}>
-                <Common ground="fw_1.png" rightType="Down" />
-                <View style={style.content}>
-                    <RefreshableListView
-                        enableEmptySections={true}
-                        ref={LISTVIEW_REF}
-                        dataSource={this.state.dataSource}
-                        renderRow={this._row.bind(this)}
-                        loadData={this._accessFileName.bind(this)}
-                        refreshPrompt="Pull down to refresh" />
-                    <Image source={require('../img/fw_2.png')} style={style.background} />
                 </View>
                 <Animated.View style={{width: this.state.ticketViewWidth, height: this.state.ticketViewHeight, 
                 marginTop: -this.state.ticketViewHeight }}>
@@ -260,20 +248,11 @@ export class NewMic extends Component {
 
                     </View>
                 </Animated.View>
-                    <TouchableWithoutFeedback onPressOut={this._stop.bind(this)} onPressIn={this._startVoice.bind(this)}>
-                        <Image style={{ width: 70, height: 70 }} source={this.state.voiceImage} />
-                    </TouchableWithoutFeedback>
-                    <TouchableOpacity style={{ flexDirection: 'row' }}  onPress={()=>this._people()}>
-                        <Text style={{ backgroundColor: '#00000000', marginTop: 32, fontSize: fontSizeAndroid(16), color: '#00000000', fontFamily: "ProximaNova-Light" }}>auto</Text>
-                        <Text style={{ backgroundColor: '#00000000', marginTop: 32, fontSize: fontSizeAndroid(16), color: '#00000000', fontFamily: "ProximaNova-Light" }}>auto</Text>
-                        <Image source={this.state.people} style={style.ImagStyle3} />
-                    </TouchableOpacity>
-                </View>
-                     <Dialog ref="dialog" />   
             </Image>
         );
     }
     InfoXX() {
+        Alert.alert('xxxxx')
         singleton.setTitle("");
         singleton.getNav().push({
             name: "USEREVENTINFO",
@@ -517,8 +496,8 @@ export class NewMic extends Component {
         // console.log('xxxxxxxxxxxxxx---', page);
         this.refs[backView].setNativeProps({
             style: {
-                width: width * (270 / 414),
-                height: heightt * (600 / 736),
+                width: width * (0 / 414),
+                height: heightt * (0 / 736),
                 opacity: 0, 
                 position: 'absolute', 
                 borderRadius:5,
@@ -581,8 +560,8 @@ export class NewMic extends Component {
         // this.returnView();
         this.refs.backView0.setNativeProps({
             style: {
-                width: width * (270 / 414),
-                height: heightt * (600 / 736),
+                width: width * (0 / 414),
+                height: heightt * (0 / 736),
                 opacity: 0, 
                 position: 'absolute', 
                 borderRadius:5,
