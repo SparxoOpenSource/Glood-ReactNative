@@ -30,15 +30,12 @@ import { HardwareUtils } from "../utils/HardwareUtils";
 import isAndroid from '../utils/isAndroid.js';
 import RefreshableListView from "react-native-refreshable-listview";
 import Singleton from '../utils/Singleton';
-<<<<<<< HEAD
 import { Communities } from './communities';
 var widthh = Dimensions.get('window').width
 var STATUS_BAR_HEIGHT = Navigator.NavigationBar.Styles.General.StatusBarHeight;
 var heightt = Dimensions.get('window').height - Navigator.NavigationBar.Styles.General.NavBarHeight - 20
 var {height, width} = Dimensions.get('window');
-=======
 import { Dialog } from "../utils/Dialog";
->>>>>>> 098aa700c0f3227b6134ae91b2d52078c3601d7e
 var singleton = new Singleton();
 var userNamexx;
 const LISTVIEW_REF = 'listView'
@@ -141,12 +138,10 @@ export class NewMic extends Component {
     ]),
             viewCoverFlow: temp,
             isPeoplePressed:false,
-<<<<<<< HEAD
-=======
+
             dialog:null,
             mCallback:null,
             dataSource: ds.cloneWithRows(data),
->>>>>>> 098aa700c0f3227b6134ae91b2d52078c3601d7e
             autoImage: myImg,
             voiceImage: voiceImg,
             like: (likeMe ? require('../img/like2.png') : require('../img/like.png')),
@@ -166,9 +161,7 @@ export class NewMic extends Component {
     render() {
         return (
             <Image style={style.container} source={require('../img/background3.png')}>
-<<<<<<< HEAD
                 <View style={{ width: width, height: height }}>
-=======
                 <Common ground="fw_1.png" rightType="Down" />
                 <View style={style.content}>
                     <RefreshableListView
@@ -179,7 +172,6 @@ export class NewMic extends Component {
                         loadData={this._accessFileName.bind(this)}
                         refreshPrompt="Pull down to refresh" />
                     <Image source={require('../img/fw_2.png')} style={style.background} />
->>>>>>> 098aa700c0f3227b6134ae91b2d52078c3601d7e
                 </View>
                 <Animated.View style={{width: this.state.ticketViewWidth, height: this.state.ticketViewHeight, 
                 marginTop: -this.state.ticketViewHeight }}>
@@ -267,9 +259,7 @@ export class NewMic extends Component {
                         </Image>
 
                     </View>
-<<<<<<< HEAD
                 </Animated.View>
-=======
                     <TouchableWithoutFeedback onPressOut={this._stop.bind(this)} onPressIn={this._startVoice.bind(this)}>
                         <Image style={{ width: 70, height: 70 }} source={this.state.voiceImage} />
                     </TouchableWithoutFeedback>
@@ -280,7 +270,6 @@ export class NewMic extends Component {
                     </TouchableOpacity>
                 </View>
                      <Dialog ref="dialog" />   
->>>>>>> 098aa700c0f3227b6134ae91b2d52078c3601d7e
             </Image>
         );
     }
@@ -378,12 +367,8 @@ export class NewMic extends Component {
         // joinEventChatRoom(value);
     }
     _row(rowData, sectionID, rowID) {
-<<<<<<< HEAD
         console.log('*-*-/-*-*-*---------rowData:',rowData);
         let item = <NewMicItem isWillFilterPeople={this.state.isPeoplePressed} title={rowData} auto={auto}  dateLength={data.length}  />;
-=======
-        let item = <NewMicItem dialog={this.state.dialog}  isWillFilterPeople={this.state.isPeoplePressed} title={rowData} auto={auto} rowID={parseInt(rowID)} dateLength={data.length}  />;
->>>>>>> 098aa700c0f3227b6134ae91b2d52078c3601d7e
         return item;
     }
     _people() {
@@ -610,11 +595,6 @@ export class NewMic extends Component {
         EventListener.on("RecordStop").then(this.stopRecordAll.bind(this));
         EventListener.on("PlayState").then(this.PlayState.bind(this));
         EventListener.on("RoomMessage").then(this.roomMessagexx.bind(this));
-<<<<<<< HEAD
-         
-
-=======
->>>>>>> 098aa700c0f3227b6134ae91b2d52078c3601d7e
     }
     async getUsersFromApi() {
         try {

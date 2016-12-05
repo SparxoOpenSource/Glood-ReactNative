@@ -93,17 +93,14 @@ export function joinEventChatRoom(eventName) {
 
       // Pop('joinEventChatRoom success');
       // EventListener.trigger("DrawerOpenPage", "EventInfo");
-<<<<<<< HEAD
       // singleton.setTitle("Crazy May Fest 2016");
       //   singleton.getNav().push({
       //       name: 'NEWMIC'
       //   });
-=======
       singleton.setTitle("Crazy May Fest 2016");
       singleton.getNav().push({
         name: 'NEWMIC'
       });
->>>>>>> 098aa700c0f3227b6134ae91b2d52078c3601d7e
       console.log('sdfsdf-------', eventName);
 
     }).fail(() => {
